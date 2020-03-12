@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/cheng/Documents/BiciLive/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-small-v4/values-small-v4.xml",
+            "outputFile": "/Users/cheng/Desktop/BiciLive/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-small-v4/values-small-v4.xml",
             "map": [
                 {
                     "source": "/Users/cheng/.gradle/caches/transforms-2/files-2.1/fe0730cf38c40455e57ce545b9b19b4a/res/values-small-v4/values-small-v4.xml",

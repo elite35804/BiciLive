@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import {Image, View, TouchableOpacity, Text, ScrollView, Platform} from 'react-native';
-import Tooltip from 'rn-tooltip';
+import {Actions} from 'react-native-router-flux';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
-import {Actions} from 'react-native-router-flux';
 import {useStores} from 'hooks/Utils';
 import Images from 'res/Images';
 import {BlueButton, WhiteButton, GreenButton} from 'components/controls/Button';
@@ -21,11 +20,9 @@ import {
   DetailMore
 } from 'components/controls/BaseUtils';
 import {BaseTextInput, BaseSelect, BaseTextFilter} from 'components/controls/BaseTextInput';
-
 const isIOS = Platform.OS === "ios";
 
 const BikePage = props => {
-
   const [isLike, setLike] = useState(false);
   return (
     <Container>

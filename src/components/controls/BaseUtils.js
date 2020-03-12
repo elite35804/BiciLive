@@ -133,6 +133,7 @@ const ListBikeInfo = (props) => (
 );
 
 const MainInfo = styled(View)`
+  background-color: #FFFFFF;
   border-left-width: 7px;
   border-left-color: #D8D8D8;
   width: 100%;

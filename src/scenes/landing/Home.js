@@ -26,7 +26,7 @@ const Home = props => {
   };
   return (
     <Container>
-      <LogoView>
+      <LogoView onPress={() => Actions.BikePagePremium()}>
         <Logo width={'100%'} height={'100%'} source={Images.background.homeLogo} style={{width: '100%', height: Platform.OS === "ios" ? 260 : 230}}/>
       </LogoView>
       <Content>
@@ -42,20 +42,20 @@ const Home = props => {
       <Content>
         <CategoryText>TUTTIIMODELLI</CategoryText>
         <CategoryView>
-          <TouchableOpacity><Image width={64} height={64} source={Images.icons.ic_company_1}/></TouchableOpacity>
-          <TouchableOpacity><Image width={64} height={64} source={Images.icons.ic_company_2}/></TouchableOpacity>
-          <TouchableOpacity><Image width={64} height={64} source={Images.icons.ic_company_3}/></TouchableOpacity>
-          <TouchableOpacity><Image width={64} height={64} source={Images.icons.ic_company_4}/></TouchableOpacity>
-          <TouchableOpacity><Image width={64} height={64} source={Images.icons.ic_company_5}/></TouchableOpacity>
+          <TouchableOpacity onPress={() => Actions.BrandPagePremium() }><Image width={64} height={64} source={Images.icons.ic_company_1}/></TouchableOpacity>
+          <TouchableOpacity onPress={() => Actions.BrandPagePremium() }><Image width={64} height={64} source={Images.icons.ic_company_2}/></TouchableOpacity>
+          <TouchableOpacity onPress={() => Actions.BrandPagePremium() }><Image width={64} height={64} source={Images.icons.ic_company_3}/></TouchableOpacity>
+          <TouchableOpacity onPress={() => Actions.BrandPagePremium() }><Image width={64} height={64} source={Images.icons.ic_company_4}/></TouchableOpacity>
+          <TouchableOpacity onPress={() => Actions.BrandPagePremium() }><Image width={64} height={64} source={Images.icons.ic_company_5}/></TouchableOpacity>
         </CategoryView>
         <Divider size={'25px'}/>
         <CategoryText>TUTTIIMODELLI</CategoryText>
         <CategoryView>
-          <TouchableOpacity><Image width={64} height={64} source={Images.icons.ic_company_6}/></TouchableOpacity>
-          <TouchableOpacity><Image width={64} height={64} source={Images.icons.ic_company_7}/></TouchableOpacity>
-          <TouchableOpacity><Image width={64} height={64} source={Images.icons.ic_company_8}/></TouchableOpacity>
-          <TouchableOpacity><Image width={64} height={64} source={Images.icons.ic_company_9}/></TouchableOpacity>
-          <TouchableOpacity><Image width={64} height={64} source={Images.icons.ic_company_10}/></TouchableOpacity>
+          <TouchableOpacity onPress={() => Actions.BrandPagePremium() }><Image width={64} height={64} source={Images.icons.ic_company_6}/></TouchableOpacity>
+          <TouchableOpacity onPress={() => Actions.BrandPagePremium() }><Image width={64} height={64} source={Images.icons.ic_company_7}/></TouchableOpacity>
+          <TouchableOpacity onPress={() => Actions.BrandPagePremium() }><Image width={64} height={64} source={Images.icons.ic_company_8}/></TouchableOpacity>
+          <TouchableOpacity onPress={() => Actions.BrandPagePremium() }><Image width={64} height={64} source={Images.icons.ic_company_9}/></TouchableOpacity>
+          <TouchableOpacity onPress={() => Actions.BrandPagePremium() }><Image width={64} height={64} source={Images.icons.ic_company_10}/></TouchableOpacity>
         </CategoryView>
         <FinderView>
           <Title color={themeProp('colorThird')}>EBIKE FINDER</Title>

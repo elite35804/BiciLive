@@ -7,7 +7,15 @@ const SceneKeys = {
     bikeFinderAZ: 'BikeFinderAZ',
     bikeFinderCategory: 'BikeFinderCategory',
     result: 'Result',
-    bikePage: 'BikePage'
+    bikePage: 'BikePage',
+    bikePagePremium: 'BikePagePremium',
+    brandPagePremium: 'BrandPagePremium',
+    brandPage: 'BrandPage',
+    newsFinder: 'NewsFinder',
+    dashboard: 'Dashboard',
+    brand: 'Brand',
+    eBike: 'EBike',
+    user: 'User',
 };
 
 export default SceneKeys;

@@ -5,6 +5,8 @@ const Images = {
         keyboard: require('./images/ic_keyboard.png'),
         filter: require('./images/ic_filter.png'),
         arrow_down: require('./images/ic_arrow_down.png'),
+        arrow_down_sm: require('./images/arrow_down_sm.png'),
+        arrow_up: require('./images/arrow_up.png'),
         arrow_right: require('./images/ic_arrow_right.png'),
         ic_company_1: require('./images/Loghi06.png'),
         ic_company_2: require('./images/lg_mark_ebike_2.png'),
@@ -51,7 +53,11 @@ const Images = {
         ic_news: require('./images/ic_footer_news.png'),
         ic_profile: require('./images/ic_footer_profile.png'),
         ic_ebike: require('./images/ic_footer_ebike_finder.png'),
-
+        ic_user_sm: require('./images/ic_user_sm.png'),
+        ic_heart_sm: require('./images/ic_heart_border_sm.png'),
+        ic_heart_red_sm: require('./images/ic_heart_red_sm.png'),
+        ic_heart_white: require('./images/ic_heart_white.png'),
+        ic_compare_white: require('./images/ic_compare_white.png'),
     },
     background: {
         logo: require('./images/logo.png'),
@@ -62,6 +68,8 @@ const Images = {
         bike_logo1: require('./images/img_bike_atala.png'),
         bike_logo2: require('./images/img_bike_bianchi.png'),
         address: require('./images/mountainbike.biciliv.png'),
+        haibike_lg: require('./images/lg_haibike_large.png'),
+        haibike_md: require('./images/lg_haibike_md.png'),
     },
     btn: {
         bike_finder: require('./images/btn_ebike_finder.png'),

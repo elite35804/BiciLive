@@ -23,12 +23,12 @@ const BikeFinderCategory = props => {
           <Title size={'40px'} color={themeProp('colorThird')} width={'35px'}>EBIKE FINDER</Title>
           <Title size={'0'} color='#D75A2B' width={'50px'}>eMTB</Title>
           <MainInfo>
-            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+            <TouchableOpacity onPress={() => Actions.BikePagePremium()} style={{justifyContent: 'center', alignItems: 'center'}}>
               <Image width={'100%'} height={'100%'} resizeMode="contain" source={Images.background.bike_logo1}
                      style={{width: '95%', height: 230}}/>
               <Image width={100} height={100} resizeMode="stretch" source={Images.icons.ic_badge_empty}
                      style={{position: 'absolute', right: 0, top: 0, width: 50, height: 50}}/>
-            </View>
+            </TouchableOpacity>
             <View style={{marginLeft: 5}}>
               <View style={{justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row'}}>
                 <TypeView><Type>eMTB</Type></TypeView>

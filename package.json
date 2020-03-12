@@ -26,6 +26,7 @@
     "react-native-elements": "^1.2.7",
     "react-native-gesture-handler": "^1.6.0",
     "react-native-step-indicator": "^0.0.11",
+    "react-native-swipe-list-view": "^2.3.0",
     "react-native-vector-icons": "^6.6.0",
     "react-native-walkthrough-tooltip": "^1.1.7",
     "rn-tooltip": "^2.0.0"

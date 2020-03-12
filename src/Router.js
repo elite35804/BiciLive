@@ -12,6 +12,14 @@ import BikeFinderAZ from './scenes/landing/BikeFinderAZ';
 import BikeFinderCategory from './scenes/landing/BikeFinderCategory';
 import Result from './scenes/landing/Result';
 import BikePage from './scenes/landing/BikePage';
+import BikePagePremium from './scenes/landing/BikePagePremium';
+import BrandPagePremium from './scenes/landing/BrandPagePremium';
+import BrandPage from './scenes/landing/BrandPage';
+import NewsFinder from './scenes/landing/NewsFinder';
+import Dashboard from './scenes/landing/Dashboard';
+import Brand from './scenes/landing/Brand';
+import EBike from './scenes/landing/EBike';
+import User from './scenes/landing/User';
 import styled from 'styled-components/native';
 
 const isIOS = Platform.OS === 'ios';
@@ -37,13 +45,13 @@ const TabBar =(props) => {
       </View>
       <Text style={{fontSize: 10, color: '#c9c3c5', fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular', marginTop: 10}}>CONFRONTO</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => Actions['Home']()}>
+    <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => Actions['NewsFinder']()}>
       <View style={{height: 40, justifyContent: 'flex-end'}}>
         <Image width={'100%'} height={'100%'} source={Images.icons.ic_news} />
       </View>
       <Text style={{fontSize: 10, color: '#c9c3c5', fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular', marginTop: 10}}>NEWS</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => Actions['Home']()}>
+    <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => Actions['Dashboard']()}>
       <View style={{backgroundColor: 'red', width: 10, height: 10, borderRadius: 5, position: 'absolute', top: 0, right: 10}}/>
       <View style={{height: 40, justifyContent: 'flex-end'}}>
         <Image width={'100%'} height={'100%'} source={Images.icons.ic_profile} />
@@ -73,6 +81,14 @@ const Root = props => {
             <Scene key={Keys.bikeFinderCategory} component={BikeFinderCategory} hideNavBar/>
             <Scene key={Keys.result} component={Result} hideNavBar/>
             <Scene key={Keys.bikePage} component={BikePage} hideNavBar/>
+            <Scene key={Keys.user} component={User} hideNavBar/>
+            <Scene key={Keys.eBike} component={EBike} hideNavBar/>
+            <Scene key={Keys.brand} component={Brand} hideNavBar/>
+            <Scene key={Keys.dashboard} component={Dashboard} hideNavBar/>
+            <Scene key={Keys.newsFinder} component={NewsFinder} hideNavBar/>
+            <Scene key={Keys.brandPage} component={BrandPage} hideNavBar/>
+            <Scene key={Keys.brandPagePremium} component={BrandPagePremium} hideNavBar/>
+            <Scene key={Keys.bikePagePremium} component={BikePagePremium} hideNavBar/>
           </Tabs>
         </Modal>
       </Router>
