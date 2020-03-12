@@ -112,7 +112,9 @@ const Home = props => {
         <NewsFinderView>
           <Title color={themeProp('colorPrimary')}>NEWS FINDER</Title>
           <SubTitle>Le notize di BiciLive.it</SubTitle>
-          <Image width={92} height={92} source={Images.btn.news_finder} style={{marginTop: 14}}/>
+          <TouchableOpacity onPress={() => Actions.NewsFinder()}>
+            <Image width={92} height={92} source={Images.btn.news_finder} style={{marginTop: 14}}/>
+          </TouchableOpacity>
         </NewsFinderView>
         <View style={{marginBottom: 30}} />
       </Content>

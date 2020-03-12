@@ -1373,6 +1373,8 @@ drawable src_components_hud_src_error
 drawable src_components_hud_src_info
 drawable src_components_hud_src_success
 drawable src_res_images_arrow_down
+drawable src_res_images_arrow_down_sm
+drawable src_res_images_arrow_up
 drawable src_res_images_bdg_star_empty
 drawable src_res_images_biciliveit
 drawable src_res_images_btn_back_half_circle
@@ -1389,6 +1391,7 @@ drawable src_res_images_ic_battery_lg
 drawable src_res_images_ic_calendar
 drawable src_res_images_ic_close
 drawable src_res_images_ic_close_sm
+drawable src_res_images_ic_compare_white
 drawable src_res_images_ic_connector
 drawable src_res_images_ic_facebook
 drawable src_res_images_ic_facebook_full
@@ -1402,7 +1405,10 @@ drawable src_res_images_ic_google
 drawable src_res_images_ic_graph
 drawable src_res_images_ic_graph_lg
 drawable src_res_images_ic_heart_border
+drawable src_res_images_ic_heart_border_sm
 drawable src_res_images_ic_heart_red
+drawable src_res_images_ic_heart_red_sm
+drawable src_res_images_ic_heart_white
 drawable src_res_images_ic_info
 drawable src_res_images_ic_info_sm_black
 drawable src_res_images_ic_keyboard
@@ -1411,6 +1417,7 @@ drawable src_res_images_ic_plus
 drawable src_res_images_ic_share
 drawable src_res_images_ic_social_linkedin
 drawable src_res_images_ic_twitter
+drawable src_res_images_ic_user_sm
 drawable src_res_images_ic_velocity_meter
 drawable src_res_images_ic_volt
 drawable src_res_images_ic_whatsapp
@@ -1419,6 +1426,8 @@ drawable src_res_images_img_bike_bianchi
 drawable src_res_images_img_bike_haibike
 drawable src_res_images_img_bike_xduro
 drawable src_res_images_img_title
+drawable src_res_images_lg_haibike_large
+drawable src_res_images_lg_haibike_md
 drawable src_res_images_lg_mark_ebike_2
 drawable src_res_images_lg_mark_ebike_3
 drawable src_res_images_lg_mark_ebike_4

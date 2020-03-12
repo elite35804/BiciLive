@@ -23,7 +23,7 @@ import {BaseTextInput, BaseSelect, BaseTextFilter} from 'components/controls/Bas
 import {Oswald, UniSansBold, UniSansBook, UniSansHeavy} from '../../utils/fontFamily';
 const isIOS = Platform.OS === "ios";
 
-const BikePage = props => {
+const NewsFinder = props => {
   const [isLike, setLike] = useState(false);
   return (
     <View style={{flex: 1}}>
@@ -206,4 +206,4 @@ const DescTitle = styled(Text)`
 `;
 
 
-export default BikePage;
+export default NewsFinder;

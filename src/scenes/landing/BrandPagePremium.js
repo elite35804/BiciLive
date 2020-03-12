@@ -23,7 +23,7 @@ import {BaseTextInput, BaseSelect, BaseTextFilter} from 'components/controls/Bas
 import {Oswald, UniSansBold, UniSansBook} from '../../utils/fontFamily';
 const isIOS = Platform.OS === "ios";
 
-const BikePagePremium = props => {
+const BrandPagePremium = props => {
   const [isLike, setLike] = useState(false);
   const [isCollapse, setCollapse] = useState(false);
   const [isCollapse1, setCollapse1] = useState(false);
@@ -294,4 +294,4 @@ const DescTitle = styled(Text)`
 `;
 
 
-export default BikePagePremium;
+export default BrandPagePremium;

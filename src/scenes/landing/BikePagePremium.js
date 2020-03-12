@@ -27,7 +27,7 @@ const BikePagePremium = props => {
   const [isLike, setLike] = useState(false);
   return (
     <Container>
-      <TouchableOpacity onPress={() => Actions.Home()} style={{position: 'absolute', left: 0, top: 320, zIndex: 10000000}}>
+      <TouchableOpacity onPress={() => Actions.BrandPagePremium()} style={{position: 'absolute', left: 0, top: 320, zIndex: 10000000}}>
         <Image width={50} height={100} resizeMode="stretch" source={Images.btn.btn_back} style={{width: 37, height: 75}}/></TouchableOpacity>
       <View style={{paddingHorizontal: 10, marginTop: 40}}>
         <TitleView>

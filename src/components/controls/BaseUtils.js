@@ -1,6 +1,7 @@
 import StepIndicator from 'react-native-step-indicator';
 import React from 'react';
 import {themeProp} from 'utils/CssUtil';
+import {Actions} from 'react-native-router-flux';
 import styled from 'styled-components/native/dist/styled-components.native.esm';
 import {Dimensions, Image, Text, TouchableOpacity, View, Platform} from 'react-native';
 import Images from 'res/Images';
@@ -37,13 +38,13 @@ const CheckBox = (props) => (
 
 const MainBikeInfo = (props) => (
   <MainInfo>
-    <View style={{justifyContent: 'center', alignItems: 'center'}}>
+    <TouchableOpacity onPress={() => Actions.BikePagePremium()} style={{justifyContent: 'center', alignItems: 'center'}}>
       <Image width={'100%'} height={'100%'} resizeMode="contain" source={Images.background.bike_logo1}
              style={{width: '95%', height: 230}}/>
       {!props.isBack ? <Image width={100} height={100} resizeMode="stretch" source={Images.icons.ic_badge_empty}
                                style={{position: 'absolute', right: 0, top: 0, width: 50, height: 50}}/>:<View/>
       }
-    </View>
+    </TouchableOpacity>
     <View style={{marginLeft: 5}}>
       <View style={{justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row'}}>
         <TypeView width={'44px'}><Type size={'15px'}>eMTB</Type></TypeView>
