@@ -67,7 +67,6 @@ const Root = props => {
       <Router>
         <Modal>
           <Scene key="landing" hideNavBar hideTabBar>
-            <Scene key={Keys.bikeFinder} component={BikeFinder} hideNavBar hideTabBar/>
             <Scene key={Keys.splash} component={Splash} hideNavBar/>
             <Scene key={Keys.register} component={Register} hideNavBar/>
             <Scene key={Keys.welcome} component={Welcome} hideNavBar/>

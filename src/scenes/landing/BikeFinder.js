@@ -8,11 +8,14 @@ import {BaseTextInput, BaseSelect} from 'components/controls/BaseTextInput';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
 import Images from 'res/Images';
 import {toJS} from 'mobx';
+import { get } from 'lodash';
 
 
 const BikeFinder = props => {
   const {staticData} = useStores();
-  console.log("search_landing", toJS(staticData.data).search_landing);
+  console.log("search_landing", toJS(staticData.data.search_landing));
+  const lastItem = staticData.data.search_landing.pop();
+  staticData.data.search_landing.pop();
   return (
     <View style={{flex:1}}>
       <Container>
@@ -20,13 +23,13 @@ const BikeFinder = props => {
         {/*<Divider size={'15px'}/>*/}
         {/*<CategoryText>TUTTIIMODELLI</CategoryText>*/}
         {/*<TouchableOpacity onPress={() => Actions.BikeFinderAZ()}><Title size={'0'} color={themeProp('colorThird')}>A-Z</Title></TouchableOpacity>*/}
-        {/*<Divider size={'15px'}/>*/}
+        <Divider size={'40px'}/>
         {/*<CategoryText>TUTTIIMODELLI</CategoryText>*/}
-        {toJS(staticData.data.search_landing).map(item => {
+        {get(staticData, 'data.search_landing', []).map(item => {
           return <TouchableOpacity onPress={() => Actions.BikeFinderCategory()}><Title size={'0'} color={item.colore}>{item.titolo}</Title></TouchableOpacity>
         })}
-        <CategoryText>TUTTIIMODELLI</CategoryText>
-        <BaseTextInput placeholder="MARCA, MODELLO"/>
+        {/*<CategoryText>TUTTIIMODELLI</CategoryText>*/}
+        <BaseTextInput placeholder={lastItem.title}/>
       </Container>
       <Bottom onPress={() => Actions.Home()}>
         <Image width={50} height={50} source={Images.icons.ic_close} />
