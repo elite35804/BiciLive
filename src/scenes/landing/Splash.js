@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, View, TouchableOpacity, Text, ScrollView, Platform} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
@@ -7,9 +7,14 @@ import { Actions } from 'react-native-router-flux';
 import {useStores} from 'hooks/Utils';
 import Images from 'res/Images';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
-
+import axios from 'axios';
 
 const Splash = props => {
+  const {staticData, homeData} = useStores();
+  useEffect(() => {
+    staticData.getData();
+    homeData.getData();
+  }, []);
   return (
     <Container>
       <ImageView>

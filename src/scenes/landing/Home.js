@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, View, TouchableOpacity, Text, ScrollView, Platform} from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
 import {themeProp} from 'utils/CssUtil';
@@ -7,9 +7,13 @@ import {Actions} from 'react-native-router-flux';
 import {useStores} from 'hooks/Utils';
 import Images from 'res/Images';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
+import axios from 'axios';
+import {toJS} from 'mobx';
 
+const Home = (props) => {
+  const {staticData} = useStores();
 
-const Home = props => {
+  console.log('staticData: ',toJS(staticData.data));
   const label = ['', '', '', '', ''];
   const customStyles = {
     stepIndicatorSize: 25,

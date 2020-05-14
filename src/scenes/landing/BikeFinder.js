@@ -7,26 +7,24 @@ import {useStores} from 'hooks/Utils';
 import {BaseTextInput, BaseSelect} from 'components/controls/BaseTextInput';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
 import Images from 'res/Images';
+import {toJS} from 'mobx';
 
 
 const BikeFinder = props => {
+  const {staticData} = useStores();
+  console.log("search_landing", toJS(staticData.data).search_landing);
   return (
     <View style={{flex:1}}>
       <Container>
-        <Title size={'40px'} color={themeProp('colorThird')}>EBIKE FINDER</Title>
-        <Divider size={'15px'}/>
-        <CategoryText>TUTTIIMODELLI</CategoryText>
-        <TouchableOpacity onPress={() => Actions.BikeFinderAZ()}><Title size={'0'} color={themeProp('colorThird')}>A-Z</Title></TouchableOpacity>
-        <Divider size={'15px'}/>
-        <CategoryText>TUTTIIMODELLI</CategoryText>
-        <TouchableOpacity onPress={() => Actions.BikeFinderCategory()}><Title size={'0'} color={'#D75A2B'}>eMTB</Title></TouchableOpacity>
-        <TouchableOpacity onPress={() => Actions.BikeFinderCategory()}><Title size={'0'} color={'#E08330'}>eCITY</Title></TouchableOpacity>
-        <TouchableOpacity onPress={() => Actions.BikeFinderCategory()}><Title size={'0'} color={'#509F48'}>eTREKKING</Title></TouchableOpacity>
-        <TouchableOpacity onPress={() => Actions.BikeFinderCategory()}><Title size={'0'} color={'#85B73F'}>eSTRADA</Title></TouchableOpacity>
-        <TouchableOpacity onPress={() => Actions.BikeFinderCategory()}><Title size={'0'} color={'#3968AE'}>ePIEGHEVOLI</Title></TouchableOpacity>
-        <TouchableOpacity onPress={() => Actions.BikeFinderCategory()}><Title size={'0'} color={'#1884ae'}>eCARGO</Title></TouchableOpacity>
-        <TouchableOpacity onPress={() => Actions.BikeFinderCategory()}><Title size={'0'} color={'#78ae6a'}>eBAMBINO</Title></TouchableOpacity>
-        <Divider size={'15px'}/>
+        {/*<Title size={'40px'} color={themeProp('colorThird')}>EBIKE FINDER</Title>*/}
+        {/*<Divider size={'15px'}/>*/}
+        {/*<CategoryText>TUTTIIMODELLI</CategoryText>*/}
+        {/*<TouchableOpacity onPress={() => Actions.BikeFinderAZ()}><Title size={'0'} color={themeProp('colorThird')}>A-Z</Title></TouchableOpacity>*/}
+        {/*<Divider size={'15px'}/>*/}
+        {/*<CategoryText>TUTTIIMODELLI</CategoryText>*/}
+        {toJS(staticData.data.search_landing).map(item => {
+          return <TouchableOpacity onPress={() => Actions.BikeFinderCategory()}><Title size={'0'} color={item.colore}>{item.titolo}</Title></TouchableOpacity>
+        })}
         <CategoryText>TUTTIIMODELLI</CategoryText>
         <BaseTextInput placeholder="MARCA, MODELLO"/>
       </Container>

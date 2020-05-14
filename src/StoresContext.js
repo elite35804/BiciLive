@@ -1,10 +1,12 @@
 import React from 'react';
-import { AlertStore, HudStore } from './stores';
+import { AlertStore, HudStore, StaticStore, HomeStore } from './stores';
 // Import stores here.
 
 const store = {
     alert : new AlertStore(),
     hud : new HudStore(),
+    staticData: new StaticStore(),
+    homeData: new HomeStore(),
 };
 
 const StoresContext = React.createContext(store);
