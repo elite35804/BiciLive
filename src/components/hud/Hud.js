@@ -1,6 +1,3 @@
-/**
- * Created by liuyu on 2017/1/18.
- */
 
 import React, { PureComponent } from 'react';
 import { View, Text, Image, Animated, StyleSheet } from 'react-native';

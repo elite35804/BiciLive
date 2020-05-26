@@ -19,8 +19,8 @@ const BaseTextFilter= (props) => (
 );
 
 const BaseSelect = (props) => (
-  <SelectView>
-    <SelectText>{props.text}</SelectText>
+  <SelectView {...props}>
+    <SelectText isValue={props.value}>{props.value || props.text}</SelectText>
     <Image width={18} height={18} source={Images.icons.arrow_down} />
   </SelectView>
 );
@@ -41,7 +41,7 @@ const SelectView = styled(TouchableOpacity)`
 
 const SelectText = styled(Text)`
     font-family: ${themeProp('fontUniBook')};
-    color: ${themeProp('colorBorder')};
+    color: ${props => props.isValue ? 'black':themeProp('colorBorder')};
     font-size: ${themeProp('szTextDefault')};
     margin-top: ${Platform.OS === "ios" ? '10px' : "0"}
 `;

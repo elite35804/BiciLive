@@ -39,18 +39,18 @@ const TabBar =(props) => {
       </View>
       <Text style={{fontSize: 10, color: '#c9c3c5', fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular', marginTop: 10}}>EBIKE FINDER</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => Actions['BikePage']()}>
-      <View style={{height: 40, justifyContent: 'flex-end'}}>
-        <Image width={'100%'} height={'100%'} source={Images.icons.ic_compare} />
-      </View>
-      <Text style={{fontSize: 10, color: '#c9c3c5', fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular', marginTop: 10}}>CONFRONTO</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => Actions['NewsFinder']()}>
-      <View style={{height: 40, justifyContent: 'flex-end'}}>
-        <Image width={'100%'} height={'100%'} source={Images.icons.ic_news} />
-      </View>
-      <Text style={{fontSize: 10, color: '#c9c3c5', fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular', marginTop: 10}}>NEWS</Text>
-    </TouchableOpacity>
+    {/*<TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => Actions['BikePage']()}>*/}
+      {/*<View style={{height: 40, justifyContent: 'flex-end'}}>*/}
+        {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare} />*/}
+      {/*</View>*/}
+      {/*<Text style={{fontSize: 10, color: '#c9c3c5', fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular', marginTop: 10}}>CONFRONTO</Text>*/}
+    {/*</TouchableOpacity>*/}
+    {/*<TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => Actions['NewsFinder']()}>*/}
+      {/*<View style={{height: 40, justifyContent: 'flex-end'}}>*/}
+        {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_news} />*/}
+      {/*</View>*/}
+      {/*<Text style={{fontSize: 10, color: '#c9c3c5', fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular', marginTop: 10}}>NEWS</Text>*/}
+    {/*</TouchableOpacity>*/}
     <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => Actions['Dashboard']()}>
       <View style={{backgroundColor: 'red', width: 10, height: 10, borderRadius: 5, position: 'absolute', top: 0, right: 10}}/>
       <View style={{height: 40, justifyContent: 'flex-end'}}>
@@ -75,10 +75,10 @@ const Root = props => {
                 tabBarComponent={TabBar}
                 hideNavBar
           >
-            <Scene key={Keys.home} component={Home} hideNavBar/>
-            <Scene key={Keys.bikeFinder} component={BikeFinder} hideNavBar hideTabBar/>
+            <Scene key={Keys.home} component={Home} hideNavBar lazy/>
+            <Scene key={Keys.bikeFinder} component={BikeFinder} hideNavBar hideTabBar lazy/>
             <Scene key={Keys.bikeFinderAZ} component={BikeFinderAZ} hideNavBar hideTabBar/>
-            <Scene key={Keys.bikeFinderCategory} component={BikeFinderCategory} hideNavBar/>
+            <Scene key={Keys.bikeFinderCategory} component={BikeFinderCategory} hideNavBar lazy/>
             <Scene key={Keys.result} component={Result} hideNavBar/>
             <Scene key={Keys.bikePage} component={BikePage} hideNavBar/>
             <Scene key={Keys.user} component={User} hideNavBar/>

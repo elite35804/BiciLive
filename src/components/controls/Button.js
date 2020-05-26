@@ -8,7 +8,7 @@ import { themeProp } from '../../utils/CssUtil';
 function textButtonFactory(ContainerComp, TextComp) {
     return props => (
         <ContainerComp {...props}>
-            <TextComp>{props.children}</TextComp>
+            <TextComp {...props}>{props.children}</TextComp>
         </ContainerComp>
     );
 }
@@ -28,11 +28,11 @@ const GreenBtnTitle = styled(Text)`
     font-family: ${isIOS ? 'UniSansHeavy' : 'uni_sans_heavy'};
     margin-top: ${Platform.OS === 'ios' ? '15px' : '0'};
     font-size: 35px;
-    color: ${themeProp('colorSecondary')}
+    color: ${props => props.txt_color}
 `;
 
 const GreenBtnContainer = styled(BaseButtonContainer)`
-    background-color: ${themeProp('colorThird')};
+    background-color: ${props => props.bg_color};
     width: 100%
 `;
 

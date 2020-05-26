@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/cheng/Desktop/BiciLive/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-mk/values-mk.xml",
+            "outputFile": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-mk/values-mk.xml",
             "map": [
                 {
-                    "source": "/Users/cheng/.gradle/caches/transforms-2/files-2.1/f751557455d68ea80d28b2e2bc3173b6/res/values-mk/values-mk.xml",
+                    "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/values-mk/values-mk.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/Users/cheng/.gradle/caches/transforms-2/files-2.1/66392b5f9b07afaec7d4363cbd553164/res/values-mk/values-mk.xml",
+                    "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/5356ece467466d9fff663a79b90dd6d4/res/values-mk/values-mk.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

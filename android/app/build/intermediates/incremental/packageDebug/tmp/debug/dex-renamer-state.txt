@@ -1,4 +1,4 @@
-#Thu Mar 12 23:31:54 CST 2020
-base.0=/Users/cheng/Desktop/BiciLive/android/app/build/intermediates/transforms/dexMerger/debug/0
+#Tue May 26 22:37:42 CST 2020
+base.0=/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex

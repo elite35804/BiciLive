@@ -39,7 +39,7 @@ const Splash = props => {
           <View width={20}/>
         </GoogleBtn>
       </SocialBtnView>
-      <Bottom>
+      <Bottom onPress={() => Actions['Home']()}>
         <BottomText>CONTINUA COME OSPITE</BottomText>
       </Bottom>
     </Container>

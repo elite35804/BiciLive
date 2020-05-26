@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/cheng/Desktop/BiciLive/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
+            "outputFile": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/cheng/.gradle/caches/transforms-2/files-2.1/f751557455d68ea80d28b2e2bc3173b6/res/values-h720dp-v13/values-h720dp-v13.xml",
+                    "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/values-h720dp-v13/values-h720dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

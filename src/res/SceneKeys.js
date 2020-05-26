@@ -6,6 +6,7 @@ const SceneKeys = {
     bikeFinder: 'BikeFinder',
     bikeFinderAZ: 'BikeFinderAZ',
     bikeFinderCategory: 'BikeFinderCategory',
+    bikeFinderCategory_inner: 'BikeFinderCategory_inner',
     result: 'Result',
     bikePage: 'BikePage',
     bikePagePremium: 'BikePagePremium',

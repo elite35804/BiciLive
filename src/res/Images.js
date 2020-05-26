@@ -37,7 +37,7 @@ const Images = {
         ic_heart_red: require('./images/ic_heart_red.png'),
         ic_compare: require('./images/ic_footer_compare.png'),
         ic_share: require('./images/ic_share.png'),
-        ic_info_black: require('./images/ic_info_sm_black.jpg'),
+        ic_info_black: require('./images/ic_info_sm_black.png'),
         ic_connect: require('./images/ic_connector.png'),
         ic_light: require('./images/ic_lightning_border.png'),
         ic_volt: require('./images/ic_volt.png'),
