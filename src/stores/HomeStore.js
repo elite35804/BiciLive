@@ -8,7 +8,7 @@ class HomeStore {
   getData = async () => {
     try {
       const response = await axios.get('http://biciapp.sepisolutions.com/api/v1/home');
-      console.log(response.data, 'homeData =====================');
+      console.log('homeData =====================');
       this.data = response.data;
     } catch (e) {
       console.log('e: ', e);
@@ -17,6 +17,10 @@ class HomeStore {
   @action.bound
   setPosition = (p) => {
     this.position = p
+  }
+  @action
+  clearData = () => {
+    this.data = {};
   }
 }
 

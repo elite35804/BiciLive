@@ -21,8 +21,8 @@ const ShareTooltip = (props) => (
     backgroundColor={'#333333'}
   >
     <ShareBtn>
-      <ShareTitle>CONDIVIDI</ShareTitle>
-      <Image width={'100%'} height={'100%'} source={Images.icons.ic_share} style={{marginLeft: 10}} />
+      {/*<ShareTitle>CONDIVIDI</ShareTitle>*/}
+      <Image width={'100%'} height={'100%'} source={Images.btn.btn_share} style={{marginLeft: 10, width: 130, height: 40, resizeMode: 'contain'}} />
     </ShareBtn>
   </Tooltip>
 );
@@ -32,10 +32,8 @@ const ShareBtn = styled(View)`
   align-items: center;
   justify-content: space-between;
   border-radius: 5px;
-  background-color: #D75A2B;
   padding: 4px;
   padding-left: 8px;
-  padding-right: 8px;
 `;
 
 const ShareTitle = styled(Text)`

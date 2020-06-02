@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Image, View, TouchableOpacity, Text, ScrollView, Platform} from 'react-native';
+import {Image, View, TouchableOpacity, Text, ScrollView, Platform, Linking} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
@@ -8,7 +8,6 @@ import Images from 'res/Images';
 import {BlueButton, WhiteButton, GreenButton} from 'components/controls/Button';
 import ShareTooltip from 'components/controls/ShareTooltip';
 import StepIndicator from 'react-native-step-indicator';
-// import RelatedGroup from 'components/controls/RelatedGroup'
 import {
   Step,
   Divider,
@@ -20,26 +19,34 @@ import {
   DivideLine,
   Detail,
   DetailMore,
+  AdvResumeBig
 } from 'components/controls/BaseUtils';
 import {BaseTextInput, BaseSelect, BaseTextFilter} from 'components/controls/BaseTextInput';
 import {UniSansBold, UniSansBook} from '../../utils/fontFamily';
-import axios from 'axios';
 import {get} from 'lodash';
 import Swiper from 'react-native-swiper';
 import {observer} from 'mobx-react';
 import {toJS} from 'mobx';
+import Tooltip from 'rn-tooltip';
+import CustomTooltip from 'components/controls/CustomTooltip';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
+// import {Tooltip} from 'react-native-elements';
 
 const isIOS = Platform.OS === 'ios';
 
 const BrandLogo = props => {
+  const {brandData} = useStores();
+  const goToBrand = (url) => {
+    brandData.clearData();
+    brandData.getData(url);
+    Actions.BrandPagePremium();
+  };
   return (
     <View>
-      <TouchableOpacity onPress={() => Actions.BrandPagePremium()}
-                        style={{position: 'absolute', left: 0, top: 240, zIndex: 100000000000}}>
-        <Image resizeMode="stretch" source={Images.btn.btn_back}
-               style={{width: 37, height: 75}}/></TouchableOpacity>
+      <TouchableOpacity onPress={() => goToBrand(props.data.url)}>
       <TitleView>
         <Image style={{width: '40%', height: '100%'}} source={{uri: props.data.img}}/>
+
         <TitleView>
           <View style={{marginRight: 10}}>
             <Text style={{color: themeProp('colorDescription'), fontSize: 15, fontFamily: UniSansBook}}>SCOPRI TUTTE
@@ -64,6 +71,7 @@ const BrandLogo = props => {
           </BadgeView>
         </TitleView>
       </TitleView>
+      </TouchableOpacity>
       <Divider size={-10}/>
       <DivideLine/>
       <Divider size={-10}/>
@@ -98,7 +106,8 @@ const IconDescriptionGroup = props => {
           paddingTop: 5,
           backgroundColor: get(props, 'data.bg_color1', ''),
         }}>
-          <Image width={'100%'} height={'100%'} source={Images.icons.ic_info_black}/>
+              <CustomTooltip tooltipText={get(props,'data.infobox1','')}/>
+
         </View>
         <View style={{
           justifyContent: 'center',
@@ -107,10 +116,12 @@ const IconDescriptionGroup = props => {
           backgroundColor: get(props, 'data.bg_color1', ''),
           marginTop: -1,
         }}>
-          <Image width={'100%'} height={'100%'} resizeMode="contain" source={props.order === 1 ? Images.icons.ic_light : Images.icons.ic_volt}
-                 style={{marginBottom: 20, height: 70}}/>
+          <Image resizeMode="contain" source={{uri: get(props, 'data.icona1','')}}
+                 style={{width: 100, height: 70, marginBottom: 20}}/>
+          {/*<Image resizeMode="contain" source={props.order === 1 ? Images.icons.ic_light : Images.icons.ic_volt}*/}
+                 {/*style={{width: 100, height: 70, marginBottom: 20}}/>*/}
           <ItemText color={get(props, 'data.color1', '#000000')}>{get(props, 'data.titolo1')}</ItemText>
-          <View style={{marginTop: -7}}/>
+          <View style={{marginTop: verticalScale(-7)}}/>
           <ItemSymbol color={get(props, 'data.color1', '#000000')}>{get(props, 'data.subtitolo1')}</ItemSymbol>
         </View>
       </ItemView>
@@ -122,7 +133,7 @@ const IconDescriptionGroup = props => {
           paddingTop: 5,
           backgroundColor: get(props, 'data.bg_color2', ''),
         }}>
-          <Image width={'100%'} height={'100%'} source={Images.icons.ic_info_black}/>
+          <CustomTooltip tooltipText={get(props,'data.infobox2','')}/>
         </View>
         <View style={{
           justifyContent: 'center',
@@ -131,8 +142,10 @@ const IconDescriptionGroup = props => {
           backgroundColor: get(props, 'data.bg_color2', ''),
           marginTop: -1,
         }}>
-          <Image width={'100%'} height={'100%'} resizeMode="contain" source={props.order === 1 ? Images.icons.ic_graph_lg : Images.icons.ic_battery_lg}
-                 style={{marginBottom: 20, height: 70}}/>
+          <Image source={{uri: get(props, 'data.icona2','')}}
+                 style={{width: 100, height: 70, marginBottom: 20, resizeMode: 'contain'}}/>
+          {/*<Image width={'100%'} height={'100%'} resizeMode="contain" source={props.order === 1 ? Images.icons.ic_graph_lg : Images.icons.ic_battery_lg}*/}
+                 {/*style={{marginBottom: 20, height: 70}}/>*/}
           <ItemText color={get(props, 'data.color2', '#000000')}>{get(props, 'data.titolo2')}</ItemText>
           <View style={{marginTop: -7}}/>
           <ItemSymbol color={get(props, 'data.color2', '#000000')}>{get(props, 'data.subtitolo2')}</ItemSymbol>
@@ -147,7 +160,7 @@ const IconDescriptionGroup = props => {
           backgroundColor: get(props, 'data.bg_color3', ''),
           marginTop: -1,
         }}>
-          <Image width={'100%'} height={'100%'} source={Images.icons.ic_info_black}/>
+          <CustomTooltip tooltipText={get(props,'data.infobox3','')}/>
         </View>
         <View style={{
           justifyContent: 'center',
@@ -155,8 +168,8 @@ const IconDescriptionGroup = props => {
           marginBottom: 8,
           backgroundColor: get(props, 'data.bg_color3', ''),
         }}>
-          <Image width={'100%'} height={'100%'} resizeMode="contain" source={props.order === 1 ? Images.icons.ic_connect : Images.icons.ic_velocity}
-                 style={{marginBottom: 20, height: 70}}/>
+          <Image source={{uri: get(props, 'data.icona3','')}}
+                 style={{width: 100, height: 70, marginBottom: 20, resizeMode: 'contain'}}/>
           <ItemText color={get(props, 'data.color3', '#000000')}>{get(props, 'data.titolo3')}</ItemText>
           <View style={{marginTop: -7}}/>
           <ItemSymbol color={get(props, 'data.color3', '#000000')}>{get(props, 'data.subtitolo3')}</ItemSymbol>
@@ -167,11 +180,17 @@ const IconDescriptionGroup = props => {
 };
 
 const RelatedElements = (item, index) => {
+  const {bikeData} = useStores();
+  const goToBike = url => {
+    bikeData.clearData();
+    bikeData.getData(url);
+    Actions.BikePagePremium();
+  };
   return (
     <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10}}>
       {item.map((item0, index) =>
         <View key={index} style={{width: '33%', borderLeftColor: '#c9c3c5', borderLeftWidth: 7, paddingHorizontal: 5}}>
-          <Image style={{width: '100%', height: 60}} source={{uri: item0.img_url}}/>
+          <TouchableOpacity onPress={() => goToBike(item0.url)}><Image style={{width: '100%', height: 60}} source={{uri: item0.img_url}}/></TouchableOpacity>
           <Text style={{
             color: '#909090',
             fontSize: 15,
@@ -179,7 +198,7 @@ const RelatedElements = (item, index) => {
             marginTop: 10,
           }}>{item0.brand}</Text>
           <Text style={{
-            color: '#D75A2B',
+            color: item0.color,
             fontSize: 15,
             fontFamily: isIOS ? 'Oswald-Bold' : 'oswald_bold',
             marginTop: -5,
@@ -232,6 +251,8 @@ const RelatedGroup = props => {
         img_date: data[`img_date${number}`],
         brand: data[`brand${number}`],
         modello: data[`modello${number}`],
+        url: data[`url${number}`],
+        color: data[`color${number}`]
       };
       elementArray.push(elementData);
     }
@@ -251,23 +272,24 @@ const RelatedGroup = props => {
       <View style={{
         backgroundColor: '#333333',
         width: '100%',
-        height: 30,
+        height: 35,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginTop: 10,
+        marginTop: 8,
         paddingHorizontal: 8,
       }}>
         <Text style={{
           fontSize: 16,
-          color: '#D75A2B',
+          color: '#53dcd0',
           fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',
-          marginTop: 5,
+          marginTop: 4,
         }}>{get(props, 'data.titolo', '')}</Text>
-        <TouchableOpacity><Image width={'100%'} height={'100%'} source={Images.icons.ic_close_sm}/></TouchableOpacity>
+        {/*<TouchableOpacity><Image width={'100%'} height={'100%'} source={Images.icons.ic_close_sm}/></TouchableOpacity>*/}
       </View>
       <View style={{height: 180}}>
-        <Swiper ref={_swiper} showsPagination={false} index={swiperState.position}
+        <Swiper ref={_swiper} showsPagination={false} index={swiperState.position} autoplay={true}
+                autoplayTimeout = {4}
                 onIndexChanged={(index) => swiperState.setPosition(index)}>
           {groupedArray.map((item, index) => RelatedElements(item, index))}
         </Swiper>
@@ -280,19 +302,26 @@ const RelatedGroup = props => {
 
 };
 
-
+const openUrl = (url) => {
+  Linking.canOpenURL(url).then(supported => {
+    if (supported) {
+      Linking.openURL(url);
+    } else {
+      console.log("Don't know how to open URI: " + this.props.url);
+    }
+  });
+};
 const RenderElements = props => {
   console.log(props);
   const uiData = props.uiData;
   const items = [];
   let i = 0;
-  let order = 0;
   uiData.forEach((item, index) => {
     if (item.id === 'BRAND_LOGO_SMALL') {
       items.push(<BrandLogo key={`key${index}`} data={item}/>);
     }
     if (item.id === 'ADV_RESUME_BIG') {
-      items.push(<MainBikeInfo isBack={true} style={{marginTop: '20px'}} key={`key${index}`} data={item}/>);
+      items.push(<View><AdvResumeBig isBack={true} productIf={true} style={{marginTop: '20px'}} key={`key${index}`} data={item}/><Divider size={-40}/></View>);
     }
     if (item.id === 'TITLE') {
       items.push(<View><Title key={`key${index}`} color={get(item, 'colore')}>{item.titolo}</Title><SubTitle1 color={get(item, 'sub_color','#ffffff')}>{item.sub}</SubTitle1><Divider size={-25}/></View>);
@@ -341,7 +370,7 @@ const RenderElements = props => {
           <View style={{backgroundColor: '#F2F2F2', alignItems: 'center', height: 190, paddingTop: 15}}>
             <Text style={{
               fontSize: 16,
-              color: '#D75A2B',
+              color: item.bg_color,
               fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',
               marginTop: 3,
             }}>RUOTA</Text>
@@ -354,7 +383,7 @@ const RenderElements = props => {
               }}>{item.ant_ruota}</Text>
             <Text style={{
               fontSize: 16,
-              color: '#D75A2B',
+              color: item.bg_color,
               fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',
               marginTop: 10,
             }}>GOMMA</Text>
@@ -405,7 +434,7 @@ const RenderElements = props => {
           <View style={{backgroundColor: '#F2F2F2', alignItems: 'center', height: 190, paddingTop: 15}}>
             <Text style={{
               fontSize: 16,
-              color: '#D75A2B',
+              color: item.bg_color,
               fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',
               marginTop: 3,
             }}>RUOTA</Text>
@@ -418,7 +447,7 @@ const RenderElements = props => {
             }} numberOfLines={2}>{item.post_ruota}</Text>
             <Text style={{
               fontSize: 16,
-              color: '#D75A2B',
+              color: item.bg_color,
               fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',
               marginTop: 10,
             }}>GOMMA</Text>
@@ -595,11 +624,13 @@ const RenderElements = props => {
 
     }
     if (item.id === 'ICON_DESCRIPTION_GROUP') {
-      order++;
-      items.push(<IconDescriptionGroup key={`key${index}`} order={order} data={item}/>);
+      items.push(<IconDescriptionGroup key={`key${index}`} data={item}/>);
     }
     if (item.id === 'RELATED_GROUP') {
       items.push(<RelatedGroup key={`key${index}`} data={item}/>);
+    }
+    if (item.id === 'AD_BANNER_ENGAGE') {
+      items.push(<View><Divider size={23}/><TouchableOpacity onPress={() => openUrl(item.url)}><Image style={{width: '100%', height: 130}} source={{uri: item.img}}/></TouchableOpacity><Divider size={20}/></View>)
     }
     items.push(<Divider key={`divider${index}`} size={20}/>);
   });
@@ -609,78 +640,18 @@ const RenderElements = props => {
 const BikePagePremium = props => {
   const {bikeData} = useStores();
   const uiData = toJS(bikeData.data);
-
-  // const [uiData, setUiData] = useState([]);
-  // const {swiperState} = useStores();
-  // swiperState.setPosition(0);
-  // React.useEffect(() => {
-  //   try {
-  //     const fetchData = async () => {
-  //       const result = await axios.get('http://biciapp.sepisolutions.com/api/v1/catalogo/prodotto/brinke/ecity/2020/life-comfort/4308');
-  //       setUiData(result.data.content);
-  //       console.log('uiData======', uiData);
-  //     };
-  //     fetchData();
-  //   } catch (e) {
-  //     console.log('error===>', e);
-  //   }
-  // }, []);
   return (
-    <Container style={{paddingHorizontal: 10, marginTop: 40}}>
-      <RenderElements uiData={uiData}/>
+    <View>
+      <TouchableOpacity onPress={() => Actions.pop()}
+                        style={{position: 'absolute', left: 0, top: '50%', zIndex: 100000000000}}>
+        <Image resizeMode="contain" source={Images.btn.btn_back}
+               style={{width: 37, height: 75}}/></TouchableOpacity>
+      <Container style={{paddingHorizontal: 10, marginTop: 40}}>
+        <RenderElements uiData={uiData}/>
 
-      {/*<NewsView>*/}
-        {/*<Title size={'0'} color={themeProp('colorPrimary')} width={'32px'}>NEWS</Title>*/}
-        {/*<Image width={50} height={30} source={Images.background.subtitle}/>*/}
-      {/*</NewsView>*/}
-      {/*<View>*/}
-        {/*<Image width={'100%'} height={'100%'} source={Images.background.bike_logo}*/}
-               {/*style={{width: '100%', height: 184}}/>*/}
-        {/*<Image width={100} height={100} resizeMode="stretch" source={Images.icons.ic_badge_empty}*/}
-               {/*style={{position: 'absolute', right: 0, top: 0, width: 35, height: 35}}/>*/}
-      {/*</View>*/}
-      {/*<DescView>*/}
-        {/*<DescTitle>BIKE NEWS</DescTitle>*/}
-        {/*<Image width={'90%'} height={'100%'} source={Images.background.address}/>*/}
-      {/*</DescView>*/}
-      {/*<Date>19/11/2020</Date>*/}
-      {/*<Description>TUTTI NUOVI MODELLI E-BIKE 2020{'\n'}DI HAIBIKE</Description>*/}
-      {/*<View style={{marginTop: 20}}>*/}
-        {/*<View style={{flexDirection: 'row'}}>*/}
-          {/*<Image width={'50%'} height={'100%'} resizeMode="stretch" source={Images.background.bike_logo}*/}
-                 {/*style={{width: '50%', height: 80}}/>*/}
-          {/*<View style={{paddingLeft: 5}}>*/}
-            {/*<Date>19/11/2020</Date>*/}
-            {/*<Desc>TUTTI NUOVI MODELLI</Desc>*/}
-            {/*<Desc>E-BIKE DI HAIBIKE</Desc>*/}
-          {/*</View>*/}
-        {/*</View>*/}
-        {/*<Image width={100} height={100} resizeMode="stretch" source={Images.icons.ic_badge_empty}*/}
-               {/*style={{position: 'absolute', right: 0, top: 0, width: 35, height: 35}}/>*/}
-      {/*</View>*/}
-      {/*<DescView>*/}
-        {/*<DescTitle>BIKE NEWS</DescTitle>*/}
-        {/*<Image width={'90%'} height={'100%'} source={Images.background.address}/>*/}
-      {/*</DescView>*/}
-      {/*<View style={{marginTop: 20}}>*/}
-        {/*<View style={{flexDirection: 'row'}}>*/}
-          {/*<Image width={'50%'} height={'100%'} resizeMode="stretch" source={Images.background.bike_logo}*/}
-                 {/*style={{width: '50%', height: 80}}/>*/}
-          {/*<View style={{paddingLeft: 5}}>*/}
-            {/*<Date>19/11/2020</Date>*/}
-            {/*<Desc>TUTTI NUOVI MODELLI</Desc>*/}
-            {/*<Desc>E-BIKE DI HAIBIKE</Desc>*/}
-          {/*</View>*/}
-        {/*</View>*/}
-        {/*<Image width={100} height={100} resizeMode="stretch" source={Images.icons.ic_badge_empty}*/}
-               {/*style={{position: 'absolute', right: 0, top: 0, width: 35, height: 35}}/>*/}
-      {/*</View>*/}
-      {/*<DescView>*/}
-        {/*<DescTitle>BIKE NEWS</DescTitle>*/}
-        {/*<Image width={'90%'} height={'100%'} source={Images.background.address}/>*/}
-      {/*</DescView>*/}
+      </Container>
+    </View>
 
-    </Container>
   );
 };
 
@@ -725,13 +696,13 @@ const Description = styled(Text)`
 
 const ItemText = styled(Text)`
   margin-top: -10px
-  font-size: 45px;
+  font-size: ${moderateScale(43)};
   color: ${props => props.color}
   font-family: ${themeProp('fontUniSemiBold')}
 `;
 
 const ItemSymbol = styled(Text)`
-  font-size: 20px;
+  font-size: ${moderateScale(19)};
   color: ${props => props.color}
   font-family: ${themeProp('fontUniBook')}
   margin-bottom: 10px

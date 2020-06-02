@@ -9,22 +9,20 @@ import {BlueButton, WhiteButton} from 'components/controls/Button';
 import Images from 'res/Images';
 import {toJS} from 'mobx';
 import { get } from 'lodash';
-import BikeFinderCategory from './BikeFinderCategory';
 
 
 const BikeFinder = props => {
-  const {staticData, category} = useStores();
+  const {staticData, category, bikeSearch} = useStores();
   console.log("search_landing", toJS(staticData.data.search_landing));
-  const lastItem = staticData.data.search_landing.pop();
-  staticData.data.search_landing.pop();
-  const goToCategory = (id, title) => {
+  const goToCategory = (id, title, color) => {
+    bikeSearch.clearRequest();
     console.log('id====', id);
     switch (true) {
       case (id === 2):
         Actions.BikeFinderAZ();
         break;
       case (id>=4 && id<=10):
-        category.setId(id, title);
+        category.setId(id, title, color);
         Actions.BikeFinderCategory();
         break;
       default:
@@ -41,7 +39,7 @@ const BikeFinder = props => {
         {/*<CategoryText>TUTTIIMODELLI</CategoryText>*/}
         {get(staticData, 'data.search_landing', []).map((item, i) => {
           return (<View>
-            <TouchableOpacity key={i} onPress={() => goToCategory(i, item.titolo)}><Title size={'0'} color={item.colore}>{item.titolo}</Title></TouchableOpacity>
+            <TouchableOpacity key={i} onPress={() => goToCategory(i, item.titolo, item.colore)}><Title size={'0'} color={item.colore}>{item.titolo}</Title></TouchableOpacity>
               {(i === 0 ||i === 2) && <Divider size={15}/>}
           </View>)
         })}

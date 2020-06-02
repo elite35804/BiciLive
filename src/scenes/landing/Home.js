@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Image, View, TouchableOpacity, Text, ScrollView, Platform, StyleSheet, Dimensions} from 'react-native';
+import {Image, View, TouchableOpacity, Text, ScrollView, Platform, Linking} from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
@@ -12,8 +12,10 @@ import {toJS} from 'mobx';
 import {get} from 'lodash';
 import Swiper from 'react-native-swiper';
 import {observer} from 'mobx-react';
+import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
+import {Divider} from '../../components/controls/BaseUtils';
 
-
+const isIOS = Platform.OS === 'ios';
 const Stepper = observer(props => {
   const {homeData} = useStores();
   const label = ['', '', '', '', ''];
@@ -48,9 +50,10 @@ const Stepper = observer(props => {
 const PageElement = props => {
   const {bikeData} = useStores();
   const goToBike = url => {
+    bikeData.clearData();
     bikeData.getData(url);
     Actions.BikePagePremium();
-  }
+  };
   return (
     <View>
       <LogoView onPress={() => goToBike(get(props, 'data.url', ''))}>
@@ -59,10 +62,11 @@ const PageElement = props => {
               style={{width: '100%', height: Platform.OS === 'ios' ? 260 : 230}}/>
       </LogoView>
       <Content>
-        <TypeView><Type>{get(props, 'data.categoria', '')}</Type></TypeView>
+        <TypeView
+          bg_color={'#' + get(props, 'data.color', themeProp('colorType'))}><Type>{get(props, 'data.categoria', '')}</Type></TypeView>
         <Sort>{get(props, 'data.brand', '')}</Sort>
         <NameView>
-          <Name>{get(props, 'data.modello', '')}</Name>
+          <Name numberOfLines={1} color={'#' + get(props, 'data.color', themeProp('colorType'))}>{get(props, 'data.modello', '')}</Name>
           <Image width={20} height={20} source={Images.icons.arrow_right}/>
         </NameView>
       </Content>
@@ -78,56 +82,60 @@ const PageSlider = (props) => {
     <SwiperContainer>
       <Swiper
         ref={_swiper}
-        containerStyle={{height: 330}}
+        containerStyle={{height: isIOS ? moderateScale(320) : moderateScale(300)}}
         showsPagination={false}
+        autoplay={true}
+        autoplayTimeout = {4}
         index={homeData.position}
         onIndexChanged={(index) => homeData.setPosition(index)}
       >
         {props.data.content.map((item, index) => {
-          return  <PageElement key={index} data={item}/>
+          return <PageElement key={index} data={item}/>;
         })}
-        {/*<PageElement data={props.data.content[0]}/>*/}
-        {/*<PageElement data={props.data.content[0]}/>*/}
-        {/*<PageElement data={props.data.content[0]}/>*/}
-        {/*<PageElement data={props.data.content[0]}/>*/}
-        {/*<PageElement data={props.data.content[0]}/>*/}
-
       </Swiper>
+      {isIOS && <Divider size={20}/>}
       <View style={{width: '115%', alignSelf: 'center'}}>
-      <Stepper total={total} onPress={p => _swiper.current.scrollBy(p, true)}/>
+        <Stepper total={total} onPress={p => _swiper.current.scrollBy(p, true)}/>
       </View>
     </SwiperContainer>
   );
 };
 
 
-
 const ImageReel = (props) => {
   const {brandData} = useStores();
   const goToBrand = (url) => {
+    brandData.clearData();
     brandData.getData(url);
-    Actions.BrandPagePremium();
+    Actions.replace('BrandPagePremium');
   };
   return (
-    <CategoryView>
-      <TouchableOpacity key="1" onPress={() => {
-        goToBrand(get(props, 'data.url1', ''));
-      }}><Image
-        style={{width: 64, height: 64, resizeMode: 'contain'}}
-        source={{uri: get(props, 'data.img1', '')}}/></TouchableOpacity>
-      <TouchableOpacity key="2" onPress={() => goToBrand(get(props, 'data.url2', ''))}><Image
-        style={{width: 64, height: 64, resizeMode: 'contain'}}
-        source={{uri: get(props, 'data.img2', '')}}/></TouchableOpacity>
-      <TouchableOpacity key="3" onPress={() => goToBrand(get(props, 'data.url3', ''))}><Image
-        style={{width: 64, height: 64, resizeMode: 'contain'}}
-        source={{uri: get(props, 'data.img3', '')}}/></TouchableOpacity>
-      <TouchableOpacity key="4" onPress={() => goToBrand(get(props, 'data.url4', ''))}><Image
-        style={{width: 64, height: 64, resizeMode: 'contain'}}
-        source={{uri: get(props, 'data.img4', '')}}/></TouchableOpacity>
-      <TouchableOpacity key="5" onPress={() => goToBrand(get(props, 'data.url5', ''))}><Image
-        style={{width: 64, height: 64, resizeMode: 'contain'}}
-        source={{uri: get(props, 'data.img5', '')}}/></TouchableOpacity>
-    </CategoryView>
+    <View>
+      <CategoryView>
+        <TouchableOpacity key="1" onPress={() => {
+          goToBrand(get(props, 'data.url1', ''));
+        }}><Image
+          style={{width: scale(110), height: verticalScale(110), resizeMode: 'contain'}}
+          source={{uri: get(props, 'data.img1', '')}}/></TouchableOpacity>
+        <TouchableOpacity key="2" onPress={() => goToBrand(get(props, 'data.url2', ''))}><Image
+          style={{width: scale(110), height: verticalScale(110), resizeMode: 'contain'}}
+          source={{uri: get(props, 'data.img2', '')}}/></TouchableOpacity>
+        <TouchableOpacity key="3" onPress={() => goToBrand(get(props, 'data.url3', ''))}><Image
+          style={{width: scale(110), height: verticalScale(110), resizeMode: 'contain'}}
+          source={{uri: get(props, 'data.img3', '')}}/></TouchableOpacity>
+      </CategoryView>
+      <CategoryView>
+        <TouchableOpacity key="4" onPress={() => goToBrand(get(props, 'data.url4', ''))}><Image
+          style={{width: scale(110), height: verticalScale(110), resizeMode: 'contain'}}
+          source={{uri: get(props, 'data.img4', '')}}/></TouchableOpacity>
+        <TouchableOpacity key="5" onPress={() => goToBrand(get(props, 'data.url5', ''))}><Image
+          style={{width: scale(110), height: verticalScale(110), resizeMode: 'contain'}}
+          source={{uri: get(props, 'data.img5', '')}}/></TouchableOpacity>
+        {props.data.url6 && <TouchableOpacity key="6" onPress={() => goToBrand(get(props, 'data.url6', ''))}><Image
+          style={{width: scale(110), height: verticalScale(110), resizeMode: 'contain'}}
+          source={{uri: get(props, 'data.img6', '')}}/></TouchableOpacity>}
+      </CategoryView>
+    </View>
   );
 };
 
@@ -138,16 +146,28 @@ const Finder = () => {
       <SubTitle>Cerca la tua bici ideale</SubTitle>
       <TouchableOpacity onPress={() => {
         Actions.BikeFinder();
-      }}><Image width={92} height={92} source={Images.btn.bike_finder} style={{marginTop: 14}}/></TouchableOpacity>
+      }}>
+        <Image style={{width: 170, height: 170, resizeMode: 'contain',marginTop: 14}} source={Images.btn.btn_finder_animated}/></TouchableOpacity>
+        {/*<Image width={92} height={92} source={Images.btn.bike_finder} style={{marginTop: 14}}/></TouchableOpacity>*/}
     </FinderView>
   );
+};
+
+const openUrl = (url) => {
+  Linking.canOpenURL(url).then(supported => {
+    if (supported) {
+      Linking.openURL(url);
+    } else {
+      console.log("Don't know how to open URI: " + this.props.url);
+    }
+  });
 };
 
 const HomeElements = (props) => {
   const uiData = props.data;
   const items = [];
   uiData.forEach((item, index) => {
-    if (item.id === 'PAGED_SLIDER') {
+    if (item.id === 'PAGED_SLIDER' && Object.keys(item.content).length) {
       items.push(<View><PageSlider key={`key${index}`} data={item}/><Divider size={20}/></View>);
     }
     if (item.id === 'TITLE') {
@@ -159,7 +179,10 @@ const HomeElements = (props) => {
     if (item.id === 'EBIKE_FINDER') {
       items.push(<View><Divider size={-20}/><Finder key={`key${index}`}/></View>);
     }
-    items.push(<Divider key={`divider${index}`} size={'25px'}/>);
+    if (item.id === 'AD_BANNER_ENGAGE') {
+      items.push(<View><TouchableOpacity onPress={() => openUrl(item.url)}><Image style={{width: '100%', height: 130}} source={{uri: item.img}}/></TouchableOpacity><Divider size={20}/></View>)
+    }
+    items.push(<Divider key={`divider${index}`} size={25}/>);
   });
   return items;
 };
@@ -170,137 +193,11 @@ const Home = (props) => {
     return <View><Text>There is no data to display</Text></View>;
   }
   const uiData = toJS(get(homeData, 'data.content', []));
+  console.log('homeData====', uiData);
   homeData.setPosition(0);
-  // console.log('uiData======: ', uiData);
-
-  //
-  // const customStyles1 = {
-  //   stepIndicatorSize: 25,
-  //   currentStepIndicatorSize: 25,
-  //   stepIndicatorCurrentColor: themeProp('colorText'),
-  //   separatorStrokeWidth: 2,
-  //   currentStepStrokeWidth: 13,
-  //   stepStrokeCurrentColor: themeProp('colorBorder'),
-  //   stepStrokeWidth: 13,
-  //   stepStrokeFinishedColor: '#c9c3c5',
-  //   stepStrokeUnFinishedColor: '#c9c3c5',
-  //   separatorFinishedColor: themeProp('colorBorder'),
-  //   separatorUnFinishedColor: '#c9c3c5',
-  // };
-
-
   return (
     <Container>
       <HomeElements data={uiData}/>
-      {/*<View>*/}
-      {/*<LogoView onPress={() => Actions.BikePagePremium()}>*/}
-      {/*<Logo width={'100%'} height={'100%'} source={Images.background.homeLogo}*/}
-      {/*style={{width: '100%', height: Platform.OS === 'ios' ? 260 : 230}}/>*/}
-      {/*</LogoView>*/}
-      {/*<Content>*/}
-      {/*<TypeView><Type>eMTB</Type></TypeView>*/}
-      {/*<Sort>HAIBIKE</Sort>*/}
-      {/*<NameView>*/}
-      {/*<Name>XDURO NDURO 10.0</Name>*/}
-      {/*<Image width={20} height={20} source={Images.icons.arrow_right}/>*/}
-      {/*</NameView>*/}
-      {/*</Content>*/}
-      {/*<StepIndicator customStyles={customStyles} currentPosition={3} labels={label}/>*/}
-      {/*<Divider size={'30px'}/>*/}
-      {/*</View>*/}
-      {/*<CategoryText>TUTTIIMODELLI</CategoryText>*/}
-      {/*<Title color={themeProp('colorThird')}>TUTTIIMODELLI</Title>*/}
-      {/*<CategoryView>*/}
-      {/*<TouchableOpacity onPress={() => Actions.BrandPagePremium()}><Image width={64} height={64}*/}
-      {/*source={Images.icons.ic_company_1}/></TouchableOpacity>*/}
-      {/*<TouchableOpacity onPress={() => Actions.BrandPagePremium()}><Image width={64} height={64}*/}
-      {/*source={Images.icons.ic_company_2}/></TouchableOpacity>*/}
-      {/*<TouchableOpacity onPress={() => Actions.BrandPagePremium()}><Image width={64} height={64}*/}
-      {/*source={Images.icons.ic_company_3}/></TouchableOpacity>*/}
-      {/*<TouchableOpacity onPress={() => Actions.BrandPagePremium()}><Image width={64} height={64}*/}
-      {/*source={Images.icons.ic_company_4}/></TouchableOpacity>*/}
-      {/*<TouchableOpacity onPress={() => Actions.BrandPagePremium()}><Image width={64} height={64}*/}
-      {/*source={Images.icons.ic_company_5}/></TouchableOpacity>*/}
-      {/*</CategoryView>*/}
-      {/*<Divider size={'25px'}/>*/}
-      {/*<CategoryText>TUTTIIMODELLI</CategoryText>*/}
-      {/*<CategoryView>*/}
-      {/*<TouchableOpacity onPress={() => Actions.BrandPagePremium()}><Image width={64} height={64}*/}
-      {/*source={Images.icons.ic_company_6}/></TouchableOpacity>*/}
-      {/*<TouchableOpacity onPress={() => Actions.BrandPagePremium()}><Image width={64} height={64}*/}
-      {/*source={Images.icons.ic_company_7}/></TouchableOpacity>*/}
-      {/*<TouchableOpacity onPress={() => Actions.BrandPagePremium()}><Image width={64} height={64}*/}
-      {/*source={Images.icons.ic_company_8}/></TouchableOpacity>*/}
-      {/*<TouchableOpacity onPress={() => Actions.BrandPagePremium()}><Image width={64} height={64}*/}
-      {/*source={Images.icons.ic_company_9}/></TouchableOpacity>*/}
-      {/*<TouchableOpacity onPress={() => Actions.BrandPagePremium()}><Image width={64} height={64}*/}
-      {/*source={Images.icons.ic_company_10}/></TouchableOpacity>*/}
-      {/*</CategoryView>*/}
-      {/*<FinderView>*/}
-      {/*<Title color={themeProp('colorThird')}>EBIKE FINDER</Title>*/}
-      {/*<SubTitle>Cerca la tua bici ideale</SubTitle>*/}
-      {/*<TouchableOpacity onPress={() => {*/}
-      {/*Actions.BikeFinder();*/}
-      {/*}}><Image width={92} height={92} source={Images.btn.bike_finder} style={{marginTop: 14}}/></TouchableOpacity>*/}
-      {/*</FinderView>*/}
-      {/*<NewsView>*/}
-        {/*<Title color={themeProp('colorPrimary')}>NEWS</Title>*/}
-        {/*<Image width={50} height={30} source={Images.background.subtitle}/>*/}
-      {/*</NewsView>*/}
-      {/*<View>*/}
-        {/*<Image width={'100%'} height={'100%'} source={Images.background.bike_logo}*/}
-               {/*style={{width: '100%', height: 184}}/>*/}
-        {/*<Image width={100} height={100} resizeMode="stretch" source={Images.icons.ic_badge_empty}*/}
-               {/*style={{position: 'absolute', right: 0, top: 0, width: 35, height: 35}}/>*/}
-      {/*</View>*/}
-      {/*<DescView>*/}
-        {/*<DescTitle>BIKE NEWS</DescTitle>*/}
-        {/*<Image width={'90%'} height={'100%'} source={Images.background.address}/>*/}
-      {/*</DescView>*/}
-      {/*<Date>19/11/2020</Date>*/}
-      {/*<Description>TUTTI NUOVI MODELLI E-BIKE 2020{'\n'}DI HAIBIKE</Description>*/}
-      {/*<View style={{marginTop: 20}}>*/}
-        {/*<View style={{flexDirection: 'row'}}>*/}
-          {/*<Image width={'50%'} height={'100%'} resizeMode="stretch" source={Images.background.bike_logo}*/}
-                 {/*style={{width: '50%', height: 80}}/>*/}
-          {/*<View style={{paddingLeft: 5}}>*/}
-            {/*<Date>19/11/2020</Date>*/}
-            {/*<Desc>TUTTI NUOVI MODELLI</Desc>*/}
-            {/*<Desc>E-BIKE DI HAIBIKE</Desc>*/}
-          {/*</View>*/}
-        {/*</View>*/}
-        {/*<Image width={100} height={100} resizeMode="stretch" source={Images.icons.ic_badge_empty}*/}
-               {/*style={{position: 'absolute', right: 0, top: 0, width: 35, height: 35}}/>*/}
-      {/*</View>*/}
-      {/*<DescView>*/}
-        {/*<DescTitle>BIKE NEWS</DescTitle>*/}
-        {/*<Image width={'90%'} height={'100%'} source={Images.background.address}/>*/}
-      {/*</DescView>*/}
-      {/*<View style={{marginTop: 20}}>*/}
-        {/*<View style={{flexDirection: 'row'}}>*/}
-          {/*<Image width={'50%'} height={'100%'} resizeMode="stretch" source={Images.background.bike_logo}*/}
-                 {/*style={{width: '50%', height: 80}}/>*/}
-          {/*<View style={{paddingLeft: 5}}>*/}
-            {/*<Date>19/11/2020</Date>*/}
-            {/*<Desc>TUTTI NUOVI MODELLI</Desc>*/}
-            {/*<Desc>E-BIKE DI HAIBIKE</Desc>*/}
-          {/*</View>*/}
-        {/*</View>*/}
-        {/*<Image width={100} height={100} resizeMode="stretch" source={Images.icons.ic_badge_empty}*/}
-               {/*style={{position: 'absolute', right: 0, top: 0, width: 35, height: 35}}/>*/}
-      {/*</View>*/}
-      {/*<DescView>*/}
-        {/*<DescTitle>BIKE NEWS</DescTitle>*/}
-        {/*<Image width={'90%'} height={'100%'} source={Images.background.address}/>*/}
-      {/*</DescView>*/}
-      {/*<NewsFinderView>*/}
-        {/*<Title color={themeProp('colorPrimary')}>NEWS FINDER</Title>*/}
-        {/*<SubTitle>Le notize di BiciLive.it</SubTitle>*/}
-        {/*<TouchableOpacity onPress={() => Actions.NewsFinder()}>*/}
-          {/*<Image width={92} height={92} source={Images.btn.news_finder} style={{marginTop: 14}}/>*/}
-        {/*</TouchableOpacity>*/}
-      {/*</NewsFinderView>*/}
-      {/*<View style={{marginBottom: 30}}/>*/}
     </Container>
   );
 };
@@ -338,27 +235,28 @@ const Logo = styled(Image)`
 
 const Content = styled(View)`
   padding-horizontal: 14px;
-  margin-left: -15px
+  margin-left: -15px;
 `;
 
 const TypeView = styled(View)`
-  background-color: ${themeProp('colorType')}
+  background-color: ${props => props.bg_color}
   padding-horizontal: 5px;
-  width: 44px;
-  margin-bottom: -5px
+  position: absolute;
+  left: 15;
 `;
 
 const Type = styled(Text)`
   color: ${themeProp('colorSecondary')};
   font-family: ${themeProp('fontPrimaryBold')}
-  font-size: 15px;
+  font-size: ${moderateScale(12)};
 `;
 
 const Sort = styled(Text)`
   color: ${themeProp('colorDescription')};
   font-family: ${themeProp('fontPrimaryBold')}
-  font-size: 20px;
-  margin-bottom: -10px
+  font-size: ${moderateScale(18)};
+  margin-bottom: -10px;
+  margin-top: ${moderateScale(16)};
 `;
 
 const NameView = styled(View)`
@@ -367,16 +265,16 @@ const NameView = styled(View)`
 `;
 
 const Name = styled(Text)`
-  color: ${themeProp('colorType')};
+  color: ${props => props.color ? props.color: themeProp('colorType')};
   font-family: ${themeProp('fontPrimaryBold')}
-  font-size: 30px;
-  margin-top: -5px;
+  font-size: ${moderateScale(28)};
+  margin-top: ${isIOS ? 0 : moderateScale(-5)};
   margin-right: 5px;
 `;
 
-const Divider = styled(View)`
-  margin-top: ${props => props.size}
-`;
+// const Divider = styled(View)`
+//   margin-top: ${props => props.size}
+// `;
 
 const CategoryText = styled(Text)`
   color: ${themeProp('colorBorder')};
@@ -404,7 +302,7 @@ const NewsFinderView = styled(View)`
 const Title = styled(Text)`
   color: ${props => props.color};
   font-family: ${themeProp('fontUniHeavy')}
-  font-size: 38px;
+  font-size: ${moderateScale(34)};
 `;
 
 const SubTitle = styled(Text)`
@@ -439,6 +337,6 @@ const DescTitle = styled(Text)`
 const SwiperContainer = styled(View)`
   width: 100%;
   flex: 1;
-`
+`;
 
 export default observer(Home);

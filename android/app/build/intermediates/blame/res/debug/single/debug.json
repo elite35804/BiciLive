@@ -8,12 +8,12 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/anim/design_bottom_sheet_slide_in.xml"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_btn_radio_to_on_mtrl_015.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xhdpi-v4/abc_btn_radio_to_on_mtrl_015.png"
-    },
-    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_ic_arrow_down.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xhdpi/src_res_images_ic_arrow_down.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_btn_radio_to_on_mtrl_015.png.flat",
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xhdpi-v4/abc_btn_radio_to_on_mtrl_015.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_mtrl_alert_dialog.xml.flat",
@@ -44,20 +44,20 @@
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xxhdpi/src_res_images_ic_battery_lg.png"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_mtrl_alert_dialog_actions.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/layout/mtrl_alert_dialog_actions.xml"
-    },
-    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher_round.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_mtrl_layout_snackbar_include.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/layout/mtrl_layout_snackbar_include.xml"
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_mtrl_alert_dialog_actions.xml.flat",
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/layout/mtrl_alert_dialog_actions.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_abc_item_background_holo_light.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable/abc_item_background_holo_light.xml"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_mtrl_layout_snackbar_include.xml.flat",
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/layout/mtrl_layout_snackbar_include.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_btn_radio_to_on_mtrl_000.png.flat",
@@ -96,24 +96,24 @@
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xxhdpi/src_res_images_ic_twitter.png"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_lg_mark_motori_4.png.flat",
-        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xxhdpi/src_res_images_lg_mark_motori_4.png"
-    },
-    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_notification_bg_low_pressed.9.png.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/5356ece467466d9fff663a79b90dd6d4/res/drawable-mdpi-v4/notification_bg_low_pressed.9.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_lg_mark_motori_4.png.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xxhdpi/src_res_images_lg_mark_motori_4.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_ic_menu_arrow_up_black_24dp.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/drawable/ic_menu_arrow_up_black_24dp.xml"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_btn_back_half_circle.png.flat",
-        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xxhdpi/src_res_images_btn_back_half_circle.png"
-    },
-    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_arrow_down_sm.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xxhdpi/src_res_images_arrow_down_sm.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_btn_back_half_circle.png.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xxhdpi/src_res_images_btn_back_half_circle.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_list_longpressed_holo.9.png.flat",
@@ -148,12 +148,12 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/fd718b6a1f5bd647456e7db7308d5de6/res/anim/fragment_fade_exit.xml"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
-    },
-    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_abc_list_selector_background_transition_holo_dark.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
@@ -172,12 +172,12 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/5356ece467466d9fff663a79b90dd6d4/res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_app.json.flat",
-        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/app.json"
-    },
-    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/color_mtrl_choice_chip_text_color.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/color/mtrl_choice_chip_text_color.xml"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_app.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/app.json"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_ic_footer_profile.png.flat",
@@ -208,52 +208,52 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/fa10bd0de3fcae7e15516aacdcd3edc0/res/anim/catalyst_slide_up.xml"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-ldrtl-xhdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-ldrtl-xhdpi-v17/abc_ic_menu_copy_mtrl_am_alpha.png"
-    },
-    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_ic_keyboard_arrow_left_black_24dp.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/drawable/ic_keyboard_arrow_left_black_24dp.xml"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-mdpi-v4/abc_btn_check_to_on_mtrl_000.png"
-    },
-    {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_text_select_handle_right_mtrl_light.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xxhdpi-v4/abc_text_select_handle_right_mtrl_light.png"
-    },
-    {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-hdpi-v4/abc_tab_indicator_mtrl_alpha.9.png"
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-ldrtl-xhdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-ldrtl-xhdpi-v17/abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_abc_alert_dialog_material.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/layout/abc_alert_dialog_material.xml"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_lg_mark_motori_1.png.flat",
-        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/src_res_images_lg_mark_motori_1.png"
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-hdpi-v4/abc_tab_indicator_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_text_select_handle_right_mtrl_light.png.flat",
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xxhdpi-v4/abc_text_select_handle_right_mtrl_light.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-mdpi-v4/abc_btn_check_to_on_mtrl_000.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_star_half_black_48dp.png.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-mdpi-v4/abc_ic_star_half_black_48dp.png"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_lg_mark_ebike_2.png.flat",
-        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xhdpi/src_res_images_lg_mark_ebike_2.png"
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_lg_mark_motori_1.png.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/src_res_images_lg_mark_motori_1.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_text_view_with_theme_line_height.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/layout/text_view_with_theme_line_height.xml"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnativedropdownalert_assets_info.png.flat",
-        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/node_modules_reactnativedropdownalert_assets_info.png"
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_lg_mark_ebike_2.png.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xhdpi/src_res_images_lg_mark_ebike_2.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_text_view_with_line_height_from_appearance.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/layout/text_view_with_line_height_from_appearance.xml"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnativedropdownalert_assets_info.png.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/node_modules_reactnativedropdownalert_assets_info.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/interpolator_mtrl_linear_out_slow_in.xml.flat",
@@ -328,6 +328,14 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/color/mtrl_filled_stroke_color.xml"
     },
     {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_bottoneanimato.gif.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/src_res_images_bottoneanimato.gif"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnativeratings_src_images_heart.png.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/node_modules_reactnativeratings_src_images_heart.png"
+    },
+    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/interpolator_mtrl_fast_out_linear_in.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/interpolator/mtrl_fast_out_linear_in.xml"
     },
@@ -340,16 +348,16 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/color-v23/abc_tint_default.xml"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_ic_user_sm.png.flat",
-        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xhdpi/src_res_images_ic_user_sm.png"
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_btn_radio_to_on_mtrl_015.png.flat",
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_015.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-ldrtl-hdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-ldrtl-hdpi-v17/abc_spinner_mtrl_am_alpha.9.png"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_btn_radio_to_on_mtrl_015.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_015.png"
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_ic_user_sm.png.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xhdpi/src_res_images_ic_user_sm.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-v21_avd_show_password.xml.flat",
@@ -368,12 +376,12 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xxxhdpi-v4/abc_ic_star_half_black_36dp.png"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_btn_minus_circle.png.flat",
-        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/src_res_images_btn_minus_circle.png"
-    },
-    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_btn_radio_to_on_mtrl_000.png.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xxxhdpi-v4/abc_btn_radio_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_btn_minus_circle.png.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/src_res_images_btn_minus_circle.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_redbox_item_title.xml.flat",
@@ -386,6 +394,10 @@
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xhdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_reactnativevectoricons_glyphmaps_evilicons.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_reactnativevectoricons_glyphmaps_evilicons.json"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_logo.png.flat",
@@ -496,12 +508,12 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable/abc_tab_indicator_material.xml"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/anim_abc_shrink_fade_out_from_bottom.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/anim/abc_shrink_fade_out_from_bottom.xml"
-    },
-    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_abc_ic_menu_overflow_material.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable/abc_ic_menu_overflow_material.xml"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/anim_abc_shrink_fade_out_from_bottom.xml.flat",
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/anim/abc_shrink_fade_out_from_bottom.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_text_select_handle_left_mtrl_light.png.flat",
@@ -528,12 +540,12 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/layout/design_text_input_start_icon.xml"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_ic_close_sm.png.flat",
-        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/src_res_images_ic_close_sm.png"
-    },
-    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_abc_seekbar_tick_mark_material.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable/abc_seekbar_tick_mark_material.xml"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_ic_close_sm.png.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/src_res_images_ic_close_sm.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_abc_activity_chooser_view_list_item.xml.flat",
@@ -640,6 +652,10 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/color/mtrl_tabs_colored_ripple_color.xml"
     },
     {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_reactnativevectoricons_glyphmaps_entypo.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_reactnativevectoricons_glyphmaps_entypo.json"
+    },
+    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/animator_mtrl_fab_transformation_sheet_collapse_spec.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/animator/mtrl_fab_transformation_sheet_collapse_spec.xml"
     },
@@ -650,6 +666,10 @@
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_node_modules_reactnavigationstack_lib_module_views_assets_backicon.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xhdpi/node_modules_reactnavigationstack_lib_module_views_assets_backicon.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnativeratings_src_images_airbnbstar.png.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/node_modules_reactnativeratings_src_images_airbnbstar.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_ic_share.png.flat",
@@ -684,12 +704,12 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-hdpi-v4/abc_ic_menu_share_mtrl_alpha.png"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/color_mtrl_navigation_item_icon_tint.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/color/mtrl_navigation_item_icon_tint.xml"
-    },
-    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_node_modules_reactnativedropdownalert_assets_warn.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xxhdpi/node_modules_reactnativedropdownalert_assets_warn.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/color_mtrl_navigation_item_icon_tint.xml.flat",
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/color/mtrl_navigation_item_icon_tint.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout-sw600dp-v13_design_layout_snackbar.xml.flat",
@@ -706,6 +726,10 @@
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_design_bottom_navigation_item_background.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/drawable/design_bottom_navigation_item_background.xml"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnativeratings_src_images_star.png.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/node_modules_reactnativeratings_src_images_star.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/color_mtrl_fab_ripple_color.xml.flat",
@@ -892,16 +916,16 @@
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xxhdpi/src_res_images_triangledown.png"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_lg_mark_motori_5.png.flat",
-        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xxhdpi/src_res_images_lg_mark_motori_5.png"
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_star_half_black_36dp.png.flat",
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xxhdpi-v4/abc_ic_star_half_black_36dp.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_ic_heart_border.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xhdpi/src_res_images_ic_heart_border.png"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_star_half_black_36dp.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xxhdpi-v4/abc_ic_star_half_black_36dp.png"
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_lg_mark_motori_5.png.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xxhdpi/src_res_images_lg_mark_motori_5.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_lg_mark_motori_2.png.flat",
@@ -954,6 +978,10 @@
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xxhdpi-v4/abc_btn_check_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnativeratings_src_images_bell.png.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/node_modules_reactnativeratings_src_images_bell.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notification_bg_normal.9.png.flat",
@@ -1144,12 +1172,12 @@
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xxhdpi/src_res_images_ic_footer_profile.png"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
-    },
-    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-hdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_test_action_chip.xml.flat",
@@ -1184,6 +1212,10 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/drawable/mtrl_tabs_default_indicator.xml"
     },
     {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_btn_animated1.gif.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/src_res_images_btn_animated1.gif"
+    },
+    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xhdpi-v4/abc_list_divider_mtrl_alpha.9.png"
     },
@@ -1196,6 +1228,10 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/color/mtrl_indicator_text_color.xml"
     },
     {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_reactnativevectoricons_glyphmaps_feather.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_reactnativevectoricons_glyphmaps_feather.json"
+    },
+    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/color_mtrl_btn_text_btn_bg_color_selector.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/color/mtrl_btn_text_btn_bg_color_selector.xml"
     },
@@ -1204,12 +1240,16 @@
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xxhdpi/src_res_images_ic_keyboard.png"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/color_abc_tint_default.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/color/abc_tint_default.xml"
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_reactnativevectoricons_glyphmaps_fontawesome5free.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_reactnativevectoricons_glyphmaps_fontawesome5free.json"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_btn_ebike_finder.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xxhdpi/src_res_images_btn_ebike_finder.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/color_abc_tint_default.xml.flat",
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/color/abc_tint_default.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_list_pressed_holo_light.9.png.flat",
@@ -1220,12 +1260,12 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xxhdpi-v4/abc_ic_star_half_black_16dp.png"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/color-v23_abc_color_highlight_material.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/color-v23/abc_color_highlight_material.xml"
-    },
-    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-ldrtl-mdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-ldrtl-mdpi-v17/abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/color-v23_abc_color_highlight_material.xml.flat",
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/color-v23/abc_color_highlight_material.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_cab_background_top_mtrl_alpha.9.png.flat",
@@ -1248,12 +1288,12 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-hdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_ic_alpha.png.flat",
-        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xhdpi/src_res_images_ic_alpha.png"
-    },
-    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_img_bike_atala.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xxhdpi/src_res_images_img_bike_atala.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_ic_alpha.png.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xhdpi/src_res_images_ic_alpha.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/color_material_on_primary_disabled.xml.flat",
@@ -1284,24 +1324,24 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/5356ece467466d9fff663a79b90dd6d4/res/drawable-hdpi-v4/notify_panel_notification_icon_bg.png"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_abc_dialog_title_material.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/layout/abc_dialog_title_material.xml"
-    },
-    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_ic_star_half_black_36dp.png.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xhdpi-v4/abc_ic_star_half_black_36dp.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_abc_dialog_title_material.xml.flat",
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/layout/abc_dialog_title_material.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_design_ic_visibility.png.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/drawable-xhdpi-v4/design_ic_visibility.png"
     },
     {
-        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/animator_mtrl_extended_fab_hide_motion_spec.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/animator/mtrl_extended_fab_hide_motion_spec.xml"
-    },
-    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_redbox_item_frame.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/fa10bd0de3fcae7e15516aacdcd3edc0/res/layout/redbox_item_frame.xml"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/animator_mtrl_extended_fab_hide_motion_spec.xml.flat",
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/animator/mtrl_extended_fab_hide_motion_spec.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_btn_checkbox_unchecked_to_checked_mtrl_animation.xml.flat",
@@ -1346,6 +1386,10 @@
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_biciliveit.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/src_res_images_biciliveit.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnativeratings_src_images_rocket.png.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/node_modules_reactnativeratings_src_images_rocket.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_text_select_handle_right_mtrl_dark.png.flat",
@@ -1398,6 +1442,10 @@
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_img_bike_xduro.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xhdpi/src_res_images_img_bike_xduro.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_entities_lib_maps_decode.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_entities_lib_maps_decode.json"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_ic_arrow_left.png.flat",
@@ -1472,6 +1520,10 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/layout/design_bottom_navigation_item.xml"
     },
     {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_btn_activated2.gif.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/src_res_images_btn_activated2.gif"
+    },
+    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_img_title.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/src_res_images_img_title.png"
     },
@@ -1486,6 +1538,10 @@
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_list_focused_holo.9.png.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xhdpi-v4/abc_list_focused_holo.9.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_entities_lib_maps_entities.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_entities_lib_maps_entities.json"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_abc_vector_test.xml.flat",
@@ -1508,6 +1564,10 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/anim/abc_fade_out.xml"
     },
     {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnativeratings_src_images_airbnbstarselected.png.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/node_modules_reactnativeratings_src_images_airbnbstarselected.png"
+    },
+    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_ic_arrow_left.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xhdpi/src_res_images_ic_arrow_left.png"
     },
@@ -1528,12 +1588,20 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/layout/abc_expanded_menu_layout.xml"
     },
     {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_btncondividi.png.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/src_res_images_btncondividi.png"
+    },
+    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_btn_radio_to_on_mtrl_015.png.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xxxhdpi-v4/abc_btn_radio_to_on_mtrl_015.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout-v21_notification_action.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/5356ece467466d9fff663a79b90dd6d4/res/layout-v21/notification_action.xml"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_domserializer_foreignnames.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_domserializer_foreignnames.json"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_list_pressed_holo_dark.9.png.flat",
@@ -1592,6 +1660,10 @@
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/src_components_hud_src_info.png"
     },
     {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_reactnativevectoricons_glyphmaps_fontawesome5free_meta.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_reactnativevectoricons_glyphmaps_fontawesome5free_meta.json"
+    },
+    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_ic_info_sm_black.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/src_res_images_ic_info_sm_black.png"
     },
@@ -1640,6 +1712,10 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-mdpi-v4/abc_list_focused_holo.9.png"
     },
     {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_reactnativevectoricons_glyphmaps_simplelineicons.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_reactnativevectoricons_glyphmaps_simplelineicons.json"
+    },
+    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/anim_btn_radio_to_off_mtrl_ring_outer_path_animation.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/anim/btn_radio_to_off_mtrl_ring_outer_path_animation.xml"
     },
@@ -1666,6 +1742,10 @@
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_ic_heart_border_sm.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/src_res_images_ic_heart_border_sm.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_reactnativevectoricons_glyphmaps_ionicons.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_reactnativevectoricons_glyphmaps_ionicons.json"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_ic_battery.png.flat",
@@ -1872,6 +1952,10 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-ldrtl-xxxhdpi-v17/abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_entities_lib_maps_legacy.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_entities_lib_maps_legacy.json"
+    },
+    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/color_abc_tint_edittext.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/color/abc_tint_edittext.xml"
     },
@@ -1890,6 +1974,10 @@
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_btn_news_finder.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xxhdpi/src_res_images_btn_news_finder.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_reactnativevectoricons_glyphmaps_materialicons.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_reactnativevectoricons_glyphmaps_materialicons.json"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_switch_track_mtrl_alpha.9.png.flat",
@@ -2068,6 +2156,10 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xhdpi-v4/abc_list_selector_disabled_holo_dark.9.png"
     },
     {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_reactnativevectoricons_glyphmaps_foundation.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_reactnativevectoricons_glyphmaps_foundation.json"
+    },
+    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/color_test_mtrl_calendar_day_selected.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/color/test_mtrl_calendar_day_selected.xml"
     },
@@ -2198,6 +2290,10 @@
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_btn_minus_circle.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xhdpi/src_res_images_btn_minus_circle.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_reactnativevectoricons_glyphmaps_materialcommunityicons.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_reactnativevectoricons_glyphmaps_materialcommunityicons.json"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_abc_cab_background_internal_bg.xml.flat",
@@ -2362,6 +2458,10 @@
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_abc_ic_arrow_drop_right_black_24dp.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable/abc_ic_arrow_drop_right_black_24dp.xml"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_reactnativevectoricons_glyphmaps_fontawesome.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_reactnativevectoricons_glyphmaps_fontawesome.json"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_mountainbikebiciliv.png.flat",
@@ -2612,6 +2712,10 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/drawable/ic_keyboard_arrow_right_black_24dp.xml"
     },
     {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_csstree_dist_defaultsyntax.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_csstree_dist_defaultsyntax.json"
+    },
+    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_textfield_search_default_mtrl_alpha.9.png.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-mdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png"
     },
@@ -2694,6 +2798,10 @@
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_reactnativevectoricons_glyphmaps_zocial.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_reactnativevectoricons_glyphmaps_zocial.json"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_ic_whatsapp.png.flat",
@@ -2822,6 +2930,10 @@
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_lg_mark_ebike_5.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xhdpi/src_res_images_lg_mark_ebike_5.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_icon_zoom.png.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/src_res_images_icon_zoom.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_mtrl_picker_actions.xml.flat",
@@ -3176,6 +3288,10 @@
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xxhdpi-v4/abc_list_pressed_holo_light.9.png"
     },
     {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_reactnativevectoricons_glyphmaps_antdesign.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_reactnativevectoricons_glyphmaps_antdesign.json"
+    },
+    {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/anim_design_snackbar_in.xml.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/anim/design_snackbar_in.xml"
     },
@@ -3186,6 +3302,10 @@
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
         "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/drawable-xhdpi-v4/abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_cssselect_lib_procedure.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_cssselect_lib_procedure.json"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi_node_modules_reactnavigationstack_lib_module_views_assets_backicon.png.flat",
@@ -3294,6 +3414,10 @@
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_bdg_star_empty.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-xxhdpi/src_res_images_bdg_star_empty.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_entities_lib_maps_xml.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_entities_lib_maps_xml.json"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_abc_edit_text_material.xml.flat",
@@ -3522,6 +3646,10 @@
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_node_modules_reactnavigationstack_lib_module_views_assets_backicon.png.flat",
         "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/drawable-mdpi/node_modules_reactnavigationstack_lib_module_views_assets_backicon.png"
+    },
+    {
+        "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_reactnativevectoricons_glyphmaps_octicons.json.flat",
+        "source": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/src/main/res/raw/node_modules_reactnativevectoricons_glyphmaps_octicons.json"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-v23_mtrl_popupmenu_background_dark.xml.flat",

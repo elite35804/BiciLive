@@ -9,6 +9,7 @@ import {BlueButton, WhiteButton} from 'components/controls/Button';
 import Images from 'res/Images';
 import {toJS} from 'mobx';
 import {get} from 'lodash';
+import {isIOS} from 'rn-tooltip/src/helpers';
 
 const preProcess = (rawData) => {
   const title = rawData.shift();
@@ -46,6 +47,7 @@ const BikeFinderAZ = props => {
   ];
   const {brandData} = useStores();
   const goToBrand = (url) => {
+    brandData.clearData();
     brandData.getData(url);
     Actions.BrandPagePremium();
   };
@@ -143,7 +145,8 @@ const Badge = styled(View)`
 const BadgeCount = styled(Text)`
   color: ${themeProp('colorSecondary')};
   font-size: 13px;
-  font-family: ${themeProp('fontUniHeavy')}
+  font-family: ${themeProp('fontUniHeavy')};
+  margin-top: ${isIOS ? 5 : 0}
 `;
 
 const Divider = styled(View)`

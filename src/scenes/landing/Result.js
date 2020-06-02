@@ -10,97 +10,139 @@ import {Step, Divider, CheckBox, Price, Slider, MainBikeInfo, ListBikeInfo, Divi
 import {BaseTextInput, BaseSelect, BaseTextFilter} from 'components/controls/BaseTextInput';
 import axios from 'axios';
 import {get} from 'lodash';
+import {observer} from 'mobx-react';
+import {toJS} from 'mobx';
+import { SwipeListView } from 'react-native-swipe-list-view';
 
 const isIOS = Platform.OS === "ios";
 
 const Result = props => {
-  const [uiData, setUiData] = useState([]);
-  const [titleData, setTitleData] = useState({});
-  useEffect(() => {
-    try {
-      const fetchData = async () => {
-        const result = await axios.get('http://biciapp.sepisolutions.com/api/v1/demo_search');
-        setUiData(result.data.content);
-        setTitleData(uiData.shift());
-        console.log('titleData======', titleData);
-        // console.log('uiData======', uiData);
-      };
-      fetchData();
-    } catch (e) {
-      console.log('error===>', e);
-    }
-  }, []);
-  return (
-    <View style={{flex: 1}}>
-      <Container>
-        <TitleView>
-          <Title size={'0px'} color={themeProp('colorThird')} width={'35px'}>{get(titleData, 'titolo', 'EBIKE FINDER')}</Title>
-          <BadgeView>
-            <Title size={isIOS ? '8px' : '0'} color={themeProp('colorSecondary')} width={'20px'}>{get(titleData, 'count', '35')}</Title>
-          </BadgeView>
-        </TitleView>
-        {/*<Title size={'-10'} color={themeProp('colorBorder')} width={'35px'}>ORDINA</Title>*/}
-        {/*<SortView>*/}
+  const {bikeSearch} = useStores();
+  const uiData = toJS(bikeSearch.data);
+  // const [uiData, setUiData] = useState([]);
+  // const [titleData, setTitleData] = useState({});
+  // useEffect(() => {
+  //   try {
+  //     const fetchData = async () => {
+  //       const result = await axios.get('http://biciapp.sepisolutions.com/api/v1/demo_search');
+  //       setUiData(result.data.content);
+  //       setTitleData(uiData.shift());
+  //       console.log('titleData======', titleData);
+  //       // console.log('uiData======', uiData);
+  //     };
+  //     fetchData();
+  //   } catch (e) {
+  //     console.log('error===>', e);
+  //   }
+  // }, []);
+  if (Object.keys(uiData).length !== 0) {
+    return (
+      <View style={{flex: 1}}>
+        <Container>
+          {/*<TitleView>*/}
+            {/*<Title size={'0px'} color={themeProp('colorThird')} width={'35px'}>{get(titleData, 'titolo', 'EBIKE FINDER')}</Title>*/}
+            {/*<BadgeView>*/}
+              {/*<Title size={isIOS ? '8px' : '0'} color={themeProp('colorSecondary')} width={'20px'}>{get(titleData, 'count', '35')}</Title>*/}
+            {/*</BadgeView>*/}
+          {/*</TitleView>*/}
+          {/*<Title size={'-10'} color={themeProp('colorBorder')} width={'35px'}>ORDINA</Title>*/}
+          {/*<SortView>*/}
           {/*<SortItem color={'black'}>*/}
-            {/*<Text style={{fontSize: 15, fontFamily: isIOS ? 'Oswald-SemiBold' : 'oswald_semibold'}}>PREZZO</Text>*/}
-            {/*<Image width={7} height={7} source={Images.icons.ic_triangle_down} />*/}
+          {/*<Text style={{fontSize: 15, fontFamily: isIOS ? 'Oswald-SemiBold' : 'oswald_semibold'}}>PREZZO</Text>*/}
+          {/*<Image width={7} height={7} source={Images.icons.ic_triangle_down} />*/}
           {/*</SortItem>*/}
           {/*<SortItem color={'#53DCD0'}>*/}
-            {/*<Text style={{fontSize: 15, fontFamily: isIOS ? 'Oswald-SemiBold' : 'oswald_semibold', color: '#53DCD0' }}>COPPIA</Text>*/}
-            {/*<Image width={7} height={7} source={Images.icons.ic_triangle_up} />*/}
+          {/*<Text style={{fontSize: 15, fontFamily: isIOS ? 'Oswald-SemiBold' : 'oswald_semibold', color: '#53DCD0' }}>COPPIA</Text>*/}
+          {/*<Image width={7} height={7} source={Images.icons.ic_triangle_up} />*/}
           {/*</SortItem>*/}
           {/*<SortItem color={'black'}>*/}
-            {/*<Text style={{fontSize: 15, fontFamily: isIOS ? 'Oswald-SemiBold' : 'oswald_semibold'}}>BATTERIA</Text>*/}
-            {/*<Image width={7} height={7} source={Images.icons.ic_triangle_down} />*/}
+          {/*<Text style={{fontSize: 15, fontFamily: isIOS ? 'Oswald-SemiBold' : 'oswald_semibold'}}>BATTERIA</Text>*/}
+          {/*<Image width={7} height={7} source={Images.icons.ic_triangle_down} />*/}
           {/*</SortItem>*/}
           {/*<SortItem color={'black'}>*/}
-            {/*<Text style={{fontSize: 15, fontFamily: isIOS ? 'Oswald-SemiBold' : 'oswald_semibold'}}>2020</Text>*/}
-            {/*<Image width={7} height={7} source={Images.icons.ic_triangle_down} />*/}
+          {/*<Text style={{fontSize: 15, fontFamily: isIOS ? 'Oswald-SemiBold' : 'oswald_semibold'}}>2020</Text>*/}
+          {/*<Image width={7} height={7} source={Images.icons.ic_triangle_down} />*/}
           {/*</SortItem>*/}
-        {/*</SortView>*/}
-        {uiData.map((item, index) => {
-          if (item.id === "BIKE_RESUME_BIG")
-            return <View>
-              <MainBikeInfo data={item}/>
-              <Divider size={40}/>
-              <DivideLine/>
-            </View>
-          if (item.id === "BIKE_RESUME_SMALL")
-            return <View>
-              <ListBikeInfo data={item}/>
-              <Divider size={40}/>
-              <DivideLine/>
-            </View>
-        })}
-        {/*<MainBikeInfo/>*/}
-        {/*<Divider size={40}/>*/}
-        {/*<DivideLine/>*/}
-        {/*<ListBikeInfo/>*/}
-        {/*<Divider size={40}/>*/}
-        {/*<DivideLine/>*/}
-        {/*<ListBikeInfo/>*/}
-        {/*<Divider size={40}/>*/}
-        {/*<DivideLine/>*/}
-        {/*<MainBikeInfo/>*/}
-        {/*<Divider size={40}/>*/}
-        {/*<DivideLine/>*/}
-        {/*<ListBikeInfo/>*/}
-        {/*<Divider size={40}/>*/}
-        {/*<DivideLine/>*/}
-        {/*<ListBikeInfo/>*/}
-      </Container>
-      {/*<Bottom>*/}
-        {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_plus_circle} />*/}
-      {/*</Bottom>*/}
-    </View>
+          {/*</SortView>*/}
+          {uiData.map((item, index) => {
+            if (item.id === 'TITLE') {
+              return <View><Title size={'-10px'} width={'35px'} color={themeProp('colorBorder')}>{item.titolo}</Title></View>
+            }
+            if (item.id === "BIKE_RESUME_BIG")
+              return <View>
+                <SwipeListView
+                  data={[""]}
+                  renderItem={(data, rowMap) => (<View><MainBikeInfo data={item}/></View>)}
+                  renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
+                    <TouchableOpacity style={{backgroundColor: 'red', alignItems: 'center', width: 70,height: '50%', justifyContent: 'center'}}>
+                      <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_white} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{backgroundColor: '#53DCD0', alignItems: 'center', width: 70,height: '50%', justifyContent: 'center'}}>
+                      <Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white} />
+                    </TouchableOpacity>
+                  </View>)}
+                  leftOpenValue={0}
+                  rightOpenValue={-80}
+                />
 
-  );
+                <Divider size={40}/>
+                <DivideLine/>
+              </View>
+            if (item.id === "BIKE_RESUME_SMALL")
+              return <View>
+                <SwipeListView
+                  data={[""]}
+                  renderItem={(data, rowMap) => (<View><ListBikeInfo data={item}/></View>)}
+                  renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
+                    <TouchableOpacity style={{backgroundColor: 'red', alignItems: 'center', width: 70,height: '50%', justifyContent: 'center'}}>
+                      <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_white} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{backgroundColor: '#53DCD0', alignItems: 'center', width: 70,height: '50%', justifyContent: 'center'}}>
+                      <Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white} />
+                    </TouchableOpacity>
+                  </View>)}
+                  leftOpenValue={0}
+                  rightOpenValue={-80}
+                />
+
+                <DivideLine/>
+              </View>
+            if (item.id === 'AD_BANNER_ENGAGE') {
+              return <View><Divider size={20}/><TouchableOpacity><Image style={{width: '100%', height: 130}} source={{uri: item.img}}/></TouchableOpacity><Divider size={30}/></View>
+            }
+          })}
+          {/*<MainBikeInfo/>*/}
+          {/*<Divider size={40}/>*/}
+          {/*<DivideLine/>*/}
+          {/*<ListBikeInfo/>*/}
+          {/*<Divider size={40}/>*/}
+          {/*<DivideLine/>*/}
+          {/*<ListBikeInfo/>*/}
+          {/*<Divider size={40}/>*/}
+          {/*<DivideLine/>*/}
+          {/*<MainBikeInfo/>*/}
+          {/*<Divider size={40}/>*/}
+          {/*<DivideLine/>*/}
+          {/*<ListBikeInfo/>*/}
+          {/*<Divider size={40}/>*/}
+          {/*<DivideLine/>*/}
+          {/*<ListBikeInfo/>*/}
+        </Container>
+        {/*<Bottom>*/}
+        {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_plus_circle} />*/}
+        {/*</Bottom>*/}
+      </View>
+    );
+  } else {
+    return <View><Text>There is no data to display</Text></View>
+  }
 };
 
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
     margin-bottom: 10px;
     padding-horizontal: 10px;
+    margin-top: 20px
 `;
 
 const TitleView = styled(View)`
@@ -149,4 +191,4 @@ const Title = styled(Text)`
   margin-top: ${props => props.size}
 `;
 
-export default Result;
+export default observer(Result);

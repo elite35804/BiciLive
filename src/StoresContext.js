@@ -1,5 +1,15 @@
 import React from 'react';
-import {AlertStore, HudStore, StaticStore, HomeStore, CategoryStore, SwiperState, BrandStore, BikeStore} from './stores';
+import {
+    AlertStore,
+    HudStore,
+    StaticStore,
+    HomeStore,
+    CategoryStore,
+    SwiperState,
+    BrandStore,
+    BikeStore,
+    BikeSearchStore,
+} from './stores';
 // Import stores here.
 
 const store = {
@@ -10,7 +20,8 @@ const store = {
     category: new CategoryStore(),
     swiperState: new SwiperState(),
     brandData: new BrandStore(),
-    bikeData: new BikeStore()
+    bikeData: new BikeStore(),
+    bikeSearch: new BikeSearchStore(),
 };
 
 const StoresContext = React.createContext(store);

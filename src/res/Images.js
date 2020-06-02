@@ -58,6 +58,7 @@ const Images = {
         ic_heart_red_sm: require('./images/ic_heart_red_sm.png'),
         ic_heart_white: require('./images/ic_heart_white.png'),
         ic_compare_white: require('./images/ic_compare_white.png'),
+        ic_zoom_in: require('./images/icon_zoom.png')
     },
     background: {
         logo: require('./images/logo.png'),
@@ -74,7 +75,9 @@ const Images = {
     btn: {
         bike_finder: require('./images/btn_ebike_finder.png'),
         news_finder: require('./images/btn_news_finder.png'),
-        btn_back: require('./images/btn_back_half_circle.png')
+        btn_back: require('./images/btn_back_half_circle.png'),
+        btn_share: require('./images/btn-condividi.png'),
+        btn_finder_animated: require('./images/btn_activated2.gif'),
     }
 };
 

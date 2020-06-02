@@ -21,13 +21,15 @@ import Brand from './scenes/landing/Brand';
 import EBike from './scenes/landing/EBike';
 import User from './scenes/landing/User';
 import styled from 'styled-components/native';
+import {useStores} from './hooks/Utils';
 
 const isIOS = Platform.OS === 'ios';
 
 const TabBar =(props) => {
+  const {homeData} = useStores();
   return (
   <View style={{width: '100%', height: 90, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', backgroundColor: '#333333'}}>
-    <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => Actions['Home']()}>
+    <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => {homeData.clearData(); homeData.getData();Actions['Home']()}}>
       <View style={{height: 40, justifyContent: 'flex-end'}}>
         <Image width={'100%'} height={'100%'} source={Images.icons.ic_home} />
       </View>
@@ -76,19 +78,39 @@ const Root = props => {
                 hideNavBar
           >
             <Scene key={Keys.home} component={Home} hideNavBar lazy/>
-            <Scene key={Keys.bikeFinder} component={BikeFinder} hideNavBar hideTabBar lazy/>
-            <Scene key={Keys.bikeFinderAZ} component={BikeFinderAZ} hideNavBar hideTabBar/>
-            <Scene key={Keys.bikeFinderCategory} component={BikeFinderCategory} hideNavBar lazy/>
-            <Scene key={Keys.result} component={Result} hideNavBar/>
             <Scene key={Keys.bikePage} component={BikePage} hideNavBar/>
-            <Scene key={Keys.user} component={User} hideNavBar/>
-            <Scene key={Keys.eBike} component={EBike} hideNavBar/>
-            <Scene key={Keys.brand} component={Brand} hideNavBar/>
-            <Scene key={Keys.dashboard} component={Dashboard} hideNavBar/>
             <Scene key={Keys.newsFinder} component={NewsFinder} hideNavBar/>
             <Scene key={Keys.brandPage} component={BrandPage} hideNavBar/>
+          </Tabs>
+          <Tabs tabBarComponent={TabBar} hideNavBar>
+            <Scene key={Keys.bikeFinder} component={BikeFinder} hideNavBar hideTabBar lazy/>
+          </Tabs>
+          <Tabs tabBarComponent={TabBar} hideNavBar>
+            <Scene key={Keys.bikeFinderAZ} component={BikeFinderAZ} hideNavBar hideTabBar/>
+          </Tabs>
+          <Tabs tabBarComponent={TabBar} hideNavBar>
+            <Scene key={Keys.bikeFinderCategory} component={BikeFinderCategory} hideNavBar lazy/>
+          </Tabs>
+          <Tabs tabBarComponent={TabBar} hideNavBar>
+            <Scene key={Keys.result} component={Result} hideNavBar/>
+          </Tabs>
+          <Tabs tabBarComponent={TabBar} hideNavBar>
             <Scene key={Keys.brandPagePremium} component={BrandPagePremium} hideNavBar/>
+          </Tabs>
+          <Tabs tabBarComponent={TabBar} hideNavBar>
             <Scene key={Keys.bikePagePremium} component={BikePagePremium} hideNavBar/>
+          </Tabs>
+          <Tabs tabBarComponent={TabBar} hideNavBar>
+            <Scene key={Keys.eBike} component={EBike} hideNavBar/>
+          </Tabs>
+          <Tabs tabBarComponent={TabBar} hideNavBar>
+            <Scene key={Keys.dashboard} component={Dashboard} hideNavBar/>
+          </Tabs>
+          <Tabs tabBarComponent={TabBar} hideNavBar>
+            <Scene key={Keys.user} component={User} hideNavBar/>
+          </Tabs>
+          <Tabs tabBarComponent={TabBar} hideNavBar>
+            <Scene key={Keys.brand} component={Brand} hideNavBar/>
           </Tabs>
         </Modal>
       </Router>
