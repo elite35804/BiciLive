@@ -22,6 +22,8 @@ import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import io.invertase.firebase.analytics.ReactNativeFirebaseAnalyticsPackage;
 // @react-native-firebase/app
 import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
+// react-native-fbsdk
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 // react-native-svg
@@ -81,6 +83,7 @@ public class PackageList {
       new RNGoogleSigninPackage(),
       new ReactNativeFirebaseAnalyticsPackage(),
       new ReactNativeFirebaseAppPackage(),
+      new FBSDKPackage(),
       new RNGestureHandlerPackage(),
       new SvgPackage(),
       new VectorIconsPackage(),

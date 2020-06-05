@@ -23,6 +23,12 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb248719556415872</string>
+			</array>
+		</dict>
+		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
@@ -30,10 +36,13 @@
 				<string>com.googleusercontent.apps.1070159144015-skqn35jdj9u78qjn6qh7qqj29u740qvq</string>
 			</array>
 		</dict>
-		<dict/>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>248719556415872</string>
+	<key>FacebookDisplayName</key>
+	<string>BiciLive APP Login</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

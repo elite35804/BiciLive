@@ -12,12 +12,14 @@
 #import <React/RCTRootView.h>
 
 #import <Firebase.h>
-//#import <RNGoogleSignin/RNGoogleSignin.h>
+#import <RNGoogleSignin/RNGoogleSignin.h>
+
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
   if ([FIRApp defaultApp] == nil) {
     [FIRApp configure];
   }
@@ -45,8 +47,8 @@
 #endif
 }
 
-//- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-//  return [RNGoogleSignin application:app openURL:url options:options];
-//}
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+  return [RNGoogleSignin application:app openURL:url options:options];
+}
 
 @end

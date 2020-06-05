@@ -96,7 +96,7 @@ const PageSlider = (props) => {
           return <PageElement key={index} data={item}/>;
         })}
       </Swiper>
-      <Divider size={isIOS ? 30 : 10}/>
+      <Divider size={isIOS ? -50 : 10}/>
       <View style={{width: '113%', alignSelf: 'center'}}>
         <Stepper total={total} onPress={p => _swiper.current.scrollBy(p, true)}/>
       </View>

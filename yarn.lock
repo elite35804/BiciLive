@@ -6485,6 +6485,11 @@ react-native-elements@^2.0.0:
     react-native-ratings "^6.5.0"
     react-native-status-bar-height "^2.2.0"
 
+react-native-fbsdk@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-fbsdk/-/react-native-fbsdk-2.0.0.tgz#eb041bdb8f9b9180a1696d3bd7d7accee6554262"
+  integrity sha512-CyPKoBVt9Y+KznALcnN4lkh6dUNqZjyFS6GbkXXTFf72wR9Dl8bXF2dDj56w/o5/TFoCnNCmQlZgh7P/NiElZQ==
+
 react-native-gesture-handler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.6.0.tgz#e9a4e1d0c7ac21eb0d6b6ec013e73f9c0c33a629"

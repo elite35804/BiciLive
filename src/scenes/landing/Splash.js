@@ -12,7 +12,7 @@ import {
   GoogleSigninButton,
   statusCodes,
 } from '@react-native-community/google-signin';
-// import { LoginButton, AccessToken } from 'react-native-fbsdk';
+import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -33,7 +33,27 @@ const Splash = props => {
       iosClientId: '1070159144015-skqn35jdj9u78qjn6qh7qqj29u740qvq.apps.googleusercontent.com', // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
     });
   }, []);
-  const _signIn = async () => {
+  const initUser = (token) => {
+    fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + token)
+      .then((response) => response.json())
+      .then((json) => {
+        // Some user object has been set up somewhere, build that user here
+        // const user = {};
+        // user.name = json.name
+        // user.id = json.id
+        // user.user_friends = json.friends
+        // user.email = json.email
+        // user.username = json.name
+        // user.loading = false
+        // user.loggedIn = true
+        // user.avatar = setAvatar(json.id)
+        console.log('userinfo======', json);
+      })
+      .catch(() => {
+        console.log('ERROR GETTING DATA FROM FACEBOOK')
+      })
+  }
+  const _gAuth = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
@@ -50,6 +70,31 @@ const Splash = props => {
       }
       console.log('userInfo erro =========', error);
     }
+  };
+  const _fbAuth = () => {
+    LoginManager.logInWithPermissions(["email", "public_profile"]).then(
+      function(result) {
+        if (result.isCancelled) {
+          console.log("Login cancelled");
+        } else {
+          console.log(
+            "Login success with permissions: " +
+            result.grantedPermissions.toString()
+          );
+          console.log('data=======', result);
+          AccessToken.getCurrentAccessToken().then(
+            (data) => {
+              console.log('facebook login data=====',data.accessToken.toString())
+              const {accessToken} = data;
+              initUser(accessToken)
+            }
+          )
+        }
+      },
+      function(error) {
+        console.log("Login fail with error: " + error);
+      }
+    );
   }
   return (
     <Container>
@@ -68,7 +113,7 @@ const Splash = props => {
           {/*size={GoogleSigninButton.Size.Wide}*/}
           {/*color={GoogleSigninButton.Color.Dark}*/}
           {/*onPress={_signIn}/>*/}
-        <GoogleBtn onPress={_signIn}>
+        <GoogleBtn onPress={_gAuth}>
           <Image width={20} height={20} source={Images.icons.google}/>
           <IconTitle color="#FF0000">Continue with Google</IconTitle>
           <View width={20}/>
@@ -84,14 +129,14 @@ const Splash = props => {
               {/*} else {*/}
                 {/*AccessToken.getCurrentAccessToken().then(*/}
                   {/*(data) => {*/}
-                    {/*console.log(data.accessToken.toString())*/}
+                    {/*console.log('facebook login data=====',data.accessToken.toString())*/}
                   {/*}*/}
                 {/*)*/}
               {/*}*/}
             {/*}*/}
           {/*}*/}
           {/*onLogoutFinished={() => console.log("logout.")}/>*/}
-        <GoogleBtn>
+        <GoogleBtn onPress={_fbAuth}>
           <Image width={20} height={20} source={Images.icons.facebook}/>
           <IconTitle color="#3B5998">Continue with facebook</IconTitle>
           <View width={20}/>
