@@ -8,6 +8,9 @@ import {BaseTextInput, BaseSelect, BaseTextFilter} from 'components/controls/Bas
 import {BlueButton, WhiteButton} from 'components/controls/Button';
 import Images from 'res/Images';
 
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
+
 
 const Brand = props => {
   const data = [

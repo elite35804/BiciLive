@@ -8,8 +8,10 @@ import {BaseTextInput, BaseSelect, BaseTextFilter} from 'components/controls/Bas
 import {BlueButton, WhiteButton} from 'components/controls/Button';
 import Images from 'res/Images';
 import {toJS} from 'mobx';
-import {get} from 'lodash';
 import {isIOS} from 'rn-tooltip/src/helpers';
+
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
 
 const preProcess = (rawData) => {
   const title = rawData.shift();

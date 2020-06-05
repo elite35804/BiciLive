@@ -10,6 +10,9 @@ import Images from 'res/Images';
 import {toJS} from 'mobx';
 import { get } from 'lodash';
 
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
+
 
 const BikeFinder = props => {
   const {staticData, category, bikeSearch} = useStores();
@@ -31,20 +34,14 @@ const BikeFinder = props => {
   return (
     <View style={{flex:1}}>
       <Container>
-        {/*<Title size={'40px'} color={themeProp('colorThird')}>EBIKE FINDER</Title>*/}
-        {/*<Divider size={'15px'}/>*/}
-        {/*<CategoryText>TUTTIIMODELLI</CategoryText>*/}
-        {/*<TouchableOpacity onPress={() => Actions.BikeFinderAZ()}><Title size={'0'} color={themeProp('colorThird')}>A-Z</Title></TouchableOpacity>*/}
-        <Divider size={'40px'}/>
+        <Divider size={25}/>
         {/*<CategoryText>TUTTIIMODELLI</CategoryText>*/}
         {get(staticData, 'data.search_landing', []).map((item, i) => {
+          if (i === 0 || i === 1 || i === 3) return <View><Divider size={15}/><Title size={'0'} color={item.colore}>{item.titolo}</Title></View>
           return (<View>
             <TouchableOpacity key={i} onPress={() => goToCategory(i, item.titolo, item.colore)}><Title size={'0'} color={item.colore}>{item.titolo}</Title></TouchableOpacity>
-              {(i === 0 ||i === 2) && <Divider size={15}/>}
           </View>)
         })}
-        {/*<CategoryText>TUTTIIMODELLI</CategoryText>*/}
-        {/*<BaseTextInput placeholder={lastItem.title}/>*/}
       </Container>
       <Bottom onPress={() => Actions.Home()}>
         <Image width={50} height={50} source={Images.icons.ic_close} />

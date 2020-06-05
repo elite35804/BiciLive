@@ -22,6 +22,7 @@ import EBike from './scenes/landing/EBike';
 import User from './scenes/landing/User';
 import styled from 'styled-components/native';
 import {useStores} from './hooks/Utils';
+import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -30,16 +31,16 @@ const TabBar =(props) => {
   return (
   <View style={{width: '100%', height: 90, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', backgroundColor: '#333333'}}>
     <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => {homeData.clearData(); homeData.getData();Actions['Home']()}}>
-      <View style={{height: 40, justifyContent: 'flex-end'}}>
-        <Image width={'100%'} height={'100%'} source={Images.icons.ic_home} />
+      <View style={{height: 35, justifyContent: 'flex-end'}}>
+        <Image style={{width: moderateScale(30), height: moderateScale(30), resizeMode: 'contain'}} source={Images.icons.ic_home} />
       </View>
       <Text style={{fontSize: 10, color: '#c9c3c5', fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular', marginTop: 10}}>HOME</Text>
     </TouchableOpacity>
     <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => Actions['BikeFinder']()}>
-      <View style={{height: 40, justifyContent: 'flex-end'}}>
-        <Image width={'100%'} height={'100%'} source={Images.icons.ic_ebike} />
+      <View style={{height: 35, justifyContent: 'flex-end'}}>
+        <Image style={{width: moderateScale(40), height: moderateScale(40), resizeMode: 'contain', marginBottom: moderateScale(-5)}} source={Images.icons.ic_ebike} />
       </View>
-      <Text style={{fontSize: 10, color: '#c9c3c5', fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular', marginTop: 10}}>EBIKE FINDER</Text>
+      <Text style={{fontSize: 10, color: '#c9c3c5', fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular', marginTop: 10, textAlign:'center'}}>EBIKE FINDER</Text>
     </TouchableOpacity>
     {/*<TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => Actions['BikePage']()}>*/}
       {/*<View style={{height: 40, justifyContent: 'flex-end'}}>*/}
@@ -55,8 +56,8 @@ const TabBar =(props) => {
     {/*</TouchableOpacity>*/}
     <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => Actions['Dashboard']()}>
       <View style={{backgroundColor: 'red', width: 10, height: 10, borderRadius: 5, position: 'absolute', top: 0, right: 10}}/>
-      <View style={{height: 40, justifyContent: 'flex-end'}}>
-        <Image width={'100%'} height={'100%'} source={Images.icons.ic_profile} />
+      <View style={{height: 35, justifyContent: 'flex-end'}}>
+        <Image style={{width: moderateScale(30), height: moderateScale(30), resizeMode: 'contain'}} source={Images.icons.ic_profile} />
       </View>
       <Text style={{fontSize: 10, color: '#c9c3c5', fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular', marginTop: 10}}>PROFILO</Text>
     </TouchableOpacity>

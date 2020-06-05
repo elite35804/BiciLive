@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Image, View, TouchableOpacity, Text, ScrollView, Platform, Linking} from 'react-native';
+import {Image as DefaultImage, View, TouchableOpacity, Text, ScrollView, Platform, Linking, Dimensions} from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
@@ -7,21 +7,25 @@ import {Actions} from 'react-native-router-flux';
 import {useStores} from 'hooks/Utils';
 import Images from 'res/Images';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
-import axios from 'axios';
 import {toJS} from 'mobx';
 import {get} from 'lodash';
 import Swiper from 'react-native-swiper';
 import {observer} from 'mobx-react';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import {Divider} from '../../components/controls/BaseUtils';
+import Image from 'react-native-image-progress';
+
+
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
 
 const isIOS = Platform.OS === 'ios';
 const Stepper = observer(props => {
   const {homeData} = useStores();
   const label = ['', '', '', '', ''];
   const customStyles = {
-    stepIndicatorSize: 25,
-    currentStepIndicatorSize: 25,
+    stepIndicatorSize: moderateScale(23, 0.7),
+    currentStepIndicatorSize: moderateScale(23, 0.7),
     currentStepStrokeWidth: 3,
     stepStrokeCurrentColor: '#000000',
     stepStrokeWidth: 3,
@@ -57,9 +61,8 @@ const PageElement = props => {
   return (
     <View>
       <LogoView onPress={() => goToBike(get(props, 'data.url', ''))}>
-        <Logo width={'100%'} height={'100%'}
-              source={{uri: 'http://biciapp.sepisolutions.com' + get(props, 'data.immagine', '')}}
-              style={{width: '100%', height: Platform.OS === 'ios' ? 260 : 230}}/>
+        <DefaultImage source={{uri: 'http://biciapp.sepisolutions.com' + get(props, 'data.immagine', '')}}
+              style={{width: Dimensions.get('window').width * 0.95, height: isIOS ? 260 : 230, resizeMode: 'contain'}}/>
       </LogoView>
       <Content>
         <TypeView
@@ -67,7 +70,7 @@ const PageElement = props => {
         <Sort>{get(props, 'data.brand', '')}</Sort>
         <NameView>
           <Name numberOfLines={1} color={'#' + get(props, 'data.color', themeProp('colorType'))}>{get(props, 'data.modello', '')}</Name>
-          <Image width={20} height={20} source={Images.icons.arrow_right}/>
+          <Image width={moderateScale(20)} height={moderateScale(20)} style={{marginTop: moderateScale(-17)}} source={Images.icons.arrow_right}/>
         </NameView>
       </Content>
     </View>
@@ -82,7 +85,7 @@ const PageSlider = (props) => {
     <SwiperContainer>
       <Swiper
         ref={_swiper}
-        containerStyle={{height: isIOS ? moderateScale(320) : moderateScale(300)}}
+        containerStyle={{height: isIOS ? verticalScale(320) : moderateScale(335, 0.1)}}
         showsPagination={false}
         autoplay={true}
         autoplayTimeout = {4}
@@ -93,8 +96,8 @@ const PageSlider = (props) => {
           return <PageElement key={index} data={item}/>;
         })}
       </Swiper>
-      {isIOS && <Divider size={20}/>}
-      <View style={{width: '115%', alignSelf: 'center'}}>
+      <Divider size={isIOS ? 30 : 10}/>
+      <View style={{width: '113%', alignSelf: 'center'}}>
         <Stepper total={total} onPress={p => _swiper.current.scrollBy(p, true)}/>
       </View>
     </SwiperContainer>
@@ -147,7 +150,7 @@ const Finder = () => {
       <TouchableOpacity onPress={() => {
         Actions.BikeFinder();
       }}>
-        <Image style={{width: 170, height: 170, resizeMode: 'contain',marginTop: 14}} source={Images.btn.btn_finder_animated}/></TouchableOpacity>
+        <DefaultImage style={{width: 170, height: 170, resizeMode: 'contain',marginTop: 14}} source={Images.btn.btn_finder_animated}/></TouchableOpacity>
         {/*<Image width={92} height={92} source={Images.btn.bike_finder} style={{marginTop: 14}}/></TouchableOpacity>*/}
     </FinderView>
   );
@@ -189,22 +192,28 @@ const HomeElements = (props) => {
 
 const Home = (props) => {
   const {homeData} = useStores();
-  if (!homeData.data.content) {
-    return <View><Text>There is no data to display</Text></View>;
+  if (homeData.isLoading) {
+    return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><DefaultImage style={{width: moderateScale(70), height: moderateScale(70), resizeMode: 'contain',marginTop: 14}} source={Images.icons.ic_loading}/></View>;
+  } else {
+    if (homeData.errorIf) {
+      return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><DefaultImage style={{width: moderateScale(200), height: moderateScale(200), resizeMode: 'contain',marginTop: 14}} source={Images.icons.ic_oops}/></View>;
+    } else {
+      const uiData = toJS(get(homeData, 'data', []));
+      console.log('homeData====', uiData);
+      homeData.setPosition(0);
+      return (
+        <Container>
+          <HomeElements data={uiData}/>
+        </Container>
+      );
+    }
   }
-  const uiData = toJS(get(homeData, 'data.content', []));
-  console.log('homeData====', uiData);
-  homeData.setPosition(0);
-  return (
-    <Container>
-      <HomeElements data={uiData}/>
-    </Container>
-  );
+
 };
 
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
-    padding-horizontal: 14px;
+    padding-horizontal: ${scale(10)};
 `;
 
 const Date = styled(Text)`
@@ -227,6 +236,7 @@ const Desc = styled(Text)`
 
 const LogoView = styled(TouchableOpacity)`
   width: 100%;
+  text-align: center
 `;
 
 const Logo = styled(Image)`
@@ -248,26 +258,27 @@ const TypeView = styled(View)`
 const Type = styled(Text)`
   color: ${themeProp('colorSecondary')};
   font-family: ${themeProp('fontPrimaryBold')}
-  font-size: ${moderateScale(12)};
+  font-size: ${moderateScale(13)};
 `;
 
 const Sort = styled(Text)`
   color: ${themeProp('colorDescription')};
   font-family: ${themeProp('fontPrimaryBold')}
-  font-size: ${moderateScale(18)};
+  font-size: ${moderateScale(22)};
   margin-bottom: -10px;
-  margin-top: ${moderateScale(16)};
+  margin-top: ${moderateScale(20)};
 `;
 
 const NameView = styled(View)`
   flex-direction: row;
   align-items: center
+  margin-top: ${verticalScale(-3)}
 `;
 
 const Name = styled(Text)`
   color: ${props => props.color ? props.color: themeProp('colorType')};
   font-family: ${themeProp('fontPrimaryBold')}
-  font-size: ${moderateScale(28)};
+  font-size: ${moderateScale(34)};
   margin-top: ${isIOS ? 0 : moderateScale(-5)};
   margin-right: 5px;
 `;
@@ -302,7 +313,7 @@ const NewsFinderView = styled(View)`
 const Title = styled(Text)`
   color: ${props => props.color};
   font-family: ${themeProp('fontUniHeavy')}
-  font-size: ${moderateScale(34)};
+  font-size: ${scale(30)};
 `;
 
 const SubTitle = styled(Text)`

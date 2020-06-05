@@ -10,6 +10,9 @@ import {BlueButton, WhiteButton} from 'components/controls/Button';
 import Images from 'res/Images';
 import {Divider} from '../../components/controls/BaseUtils';
 
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
+
 
 const swipeoutBtns = [
   {

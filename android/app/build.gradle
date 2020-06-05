@@ -1,5 +1,7 @@
 apply plugin: "com.android.application"
 
+
+
 import com.android.build.OutputFile
 
 /**
@@ -181,7 +183,9 @@ android {
 dependencies {
     implementation project(':react-native-gesture-handler')
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "com.facebook.react:react-native:+"  // From node_modules
+
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+//    implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
 
     implementation 'com.facebook.fresco:fresco:1.10.0'
     implementation 'com.facebook.fresco:animated-gif:2.0.0'
@@ -203,3 +207,6 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+
+//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'

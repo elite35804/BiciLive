@@ -14,6 +14,14 @@ import java.util.ArrayList;
 import com.bicilive.BuildConfig;
 import com.bicilive.R;
 
+// @react-native-community/art
+import com.reactnativecommunity.art.ARTPackage;
+// @react-native-community/google-signin
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
+// @react-native-firebase/analytics
+import io.invertase.firebase.analytics.ReactNativeFirebaseAnalyticsPackage;
+// @react-native-firebase/app
+import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 // react-native-svg
@@ -69,6 +77,10 @@ public class PackageList {
   public ArrayList<ReactPackage> getPackages() {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(mConfig),
+      new ARTPackage(),
+      new RNGoogleSigninPackage(),
+      new ReactNativeFirebaseAnalyticsPackage(),
+      new ReactNativeFirebaseAppPackage(),
       new RNGestureHandlerPackage(),
       new SvgPackage(),
       new VectorIconsPackage(),

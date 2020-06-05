@@ -51,8 +51,8 @@ const MainBikeInfo = (props) => {
   };
   return (
       <MainInfo>
-        <TouchableOpacity onPress={() => goToBike(get(props, 'data.url', ''))}
-                          style={{justifyContent: 'center', alignItems: 'center'}}>
+        <TouchableOpacity onPress={() => goToBike(get(props, 'data.url', ''))}>
+          <View style={{justifyContent: 'center', alignItems: 'center'}}>
           {props.data && <Image resizeMode="contain"
                                 source={{uri: `http://biciapp.sepisolutions.com${get(props, 'data.immagine', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg')}`}}
                                 style={{width: '95%', height: 230}}/>}
@@ -62,59 +62,61 @@ const MainBikeInfo = (props) => {
           {!props.isBack ? <Image resizeMode="stretch" source={Images.icons.ic_badge_empty}
                                   style={{position: 'absolute', right: 0, top: 0, width: 50, height: 50}}/> : <View/>
           }
-        </TouchableOpacity>
-        <View style={{marginLeft: 5}}>
-          <View style={{justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row'}}>
-            <TypeView bg_color={'#' + get(props, 'data.color', 'D75A2B')}><Type
-              size={moderateScale(14)}>{get(props, 'data.categoria', 'eCity')}</Type></TypeView>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image width={40} height={40} source={Images.icons.ic_calendar} style={{marginRight: 5}}/>
-              <Sort size={moderateScale(21)}>{get(props, 'data.anno', '2020')}</Sort>
-            </View>
           </View>
-          <Divider size={moderateScale(-11)}/>
-          <Sort size={'23px'}>{get(props, 'data.brand', 'ASKOLL')}</Sort>
-          <Divider size={moderateScale(-10)}/>
-          <NameView>
-            <Name numberOfLines={1} color={'#' + get(props, 'data.color', 'D75A2B')}
-                  size={'38px'}>{get(props, 'data.modello', 'EB4')}</Name>
-            <Image width={20} height={20} source={Images.icons.arrow_right}/>
-          </NameView>
-          <Sort style={{marginTop: moderateScale(-15)}} size={moderateScale(21)}>{get(props, 'data.prezzo', '1390')}€</Sort>
-          <Text style={{
-            marginTop: 3,
-            color: '#' + get(props, 'data.color', 'D75A2B'),
-            fontFamily: oswald_bold,
-            fontSize: 11,
-          }}>MOTORE</Text>
-          <View style={{marginTop: -5, justifyContent: 'space-between', flexDirection: 'row'}}>
+          <View style={{marginLeft: 5}}>
+            <View style={{justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row'}}>
+              <TypeView bg_color={'#' + get(props, 'data.color', 'D75A2B')}><Type
+                size={moderateScale(14)}>{get(props, 'data.categoria', 'eCity')}</Type></TypeView>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Image width={40} height={40} source={Images.icons.ic_calendar} style={{marginRight: 5}}/>
+                <Sort size={moderateScale(21)}>{get(props, 'data.anno', '2020')}</Sort>
+              </View>
+            </View>
+            <Divider size={moderateScale(-11)}/>
+            <Sort size={'23px'}>{get(props, 'data.brand', 'ASKOLL')}</Sort>
+            <Divider size={moderateScale(-10)}/>
+            <NameView>
+              <Name numberOfLines={1} color={'#' + get(props, 'data.color', 'D75A2B')}
+                    size={'38px'}>{get(props, 'data.modello', 'EB4')}</Name>
+              <Image width={20} height={20} source={Images.icons.arrow_right}/>
+            </NameView>
+            <Sort style={{marginTop: moderateScale(-15)}} size={moderateScale(21)}>{get(props, 'data.prezzo', '1390')}€</Sort>
             <Text style={{
-              color: '#909090',
+              marginTop: 3,
+              color: '#' + get(props, 'data.color', 'D75A2B'),
               fontFamily: oswald_bold,
-              fontSize: 13,
-            }}>{get(props, 'data.motore', 'BAFANG, G20 250D')}</Text>
-            <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
-              <View style={{flexDirection: 'row', marginRight: 20}}>
-                <View style={{marginTop: 10, marginRight: 3}}>
-                  <Image style={{width: 15, height: 20, resizeMode: 'contain'}}
-                         source={{uri: get(props, 'data.img_nm', '')}}/>
-                  {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_graph}/>*/}
+              fontSize: 11,
+            }}>MOTORE</Text>
+            <View style={{marginTop: -5, justifyContent: 'space-between', flexDirection: 'row'}}>
+              <Text style={{
+                color: '#909090',
+                fontFamily: oswald_bold,
+                fontSize: 13,
+              }}>{get(props, 'data.motore', 'BAFANG, G20 250D')}</Text>
+              <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+                <View style={{flexDirection: 'row', marginRight: 20}}>
+                  <View style={{marginTop: 10, marginRight: 3}}>
+                    <Image style={{width: 15, height: 20, resizeMode: 'contain'}}
+                           source={{uri: get(props, 'data.img_nm', '')}}/>
+                    {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_graph}/>*/}
+                  </View>
+                  <Sort size={'23px'}>{get(props, 'data.coppia', '40')}</Sort>
+                  <Text style={{color: '#909090', fontFamily: oswald_bold, fontSize: 15, marginTop: 10}}>Nm</Text>
                 </View>
-                <Sort size={'23px'}>{get(props, 'data.coppia', '40')}</Sort>
-                <Text style={{color: '#909090', fontFamily: oswald_bold, fontSize: 15, marginTop: 10}}>Nm</Text>
-              </View>
-              <View style={{flexDirection: 'row'}}>
-                <View style={{marginTop: 10, marginRight: 3}}>
-                  <Image style={{width: 15, height: 20, resizeMode: 'contain'}}
-                         source={{uri: get(props, 'data.img_wh', '')}}/>
-                  {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_battery}/>*/}
+                <View style={{flexDirection: 'row'}}>
+                  <View style={{marginTop: 10, marginRight: 3}}>
+                    <Image style={{width: 15, height: 20, resizeMode: 'contain'}}
+                           source={{uri: get(props, 'data.img_wh', '')}}/>
+                    {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_battery}/>*/}
+                  </View>
+                  <Sort size={'23px'}>{get(props, 'data.batteria', '625')}</Sort>
+                  <Text style={{color: '#909090', fontFamily: oswald_bold, fontSize: 15, marginTop: 10}}>Wh</Text>
                 </View>
-                <Sort size={'23px'}>{get(props, 'data.batteria', '625')}</Sort>
-                <Text style={{color: '#909090', fontFamily: oswald_bold, fontSize: 15, marginTop: 10}}>Wh</Text>
               </View>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
+
       </MainInfo>
   );
 };
@@ -128,24 +130,28 @@ const ListBikeInfo = (props) => {
   };
   return (
     <MainInfo>
+      <TouchableOpacity onPress={() => goToBike(get(props, 'data.url', ''))}>
       <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity onPress={() => goToBike(get(props, 'data.url', ''))}><Image
-          source={Images.background.bike_logo1} style={{width: 160, height: 80}}/></TouchableOpacity>
-        <View width={'60%'}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: -8}}>
+        <Image
+               source={{uri: `http://biciapp.sepisolutions.com${get(props, 'data.immagine', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg')}`}}
+               style={{width: '45%', height: 80, resizeMode: 'contain'}}/>
+        {/*<Image*/}
+          {/*source={Images.background.bike_logo1} style={{width: '45%', height: 80, resizeMode: 'contain'}}/>*/}
+        <View width={'55%'}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: -8, width: '100%'}}>
             <View style={{marginTop: 8}}>
-              <TypeView bg_color='#D75A2B'><Type size={'10px'}>{get(props, 'data.categoria', 'eCity')}</Type></TypeView>
+              <TypeView bg_color={'#'+get(props, 'data.color', 'D75A2B')}><Type size={'10px'}>{get(props, 'data.categoria', 'eCity')}</Type></TypeView>
             </View>
-            <View style={{flexDirection: 'row', alignItems: 'center', marginRight: isIOS ? 15 : 0}}>
-              <Image width={40} height={40} source={Images.icons.ic_calendar} style={{marginRight: 5}}/>
-              <Sort style={{marginRight: 5}} size={'23px'}>2020</Sort>
+            <View style={{flexDirection: 'row', alignItems: 'center', marginRight: isIOS ? 15 : 0, position: 'absolute', top: 0, right: 0}}>
+              <Image width={40} height={40} source={Images.icons.ic_calendar} style={{marginRight: moderateScale(5, 0.9)}}/>
+              <Sort size={moderateScale(20)}>2020</Sort>
             </View>
           </View>
-          <View style={{marginTop: isIOS ? -13 : -15}}>
+          <View style={{marginTop: isIOS ? -1 : -3}}>
             <Sort size={'14px'}>{get(props, 'data.brand', 'HIBIKER')}</Sort>
           </View>
           <NameView>
-            <Name numberOfLines={1} size={'23px'}>{get(props, 'data.modello', 'XDURO NDURO 3.5')}</Name>
+            <Name color={'#'+get(props, 'data.color', 'D75A2B')} numberOfLines={1} size={'23px'}>{get(props, 'data.modello', 'XDURO NDURO 3.5')}</Name>
             <Image width={10} height={10} source={Images.icons.arrow_right} style={{width: 5, height: 9}}/>
           </NameView>
           <View style={{marginTop: isIOS ? -11 : -15}}/>
@@ -183,6 +189,7 @@ const ListBikeInfo = (props) => {
           </View>
         </View>
       </View>
+      </TouchableOpacity>
     </MainInfo>
   );
 };
@@ -205,6 +212,7 @@ const AdvResumeBig = (props) => {
         imageIndex={0}
         visible={isVisible}
         onRequestClose={() => setIsVisible(false)}
+        style={{height: 800}}
       />
       <MainInfo>
         <TouchableOpacity onPress={() => !props.productIf ? goToBike(props.data.url) : {}}
@@ -219,7 +227,7 @@ const AdvResumeBig = (props) => {
                                   style={{position: 'absolute', right: 0, top: 0, width: 50, height: 50}}/> : <View/>
           }
         </TouchableOpacity>
-        {props.productIf ? <TouchableOpacity style={{position: 'absolute', right: 0, top: 200}} onPress={() => setIsVisible(true)}><Image style={{height:30, width:30, resizeMode: 'contain'}} source={Images.icons.ic_zoom_in}/></TouchableOpacity> : <View/>}
+        {props.productIf ? <TouchableOpacity style={{position: 'absolute', right: 0, top: 200}} onPress={() => setIsVisible(true)}><Image style={{height:moderateScale(27, 0.8), width: moderateScale(27, 0.8), resizeMode: 'contain'}} source={Images.icons.ic_zoom_in}/></TouchableOpacity> : <View/>}
         <View style={{marginLeft: 5}}>
           <View style={{justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row'}}>
             <TypeView bg_color={'#' + get(props, 'data.color', 'D75A2B')}><Type
@@ -325,6 +333,15 @@ const SymbolView = styled(Text)`
   margin-top: 8px;
 `;
 
+const Header = styled(View)`
+  background-color: #f7f7f7
+  flex: 1;
+  position: absolute;
+  width: 100%;
+  top:0
+  height: ${verticalScale(50)}
+`;
+
 const Slider = (props) => (
   <View style={{marginHorizontal: 25}}>
     <MultiSlider
@@ -395,7 +412,10 @@ const DetailMore = (props) => (
 );
 
 
+
+
 export {
+  Header,
   Step,
   Divider,
   CheckBox,

@@ -9,6 +9,7 @@ import {BlueButton, WhiteButton, GreenButton} from 'components/controls/Button';
 import ShareTooltip from 'components/controls/ShareTooltip';
 import StepIndicator from 'react-native-step-indicator';
 import {
+  Header,
   Step,
   Divider,
   CheckBox,
@@ -29,8 +30,10 @@ import {observer} from 'mobx-react';
 import {toJS} from 'mobx';
 import Tooltip from 'rn-tooltip';
 import CustomTooltip from 'components/controls/CustomTooltip';
-import {moderateScale, verticalScale} from 'react-native-size-matters';
-// import {Tooltip} from 'react-native-elements';
+import {moderateScale, verticalScale, scale} from 'react-native-size-matters';
+
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
 
 const isIOS = Platform.OS === 'ios';
 
@@ -45,29 +48,28 @@ const BrandLogo = props => {
     <View>
       <TouchableOpacity onPress={() => goToBrand(props.data.url)}>
       <TitleView>
-        <Image style={{width: '40%', height: '100%'}} source={{uri: props.data.img}}/>
+        <Image style={{width: '35%', height: '100%'}} source={{uri: props.data.img}}/>
 
         <TitleView>
           <View style={{marginRight: 10}}>
-            <Text style={{color: themeProp('colorDescription'), fontSize: 15, fontFamily: UniSansBook}}>SCOPRI TUTTE
-              LE</Text>
-            <TitleView>
+            <Text style={{color: themeProp('colorDescription'), fontSize: moderateScale(14, 0.2), fontFamily: UniSansBook}}>TUTTE LE EBIKE</Text>
+            <SubTitleView>
               <Text style={{
                 color: themeProp('colorDescription'),
-                fontSize: 15,
+                fontSize: moderateScale(14, 0.2),
                 fontFamily: UniSansBook,
-              }}>{get(props, 'data.categoria', '')}</Text>
+              }}>DI</Text>
               <Text style={{
                 color: themeProp('colorDescription'),
-                fontSize: 15,
+                fontSize: moderateScale(14, 0.2),
                 fontFamily: UniSansBold,
-              }}>{get(props, 'data.brand', '')}</Text>
-            </TitleView>
+              }}> {get(props, 'data.brand', '')}</Text>
+            </SubTitleView>
           </View>
           <Image width={'100%'} height={'100%'} source={Images.icons.arrow_right} style={{marginRight: 10}}/>
           <BadgeView>
             <Title size={isIOS ? '8px' : '0'} color={themeProp('colorSecondary')}
-                   width={'20px'}>{props.data.count}</Title>
+                   width={moderateScale(15)}>{props.data.count}</Title>
           </BadgeView>
         </TitleView>
       </TitleView>
@@ -244,7 +246,7 @@ const RelatedGroup = props => {
   let elementArray = [];
   Object.entries(data).forEach(([index, value]) => {
     if (index.includes('img_url')) {
-      let number = index.charAt(index.length - 1);
+      let number = index.substring(7);
       let elementData = {
         key: index,
         img_url: data[`img_url${number}`],
@@ -312,7 +314,7 @@ const openUrl = (url) => {
   });
 };
 const RenderElements = props => {
-  console.log(props);
+  // console.log(props);
   const uiData = props.uiData;
   const items = [];
   let i = 0;
@@ -467,154 +469,6 @@ const RenderElements = props => {
       if (i === 2) {
         items.push(
           <View>
-            {/*<Divider size={-40}/>*/}
-            {/*<CategoryText>CARATTERISTICHE</CategoryText>*/}
-            {/*<Detail title="TELAIO" desc="Carbonio/Alu"/>*/}
-            {/*<Detail title="PESO (KG)" desc="n.d."/>*/}
-            {/*<Detail title="TAGLIE" desc="S-M-L-XL"/>*/}
-            {/*<Divider size={-20}/>*/}
-            {/*<SubTitle>COMPONENTI</SubTitle>*/}
-            {/*<DetailMore title="FORCELLA" desc="FOX, 36 Float Factory, Aria, 180"/>*/}
-            {/*<DetailMore title="AMMORTIZZATORE" desc="FOX, Float X2 Factory, Aria"/>*/}
-            {/*<Detail title="ESCURSIONE POSTERIORE(MM)" desc="180"/>*/}
-            {/*<Detail title="DERAGLIATORE ANTERIORE" desc="/"/>*/}
-            {/*<Detail title="TRASMISSIONE" desc="SR EX1, EX1, Trigger switch, 1x8"/>*/}
-            {/*<Detail title="FRENI" desc="Disco, Magura MT7, 203/203"/>*/}
-            {/*<Divider size={-20}/>*/}
-            {/*<SubTitle>CICLISTICA</SubTitle>*/}
-            {/*<SwipeView>*/}
-              {/*<View style={{width: '48%'}}>*/}
-                {/*<View style={{*/}
-                  {/*backgroundColor: '#D75A2B',*/}
-                  {/*alignItems: 'center',*/}
-                  {/*justifyContent: 'center',*/}
-                  {/*height: 30,*/}
-                  {/*paddingTop: 5,*/}
-                {/*}}>*/}
-                  {/*<Text style={{*/}
-                    {/*fontSize: 15,*/}
-                    {/*color: 'white',*/}
-                    {/*fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular',*/}
-                    {/*marginHorizontal: 10,*/}
-                  {/*}}>ANTERRIRE</Text>*/}
-                {/*</View>*/}
-                {/*<View style={{*/}
-                  {/*backgroundColor: '#333333',*/}
-                  {/*alignItems: 'center',*/}
-                  {/*justifyContent: 'center',*/}
-                  {/*height: 100,*/}
-                  {/*paddingTop: 5,*/}
-                {/*}}>*/}
-                  {/*<Text*/}
-                    {/*style={{*/}
-                      {/*fontSize: 60,*/}
-                      {/*color: 'white',*/}
-                      {/*fontFamily: isIOS ? 'UniSansBold' : 'uni_sans_bold',*/}
-                    {/*}}>n.d.</Text>*/}
-                  {/*<Text style={{*/}
-                    {/*fontSize: 17,*/}
-                    {/*color: 'white',*/}
-                    {/*fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',*/}
-                    {/*marginTop: -10,*/}
-                  {/*}}>POLLICI</Text>*/}
-                {/*</View>*/}
-                {/*<View style={{backgroundColor: '#F2F2F2', alignItems: 'center', height: 190, paddingTop: 15}}>*/}
-                  {/*<Text style={{*/}
-                    {/*fontSize: 16,*/}
-                    {/*color: '#D75A2B',*/}
-                    {/*fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',*/}
-                    {/*marginTop: 3,*/}
-                  {/*}}>ROUTA</Text>*/}
-                  {/*<Text*/}
-                    {/*style={{*/}
-                      {/*fontSize: 20,*/}
-                      {/*color: 'black',*/}
-                      {/*fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',*/}
-                      {/*marginTop: 7,*/}
-                    {/*}}>DT*/}
-                    {/*Swiss FR1950</Text>*/}
-                  {/*<Text style={{*/}
-                    {/*fontSize: 16,*/}
-                    {/*color: '#D75A2B',*/}
-                    {/*fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',*/}
-                    {/*marginTop: 10,*/}
-                  {/*}}>GOMMA</Text>*/}
-                  {/*<Text*/}
-                    {/*style={{*/}
-                      {/*fontSize: 20,*/}
-                      {/*color: 'black',*/}
-                      {/*fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',*/}
-                      {/*marginTop: 7,*/}
-                    {/*}}>SW*/}
-                    {/*Magic Mary</Text>*/}
-                {/*</View>*/}
-              {/*</View>*/}
-              {/*<View style={{width: '48%'}}>*/}
-                {/*<View style={{*/}
-                  {/*backgroundColor: '#D75A2B',*/}
-                  {/*alignItems: 'center',*/}
-                  {/*justifyContent: 'center',*/}
-                  {/*height: 30,*/}
-                  {/*paddingTop: 5,*/}
-                {/*}}>*/}
-                  {/*<Text style={{*/}
-                    {/*fontSize: 15,*/}
-                    {/*color: 'white',*/}
-                    {/*fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular',*/}
-                    {/*marginHorizontal: 10,*/}
-                  {/*}}>ANTERRIRE</Text>*/}
-                {/*</View>*/}
-                {/*<View style={{*/}
-                  {/*backgroundColor: '#333333',*/}
-                  {/*alignItems: 'center',*/}
-                  {/*justifyContent: 'center',*/}
-                  {/*height: 100,*/}
-                  {/*paddingTop: 5,*/}
-                {/*}}>*/}
-                  {/*<Text*/}
-                    {/*style={{*/}
-                      {/*fontSize: 60,*/}
-                      {/*color: 'white',*/}
-                      {/*fontFamily: isIOS ? 'UniSansBold' : 'uni_sans_bold',*/}
-                    {/*}}>n.d.</Text>*/}
-                  {/*<Text style={{*/}
-                    {/*fontSize: 17,*/}
-                    {/*color: 'white',*/}
-                    {/*fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',*/}
-                    {/*marginTop: -10,*/}
-                  {/*}}>POLLICI</Text>*/}
-                {/*</View>*/}
-                {/*<View style={{backgroundColor: '#F2F2F2', alignItems: 'center', height: 190, paddingTop: 15}}>*/}
-                  {/*<Text style={{*/}
-                    {/*fontSize: 16,*/}
-                    {/*color: '#D75A2B',*/}
-                    {/*fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',*/}
-                    {/*marginTop: 3,*/}
-                  {/*}}>ROUTA</Text>*/}
-                  {/*<Text style={{*/}
-                    {/*fontSize: 20,*/}
-                    {/*color: 'black',*/}
-                    {/*fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',*/}
-                    {/*marginTop: 7,*/}
-                    {/*textAlign: 'center',*/}
-                  {/*}} numberOfLines={2}>DT Swiss, FR1950 FR1950</Text>*/}
-                  {/*<Text style={{*/}
-                    {/*fontSize: 16,*/}
-                    {/*color: '#D75A2B',*/}
-                    {/*fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',*/}
-                    {/*marginTop: 10,*/}
-                  {/*}}>GOMMA</Text>*/}
-                  {/*<Text*/}
-                    {/*style={{*/}
-                      {/*fontSize: 20,*/}
-                      {/*color: 'black',*/}
-                      {/*fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',*/}
-                      {/*marginTop: 7,*/}
-                    {/*}}>SW*/}
-                    {/*Magic Mary</Text>*/}
-                {/*</View>*/}
-              {/*</View>*/}
-            {/*</SwipeView>*/}
             <ShareBlock key={`key${index}`} data={item}/>
           </View>,
         );
@@ -640,38 +494,51 @@ const RenderElements = props => {
 const BikePagePremium = props => {
   const {bikeData} = useStores();
   const uiData = toJS(bikeData.data);
-  return (
-    <View>
-      <TouchableOpacity onPress={() => Actions.pop()}
-                        style={{position: 'absolute', left: 0, top: '50%', zIndex: 100000000000}}>
-        <Image resizeMode="contain" source={Images.btn.btn_back}
-               style={{width: 37, height: 75}}/></TouchableOpacity>
-      <Container style={{paddingHorizontal: 10, marginTop: 40}}>
-        <RenderElements uiData={uiData}/>
+  if (Object.keys(uiData).length !== 0 ) {
+    return (
+      <View>
+        <Header>
+          <TouchableOpacity onPress={() => Actions.pop()}>
+            <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
+                   style={{width: scale(37), height: verticalScale(30), resizeMode: 'contain', marginTop: verticalScale(10)}}/></TouchableOpacity>
+        </Header>
 
-      </Container>
-    </View>
+        <Container>
+          <RenderElements uiData={uiData}/>
 
-  );
+        </Container>
+      </View>
+    );
+  } else {
+    return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><Image style={{width: 70, height: 70, resizeMode: 'contain',marginTop: 14}} source={Images.icons.ic_loading}/></View>
+  }
 };
 
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
     margin-bottom: 10px;
+    paddingHorizontal: ${scale(8)} 
+    marginTop: ${verticalScale(60)}
 `;
 
 const BadgeView = styled(View)`
-  width: 56px
-  height: 56px
-  border-radius: 28px
+  width: ${moderateScale(44, 0.4)}
+  height: ${moderateScale(44, 0.4)}
+  border-radius: ${moderateScale(22, 0.4)}
   justify-content: center
   align-items: center
   background-color: red
+  margin-left : -3px
 `;
 
 const TitleView = styled(View)`
   flex-direction: row;
   justify-content: space-between;
+  align-items: center
+`;
+const SubTitleView = styled(View)`
+  flex-direction: row;
+  justify-content: center;
   align-items: center
 `;
 
@@ -755,7 +622,7 @@ const ShareView = styled(View)`
 const Title = styled(Text)`
   color: ${props => props.color};
   font-family: ${themeProp('fontUniHeavy')}
-  font-size: 32px;
+  font-size: ${moderateScale(30)}
 `;
 
 const SubTitle1 = styled(Text)`

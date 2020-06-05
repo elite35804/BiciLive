@@ -27,7 +27,11 @@ import {get} from 'lodash';
 import Swiper from 'react-native-swiper';
 import StepIndicator from 'react-native-step-indicator';
 import { SwipeListView } from 'react-native-swipe-list-view';
+import {moderateScale} from 'react-native-size-matters';
 const isIOS = Platform.OS === "ios";
+
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
 
 const Expandible_Wrapper = props => {
   const [isCollapse, setCollapse] = useState(false);
@@ -94,24 +98,24 @@ const ImageReel = (props) => {
       <TouchableOpacity key="1" onPress={() => {
         goToBrand(get(props, 'data.url1', ''));
       }}><Image
-        style={{width: 110, height: 110, resizeMode: 'contain'}}
+        style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
         source={{uri: get(props, 'data.img1', '')}}/></TouchableOpacity>
       <TouchableOpacity key="2" onPress={() => goToBrand(get(props, 'data.url2', ''))}><Image
-        style={{width: 110, height: 110, resizeMode: 'contain'}}
+        style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
         source={{uri: get(props, 'data.img2', '')}}/></TouchableOpacity>
       <TouchableOpacity key="3" onPress={() => goToBrand(get(props, 'data.url3', ''))}><Image
-        style={{width: 110, height: 110, resizeMode: 'contain'}}
+        style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
         source={{uri: get(props, 'data.img3', '')}}/></TouchableOpacity>
     </CategoryView>
       <CategoryView>
         <TouchableOpacity key="4" onPress={() => goToBrand(get(props, 'data.url4', ''))}><Image
-          style={{width: 110, height: 110, resizeMode: 'contain'}}
+          style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
           source={{uri: get(props, 'data.img4', '')}}/></TouchableOpacity>
         <TouchableOpacity key="5" onPress={() => goToBrand(get(props, 'data.url5', ''))}><Image
-          style={{width: 110, height: 110, resizeMode: 'contain'}}
+          style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
           source={{uri: get(props, 'data.img5', '')}}/></TouchableOpacity>
         <TouchableOpacity key="6" onPress={() => goToBrand(get(props, 'data.url6', ''))}><Image
-          style={{width: 110, height: 110, resizeMode: 'contain'}}
+          style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
           source={{uri: get(props, 'data.img6', '')}}/></TouchableOpacity>
       </CategoryView>
     </View>
@@ -242,6 +246,8 @@ const BrandPagePremium = props => {
         </View>
       </Container>
     );
+  } else {
+    return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><Image style={{width: 70, height: 70, resizeMode: 'contain',marginTop: 14}} source={Images.icons.ic_loading}/></View>
   }
 
 };
@@ -320,7 +326,7 @@ const DescText = styled(Text)`
 const CategoryText = styled(Text)`
   color: ${props => props.color};
   font-family: ${themeProp('fontUniHeavy')}
-  font-size: 35px;
+  font-size: ${moderateScale(32)};
   margin-top: 31px;
 `;
 

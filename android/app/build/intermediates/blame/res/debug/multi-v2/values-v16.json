@@ -4,7 +4,7 @@
             "outputFile": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/values-v16/values-v16.xml",
+                    "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/d778bce9e1af58199f9a728090a0b010/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/5356ece467466d9fff663a79b90dd6d4/res/values-v16/values-v16.xml",
+                    "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/3988e0bca9ba4878b30c162073bb9e85/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

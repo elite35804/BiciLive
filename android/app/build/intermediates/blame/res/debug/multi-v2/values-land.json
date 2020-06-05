@@ -4,7 +4,7 @@
             "outputFile": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-land/values-land.xml",
             "map": [
                 {
-                    "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/b6d9d9177cee3a0ab5497fd3363495f2/res/values-land/values-land.xml",
+                    "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/a539fa8e566f66eb543e338cb889ad94/res/values-land/values-land.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,24,30",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/0d6bafa122c67acbd0b83a4c682a1602/res/values-land/values-land.xml",
+                    "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/d778bce9e1af58199f9a728090a0b010/res/values-land/values-land.xml",
                     "from": {
                         "startLines": "2,3,4",
                         "startColumns": "4,4,4",

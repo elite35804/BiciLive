@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {Image, Platform, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
@@ -6,7 +6,7 @@ import {Actions} from 'react-native-router-flux';
 import {useStores} from 'hooks/Utils';
 import Images from 'res/Images';
 import {BlueButton, GreenButton, WhiteButton} from 'components/controls/Button';
-import {AdvResumeBig, CheckBox, Divider, Price, Slider, Step} from 'components/controls/BaseUtils';
+import {Header,AdvResumeBig, CheckBox, Divider, Price, Slider, Step} from 'components/controls/BaseUtils';
 import {BaseSelect, BaseTextFilter, BaseTextInput} from 'components/controls/BaseTextInput';
 import {useActionSheet} from '@expo/react-native-action-sheet';
 import {toJS} from 'mobx';
@@ -15,6 +15,10 @@ import {observer} from 'mobx-react';
 import Swiper from 'react-native-swiper';
 import StepIndicator from 'react-native-step-indicator';
 import CustomTooltip from 'components/controls/CustomTooltip';
+import {scale, verticalScale} from 'react-native-size-matters';
+
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
 
 const isIOS = Platform.OS === 'ios';
 
@@ -34,15 +38,6 @@ const FinderItem = props => {
     <View>
       <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginRight: 10}}>
           <CheckBox checked={checked} onPress={() => setChecked(!checked)} text={get(props, 'data.title','').toUpperCase()}/>
-        {/*<Tooltip*/}
-          {/*width={275}*/}
-          {/*height={140}*/}
-          {/*overlayColor={'rgba(0,0,0,0'}*/}
-          {/*popover={<Text numberOfLines={5} style={{color: 'white', fontSize: 18, fontFamily: 'UniSansRegular'}}>{get(props, 'data.infotext', 'No Info')}</Text>}*/}
-          {/*backgroundColor={'black'}*/}
-        {/*>*/}
-          {/*<Image width={30} height={30} source={Images.icons.ic_info_green}/>*/}
-        {/*</Tooltip>*/}
         <CustomTooltip from="category" tooltipText={get(props, 'data.infotext', 'No Info')}/>
       </View>
       {
@@ -133,14 +128,11 @@ const processSelectData = (predata) => {
 };
 const BikeFinderCategory = props => {
   const {staticData, category, bikeSearch} = useStores();
-  // console.log('static_Data========', toJS(staticData.data.search_forms))
   console.log('currentid=====111111', toJS(category.currentId));
   const uiData = toJS(staticData.data.search_forms[category.currentId]);
-  // console.log('data=======', toJS(staticData.data.search_forms[category.currentId]));
-  // console.log('uiData===', uiData);
-  // bikeSearch.clearRequest();
   const {showActionSheetWithOptions} = useActionSheet();
   const [collapse, setCollapsed] = useState(false);
+  const _container = useRef(null);
 
   const SelectElement = (props) => {
 
@@ -148,15 +140,20 @@ const BikeFinderCategory = props => {
     const [brand, setBrand] = useState();
     const _onOpenActionSheet = (id, cb) => {
       const {title, texts, values} = processSelectData(preData);
-      // const options = [...texts, 'Cancel'];
+      const options = ['Cancel', ...texts];
+      const cancelButtonIndex = 0;
       showActionSheetWithOptions(
         {
-          options: texts
+          options,
+          cancelButtonIndex
         },
         buttonIndex => {
-          bikeSearch.setRequest(get(preData, 'name', ''), values[buttonIndex]);
-          cb(texts[buttonIndex]);
-          // Do something here depending on the button index selected
+          if (buttonIndex !== 0) {
+            bikeSearch.setRequest(get(preData, 'name', ''), values[buttonIndex - 1]);
+            cb(texts[buttonIndex - 1]);
+            // Do something here depending on the button index selected
+          }
+
         },
       );
     };
@@ -170,16 +167,26 @@ const BikeFinderCategory = props => {
     Actions.Result();
   };
 
+  useEffect(() => {
+    if (collapse) {
+      setTimeout(() => {
+        _container.current.scrollTo({y: 600, animated: true})
+      }, 100)
+    }
+
+  },[collapse]);
+
   if (Object.keys(uiData).length !== 0) {
     return (
       <View style={{flex: 1}}>
-        <Container>
-          {/*<View style={{paddingHorizontal: 10}}>*/}
-          {/**/}
-          {/*</View>*/}
-
+        <Header>
+          <TouchableOpacity onPress={() => Actions.pop()}>
+            <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
+                   style={{width: scale(37), height: verticalScale(30), resizeMode: 'contain', marginTop: verticalScale(10)}}/></TouchableOpacity>
+        </Header>
+        <Container ref={_container}>
           <View style={{paddingLeft: 13,paddingHorizontal: 10}}>
-            <Title size={'40px'} color={themeProp('colorThird')} width={'35px'}>EBIKE FINDER</Title>
+            <Title size={'30px'} color={themeProp('colorThird')} width={'35px'}>EBIKE FINDER</Title>
             <Title size={'0'} color={toJS(category.color)} width={'50px'}>{toJS(category.title)}</Title>
             {uiData.map((item,index) => {
               if (item.id === 'PAGED_SLIDER' && Object.keys(item.content).length) {
@@ -190,15 +197,7 @@ const BikeFinderCategory = props => {
               <Title1 size={'10px'} color={themeProp('colorThird')} width={'35px'}>CERCA</Title1>
             </View>
             <Divider size={13}/>
-            {/*<CategoryElements/>*/}
-
-            {/*<SelectElement dataId="0" dataName="brand" dataTitle="Marca"/>*/}
-            {/*<SliderElement/>*/}
-            {/*<BaseSelect text="ANNO*"/>*/}
-            {/*<BaseTextInput placeholder="MARCA, MODELLO"/>*/}
             <Divider size={5}/>
-            {/*<BaseSelect text="MARCA EBIKE"/>*/}
-            {/*<BaseSelect text="MARCE MOTORE"/>*/}
             {uiData.map((item,index) => {
               if (item.id === "FORM_INPUT_SELECT" && item.name === "brand"){
                 return <SelectElement data={item} key={index}/>;
@@ -286,26 +285,32 @@ const BikeFinderCategory = props => {
             })}
           </View>}
 
-        </Container>
-        <Bottom>
           {uiData.map((item,index) => {
             if (item.id === "FORM_INPUT_BUTTON" && item.action === "CERCA"){
-              return  <GreenButton bg_color={item.bg_color} txt_color= {item.txt_color} onPress={() => goToResult(item.url)}>CERCA</GreenButton>
+              return  <View style={{marginHorizontal : 10}}><GreenButton bg_color={item.bg_color} txt_color= {item.txt_color} onPress={() => goToResult(item.url)}>CERCA</GreenButton></View>
             }
           })}
-          {/*<GreenButton bg_color='green' onPress={() => Actions.Result()}>CERCA</GreenButton>*/}
-        </Bottom>
+        </Container>
+        {/*<Bottom>*/}
+          {/*{uiData.map((item,index) => {*/}
+            {/*if (item.id === "FORM_INPUT_BUTTON" && item.action === "CERCA"){*/}
+              {/*return  <GreenButton bg_color={item.bg_color} txt_color= {item.txt_color} onPress={() => goToResult(item.url)}>CERCA</GreenButton>*/}
+            {/*}*/}
+          {/*})}*/}
+          {/*/!*<GreenButton bg_color='green' onPress={() => Actions.Result()}>CERCA</GreenButton>*!/*/}
+        {/*</Bottom>*/}
       </View>
     );
   } else {
-    return <View><Text>There is no data to display</Text></View>
+    return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><Image style={{width: 70, height: 70, resizeMode: 'contain',marginTop: 14}} source={Images.icons.ic_loading}/></View>
   }
 
 };
 
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    margin-top: 50px
 `;
 
 const Bottom = styled(View)`

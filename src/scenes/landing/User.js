@@ -12,6 +12,9 @@ import {
 } from 'components/controls/BaseUtils';
 import {UniSansBold, UniSansBook, UniSansSemiBold} from '../../utils/fontFamily';
 
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
+
 
 const Dashboard = props => {
   return (

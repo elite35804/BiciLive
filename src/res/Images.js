@@ -58,7 +58,9 @@ const Images = {
         ic_heart_red_sm: require('./images/ic_heart_red_sm.png'),
         ic_heart_white: require('./images/ic_heart_white.png'),
         ic_compare_white: require('./images/ic_compare_white.png'),
-        ic_zoom_in: require('./images/icon_zoom.png')
+        ic_zoom_in: require('./images/icon_zoom.png'),
+        ic_loading: require('./images/loading.gif'),
+        ic_oops: require('./images/icon_ops.jpg')
     },
     background: {
         logo: require('./images/logo.png'),
@@ -78,6 +80,7 @@ const Images = {
         btn_back: require('./images/btn_back_half_circle.png'),
         btn_share: require('./images/btn-condividi.png'),
         btn_finder_animated: require('./images/btn_activated2.gif'),
+        btn_back_arrow: require('./images/back_icon.png')
     }
 };
 

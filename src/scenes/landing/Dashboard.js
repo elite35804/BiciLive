@@ -11,6 +11,9 @@ import {
   Divider,
 } from 'components/controls/BaseUtils';
 
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
+
 
 const Dashboard = props => {
   return (
