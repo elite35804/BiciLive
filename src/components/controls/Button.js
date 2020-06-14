@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 import { TouchableOpacity } from 'react-native';
 import Colors from '../../res/Colors';
 import { themeProp } from '../../utils/CssUtil';
+import {get} from 'lodash';
 
 function textButtonFactory(ContainerComp, TextComp) {
     return props => (
@@ -18,7 +19,7 @@ const isIOS = Platform.OS === "ios";
 const BaseButtonContainer = styled(TouchableOpacity)`
     height: ${themeProp('szButton')};
     border-width: 2px;
-    border-color: ${themeProp('colorSecondary')};
+    border-color: ${props => get(props, 'borderColor', themeProp('colorSecondary'))};
     align-items: center;
     justify-content:center;
     width:95%;
@@ -42,14 +43,14 @@ const BlueBtnContainer = styled(BaseButtonContainer)`
 `;
 
 const WhiteBtnContainer = styled(BaseButtonContainer)`
-    background-color: ${themeProp('colorPrimary')};
+    background-color: ${props => get(props, 'backgroudColor', '#7cd9d0')};
 `;
 
 const BlueBtnTitle = styled(Text)`
     font-family: ${isIOS ? 'UniSansHeavy' : 'uni_sans_heavy'};
     margin-top: ${Platform.OS === 'ios' ? '15px' : '0'};
     font-size: 35px;
-    color: ${themeProp('colorPrimary')}
+    color: ${props => get(props, 'textColor', '#7cd9d0')}
 `;
 
 const WhiteBtnTitle = styled(Text)`
@@ -64,6 +65,8 @@ const BlueButton = textButtonFactory(BlueBtnContainer, BlueBtnTitle);
 const WhiteButton = textButtonFactory(WhiteBtnContainer, WhiteBtnTitle);
 
 const GreenButton = textButtonFactory(GreenBtnContainer, GreenBtnTitle);
+
+const BorderButton = textButtonFactory();
 
 
 //export default StyledButton;

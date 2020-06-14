@@ -1,5 +1,16 @@
-import React, {useState} from 'react';
-import {Image, View, TouchableOpacity, Text, ScrollView, Platform, Linking} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  Image,
+  View,
+  TouchableOpacity,
+  Text,
+  ScrollView,
+  Platform,
+  Linking,
+  Image as DefaultImage,
+  Modal,
+  Alert,
+} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
@@ -20,7 +31,9 @@ import {
   DivideLine,
   Detail,
   DetailMore,
-  AdvResumeBig
+  AdvResumeBig,
+  ErrorView,
+  LoginModal
 } from 'components/controls/BaseUtils';
 import {BaseTextInput, BaseSelect, BaseTextFilter} from 'components/controls/BaseTextInput';
 import {UniSansBold, UniSansBook} from '../../utils/fontFamily';
@@ -47,32 +60,36 @@ const BrandLogo = props => {
   return (
     <View>
       <TouchableOpacity onPress={() => goToBrand(props.data.url)}>
-      <TitleView>
-        <Image style={{width: '35%', height: '100%'}} source={{uri: props.data.img}}/>
-
         <TitleView>
-          <View style={{marginRight: 10}}>
-            <Text style={{color: themeProp('colorDescription'), fontSize: moderateScale(14, 0.2), fontFamily: UniSansBook}}>TUTTE LE EBIKE</Text>
-            <SubTitleView>
+          <Image style={{width: '35%', height: '100%'}} source={{uri: props.data.img}}/>
+
+          <TitleView>
+            <View style={{marginRight: 10}}>
               <Text style={{
                 color: themeProp('colorDescription'),
                 fontSize: moderateScale(14, 0.2),
                 fontFamily: UniSansBook,
-              }}>DI</Text>
-              <Text style={{
-                color: themeProp('colorDescription'),
-                fontSize: moderateScale(14, 0.2),
-                fontFamily: UniSansBold,
-              }}> {get(props, 'data.brand', '')}</Text>
-            </SubTitleView>
-          </View>
-          <Image width={'100%'} height={'100%'} source={Images.icons.arrow_right} style={{marginRight: 10}}/>
-          <BadgeView>
-            <Title size={isIOS ? '8px' : '0'} color={themeProp('colorSecondary')}
-                   width={moderateScale(15)}>{props.data.count}</Title>
-          </BadgeView>
+              }}>TUTTE LE EBIKE</Text>
+              <SubTitleView>
+                <Text style={{
+                  color: themeProp('colorDescription'),
+                  fontSize: moderateScale(14, 0.2),
+                  fontFamily: UniSansBook,
+                }}>DI</Text>
+                <Text style={{
+                  color: themeProp('colorDescription'),
+                  fontSize: moderateScale(14, 0.2),
+                  fontFamily: UniSansBold,
+                }}> {get(props, 'data.brand', '')}</Text>
+              </SubTitleView>
+            </View>
+            <Image width={'100%'} height={'100%'} source={Images.icons.arrow_right} style={{marginRight: 10}}/>
+            <BadgeView>
+              <Title size={props.data.count > 99 ? 25 : 30} color={themeProp('colorSecondary')}
+                     width={moderateScale(15)}>{props.data.count}</Title>
+            </BadgeView>
+          </TitleView>
         </TitleView>
-      </TitleView>
       </TouchableOpacity>
       <Divider size={-10}/>
       <DivideLine/>
@@ -108,7 +125,7 @@ const IconDescriptionGroup = props => {
           paddingTop: 5,
           backgroundColor: get(props, 'data.bg_color1', ''),
         }}>
-              <CustomTooltip tooltipText={get(props,'data.infobox1','')}/>
+          <CustomTooltip tooltipText={get(props, 'data.infobox1', '')}/>
 
         </View>
         <View style={{
@@ -118,10 +135,10 @@ const IconDescriptionGroup = props => {
           backgroundColor: get(props, 'data.bg_color1', ''),
           marginTop: -1,
         }}>
-          <Image resizeMode="contain" source={{uri: get(props, 'data.icona1','')}}
+          <Image resizeMode="contain" source={{uri: get(props, 'data.icona1', '')}}
                  style={{width: 100, height: 70, marginBottom: 20}}/>
           {/*<Image resizeMode="contain" source={props.order === 1 ? Images.icons.ic_light : Images.icons.ic_volt}*/}
-                 {/*style={{width: 100, height: 70, marginBottom: 20}}/>*/}
+          {/*style={{width: 100, height: 70, marginBottom: 20}}/>*/}
           <ItemText color={get(props, 'data.color1', '#000000')}>{get(props, 'data.titolo1')}</ItemText>
           <View style={{marginTop: verticalScale(-7)}}/>
           <ItemSymbol color={get(props, 'data.color1', '#000000')}>{get(props, 'data.subtitolo1')}</ItemSymbol>
@@ -135,7 +152,7 @@ const IconDescriptionGroup = props => {
           paddingTop: 5,
           backgroundColor: get(props, 'data.bg_color2', ''),
         }}>
-          <CustomTooltip tooltipText={get(props,'data.infobox2','')}/>
+          <CustomTooltip tooltipText={get(props, 'data.infobox2', '')}/>
         </View>
         <View style={{
           justifyContent: 'center',
@@ -144,10 +161,10 @@ const IconDescriptionGroup = props => {
           backgroundColor: get(props, 'data.bg_color2', ''),
           marginTop: -1,
         }}>
-          <Image source={{uri: get(props, 'data.icona2','')}}
+          <Image source={{uri: get(props, 'data.icona2', '')}}
                  style={{width: 100, height: 70, marginBottom: 20, resizeMode: 'contain'}}/>
           {/*<Image width={'100%'} height={'100%'} resizeMode="contain" source={props.order === 1 ? Images.icons.ic_graph_lg : Images.icons.ic_battery_lg}*/}
-                 {/*style={{marginBottom: 20, height: 70}}/>*/}
+          {/*style={{marginBottom: 20, height: 70}}/>*/}
           <ItemText color={get(props, 'data.color2', '#000000')}>{get(props, 'data.titolo2')}</ItemText>
           <View style={{marginTop: -7}}/>
           <ItemSymbol color={get(props, 'data.color2', '#000000')}>{get(props, 'data.subtitolo2')}</ItemSymbol>
@@ -162,7 +179,7 @@ const IconDescriptionGroup = props => {
           backgroundColor: get(props, 'data.bg_color3', ''),
           marginTop: -1,
         }}>
-          <CustomTooltip tooltipText={get(props,'data.infobox3','')}/>
+          <CustomTooltip tooltipText={get(props, 'data.infobox3', '')}/>
         </View>
         <View style={{
           justifyContent: 'center',
@@ -170,7 +187,7 @@ const IconDescriptionGroup = props => {
           marginBottom: 8,
           backgroundColor: get(props, 'data.bg_color3', ''),
         }}>
-          <Image source={{uri: get(props, 'data.icona3','')}}
+          <Image source={{uri: get(props, 'data.icona3', '')}}
                  style={{width: 100, height: 70, marginBottom: 20, resizeMode: 'contain'}}/>
           <ItemText color={get(props, 'data.color3', '#000000')}>{get(props, 'data.titolo3')}</ItemText>
           <View style={{marginTop: -7}}/>
@@ -192,7 +209,8 @@ const RelatedElements = (item, index) => {
     <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10}}>
       {item.map((item0, index) =>
         <View key={index} style={{width: '33%', borderLeftColor: '#c9c3c5', borderLeftWidth: 7, paddingHorizontal: 5}}>
-          <TouchableOpacity onPress={() => goToBike(item0.url)}><Image style={{width: '100%', height: 60}} source={{uri: item0.img_url}}/></TouchableOpacity>
+          <TouchableOpacity onPress={() => goToBike(item0.url)}><Image style={{width: '100%', height: 60}}
+                                                                       source={{uri: item0.img_url}}/></TouchableOpacity>
           <Text style={{
             color: '#909090',
             fontSize: 15,
@@ -254,7 +272,7 @@ const RelatedGroup = props => {
         brand: data[`brand${number}`],
         modello: data[`modello${number}`],
         url: data[`url${number}`],
-        color: data[`color${number}`]
+        color: data[`color${number}`],
       };
       elementArray.push(elementData);
     }
@@ -291,12 +309,12 @@ const RelatedGroup = props => {
       </View>
       <View style={{height: 180}}>
         <Swiper ref={_swiper} showsPagination={false} index={swiperState.position} autoplay={true}
-                autoplayTimeout = {4}
+                autoplayTimeout={4}
                 onIndexChanged={(index) => swiperState.setPosition(index)}>
           {groupedArray.map((item, index) => RelatedElements(item, index))}
         </Swiper>
         <View style={{width: '115%', alignSelf: 'center'}}>
-        <Stepper total={total} onPress={p => _swiper.current.scrollBy(p, true)}/>
+          <Stepper total={total} onPress={p => _swiper.current.scrollBy(p, true)}/>
         </View>
       </View>
     </View>
@@ -309,12 +327,23 @@ const openUrl = (url) => {
     if (supported) {
       Linking.openURL(url);
     } else {
-      console.log("Don't know how to open URI: " + this.props.url);
+      console.log('Don\'t know how to open URI: ' + this.props.url);
     }
   });
 };
+
+const AdBlock = props => {
+  const {web} = useStores();
+  const openWebViewer = (url) => {
+    web.url = url;
+    Actions.WebViewer();
+  };
+  return <View><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image style={{width: '100%', height: 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>
+};
+
 const RenderElements = props => {
   // console.log(props);
+  const {auth} = useStores();
   const uiData = props.uiData;
   const items = [];
   let i = 0;
@@ -323,15 +352,18 @@ const RenderElements = props => {
       items.push(<BrandLogo key={`key${index}`} data={item}/>);
     }
     if (item.id === 'ADV_RESUME_BIG') {
-      items.push(<View><AdvResumeBig isBack={true} productIf={true} style={{marginTop: '20px'}} key={`key${index}`} data={item}/><Divider size={-40}/></View>);
+      items.push(<View><AdvResumeBig isBack={true} productIf={true} style={{marginTop: '20px'}} key={`key${index}`}
+                                     data={item}/><Divider size={-40}/></View>);
     }
     if (item.id === 'TITLE') {
-      items.push(<View><Title key={`key${index}`} color={get(item, 'colore')}>{item.titolo}</Title><SubTitle1 color={get(item, 'sub_color','#ffffff')}>{item.sub}</SubTitle1><Divider size={-25}/></View>);
+      items.push(<View><Title key={`key${index}`} color={get(item, 'colore')}>{item.titolo}</Title><SubTitle1
+        color={get(item, 'sub_color', '#ffffff')}>{item.sub}</SubTitle1><Divider size={-25}/></View>);
     }
-    if (item.id === "TITLED_TEXT") {
-      items.push(<DetailMore key={index} title={item.title} desc={item.text} title_color={item.title_color} text_color={item.text_color}/>)
+    if (item.id === 'TITLED_TEXT') {
+      items.push(<DetailMore key={index} title={item.title} desc={item.text} title_color={item.title_color}
+                             text_color={item.text_color}/>);
     }
-    if (item.id === "WHEEL_DETAIL_GROUP") {
+    if (item.id === 'WHEEL_DETAIL_GROUP') {
       items.push(<View><Divider size={-18}/><SwipeView>
         <View style={{width: '48%'}}>
           <View style={{
@@ -369,7 +401,7 @@ const RenderElements = props => {
               marginTop: -10,
             }}>POLLICI</Text>
           </View>
-          <View style={{backgroundColor: '#F2F2F2', alignItems: 'center', height: 190, paddingTop: 15}}>
+          <View style={{backgroundColor: '#F2F2F2', alignItems: 'center', height: 200, paddingTop: 15, paddingHorizontal: 5}}>
             <Text style={{
               fontSize: 16,
               color: item.bg_color,
@@ -433,7 +465,7 @@ const RenderElements = props => {
               marginTop: -10,
             }}>POLLICI</Text>
           </View>
-          <View style={{backgroundColor: '#F2F2F2', alignItems: 'center', height: 190, paddingTop: 15}}>
+          <View style={{backgroundColor: '#F2F2F2', alignItems: 'center', height: 200, paddingTop: 15, paddingHorizontal: 5}}>
             <Text style={{
               fontSize: 16,
               color: item.bg_color,
@@ -462,7 +494,7 @@ const RenderElements = props => {
               }}>{item.post_gomma}</Text>
           </View>
         </View>
-      </SwipeView><Divider size={-30}/></View>)
+      </SwipeView><Divider size={-30}/></View>);
     }
     if (item.id === 'SHARE_BLOCK') {
       i++;
@@ -473,7 +505,7 @@ const RenderElements = props => {
           </View>,
         );
       } else {
-        items.push(<ShareBlock key={`key${index}`} data={item}/>)
+        items.push(<ShareBlock key={`key${index}`} data={item}/>);
       }
 
     }
@@ -484,7 +516,10 @@ const RenderElements = props => {
       items.push(<RelatedGroup key={`key${index}`} data={item}/>);
     }
     if (item.id === 'AD_BANNER_ENGAGE') {
-      items.push(<View><Divider size={23}/><TouchableOpacity onPress={() => openUrl(item.url)}><Image style={{width: '100%', height: 130}} source={{uri: item.img}}/></TouchableOpacity><Divider size={20}/></View>)
+      items.push(<View><Divider size={23}/><AdBlock data={item}/></View>);
+    }
+    if (item.id === 'SIGN_IN_PLACEHOLDER' && !auth.loginState) {
+      items.push(<LoginModal data={item}/>);
     }
     items.push(<Divider key={`divider${index}`} size={20}/>);
   });
@@ -493,24 +528,41 @@ const RenderElements = props => {
 
 const BikePagePremium = props => {
   const {bikeData} = useStores();
-  const uiData = toJS(bikeData.data);
-  if (Object.keys(uiData).length !== 0 ) {
-    return (
-      <View>
-        <Header>
-          <TouchableOpacity onPress={() => Actions.pop()}>
-            <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
-                   style={{width: scale(37), height: verticalScale(30), resizeMode: 'contain', marginTop: verticalScale(10)}}/></TouchableOpacity>
-        </Header>
 
-        <Container>
-          <RenderElements uiData={uiData}/>
 
-        </Container>
-      </View>
-    );
+  if (bikeData.isLoading) {
+    return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><DefaultImage
+      style={{width: moderateScale(70), height: moderateScale(70), resizeMode: 'contain', marginTop: 14}}
+      source={Images.icons.ic_loading}/></View>;
   } else {
-    return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><Image style={{width: 70, height: 70, resizeMode: 'contain',marginTop: 14}} source={Images.icons.ic_loading}/></View>
+    if (bikeData.errorIf) {
+      return <ErrorView/>
+    } else {
+      const uiData = toJS(bikeData.data);
+      return (
+        <View>
+          <Header>
+            <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => Actions.pop()}>
+              <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
+                     style={{
+                       position: 'absolute',
+                       left: 0,
+                       width: scale(37),
+                       height: verticalScale(23),
+                       resizeMode: 'contain',
+                       marginTop: verticalScale(14),
+                     }}/>
+              <Text style={{textAlign: 'center', fontSize: 19, lineHeight: 49}}>SCHEDA BICI</Text>
+            </TouchableOpacity>
+          </Header>
+
+          <Container>
+            <RenderElements uiData={uiData}/>
+          </Container>
+        </View>
+      );
+
+    }
   }
 };
 
@@ -518,7 +570,7 @@ const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
     margin-bottom: 10px;
     paddingHorizontal: ${scale(8)} 
-    marginTop: ${verticalScale(60)}
+    marginTop: ${verticalScale(50)}
 `;
 
 const BadgeView = styled(View)`
@@ -622,7 +674,7 @@ const ShareView = styled(View)`
 const Title = styled(Text)`
   color: ${props => props.color};
   font-family: ${themeProp('fontUniHeavy')}
-  font-size: ${moderateScale(30)}
+  font-size: ${props => props.size ? moderateScale(props.size) : moderateScale(30)}
 `;
 
 const SubTitle1 = styled(Text)`

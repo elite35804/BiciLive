@@ -1579,12 +1579,13 @@ int drawable src_res_images_line 0x7f07011d
 int drawable src_res_images_loading 0x7f07011e
 int drawable src_res_images_loghi06 0x7f07011f
 int drawable src_res_images_logo 0x7f070120
-int drawable src_res_images_mountainbikebiciliv 0x7f070121
-int drawable src_res_images_triangle 0x7f070122
-int drawable src_res_images_triangledown 0x7f070123
-int drawable test_custom_background 0x7f070124
-int drawable tooltip_frame_dark 0x7f070125
-int drawable tooltip_frame_light 0x7f070126
+int drawable src_res_images_logo1 0x7f070121
+int drawable src_res_images_mountainbikebiciliv 0x7f070122
+int drawable src_res_images_triangle 0x7f070123
+int drawable src_res_images_triangledown 0x7f070124
+int drawable test_custom_background 0x7f070125
+int drawable tooltip_frame_dark 0x7f070126
+int drawable tooltip_frame_light 0x7f070127
 int id ALT 0x7f080000
 int id BOTTOM_END 0x7f080001
 int id BOTTOM_START 0x7f080002
@@ -3997,8 +3998,9 @@ int styleable com_facebook_login_view_com_facebook_tooltip_mode 3
 int[] styleable com_facebook_profile_picture_view { 0x7f0300bb, 0x7f0300c0 }
 int styleable com_facebook_profile_picture_view_com_facebook_is_cropped 0
 int styleable com_facebook_profile_picture_view_com_facebook_preset_size 1
-int xml rn_dev_preferences 0x7f120000
-int xml standalone_badge 0x7f120001
-int xml standalone_badge_gravity_bottom_end 0x7f120002
-int xml standalone_badge_gravity_bottom_start 0x7f120003
-int xml standalone_badge_gravity_top_start 0x7f120004
+int xml file_provider_paths 0x7f120000
+int xml rn_dev_preferences 0x7f120001
+int xml standalone_badge 0x7f120002
+int xml standalone_badge_gravity_bottom_end 0x7f120003
+int xml standalone_badge_gravity_bottom_start 0x7f120004
+int xml standalone_badge_gravity_top_start 0x7f120005

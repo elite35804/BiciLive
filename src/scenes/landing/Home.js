@@ -12,7 +12,7 @@ import {get} from 'lodash';
 import Swiper from 'react-native-swiper';
 import {observer} from 'mobx-react';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
-import {Divider} from '../../components/controls/BaseUtils';
+import {Divider, ErrorView} from '../../components/controls/BaseUtils';
 import Image from 'react-native-image-progress';
 
 
@@ -115,29 +115,29 @@ const ImageReel = (props) => {
   return (
     <View>
       <CategoryView>
-        <TouchableOpacity key="1" onPress={() => {
+        {props.data.img1 && <TouchableOpacity key="1" onPress={() => {
           goToBrand(get(props, 'data.url1', ''));
         }}><Image
-          style={{width: scale(110), height: verticalScale(110), resizeMode: 'contain'}}
-          source={{uri: get(props, 'data.img1', '')}}/></TouchableOpacity>
-        <TouchableOpacity key="2" onPress={() => goToBrand(get(props, 'data.url2', ''))}><Image
-          style={{width: scale(110), height: verticalScale(110), resizeMode: 'contain'}}
-          source={{uri: get(props, 'data.img2', '')}}/></TouchableOpacity>
-        <TouchableOpacity key="3" onPress={() => goToBrand(get(props, 'data.url3', ''))}><Image
-          style={{width: scale(110), height: verticalScale(110), resizeMode: 'contain'}}
-          source={{uri: get(props, 'data.img3', '')}}/></TouchableOpacity>
+          style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
+          source={{uri: get(props, 'data.img1', '')}}/></TouchableOpacity>}
+        {props.data.img2 && <TouchableOpacity key="2" onPress={() => goToBrand(get(props, 'data.url2', ''))}><Image
+          style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
+          source={{uri: get(props, 'data.img2', '')}}/></TouchableOpacity>}
+        {props.data.img3 &&  <TouchableOpacity key="3" onPress={() => goToBrand(get(props, 'data.url3', ''))}><Image
+          style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
+          source={{uri: get(props, 'data.img3', '')}}/></TouchableOpacity>}
       </CategoryView>
-      <CategoryView>
-        <TouchableOpacity key="4" onPress={() => goToBrand(get(props, 'data.url4', ''))}><Image
-          style={{width: scale(110), height: verticalScale(110), resizeMode: 'contain'}}
-          source={{uri: get(props, 'data.img4', '')}}/></TouchableOpacity>
-        <TouchableOpacity key="5" onPress={() => goToBrand(get(props, 'data.url5', ''))}><Image
-          style={{width: scale(110), height: verticalScale(110), resizeMode: 'contain'}}
-          source={{uri: get(props, 'data.img5', '')}}/></TouchableOpacity>
-        {props.data.url6 && <TouchableOpacity key="6" onPress={() => goToBrand(get(props, 'data.url6', ''))}><Image
-          style={{width: scale(110), height: verticalScale(110), resizeMode: 'contain'}}
+      {props.data.img4 &&<CategoryView>
+        {props.data.img4 && <TouchableOpacity key="4" onPress={() => goToBrand(get(props, 'data.url4', ''))}><Image
+          style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
+          source={{uri: get(props, 'data.img4', '')}}/></TouchableOpacity>}
+        {props.data.img5 && <TouchableOpacity key="5" onPress={() => goToBrand(get(props, 'data.url5', ''))}><Image
+          style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
+          source={{uri: get(props, 'data.img5', '')}}/></TouchableOpacity>}
+        {props.data.img6 && <TouchableOpacity key="6" onPress={() => goToBrand(get(props, 'data.url6', ''))}><Image
+          style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
           source={{uri: get(props, 'data.img6', '')}}/></TouchableOpacity>}
-      </CategoryView>
+      </CategoryView>}
     </View>
   );
 };
@@ -156,14 +156,23 @@ const Finder = () => {
   );
 };
 
-const openUrl = (url) => {
-  Linking.canOpenURL(url).then(supported => {
-    if (supported) {
-      Linking.openURL(url);
-    } else {
-      console.log("Don't know how to open URI: " + this.props.url);
-    }
-  });
+// const openUrl = (url) => {
+//   Linking.canOpenURL(url).then(supported => {
+//     if (supported) {
+//       Linking.openURL(url);
+//     } else {
+//       console.log("Don't know how to open URI: " + this.props.url);
+//     }
+//   });
+// };
+
+const AdBlock = props => {
+  const {web} = useStores();
+  const openWebViewer = (url) => {
+    web.url = url;
+    Actions.WebViewer();
+  };
+  return <View><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image style={{width: '100%', height: 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>
 };
 
 const HomeElements = (props) => {
@@ -183,7 +192,7 @@ const HomeElements = (props) => {
       items.push(<View><Divider size={-20}/><Finder key={`key${index}`}/></View>);
     }
     if (item.id === 'AD_BANNER_ENGAGE') {
-      items.push(<View><TouchableOpacity onPress={() => openUrl(item.url)}><Image style={{width: '100%', height: 130}} source={{uri: item.img}}/></TouchableOpacity><Divider size={20}/></View>)
+      items.push(<AdBlock data={item}/>)
     }
     items.push(<Divider key={`divider${index}`} size={25}/>);
   });
@@ -196,7 +205,7 @@ const Home = (props) => {
     return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><DefaultImage style={{width: moderateScale(70), height: moderateScale(70), resizeMode: 'contain',marginTop: 14}} source={Images.icons.ic_loading}/></View>;
   } else {
     if (homeData.errorIf) {
-      return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><DefaultImage style={{width: moderateScale(200), height: moderateScale(200), resizeMode: 'contain',marginTop: 14}} source={Images.icons.ic_oops}/></View>;
+      return <ErrorView/>
     } else {
       const uiData = toJS(get(homeData, 'data', []));
       console.log('homeData====', uiData);

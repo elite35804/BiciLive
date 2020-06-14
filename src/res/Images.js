@@ -64,6 +64,7 @@ const Images = {
     },
     background: {
         logo: require('./images/logo.png'),
+        logo1: require('./images/logo1.png'),
         title: require('./images/bicilive.it.png'),
         homeLogo: require('./images/img_bike_xduro.png'),
         subtitle: require('./images/img_title.png'),

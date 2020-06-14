@@ -23,6 +23,8 @@ import User from './scenes/landing/User';
 import styled from 'styled-components/native';
 import {useStores} from './hooks/Utils';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
+import Login from './scenes/landing/Login';
+import WebViewer from './scenes/landing/WebViewer';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -71,9 +73,10 @@ const Root = props => {
         <Modal>
           <Scene key="landing" hideNavBar hideTabBar>
             <Scene key={Keys.splash} component={Splash} hideNavBar/>
-            <Scene key={Keys.register} component={Register} hideNavBar/>
-            <Scene key={Keys.welcome} component={Welcome} hideNavBar/>
           </Scene>
+          <Scene key={Keys.welcome} component={Welcome} hideNavBar hideTabBar/>
+          <Scene key={Keys.login} component={Login} hideNavBar hideTabBar/>
+          <Scene key={Keys.register} component={Register} hideNavBar hideTabBar/>
           <Tabs key="entry"
                 tabBarComponent={TabBar}
                 hideNavBar
@@ -112,6 +115,9 @@ const Root = props => {
           </Tabs>
           <Tabs tabBarComponent={TabBar} hideNavBar>
             <Scene key={Keys.brand} component={Brand} hideNavBar/>
+          </Tabs>
+          <Tabs tabBarComponent={TabBar} hideNavBar>
+            <Scene key={Keys.webViewer} component={WebViewer} hideNavBar/>
           </Tabs>
         </Modal>
       </Router>

@@ -25,7 +25,7 @@
 		59337FD19D5847C987A49D69 /* uni_sans_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB81F48624AA4B1399E12F21 /* uni_sans_bold.ttf */; };
 		7137C2B9FD354060A2CB5F35 /* oswald_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C27468EFB5DC4996BE4E674E /* oswald_medium.ttf */; };
 		83A7BD5F248ADD980055F60B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A7BD5E248ADD980055F60B /* File.swift */; };
-		83E3EFAD2489FC5E009B33CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83E3EFAC2489FC5E009B33CE /* GoogleService-Info.plist */; };
+		83DC3C412492318D005B4FD1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83DC3C402492318D005B4FD1 /* GoogleService-Info.plist */; };
 		90482119825E4D8A8B85C20D /* oswald_semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11FCED3C7B5940DFB2778354 /* oswald_semibold.ttf */; };
 		973BBE354EC5487D8E4C74E5 /* oswald_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAFEF56B61C14FF496E07596 /* oswald_light.ttf */; };
 		A6738DECACABF2835AC6A3F7 /* libPods-BiciLive.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDB267AB3FABA3497F84412 /* libPods-BiciLive.a */; };
@@ -70,49 +70,65 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BiciLive/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BiciLive/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = BiciLive/main.m; sourceTree = "<group>"; };
+		19F36680A3B94B1A9D86F240 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		1BDEAED3089C41BDAFB26D57 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		1F9BB2E92D364F67B1A632B3 /* uni_sans_book.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = uni_sans_book.ttf; path = ../src/assets/font/uni_sans_book.ttf; sourceTree = "<group>"; };
 		207D54B0CE3D4AD198DC5573 /* oswald_regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = oswald_regular.ttf; path = ../src/assets/font/oswald_regular.ttf; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* BiciLive-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BiciLive-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* BiciLive-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BiciLive-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F1E7D40F0E74EE2B8AB595A /* Oswald-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Oswald-Medium.ttf"; path = "../src/assets/font/Oswald-Medium.ttf"; sourceTree = "<group>"; };
 		31A5ABE9885245A599F1F62C /* unisansheavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = unisansheavy.ttf; path = ../src/assets/font/unisansheavy.ttf; sourceTree = "<group>"; };
+		390C034824E74CF09DE6D8D4 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		3981732019C64CFB936452DE /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		3DACFAC7C8FC4556814166D6 /* unisansbold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = unisansbold.ttf; path = ../src/assets/font/unisansbold.ttf; sourceTree = "<group>"; };
+		3E6503D034CE494D9DD3BFEB /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		41C45A887764411682C541A2 /* OswaldHeavy-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OswaldHeavy-Regular.ttf"; path = "../src/assets/font/OswaldHeavy-Regular.ttf"; sourceTree = "<group>"; };
 		42E285325D020019E55DE45F /* Pods-BiciLive-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BiciLive-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-BiciLive-tvOSTests/Pods-BiciLive-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4B9C1479DCC5474BBED54D22 /* unisans_regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = unisans_regular.ttf; path = ../src/assets/font/unisans_regular.ttf; sourceTree = "<group>"; };
+		4CFB901745EE49FDA6A3763C /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		516D58B45D8746A8BA501BD9 /* oswald_heavy_regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = oswald_heavy_regular.ttf; path = ../src/assets/font/oswald_heavy_regular.ttf; sourceTree = "<group>"; };
 		52E31BBA6118E51391DE5DAC /* Pods-BiciLive-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BiciLive-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-BiciLive-tvOS/Pods-BiciLive-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		53D659E7BB0A4102B385D463 /* unisans_bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = unisans_bold.ttf; path = ../src/assets/font/unisans_bold.ttf; sourceTree = "<group>"; };
 		549BBCEDD8AC4765B1AB0FDE /* Oswald-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Oswald-Bold.ttf"; path = "../src/assets/font/Oswald-Bold.ttf"; sourceTree = "<group>"; };
+		5A8E3177870E4BFAB0E05D94 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		5D82E85DF410400D97DFD2BB /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		6B08F38E81624C8ABB1B94DA /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		712240BBD80327FFCBA36352 /* Pods-BiciLive-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BiciLive-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-BiciLive-tvOSTests/Pods-BiciLive-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		785F4389FC25EF4C262C4B2D /* Pods-BiciLiveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BiciLiveTests.debug.xcconfig"; path = "Target Support Files/Pods-BiciLiveTests/Pods-BiciLiveTests.debug.xcconfig"; sourceTree = "<group>"; };
 		796DEDE03333307308AAD97F /* Pods-BiciLive-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BiciLive-tvOS.release.xcconfig"; path = "Target Support Files/Pods-BiciLive-tvOS/Pods-BiciLive-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		825339C7175A4FF599B08C99 /* Oswald-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Oswald-Light.ttf"; path = "../src/assets/font/Oswald-Light.ttf"; sourceTree = "<group>"; };
 		83A7BD59248AD5900055F60B /* BiciLive-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BiciLive-Bridging-Header.h"; sourceTree = "<group>"; };
 		83A7BD5E248ADD980055F60B /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
-		83E3EFAC2489FC5E009B33CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Data/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		83DC3C402492318D005B4FD1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../configurations/davide/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		843953F837922635D5DC297C /* Pods-BiciLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BiciLive.release.xcconfig"; path = "Target Support Files/Pods-BiciLive/Pods-BiciLive.release.xcconfig"; sourceTree = "<group>"; };
 		8DDB267AB3FABA3497F84412 /* libPods-BiciLive.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BiciLive.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FE85B8C7C1E0FB9A280B860 /* libPods-BiciLive-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BiciLive-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91C31EF7D60B4FF98A728847 /* oswald_extralight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = oswald_extralight.ttf; path = ../src/assets/font/oswald_extralight.ttf; sourceTree = "<group>"; };
 		99C619F4F5334B5FB12F51FA /* unisans_heavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = unisans_heavy.ttf; path = ../src/assets/font/unisans_heavy.ttf; sourceTree = "<group>"; };
+		9B075B27E3024D60A2E3B00C /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		9F26058633274F40B5006C35 /* unisansbook.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = unisansbook.ttf; path = ../src/assets/font/unisansbook.ttf; sourceTree = "<group>"; };
 		9F60D02D857C427AA921E89A /* unisans_book.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = unisans_book.ttf; path = ../src/assets/font/unisans_book.ttf; sourceTree = "<group>"; };
 		A091566DD9F04D5F99BACB23 /* Oswald-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Oswald-Regular.ttf"; path = "../src/assets/font/Oswald-Regular.ttf"; sourceTree = "<group>"; };
 		AB81F48624AA4B1399E12F21 /* uni_sans_bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = uni_sans_bold.ttf; path = ../src/assets/font/uni_sans_bold.ttf; sourceTree = "<group>"; };
+		AD95DCF9694C41B78630C180 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		C11264D1164845F5833D0CA5 /* Oswald-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Oswald-ExtraLight.ttf"; path = "../src/assets/font/Oswald-ExtraLight.ttf"; sourceTree = "<group>"; };
 		C27468EFB5DC4996BE4E674E /* oswald_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = oswald_medium.ttf; path = ../src/assets/font/oswald_medium.ttf; sourceTree = "<group>"; };
 		C3A1564E7C90C5E224665F21 /* libPods-BiciLive-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BiciLive-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3DEEF9143234AB19E2AA0E1 /* unisansregular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = unisansregular.ttf; path = ../src/assets/font/unisansregular.ttf; sourceTree = "<group>"; };
 		D3EE0AD382A4EAE18CD5C7B9 /* libPods-BiciLiveTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BiciLiveTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8466CEAA161461F89A511FB /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		D956A1A2ED75FD9FA278ACDC /* Pods-BiciLive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BiciLive.debug.xcconfig"; path = "Target Support Files/Pods-BiciLive/Pods-BiciLive.debug.xcconfig"; sourceTree = "<group>"; };
 		DAFEF56B61C14FF496E07596 /* oswald_light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = oswald_light.ttf; path = ../src/assets/font/oswald_light.ttf; sourceTree = "<group>"; };
+		E660CF2280324ADCB4A7BBAF /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		ED23840FDD4E47C4A3985B52 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F1446065CE9E4FD6B6576EFD /* Oswald-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Oswald-SemiBold.ttf"; path = "../src/assets/font/Oswald-SemiBold.ttf"; sourceTree = "<group>"; };
 		F1D79E722A864ACB830EC141 /* uni_sans_semibold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = uni_sans_semibold.ttf; path = ../src/assets/font/uni_sans_semibold.ttf; sourceTree = "<group>"; };
+		F941736EA8D549598930BF73 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		FA4313D53AB84B5082CB5284 /* oswald_bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = oswald_bold.ttf; path = ../src/assets/font/oswald_bold.ttf; sourceTree = "<group>"; };
 		FA5398C9A83F42D9B5D892C0 /* uni_sans_regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = uni_sans_regular.ttf; path = ../src/assets/font/uni_sans_regular.ttf; sourceTree = "<group>"; };
+		FC8E4E7052434A478DB5F804 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,7 +187,7 @@
 		13B07FAE1A68108700A75B9A /* BiciLive */ = {
 			isa = PBXGroup;
 			children = (
-				83E3EFAC2489FC5E009B33CE /* GoogleService-Info.plist */,
+				83DC3C402492318D005B4FD1 /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -271,6 +287,22 @@
 				03E38A62DD7246D089ED5451 /* uni_sans_heavy.ttf */,
 				FA5398C9A83F42D9B5D892C0 /* uni_sans_regular.ttf */,
 				F1D79E722A864ACB830EC141 /* uni_sans_semibold.ttf */,
+				ED23840FDD4E47C4A3985B52 /* AntDesign.ttf */,
+				6B08F38E81624C8ABB1B94DA /* Entypo.ttf */,
+				390C034824E74CF09DE6D8D4 /* EvilIcons.ttf */,
+				AD95DCF9694C41B78630C180 /* Feather.ttf */,
+				4CFB901745EE49FDA6A3763C /* FontAwesome.ttf */,
+				1BDEAED3089C41BDAFB26D57 /* FontAwesome5_Brands.ttf */,
+				3E6503D034CE494D9DD3BFEB /* FontAwesome5_Regular.ttf */,
+				5D82E85DF410400D97DFD2BB /* FontAwesome5_Solid.ttf */,
+				FC8E4E7052434A478DB5F804 /* Fontisto.ttf */,
+				F941736EA8D549598930BF73 /* Foundation.ttf */,
+				19F36680A3B94B1A9D86F240 /* Ionicons.ttf */,
+				E660CF2280324ADCB4A7BBAF /* MaterialCommunityIcons.ttf */,
+				9B075B27E3024D60A2E3B00C /* MaterialIcons.ttf */,
+				5A8E3177870E4BFAB0E05D94 /* Octicons.ttf */,
+				D8466CEAA161461F89A511FB /* SimpleLineIcons.ttf */,
+				3981732019C64CFB936452DE /* Zocial.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -421,7 +453,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				83E3EFAD2489FC5E009B33CE /* GoogleService-Info.plist in Resources */,
+				83DC3C412492318D005B4FD1 /* GoogleService-Info.plist in Resources */,
 				140E77C7B7B649A2A7F8C2D4 /* oswald_bold.ttf in Resources */,
 				201D645B42D24F05971B6649 /* oswald_extralight.ttf in Resources */,
 				C0D416862D4242DAA6899607 /* oswald_heavy_regular.ttf in Resources */,

@@ -6,7 +6,7 @@ import {Actions} from 'react-native-router-flux';
 import {useStores} from 'hooks/Utils';
 import Images from 'res/Images';
 import {BlueButton, GreenButton, WhiteButton} from 'components/controls/Button';
-import {Header,AdvResumeBig, CheckBox, Divider, Price, Slider, Step} from 'components/controls/BaseUtils';
+import {Header,AdvResumeBig, CheckBox, Divider, Price, Slider, Step, ErrorView} from 'components/controls/BaseUtils';
 import {BaseSelect, BaseTextFilter, BaseTextInput} from 'components/controls/BaseTextInput';
 import {useActionSheet} from '@expo/react-native-action-sheet';
 import {toJS} from 'mobx';
@@ -45,7 +45,7 @@ const FinderItem = props => {
         <View style={{marginLeft: 10}}>
           <Price left={range[0]} right={range[1]} symbol={props.data.um}/>
           <Slider min={props.data.min_val} max={props.data.max_val} values={range} step={props.data.step}
-                  onChange={(e) => onChange(e)}/>
+                  onChangeFinish={(e) => onChange(e)} onChange={(e) => setRange(e)}/>
         </View>
       }
       <Divider size={10}/>
@@ -180,14 +180,23 @@ const BikeFinderCategory = props => {
     return (
       <View style={{flex: 1}}>
         <Header>
-          <TouchableOpacity onPress={() => Actions.pop()}>
+          <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => Actions.pop()}>
             <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
-                   style={{width: scale(37), height: verticalScale(30), resizeMode: 'contain', marginTop: verticalScale(10)}}/></TouchableOpacity>
+                   style={{
+                     position: 'absolute',
+                     left: 0,
+                     width: scale(37),
+                     height: verticalScale(23),
+                     resizeMode: 'contain',
+                     marginTop: verticalScale(14),
+                   }}/>
+            <Text style={{textAlign: 'center', fontSize: 19, lineHeight: 49}}>EBIKE FINDER</Text>
+          </TouchableOpacity>
         </Header>
         <Container ref={_container}>
           <View style={{paddingLeft: 13,paddingHorizontal: 10}}>
-            <Title size={'30px'} color={themeProp('colorThird')} width={'35px'}>EBIKE FINDER</Title>
-            <Title size={'0'} color={toJS(category.color)} width={'50px'}>{toJS(category.title)}</Title>
+            {/*<Title size={'30px'} color={themeProp('colorThird')} width={'35px'}>EBIKE FINDER</Title>*/}
+            <Title size={5} color={toJS(category.color)} width={'50px'}>{toJS(category.title)}</Title>
             {uiData.map((item,index) => {
               if (item.id === 'PAGED_SLIDER' && Object.keys(item.content).length) {
                 return <View><PageSlider key={`key${index}`} data={item}/><Divider size={20}/></View>

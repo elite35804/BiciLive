@@ -41,7 +41,7 @@ class AlertStore {
         this.show(Types.warn, message, title);
     }
 
-    showSuccess(title, message){
+    showSuccess(message, title){
         this.show(Types.success, message, title);
     }
 }

@@ -1,6 +1,7 @@
 const SceneKeys = {
     home: 'Home',
     splash: 'Splash',
+    login: 'Login',
     register: 'Register',
     welcome: 'Welcome',
     bikeFinder: 'BikeFinder',
@@ -15,6 +16,7 @@ const SceneKeys = {
     newsFinder: 'NewsFinder',
     dashboard: 'Dashboard',
     brand: 'Brand',
+    webViewer: 'WebViewer',
     eBike: 'EBike',
     user: 'User',
 };

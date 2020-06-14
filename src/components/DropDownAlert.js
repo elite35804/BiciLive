@@ -3,6 +3,7 @@ import { useStores } from '../hooks/Utils';
 import DropdownAlert from 'react-native-dropdownalert';
 import { useTheme } from 'styled-components/native';
 import { when } from 'mobx';
+import {observer} from 'mobx-react';
 
 const baseStyle = {
     textAlign: 'left',
@@ -45,10 +46,10 @@ const Alert = props => {
             messageNumOfLines={0}
             titleStyle={titleStyle}
             messagesStyle={messaageStyle}
-            successColor='#000'
+            successColor='#3c2deb'
             onClose={ alert.hide }/>
     )
 };
 
 
-export default Alert;
+export default observer(Alert);

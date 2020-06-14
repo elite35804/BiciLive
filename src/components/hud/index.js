@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import LoadingHud from './Hud';
 import { useStores } from '../../hooks/Utils';
 import { autorun } from 'mobx';
+import {observer} from 'mobx-react';
 
 /**
  * [MobX based HUD]
@@ -30,4 +31,4 @@ const Hud = props => {
     )
 };
 
-export default Hud;
+export default observer(Hud);

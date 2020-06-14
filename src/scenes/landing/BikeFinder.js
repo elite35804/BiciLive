@@ -4,11 +4,13 @@ import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {Actions} from 'react-native-router-flux';
 import {useStores} from 'hooks/Utils';
+import {Header} from 'components/controls/BaseUtils'
 import {BaseTextInput, BaseSelect} from 'components/controls/BaseTextInput';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
 import Images from 'res/Images';
 import {toJS} from 'mobx';
 import { get } from 'lodash';
+import {scale, verticalScale} from 'react-native-size-matters';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -32,12 +34,26 @@ const BikeFinder = props => {
     }
   };
   return (
-    <View style={{flex:1}}>
+    <View>
+      <Header>
+        <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => Actions.pop()}>
+          <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
+                 style={{
+                   position: 'absolute',
+                   left: 0,
+                   width: scale(37),
+                   height: verticalScale(23),
+                   resizeMode: 'contain',
+                   marginTop: verticalScale(14),
+                 }}/>
+          <Text style={{textAlign: 'center', fontSize: 19, lineHeight: 49}}>EBIKE FINDER</Text>
+        </TouchableOpacity>
+      </Header>
       <Container>
         <Divider size={25}/>
         {/*<CategoryText>TUTTIIMODELLI</CategoryText>*/}
         {get(staticData, 'data.search_landing', []).map((item, i) => {
-          if (i === 0 || i === 1 || i === 3) return <View><Divider size={15}/><Title size={'0'} color={item.colore}>{item.titolo}</Title></View>
+          if (i === 1 || i === 3) return <View><Divider size={15}/><Title size={'0'} color={item.colore}>{item.titolo}</Title></View>
           return (<View>
             <TouchableOpacity key={i} onPress={() => goToCategory(i, item.titolo, item.colore)}><Title size={'0'} color={item.colore}>{item.titolo}</Title></TouchableOpacity>
           </View>)
@@ -53,6 +69,7 @@ const BikeFinder = props => {
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
     padding-left: 13px;
+    marginTop: ${verticalScale(50)}
 `;
 
 const Bottom = styled(TouchableOpacity)`

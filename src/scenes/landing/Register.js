@@ -1,28 +1,113 @@
-import React, {useState} from 'react';
-import {Image, View, TouchableOpacity, Text, ScrollView} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Image, View, TouchableOpacity, Text, ScrollView, Platform, BackHandler} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import { Actions } from 'react-native-router-flux';
 import {useStores} from 'hooks/Utils';
-import {BaseTextInput, BaseSelect } from 'components/controls/BaseTextInput';
+import {BaseTextInput, BaseSelect, CustomSelect } from 'components/controls/BaseTextInput';
 import BaseSelectBox from 'components/controls/BaseSelectBox';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
+import {cities, sesso} from '../../res/data';
+import {get} from 'lodash';
+import {useActionSheet} from '@expo/react-native-action-sheet';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
+const SelectElement = (props) => {
+  const [brand, setBrand] = useState();
+  const { auth } = useStores();
+  const {showActionSheetWithOptions} = useActionSheet();
+  const data =  get(props, 'data', []);
+  const _onOpenActionSheet = () => {
+    const options = ['Cancel', ...data];
+    const cancelButtonIndex = 0;
+    showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex
+      },
+      buttonIndex => {
+        if (buttonIndex !== 0) {
+          auth.setParam(get(props, 'value', ''), data[buttonIndex - 1]);
+          setBrand(data[buttonIndex - 1]);
+          // Do something here depending on the button index selected
+        }
+
+      },
+    );
+  };
+  return <BaseSelect required={true} text={get(props, 'title', '').toUpperCase()} value={brand}
+                     onPress={() => _onOpenActionSheet()}/>;
+};
 
 const Register = props => {
-
+  const { auth, alert } = useStores();
   const [checked, setChecked] = useState(true);
   const [checked1, setChecked1] = useState(true);
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [show, setShow] = useState(false);
+  const [displayDate, setDisplayDate] = useState(null);
+  useEffect(() => {
+    const backAction = () => {
+      console.log('back button clicked');
+      Actions.landing();
+      return true;
+    };
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+    return () => backHandler.remove();
+  });
+  const ageData = [];
+  for(let item = 1920; item <= 2020; item++) {
+    ageData.push(item.toString());
+  }
+  console.log('ageE===', ageData);
+
+  const onDateChange = (event, selectedDate)  => {
+    setShow(Platform.OS === 'ios');
+    setDate(selectedDate);
+    setDisplayDate(selectedDate.toString().substring(0,10));
+    auth.setParam('eta', selectedDate);
+    console.log('======', event, selectedDate);
+  };
+
+
+
+  const onRegister = () => {
+    for (let [key, value] of Object.entries(auth.registerData)) {
+      if (key === 'email' && !validationEmail(value)) {
+        alert.showWarn("Questo campo è obbligatorio", 'Email'.toUpperCase())
+        return;
+      }
+      if (value === '') {
+        alert.showWarn("Questo campo è obbligatorio", key.toUpperCase())
+        return;
+      }
+
+    }
+    auth.register();
+    Actions.Welcome();
+  };
+
+  const validationEmail = email => {
+    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})+$/;
+    return re.test(String(email).toLowerCase());
+  };
+
   return (
     <Container>
-      <Title>REGISRAZIONE</Title>
+      <Title>REGISTRAZIONE</Title>
       <View style={{alignItems: 'center'}}>
-        <BaseTextInput placeholder="EMAIL"/>
-        <BaseTextInput placeholder="EMAIL"/>
-        <BaseTextInput placeholder="EMAIL"/>
-        <BaseTextInput placeholder="EMAIL"/>
-        <BaseSelect text="EMAIL"/>
-        <BaseSelect text="EMAIL"/>
-        <BaseSelect text="EMAIL"/>
+        <BaseTextInput required={true} placeholder="EMAIL" onChange = {(value) => auth.setParam('email', value)}/>
+        <BaseTextInput required={true} isPassword={true} placeholder="PASSWORD" onChange = {(value) => auth.setParam('password', value)}/>
+        <BaseTextInput required={true} placeholder="NOME" onChange = {(value) => auth.setParam('nome', value)}/>
+        <BaseTextInput required={true} placeholder="COGNOME" onChange = {(value) => auth.setParam('cognome', value)}/>
+        {/*<BaseTextInput placeholder="CITTÀ" onChange = {(value) => auth.setParam('citta', value)}/>*/}
+        <SelectElement title="PROVINCIA" value="provincia" data={cities}/>
+        <SelectElement title="ANNO DI NASCITA" value="eta" data={ageData}/>
+        {/*<BaseSelect text="ETA" value={displayDate} onPress={() => setShow(true)}/>*/}
+        <SelectElement data={sesso} value= "sesso" title="SESSO"/>
       </View>
       <Divider size="60px" />
       <BaseSelectBox checked={checked} onPress={() => setChecked(!checked)} text="
@@ -31,8 +116,18 @@ const Register = props => {
       <BaseSelectBox checked={checked1} onPress={() => setChecked1(!checked1)} text="
       Lorem Ipsum dolor sit amet, consecteur adipiscing eUt,  sed do elusmod tempor
       "/>
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode='date'
+          is24Hour={true}
+          display="default"
+          onChange={onDateChange}
+        />
+      )}
       <Bottom>
-        <WhiteButton onPress={() => Actions.Welcome()}>REGISTRATI</WhiteButton>
+        <WhiteButton onPress={() => onRegister()}>REGISTRATI</WhiteButton>
       </Bottom>
     </Container>
   );
@@ -50,10 +145,11 @@ const Divider = styled(View)`
 
 const Title = styled(Text)`
   font-size: 35px;
-  color: ${themeProp('colorPrimary')};
+  color: #7cd9d0
   font-family: ${themeProp('fontUniHeavy')};
   margin-top: 40px;
   padding-left: 8px;
+  margin-bottom: 10px
 `;
 
 const Bottom = styled(TouchableOpacity)`

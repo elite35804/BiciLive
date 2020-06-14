@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Image, View, TouchableOpacity, Text, ScrollView, Platform, Linking} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Image, View, TouchableOpacity, Text, ScrollView, Platform, Linking, Image as DefaultImage} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
@@ -8,6 +8,7 @@ import Images from 'res/Images';
 import {BlueButton, WhiteButton, GreenButton} from 'components/controls/Button';
 import ShareTooltip from 'components/controls/ShareTooltip';
 import {
+  Header,
   Step,
   Divider,
   CheckBox,
@@ -17,7 +18,8 @@ import {
   ListBikeInfo,
   DivideLine,
   Detail,
-  DetailMore
+  DetailMore,
+  ErrorView
 } from 'components/controls/BaseUtils';
 import {BaseTextInput, BaseSelect, BaseTextFilter} from 'components/controls/BaseTextInput';
 import {Oswald, UniSansBold, UniSansBook} from '../../utils/fontFamily';
@@ -27,12 +29,107 @@ import {get} from 'lodash';
 import Swiper from 'react-native-swiper';
 import StepIndicator from 'react-native-step-indicator';
 import { SwipeListView } from 'react-native-swipe-list-view';
-import {moderateScale} from 'react-native-size-matters';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import axios from 'axios';
 const isIOS = Platform.OS === "ios";
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
+const RelatedElements = (item, index) => {
+  const {bikeData} = useStores();
+  const goToBike = url => {
+    bikeData.clearData();
+    bikeData.getData(url);
+    Actions.BikePagePremium();
+  };
+  return (
+    <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10}}>
+      {item.map((item0, index) =>
+        <View key={index} style={{width: '33%', borderLeftColor: '#c9c3c5', borderLeftWidth: 7, paddingHorizontal: 5}}>
+          <TouchableOpacity onPress={() => goToBike(item0.url)}><Image style={{width: '100%', height: 60}}
+                                                                       source={{uri: item0.img_url}}/></TouchableOpacity>
+          <Text style={{
+            color: '#909090',
+            fontSize: 15,
+            fontFamily: isIOS ? 'Oswald-Bold' : 'oswald_bold',
+            marginTop: 10,
+          }}>{item0.brand}</Text>
+          <Text style={{
+            color: item0.color,
+            fontSize: 15,
+            fontFamily: isIOS ? 'Oswald-Bold' : 'oswald_bold',
+            marginTop: -5,
+          }}>{item0.modello}</Text>
+        </View>,
+      )}
+    </View>
+  );
+};
+const RelatedGroup = props => {
+  const {data} = props;
+  const {brandData} = useStores();
+  let _swiper = React.useRef(null);
+  let elementArray = [];
+  Object.entries(data).forEach(([index, value]) => {
+    if (index.includes('img_url')) {
+      let number = index.substring(7);
+      let elementData = {
+        key: index,
+        img_url: data[`img_url${number}`],
+        img_date: data[`img_date${number}`],
+        brand: data[`brand${number}`],
+        modello: data[`modello${number}`],
+        url: data[`url${number}`],
+        color: data[`color${number}`],
+      };
+      elementArray.push(elementData);
+    }
+  });
+  let groupedArray = [];
+  let tempArray = [];
+  elementArray.forEach((item, index) => {
+    tempArray.push(item);
+    if (index % 3 === 2 || index === elementArray.length - 1) {
+      groupedArray.push(tempArray);
+      tempArray = [];
+    }
+  });
+  const total = groupedArray.length;
+  return (
+    <View>
+      <View style={{
+        backgroundColor: '#333333',
+        width: '100%',
+        height: 35,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginTop: 8,
+        paddingHorizontal: 8,
+      }}>
+        <Text style={{
+          fontSize: 16,
+          color: '#53dcd0',
+          fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',
+          marginTop: 4,
+        }}>{get(props, 'data.titolo', '')}</Text>
+        {/*<TouchableOpacity><Image width={'100%'} height={'100%'} source={Images.icons.ic_close_sm}/></TouchableOpacity>*/}
+      </View>
+      <View style={{height: 180}}>
+        <Swiper ref={_swiper} showsPagination={false} index={brandData.position} autoplay={true}
+                autoplayTimeout={4}
+                onIndexChanged={(index) => brandData.setPosition(index)}>
+          {groupedArray.map((item, index) => RelatedElements(item, index))}
+        </Swiper>
+        <View style={{width: '115%', alignSelf: 'center'}}>
+          <Stepper total={total} onPress={p => _swiper.current.scrollBy(p, true)}/>
+        </View>
+      </View>
+    </View>
+  );
+
+};
 const Expandible_Wrapper = props => {
   const [isCollapse, setCollapse] = useState(false);
   return <View>
@@ -78,6 +175,9 @@ const Expandible_Wrapper = props => {
               rightOpenValue={-80}
             />
             <DivideLine/></View>
+        if (item.id === 'RELATED_GROUP') {
+          return <View><RelatedGroup key={`key${index}`} data={item}/><Divider size={10}/><DivideLine/></View>
+        }
       })}
     </View>
     }
@@ -95,29 +195,29 @@ const ImageReel = (props) => {
   return (
     <View>
     <CategoryView>
-      <TouchableOpacity key="1" onPress={() => {
+      {props.data.img1 && <TouchableOpacity key="1" onPress={() => {
         goToBrand(get(props, 'data.url1', ''));
       }}><Image
         style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
-        source={{uri: get(props, 'data.img1', '')}}/></TouchableOpacity>
-      <TouchableOpacity key="2" onPress={() => goToBrand(get(props, 'data.url2', ''))}><Image
+        source={{uri: get(props, 'data.img1', '')}}/></TouchableOpacity>}
+      {props.data.img2 && <TouchableOpacity key="2" onPress={() => goToBrand(get(props, 'data.url2', ''))}><Image
         style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
-        source={{uri: get(props, 'data.img2', '')}}/></TouchableOpacity>
-      <TouchableOpacity key="3" onPress={() => goToBrand(get(props, 'data.url3', ''))}><Image
+        source={{uri: get(props, 'data.img2', '')}}/></TouchableOpacity>}
+      {props.data.img3 &&  <TouchableOpacity key="3" onPress={() => goToBrand(get(props, 'data.url3', ''))}><Image
         style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
-        source={{uri: get(props, 'data.img3', '')}}/></TouchableOpacity>
+        source={{uri: get(props, 'data.img3', '')}}/></TouchableOpacity>}
     </CategoryView>
-      <CategoryView>
-        <TouchableOpacity key="4" onPress={() => goToBrand(get(props, 'data.url4', ''))}><Image
+      {props.data.img4 &&<CategoryView>
+        {props.data.img4 && <TouchableOpacity key="4" onPress={() => goToBrand(get(props, 'data.url4', ''))}><Image
           style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
-          source={{uri: get(props, 'data.img4', '')}}/></TouchableOpacity>
-        <TouchableOpacity key="5" onPress={() => goToBrand(get(props, 'data.url5', ''))}><Image
+          source={{uri: get(props, 'data.img4', '')}}/></TouchableOpacity>}
+        {props.data.img5 && <TouchableOpacity key="5" onPress={() => goToBrand(get(props, 'data.url5', ''))}><Image
           style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
-          source={{uri: get(props, 'data.img5', '')}}/></TouchableOpacity>
-        <TouchableOpacity key="6" onPress={() => goToBrand(get(props, 'data.url6', ''))}><Image
+          source={{uri: get(props, 'data.img5', '')}}/></TouchableOpacity>}
+        {props.data.img6 && <TouchableOpacity key="6" onPress={() => goToBrand(get(props, 'data.url6', ''))}><Image
           style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
-          source={{uri: get(props, 'data.img6', '')}}/></TouchableOpacity>
-      </CategoryView>
+          source={{uri: get(props, 'data.img6', '')}}/></TouchableOpacity>}
+      </CategoryView>}
     </View>
   );
 };
@@ -181,73 +281,121 @@ const PageSlider = (props) => {
     </View>
   );
 };
+
+const ShareBlock = props => {
+  const {auth} = useStores();
+  const [isLike, setLike] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        axios.get(
+          `http://biciapp.sepisolutions.com${props.data.like_url}`,
+          {
+            headers: {
+              'Authorization' : `Bearer ${auth.token}`
+            }
+          }
+        ).then(res => {
+          console.log('======', res.data);
+          if (res.data.err_code === "ERR_OK") {
+            setLike(res.data.status)
+          }
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    fetchData();
+  }, []);
+  return <View><ShareView>
+    <TouchableOpacity onPress={() => setLike(!isLike)}><Image width={'100%'} height={'100%'} source={isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart} /></TouchableOpacity>
+    <ShareTooltip/>
+  </ShareView>
+    <Divider size={15}/>
+  </View>
+};
+
+const AdBlock = props => {
+  const {web} = useStores();
+  const openWebViewer = (url) => {
+    web.url = url;
+    Actions.WebViewer();
+  };
+  return <View><Divider size={30}/><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image style={{width: '100%', height: 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>
+};
 const BrandPagePremium = props => {
   const {brandData} = useStores();
   // const [titleData, setTitleData] = useState({});
-  const uiData = toJS(brandData.data);
-  const [isLike, setLike] = useState(false);
+
+
   const {bikeData} = useStores();
-  if (Object.keys(uiData).length !== 0) {
-    let titleData = {};
-    console.log('111111==========', uiData);
-    if (uiData[0].id === "TITLE") {
-      titleData = uiData.shift();
-    }
-    // setTitleData(uiData.shift());
-    console.log('==========', uiData, titleData);
-    const goToBike = url => {
-      bikeData.clearData();
-      bikeData.getData(url);
-      Actions.BikePagePremium();
-    }
-    const openUrl = (url) => {
-      Linking.canOpenURL(url).then(supported => {
-        if (supported) {
-          Linking.openURL(url);
-        } else {
-          console.log("Don't know how to open URI: " + this.props.url);
-        }
-      });
-    };
-    return (
-      <Container>
-        <View style={{paddingHorizontal: 10, marginTop: 20}}>
-          {Object.keys(titleData).length !== 0 && <TitleText color={get(titleData, 'colore', '#000000')}>{get(titleData, 'titolo', 'KOGA')}</TitleText>}
-          {uiData.map((item, index) => {
-            if (item.id === "TITLE") return  <View><Divider size={-10}/><CategoryText color={item.colore}>{item.titolo}</CategoryText></View>
-            if (item.id === "SHARE_BLOCK") return <View><ShareView>
-              <TouchableOpacity onPress={() => setLike(!isLike)}><Image width={'100%'} height={'100%'} source={isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart} /></TouchableOpacity>
-              <ShareTooltip/>
-            </ShareView>
-              <Divider size={15}/>
-            </View>
-            if (item.id === "EXPANDIBLE_WRAPPER_BADGE") return <View><Expandible_Wrapper key={index} data={item}/><Divider size={5}/></View>
-            if (item.id === "IMAGE_REEL") return <ImageReel key={`key${index}`} data={item}/>
-            if (item.id === "BIKE_RESUME_SMALL") return <View><ListBikeInfo key={index} data={item} goToBike={goToBike}/></View>
-            if (item.id === "BIKE_RESUME_BIG") return <View><Divider size={30}/><MainBikeInfo key={index} data={item} goToBike={goToBike}/><Divider size={60}/></View>
-            if (item.id === "BRAND_LOGO_BIG")
-              return <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                <Image
-                  style={{width: 200, height: 200, resizeMode: 'contain', marginTop: -30}}
-                  source={{uri: get(item, 'img', '')}}/>
-                {/*<Image width={'100%'} height={'100%'} source={Images.background.haibike_lg} />*/}
-                <Text style={{color: themeProp('colorDescription'), fontSize: 15, marginTop: -30, fontFamily: UniSansBook,lineHeight: 20}}>
-                  {item.text}
-                </Text>
-              </View>
-            if (item.id === 'AD_BANNER_ENGAGE') {
-              return <View><Divider size={40}/><TouchableOpacity onPress={() => openUrl(item.url)}><Image style={{width: '100%', height: 130}} source={{uri: item.img}}/></TouchableOpacity><Divider size={20}/></View>
-            }
-            if (item.id === 'PAGED_SLIDER') {
-              return <View><PageSlider key={`key${index}`} data={item}/><Divider size={20}/></View>
-            }
-          })}
-          <Divider size={30} />
-        </View>
-      </Container>
-    );
+  const goToBike = url => {
+    bikeData.clearData();
+    bikeData.getData(url);
+    Actions.BikePagePremium();
+  }
+
+  if (brandData.isLoading) {
+    return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><DefaultImage style={{width: moderateScale(70), height: moderateScale(70), resizeMode: 'contain',marginTop: 14}} source={Images.icons.ic_loading}/></View>;
   } else {
-    return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><Image style={{width: 70, height: 70, resizeMode: 'contain',marginTop: 14}} source={Images.icons.ic_loading}/></View>
+    if (brandData.errorIf) {
+      return <ErrorView/>
+    } else {
+      const uiData = toJS(brandData.data);
+      let titleData = {};
+      console.log('111111==========', uiData);
+      if (uiData[0].id === "TITLE") {
+        titleData = uiData.shift();
+      }
+      return (
+        <View>
+          <Header>
+            <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => Actions.pop()}>
+              <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
+                     style={{
+                       position: 'absolute',
+                       left: 0,
+                       width: scale(37),
+                       height: verticalScale(23),
+                       resizeMode: 'contain',
+                       marginTop: verticalScale(14),
+                     }}/>
+              <Text style={{textAlign: 'center', fontSize: 19, lineHeight: 49}}>BRAND PAGE</Text>
+            </TouchableOpacity>
+          </Header>
+        <Container>
+          <View style={{paddingHorizontal: 10, marginTop: 10}}>
+            {Object.keys(titleData).length !== 0 && <TitleText color={get(titleData, 'colore', '#000000')}>{get(titleData, 'titolo', 'KOGA')}</TitleText>}
+            {uiData.map((item, index) => {
+              if (item.id === "TITLE") return  <View><Divider size={-10}/><CategoryText color={item.colore}>{item.titolo}</CategoryText></View>
+              if (item.id === "SHARE_BLOCK") return <ShareBlock data={item}/>
+              if (item.id === "EXPANDIBLE_WRAPPER_BADGE") return <View><Expandible_Wrapper key={index} data={item}/><Divider size={5}/></View>
+              if (item.id === "IMAGE_REEL") return <ImageReel key={`key${index}`} data={item}/>
+              if (item.id === "BIKE_RESUME_SMALL") return <View><ListBikeInfo key={index} data={item} goToBike={goToBike}/></View>
+              if (item.id === "BIKE_RESUME_BIG") return <View><Divider size={30}/><MainBikeInfo key={index} data={item} goToBike={goToBike}/><Divider size={60}/></View>
+              if (item.id === "BRAND_LOGO_BIG")
+                return <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                  <Image
+                    style={{width: 200, height: 200, resizeMode: 'contain', marginTop: -30}}
+                    source={{uri: get(item, 'img', 'http://')}}/>
+                  {/*<Image width={'100%'} height={'100%'} source={Images.background.haibike_lg} />*/}
+                  <Text style={{color: themeProp('colorDescription'), fontSize: 15, marginTop: -30, fontFamily: UniSansBook,lineHeight: 20}}>
+                    {item.text}
+                  </Text>
+                </View>
+              if (item.id === 'AD_BANNER_ENGAGE') {
+                return <AdBlock data={item}/>
+              }
+              if (item.id === 'PAGED_SLIDER') {
+                return <View><PageSlider key={`key${index}`} data={item}/><Divider size={20}/></View>
+              }
+            })}
+            <Divider size={30} />
+          </View>
+        </Container>
+        </View>
+      );
+    }
   }
 
 };
@@ -255,6 +403,7 @@ const BrandPagePremium = props => {
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
     margin-bottom: 10px;
+    marginTop: ${verticalScale(50)}
 `;
 
 const Badge = styled(View)`

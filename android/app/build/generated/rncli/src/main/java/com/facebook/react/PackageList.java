@@ -16,6 +16,8 @@ import com.bicilive.R;
 
 // @react-native-community/art
 import com.reactnativecommunity.art.ARTPackage;
+// @react-native-community/datetimepicker
+import com.reactcommunity.rndatetimepicker.RNDateTimePickerPackage;
 // @react-native-community/google-signin
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 // @react-native-firebase/analytics
@@ -30,6 +32,8 @@ import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.horcrux.svg.SvgPackage;
 // react-native-vector-icons
 import com.oblador.vectoricons.VectorIconsPackage;
+// react-native-webview
+import com.reactnativecommunity.webview.RNCWebViewPackage;
 // react-native-reanimated
 import com.swmansion.reanimated.ReanimatedPackage;
 // react-native-screens
@@ -80,6 +84,7 @@ public class PackageList {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(mConfig),
       new ARTPackage(),
+      new RNDateTimePickerPackage(),
       new RNGoogleSigninPackage(),
       new ReactNativeFirebaseAnalyticsPackage(),
       new ReactNativeFirebaseAppPackage(),
@@ -87,6 +92,7 @@ public class PackageList {
       new RNGestureHandlerPackage(),
       new SvgPackage(),
       new VectorIconsPackage(),
+      new RNCWebViewPackage(),
       new ReanimatedPackage(),
       new RNScreensPackage()
     ));

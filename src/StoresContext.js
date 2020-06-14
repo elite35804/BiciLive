@@ -9,6 +9,9 @@ import {
     BrandStore,
     BikeStore,
     BikeSearchStore,
+    AuthStore,
+    WebViewStore,
+    QuestionStore
 } from './stores';
 // Import stores here.
 
@@ -22,6 +25,9 @@ const store = {
     brandData: new BrandStore(),
     bikeData: new BikeStore(),
     bikeSearch: new BikeSearchStore(),
+    auth: new AuthStore(),
+    web: new WebViewStore(),
+    question: new QuestionStore(),
 };
 
 const StoresContext = React.createContext(store);

@@ -6869,12 +6869,13 @@ public final class R {
     public static final int src_res_images_loading=0x7f07011e;
     public static final int src_res_images_loghi06=0x7f07011f;
     public static final int src_res_images_logo=0x7f070120;
-    public static final int src_res_images_mountainbikebiciliv=0x7f070121;
-    public static final int src_res_images_triangle=0x7f070122;
-    public static final int src_res_images_triangledown=0x7f070123;
-    public static final int test_custom_background=0x7f070124;
-    public static final int tooltip_frame_dark=0x7f070125;
-    public static final int tooltip_frame_light=0x7f070126;
+    public static final int src_res_images_logo1=0x7f070121;
+    public static final int src_res_images_mountainbikebiciliv=0x7f070122;
+    public static final int src_res_images_triangle=0x7f070123;
+    public static final int src_res_images_triangledown=0x7f070124;
+    public static final int test_custom_background=0x7f070125;
+    public static final int tooltip_frame_dark=0x7f070126;
+    public static final int tooltip_frame_light=0x7f070127;
   }
   public static final class id {
     public static final int ALT=0x7f080000;
@@ -23916,10 +23917,11 @@ public final class R {
     public static final int com_facebook_profile_picture_view_com_facebook_preset_size=1;
   }
   public static final class xml {
-    public static final int rn_dev_preferences=0x7f120000;
-    public static final int standalone_badge=0x7f120001;
-    public static final int standalone_badge_gravity_bottom_end=0x7f120002;
-    public static final int standalone_badge_gravity_bottom_start=0x7f120003;
-    public static final int standalone_badge_gravity_top_start=0x7f120004;
+    public static final int file_provider_paths=0x7f120000;
+    public static final int rn_dev_preferences=0x7f120001;
+    public static final int standalone_badge=0x7f120002;
+    public static final int standalone_badge_gravity_bottom_end=0x7f120003;
+    public static final int standalone_badge_gravity_bottom_start=0x7f120004;
+    public static final int standalone_badge_gravity_top_start=0x7f120005;
   }
 }

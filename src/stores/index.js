@@ -6,6 +6,9 @@ import CategoryStore from './CategoryStore'
 import SwiperState from './SwiperState'
 import BrandStore from './BrandStore';
 import BikeStore from './BikeStore';
-import BikeSearchStore from './BikeSearchStore'
+import BikeSearchStore from './BikeSearchStore';
+import AuthStore from './AuthStore';
+import WebViewStore from './WebViewStore'
+import QuestionStore from './QuestionStore';
 
-export { AlertStore, HudStore, StaticStore, HomeStore, CategoryStore, SwiperState, BrandStore, BikeStore, BikeSearchStore };
+export { AlertStore, HudStore, StaticStore, HomeStore, CategoryStore, SwiperState, BrandStore, BikeStore, BikeSearchStore, AuthStore, WebViewStore, QuestionStore};

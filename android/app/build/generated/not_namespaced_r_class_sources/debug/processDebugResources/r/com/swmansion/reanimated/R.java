@@ -652,8 +652,8 @@ public final class R {
         public static final int notification_tile_bg = 0x7f0700cf;
         public static final int notify_panel_notification_icon_bg = 0x7f0700d0;
         public static final int redbox_top_border_background = 0x7f0700d1;
-        public static final int tooltip_frame_dark = 0x7f070125;
-        public static final int tooltip_frame_light = 0x7f070126;
+        public static final int tooltip_frame_dark = 0x7f070126;
+        public static final int tooltip_frame_light = 0x7f070127;
     }
     public static final class id {
         private id() {}
@@ -1864,6 +1864,6 @@ public final class R {
     public static final class xml {
         private xml() {}
 
-        public static final int rn_dev_preferences = 0x7f120000;
+        public static final int rn_dev_preferences = 0x7f120001;
     }
 }
