@@ -44,12 +44,38 @@ import {toJS} from 'mobx';
 import Tooltip from 'rn-tooltip';
 import CustomTooltip from 'components/controls/CustomTooltip';
 import {moderateScale, verticalScale, scale} from 'react-native-size-matters';
+import {LoginButton, ShareDialog} from 'react-native-fbsdk';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
 const isIOS = Platform.OS === 'ios';
 
+const shareLinkWithShareDialog = () => {
+  const shareLinkContent = {
+    contentType: 'link',
+    contentUrl: 'http://biciapp.sepisolutions.com/z-content/images/ebike/r-raymon/wfmXeuPBAWf1QiZijXxa4UlqdtnKgNeG_320.jpg',
+    contentDescription: 'Facebook sharing is easy!'
+  };
+  ShareDialog.canShow(shareLinkContent).then(
+    function(canShow) {
+      if (canShow) {
+        return ShareDialog.show(shareLinkContent);
+      }
+    }
+  ).then(
+    function(result) {
+      if (result.isCancelled) {
+        alert('Share cancelled');
+      } else {
+        alert('Share success with postId: ' + result.postId);
+      }
+    },
+    function(error) {
+      alert('Share fail with error: ' + error);
+    }
+  );
+}
 const BrandLogo = props => {
   const {brandData} = useStores();
   const goToBrand = (url) => {
@@ -108,7 +134,7 @@ const ShareBlock = props => {
                                                                     source={isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart}/></TouchableOpacity>
           <Image width={'100%'} height={'100%'} source={Images.icons.ic_compare} style={{marginLeft: 25}}/>
         </ShareIcon>
-        <ShareTooltip/>
+        <ShareTooltip onFB={() => shareLinkWithShareDialog()}/>
       </ShareView>
     </View>
   );

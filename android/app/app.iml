@@ -183,17 +183,17 @@
     <orderEntry type="library" name="Gradle: com.android.installreferrer:installreferrer:1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.facebook.fresco:animated-gif:2.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: org.webkit:android-jsc:r245459@aar" level="project" />
-    <orderEntry type="module" module-name="android-react-native-community_art" />
-    <orderEntry type="module" module-name="android-react-native-firebase_analytics" />
-    <orderEntry type="module" module-name="android-react-native-firebase_app" />
-    <orderEntry type="module" module-name="node_modules-react-native-webview-android-react-native-webview" />
-    <orderEntry type="module" module-name="android-react-native-gesture-handler" />
-    <orderEntry type="module" module-name="@react-native-community-datetimepicker-android-react-native-community_datetimepicker~1" />
-    <orderEntry type="module" module-name="android-react-native-community_google-signin" />
-    <orderEntry type="module" module-name="android-react-native-fbsdk" />
+    <orderEntry type="module" module-name="@react-native-community-art-android-react-native-community_art" />
+    <orderEntry type="module" module-name="@react-native-firebase-analytics-android-react-native-firebase_analytics" />
+    <orderEntry type="module" module-name="@react-native-firebase-app-android-react-native-firebase_app" />
+    <orderEntry type="module" module-name="node_modules-react-native-webview-android-react-native-webview~2" />
+    <orderEntry type="module" module-name="node_modules-react-native-gesture-handler-android-react-native-gesture-handler" />
+    <orderEntry type="module" module-name="react-native-community_datetimepicker" />
+    <orderEntry type="module" module-name="@react-native-community-google-signin-android-react-native-community_google-signin" />
+    <orderEntry type="module" module-name="node_modules-react-native-fbsdk-android-react-native-fbsdk" />
     <orderEntry type="module" module-name="react-native-svg" />
-    <orderEntry type="module" module-name="android-react-native-vector-icons" />
-    <orderEntry type="module" module-name="android-react-native-reanimated" />
-    <orderEntry type="module" module-name="android-react-native-screens" />
+    <orderEntry type="module" module-name="react-native-vector-icons-android-react-native-vector-icons" />
+    <orderEntry type="module" module-name="react-native-reanimated-android-react-native-reanimated" />
+    <orderEntry type="module" module-name="react-native-screens-android-react-native-screens" />
   </component>
 </module>

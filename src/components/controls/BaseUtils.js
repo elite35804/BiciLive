@@ -26,7 +26,7 @@ import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
 import ImageZoom from 'react-native-image-pan-zoom';
 import ZoomableImage from 'components/controls/ZoomableImage';
-import PinchZoomImage from 'react-native-pinch-zoom-image';
+import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -238,19 +238,18 @@ const AdvResumeBig = (props) => {
     bikeData.getData(url);
     Actions.BikePagePremium();
   };
-  console.log('height=======', Dimensions.get('window').height, Dimensions.get('window').width);
   const images = [{
     uri: 'http://biciapp.sepisolutions.com' + get(props, 'data.immagine_zoom', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg'),
   }];
   return (
     <View>
-      {/*<ImageView*/}
-        {/*images={images}*/}
-        {/*imageIndex={0}*/}
-        {/*visible={isVisible}*/}
-        {/*onRequestClose={() => setIsVisible(false)}*/}
-        {/*style={{height: 800}}*/}
-      {/*/>*/}
+      <ImageView
+        images={images}
+        imageIndex={0}
+        visible={isVisible}
+        onRequestClose={() => setIsVisible(false)}
+        style={{height: 800}}
+      />
       {/*{isVisible &&*/}
       {/*<ImageZoom cropWidth={1000}*/}
       {/*cropHeight={Dimensions.get('window').height}*/}
@@ -260,30 +259,32 @@ const AdvResumeBig = (props) => {
       {/*source={{uri: 'http://biciapp.sepisolutions.com' + get(props, 'data.immagine_zoom', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg')}}/>*/}
       {/*</ImageZoom>*/}
       {/*}*/}
-      <Modal
-      animationType="slide"
-      visible={isVisible}
-      presentationStyle="fullScreen"
-      onRequestClose={() => {
-      Alert.alert("Modal has been closed.");
-      }}
-      >
-      <View style={{flex: 1}}>
-      <TouchableOpacity onPress={() => setIsVisible(false)}><Text>Close</Text></TouchableOpacity>
-        {/*<TouchableOpacity onPress={() => _image.current.zoom({zoomScale:2.5, animated:true})}><Text>ZOOM</Text></TouchableOpacity>*/}
-        <PinchZoomImage
-          style={{flex:1}}
-          ref={_image}
-        >
-          <Image
-            style={{width:56,height:56, resizeMode: 'contain'}}
-            source={{
-              uri:'http://biciapp.sepisolutions.com' + get(props, 'data.immagine_zoom', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg')
-            }}
-          />
-        </PinchZoomImage>
-      </View>
-      </Modal>
+      {/*<Modal*/}
+      {/*animationType="slide"*/}
+      {/*visible={isVisible}*/}
+      {/*presentationStyle="fullScreen"*/}
+      {/*onRequestClose={() => {*/}
+      {/*Alert.alert("Modal has been closed.");*/}
+      {/*}}*/}
+      {/*>*/}
+      {/*<View style={{flex: 1}}>*/}
+      {/*<TouchableOpacity onPress={() => setIsVisible(false)}><Text>Close</Text></TouchableOpacity>*/}
+        {/*/!*<TouchableOpacity onPress={() => _image.current.zoom({zoomScale:2.5, animated:true})}><Text>ZOOM</Text></TouchableOpacity>*!/*/}
+        {/*<ReactNativeZoomableView*/}
+          {/*maxZoom={15}*/}
+          {/*minZoom={0.5}*/}
+          {/*zoomStep={0.1}*/}
+          {/*initialZoom={1}*/}
+          {/*bindToBorders={true}*/}
+          {/*onZoomAfter={() => {}}*/}
+          {/*pinchToZoomInSensitivity={1}*/}
+          {/*pinchToZoomOutSensitivity={1}*/}
+        {/*>*/}
+          {/*<Text>This is the content</Text>*/}
+          {/*/!*<Image style={{width: 150, height: 150, resizeMode: 'contain'}} source={{uri: `http://biciapp.sepisolutions.com${get(props, 'data.immagine', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg')}`}}/>*!/*/}
+        {/*</ReactNativeZoomableView>*/}
+      {/*</View>*/}
+      {/*</Modal>*/}
 
       <MainInfo>
         <TouchableOpacity onPress={() => !props.productIf ? goToBike(props.data.url) : {}}
@@ -299,7 +300,7 @@ const AdvResumeBig = (props) => {
           }
         </TouchableOpacity>
         {props.productIf ?
-          <TouchableOpacity style={{position: 'absolute', right: 0, top: 200}} onPress={() => {setIsVisible(true);}}><Image
+          <TouchableOpacity style={{position: 'absolute', right: 0, top: 200}} onPress={() => setIsVisible(true)}><Image
             style={{height: moderateScale(27, 0.8), width: moderateScale(27, 0.8), resizeMode: 'contain'}}
             source={Images.icons.ic_zoom_in}/></TouchableOpacity> : <View/>}
         <View style={{marginLeft: 5}}>

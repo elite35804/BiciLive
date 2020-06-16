@@ -1,4 +1,4 @@
-#Fri Jun 12 20:33:27 CST 2020
+#Tue Jun 16 01:37:45 CST 2020
 base.10=/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/transforms/dexMerger/debug/18
 path.37=classes2.dex
 path.36=classes.dex

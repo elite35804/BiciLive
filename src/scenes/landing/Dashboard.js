@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, ScrollView, TouchableOpacity, Image, FlatList} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
@@ -16,19 +16,21 @@ Text.defaultProps.allowFontScaling = false;
 
 
 const Dashboard = props => {
+  const {auth, dashboard} = useStores();
+  const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImlzcyI6ImJpY2lsaXZlLml0In0.eyJ1aWQiOiIxIiwiZW1haWwiOiJhQGIuYyJ9.4SJz8le-RIzeuvDdZXUNpBqtE4MENz6vrA93wEhfqHhuALEsbxYF82bjQa1wq_h17EXw0axaVPHKGuCOo2donA';
   return (
       <Container>
         <Title size={'40px'} color={themeProp('colorPrimary')} width={'35px'}>DASHBOARD</Title>
         <Divider size={20}/>
-        <ItemView onPress={() => Actions.Brand()}>
+        <ItemView onPress={() => {dashboard.getData('brand', auth.token); Actions.Brand()}}>
           <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_sm}/>
           <Title size={'10px'} color={themeProp('colorThird')} width={'35px'}>BRAND</Title>
         </ItemView>
-        <ItemView onPress={() => Actions.EBike()}>
+        <ItemView onPress={() => {dashboard.getData('product', auth.token); Actions.EBike()}}>
           <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_sm}/>
           <Title size={'10px'} color={themeProp('colorThird')} width={'35px'}>EBIKE</Title>
         </ItemView>
-        <ItemView onPress={() => Actions.User()}>
+        <ItemView onPress={() => {dashboard.getData('account', auth.token); Actions.User()}}>
           <Image width={'100%'} height={'100%'} source={Images.icons.ic_user_sm}/>
           <Title size={'10px'} color={themeProp('colorDescription')} width={'35px'}>ACCOUNT</Title>
         </ItemView>

@@ -693,6 +693,13 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@dudigital/react-native-zoomable-view@^1.0.15":
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/@dudigital/react-native-zoomable-view/-/react-native-zoomable-view-1.0.15.tgz#d49cc14f979a4db41719ee2c13b7c91268212936"
+  integrity sha512-Fctft/GmGtEqBC7bLvD0oiqOvPq+NVgLyu9XZWqlMNFqVE2XoJAs9ADrTDMDxdEc4L5ZVNc39D3Bh5CLbVJ3VQ==
+  dependencies:
+    prop-types "^15.5.10"
+
 "@egjs/hammerjs@^2.0.17":
   version "2.0.17"
   resolved "https://registry.yarnpkg.com/@egjs/hammerjs/-/hammerjs-2.0.17.tgz#5dc02af75a6a06e4c2db0202cae38c9263895124"
@@ -6557,11 +6564,6 @@ react-native-picker-select@^7.0.0:
   integrity sha512-SO7b7wHfeM07oVTsLhBlT/VDvMXg2aP0Xy5CA+kL7+oV2Bq6nfKTVjpB2+HLVhFik9i/tlq5ROuGdUrfPhl3rg==
   dependencies:
     lodash.isequal "^4.5.0"
-
-react-native-pinch-zoom-image@^0.0.10:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/react-native-pinch-zoom-image/-/react-native-pinch-zoom-image-0.0.10.tgz#fd605bbdf9015deffc3028049d9e01f50c8dc824"
-  integrity sha512-dEZuxeylT9oTmK0dWFKaLImXs1Ps6w+rpxVeh3a9ccNdjNScNI0Ii/3XKtvBJ0YDsHvR8YfGO/oI3X/lSxRlBA==
 
 react-native-progress@^4.1.2:
   version "4.1.2"

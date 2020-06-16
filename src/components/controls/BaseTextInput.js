@@ -4,6 +4,7 @@ import Images from 'res/Images';
 import styled from 'styled-components/native';
 import { themeProp }  from '../../utils/CssUtil';
 import {get} from 'lodash';
+import Colors from 'res/Colors'
 
 const BaseTextInput= (props) => (
   <View style={{flex: 1, flexDirection: 'row'}}>
@@ -60,7 +61,7 @@ const CustomSelect = (props) => {
 const LineView = styled(View)`
     height: 47px;
     width: 7px;
-    background-color: ${props => props.required ? '#7cd9d0' : themeProp('colorPrimary')};
+    background-color: ${props => props.required ? '#7cd9d0' : Colors.description};
 `;
 const SelectView = styled(TouchableOpacity)`
     width: ${props => props.width}

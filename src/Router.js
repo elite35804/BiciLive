@@ -29,7 +29,14 @@ import WebViewer from './scenes/landing/WebViewer';
 const isIOS = Platform.OS === 'ios';
 
 const TabBar =(props) => {
-  const {homeData} = useStores();
+  const {homeData, auth} = useStores();
+  const onDashboard = () => {
+    if (auth.loginState) {
+      Actions.Dashboard();
+    } else {
+      Actions.Register();
+    }
+  }
   return (
   <View style={{width: '100%', height: 90, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', backgroundColor: '#333333'}}>
     <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => {homeData.clearData(); homeData.getData();Actions['Home']()}}>
@@ -56,7 +63,7 @@ const TabBar =(props) => {
       {/*</View>*/}
       {/*<Text style={{fontSize: 10, color: '#c9c3c5', fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular', marginTop: 10}}>NEWS</Text>*/}
     {/*</TouchableOpacity>*/}
-    <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => Actions['Dashboard']()}>
+    <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => onDashboard()}>
       <View style={{backgroundColor: 'red', width: 10, height: 10, borderRadius: 5, position: 'absolute', top: 0, right: 10}}/>
       <View style={{height: 35, justifyContent: 'flex-end'}}>
         <Image style={{width: moderateScale(30), height: moderateScale(30), resizeMode: 'contain'}} source={Images.icons.ic_profile} />

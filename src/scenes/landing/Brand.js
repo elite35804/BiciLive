@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Text, ScrollView, TouchableOpacity, Image, FlatList} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, ScrollView, TouchableOpacity, Image, FlatList, Image as DefaultImage} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {Actions} from 'react-native-router-flux';
@@ -7,12 +7,46 @@ import {useStores} from 'hooks/Utils';
 import {BaseTextInput, BaseSelect, BaseTextFilter} from 'components/controls/BaseTextInput';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
 import Images from 'res/Images';
+import {moderateScale} from 'react-native-size-matters';
+import {ErrorView} from '../../components/controls/BaseUtils';
+import {observer} from 'mobx-react';
+import {toJS} from 'mobx';
+import axios from 'axios';
+import config from '../../config/Config';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
+const LikeBlock = props => {
+  const {auth} = useStores();
+  const [isLike, setLike] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        axios.get(
+          `http://biciapp.sepisolutions.com${props.url}`,
+          {
+            headers: {
+              'Authorization' : `Bearer ${auth.token}`
+            }
+          }
+        ).then(res => {
+          console.log('======', res.data);
+          if (res.data.err_code === "ERR_OK") {
+            setLike(res.data.status)
+          }
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    fetchData();
+  }, []);
+  return <Image width={'100%'} height={'100%'} source={isLike ? Images.icons.ic_heart_red_sm : Images.icons.ic_heart_sm}/>
+};
 
 const Brand = props => {
+  const {auth} = useStores();
   const data = [
     {name: 'ABUS', count: 34},
     {name: 'ADRIATICA', count: 34},
@@ -21,29 +55,65 @@ const Brand = props => {
     {name: 'ALPINA', count: 34},
     {name: 'ARLIX', count: 34},
   ];
-  return (
-      <Container>
-        <Title size={'40px'} color={themeProp('colorPrimary')} width={'35px'}>DASHBOARD</Title>
-        <Divider size={20}/>
-        <ItemView>
-          <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_sm}/>
-          <Title size={'10px'} color={themeProp('colorThird')} width={'35px'}>BRAND</Title>
-        </ItemView>
-        <FlatList
-          data={data}
-          keyExtractor={(item, index) => `company_${index}`}
-          renderItem={({ item, index }) => {
-            return (
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
-               paddingHorizontal: 13, paddingVertical: 3, backgroundColor: (index % 2 === 0) && '#F7F7F7' }}>
-              <ListText>{item.name}</ListText>
-              <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_red_sm}/>
-            </View>
-          )}}
-        />
 
-      </Container>
-  );
+  const getLikeInfo = url => {
+    try {
+      axios.get(
+        url,
+        {
+          headers: {
+            'Authorization' : `Bearer ${auth.token}`
+          }
+        }
+      ).then(res => {
+
+      })
+    }catch (e) {
+
+    }
+  }
+  const {dashboard} = useStores();
+  if (dashboard.isLoading) {
+    return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><DefaultImage
+      style={{width: moderateScale(70), height: moderateScale(70), resizeMode: 'contain', marginTop: 14}}
+      source={Images.icons.ic_loading}/></View>;
+  } else {
+    if (dashboard.errorIf) {
+      return <ErrorView/>;
+    } else {
+      const uiData = toJS(dashboard.data);
+      console.log('jererererer', uiData);
+      const titleData1 = uiData.shift();
+      const titleData2 = uiData.shift();
+      return (
+        <Container>
+          <Title size={'40px'} color={titleData1.colore} width={'35px'}>{titleData1.titolo.toUpperCase()}</Title>
+          <Divider size={20}/>
+          <ItemView>
+            <Image width={'100%'} height={'100%'} source={Images.icons.ic_user_sm}/>
+            <Title size={'10px'} color={titleData2.colore} width={'35px'}>{titleData2.titolo.toUpperCase()}</Title>
+          </ItemView>
+          {Object.entries(uiData).length !== 0 && <FlatList
+            data={uiData}
+            keyExtractor={(item, index) => `company_${index}`}
+            renderItem={({item, index}) => {
+              return (
+                <View style={{
+                  flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
+                  paddingHorizontal: 13, paddingVertical: 3, backgroundColor: index % 2 === 0 ? item.bg_color_even : item.bg_color_odd
+                }}>
+                  <ListText>{item.titolo}</ListText>
+                  <LikeBlock url={item.like_url}/>
+                </View>
+              )
+            }}
+          />}
+
+
+        </Container>
+      );
+    }
+  }
 };
 
 const Container = styled(ScrollView)`
@@ -88,9 +158,9 @@ const Title = styled(Text)`
   font-size: ${props => props.width};
   color: ${props => props.color};
   font-family: ${themeProp('fontUniHeavy')};
-  margin-top: ${props => props.size}   
-  padding-horizontal: 10px; 
+  margin-top: ${props => props.size}
+  padding-horizontal: 10px;
 `;
 
 
-export default Brand;
+export default observer(Brand);
