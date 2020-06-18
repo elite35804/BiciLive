@@ -1509,6 +1509,7 @@ drawable src_res_images_arrow_down_sm
 drawable src_res_images_arrow_up
 drawable src_res_images_back_icon
 drawable src_res_images_bdg_star_empty
+drawable src_res_images_bg_image
 drawable src_res_images_biciliveit
 drawable src_res_images_bottoneanimato
 drawable src_res_images_btn_activated2
@@ -3122,6 +3123,7 @@ styleable com_facebook_login_view com_facebook_confirm_logout com_facebook_login
 styleable com_facebook_profile_picture_view com_facebook_is_cropped com_facebook_preset_size
 xml file_provider_paths
 xml rn_dev_preferences
+xml share_download_paths
 xml standalone_badge
 xml standalone_badge_gravity_bottom_end
 xml standalone_badge_gravity_bottom_start

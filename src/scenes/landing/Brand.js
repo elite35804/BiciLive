@@ -13,39 +13,42 @@ import {observer} from 'mobx-react';
 import {toJS} from 'mobx';
 import axios from 'axios';
 import config from '../../config/Config';
+import analytics from '@react-native-firebase/analytics';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
 const LikeBlock = props => {
   const {auth} = useStores();
-  const [isLike, setLike] = useState(false);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        axios.get(
-          `http://biciapp.sepisolutions.com${props.url}`,
-          {
-            headers: {
-              'Authorization' : `Bearer ${auth.token}`
-            }
+  const [isLike, setLike] = useState(true);
+  const setStatus = async (status) => {
+    try {
+      console.log('set============');
+      axios.get(
+        `http://biciapp.sepisolutions.com${props.url}`,
+        {
+          headers: {
+            'Authorization' : `Bearer ${auth.token}`
           }
-        ).then(res => {
-          console.log('======', res.data);
-          if (res.data.err_code === "ERR_OK") {
-            setLike(res.data.status)
-          }
-        });
-      } catch (e) {
-        console.log(e);
-      }
+        }
+      ).then(res => {
+        console.log('======', res.data);
+        if (res.data.err_code === "ERR_OK") {
+          setLike(res.data.status)
+        }
+      });
+    } catch (e) {
+      console.log(e);
     }
-    fetchData();
-  }, []);
-  return <Image width={'100%'} height={'100%'} source={isLike ? Images.icons.ic_heart_red_sm : Images.icons.ic_heart_sm}/>
+  }
+  return <TouchableOpacity onPress={() => {setStatus(!isLike);setLike(!isLike)}}><Image width={'100%'} height={'100%'} source={isLike ? Images.icons.ic_heart_red_sm : Images.icons.ic_heart_sm}/></TouchableOpacity>
 };
 
 const Brand = props => {
+
+  useEffect(() => {
+    analytics().setCurrentScreen('loved_brand_screen', 'LovedBrandPage');
+  }, []);
   const {auth} = useStores();
   const data = [
     {name: 'ABUS', count: 34},

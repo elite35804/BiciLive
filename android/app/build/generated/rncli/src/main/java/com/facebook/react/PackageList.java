@@ -28,6 +28,8 @@ import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+// react-native-share
+import cl.json.RNSharePackage;
 // react-native-svg
 import com.horcrux.svg.SvgPackage;
 // react-native-vector-icons
@@ -90,6 +92,7 @@ public class PackageList {
       new ReactNativeFirebaseAppPackage(),
       new FBSDKPackage(),
       new RNGestureHandlerPackage(),
+      new RNSharePackage(),
       new SvgPackage(),
       new VectorIconsPackage(),
       new RNCWebViewPackage(),

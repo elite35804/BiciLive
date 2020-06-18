@@ -33,7 +33,7 @@ import {
   DetailMore,
   AdvResumeBig,
   ErrorView,
-  LoginModal
+  LoginModal,
 } from 'components/controls/BaseUtils';
 import {BaseTextInput, BaseSelect, BaseTextFilter} from 'components/controls/BaseTextInput';
 import {UniSansBold, UniSansBook} from '../../utils/fontFamily';
@@ -45,37 +45,69 @@ import Tooltip from 'rn-tooltip';
 import CustomTooltip from 'components/controls/CustomTooltip';
 import {moderateScale, verticalScale, scale} from 'react-native-size-matters';
 import {LoginButton, ShareDialog} from 'react-native-fbsdk';
+import analytics from '@react-native-firebase/analytics';
+import axios from 'axios';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
 const isIOS = Platform.OS === 'ios';
 
-const shareLinkWithShareDialog = () => {
+const shareFacebook = () => {
   const shareLinkContent = {
     contentType: 'link',
     contentUrl: 'http://biciapp.sepisolutions.com/z-content/images/ebike/r-raymon/wfmXeuPBAWf1QiZijXxa4UlqdtnKgNeG_320.jpg',
-    contentDescription: 'Facebook sharing is easy!'
+    contentDescription: 'Facebook sharing is easy!',
   };
   ShareDialog.canShow(shareLinkContent).then(
-    function(canShow) {
+    function (canShow) {
       if (canShow) {
         return ShareDialog.show(shareLinkContent);
       }
-    }
+    },
   ).then(
-    function(result) {
+    function (result) {
       if (result.isCancelled) {
         alert('Share cancelled');
       } else {
         alert('Share success with postId: ' + result.postId);
       }
     },
-    function(error) {
+    function (error) {
       alert('Share fail with error: ' + error);
-    }
+    },
   );
-}
+};
+const shareWhatsapp = () => {
+  const text = 'this';
+  const phoneNumber = '8618240331746';
+  const downloadUrl = isIOS ? 'https://apps.apple.com/it/app/whatsapp-messenger/id310633997' : 'https://play.google.com/store/apps/details?id=com.whatsapp&hl=it';
+  // Linking.openURL(`whatsapp://send?text=${text}`)
+  const url = `whatsapp://send?text=${text}&phone=${phoneNumber}`;
+  Linking.canOpenURL(url).then(supported => {
+    console.log('supported======', supported);
+    if (!supported) {
+      console.log('Can\'t handle url: ' + url);
+      Alert.alert(
+        'Your phone does not have whatsapp',
+        'Do you want to install whatsapp?',
+        [
+          {
+            text: 'Install Whatsapp',
+            onPress: () => Linking.openURL(downloadUrl),
+          },
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+        ],
+        {cancelable: false},
+      );
+    } else {
+      return Linking.openURL(url);
+    }
+  }).catch(err => console.error('An error occurred', err));
+};
 const BrandLogo = props => {
   const {brandData} = useStores();
   const goToBrand = (url) => {
@@ -125,16 +157,41 @@ const BrandLogo = props => {
 };
 
 const ShareBlock = props => {
+  const {auth} = useStores();
   const [isLike, setLike] = useState(false);
+  const fetchData = async () => {
+    try {
+      console.log('getshardata=========');
+      axios.get(
+        `http://biciapp.sepisolutions.com${props.data.like_url}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${auth.token}`,
+          },
+        },
+      ).then(res => {
+        console.log('======', res.data);
+        if (res.data.err_code === 'ERR_OK') {
+          setLike(res.data.status);
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <View>
       <ShareView>
         <ShareIcon>
-          <TouchableOpacity onPress={() => setLike(!isLike)}><Image width={'100%'} height={'100%'}
-                                                                    source={isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart}/></TouchableOpacity>
-          <Image width={'100%'} height={'100%'} source={Images.icons.ic_compare} style={{marginLeft: 25}}/>
+          <TouchableOpacity onPress={() => fetchData()}><Image width={'100%'} height={'100%'}
+                                                               source={isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart}/></TouchableOpacity>
+          {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare} style={{marginLeft: 25}}/>*/}
         </ShareIcon>
-        <ShareTooltip onFB={() => shareLinkWithShareDialog()}/>
+        <ShareTooltip onWhatsapp={() => shareWhatsapp()} onFB={() => shareFacebook()}/>
       </ShareView>
     </View>
   );
@@ -235,8 +292,9 @@ const RelatedElements = (item, index) => {
     <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10}}>
       {item.map((item0, index) =>
         <View key={index} style={{width: '33%', borderLeftColor: '#c9c3c5', borderLeftWidth: 7, paddingHorizontal: 5}}>
-          <TouchableOpacity onPress={() => goToBike(item0.url)}><Image style={{width: '100%', height: 60}}
-                                                                       source={{uri: item0.img_url}}/></TouchableOpacity>
+          <TouchableOpacity onPress={() => goToBike(item0.url)}><Image
+            style={{width: '100%', height: 60, resizeMode: 'contain'}}
+            source={{uri: item0.img_url}}/></TouchableOpacity>
           <Text style={{
             color: '#909090',
             fontSize: 15,
@@ -364,7 +422,8 @@ const AdBlock = props => {
     web.url = url;
     Actions.WebViewer();
   };
-  return <View><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image style={{width: '100%', height: 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>
+  return <View><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image
+    style={{width: '100%', height: 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>;
 };
 
 const RenderElements = props => {
@@ -411,7 +470,7 @@ const RenderElements = props => {
             alignItems: 'center',
             justifyContent: 'center',
             height: 100,
-            paddingTop: 5,
+            paddingBottom: 13,
           }}>
             <Text
               style={{
@@ -427,7 +486,13 @@ const RenderElements = props => {
               marginTop: -10,
             }}>POLLICI</Text>
           </View>
-          <View style={{backgroundColor: '#F2F2F2', alignItems: 'center', height: 200, paddingTop: 15, paddingHorizontal: 5}}>
+          <View style={{
+            backgroundColor: '#F2F2F2',
+            alignItems: 'center',
+            height: 200,
+            paddingTop: 15,
+            paddingHorizontal: 5,
+          }}>
             <Text style={{
               fontSize: 16,
               color: item.bg_color,
@@ -453,6 +518,7 @@ const RenderElements = props => {
                 color: 'black',
                 fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',
                 marginTop: 7,
+                textAlign: 'center',
               }}>{item.ant_gomma}</Text>
           </View>
         </View>
@@ -476,7 +542,7 @@ const RenderElements = props => {
             alignItems: 'center',
             justifyContent: 'center',
             height: 100,
-            paddingTop: 5,
+            paddingBottom: 13,
           }}>
             <Text
               style={{
@@ -491,7 +557,13 @@ const RenderElements = props => {
               marginTop: -10,
             }}>POLLICI</Text>
           </View>
-          <View style={{backgroundColor: '#F2F2F2', alignItems: 'center', height: 200, paddingTop: 15, paddingHorizontal: 5}}>
+          <View style={{
+            backgroundColor: '#F2F2F2',
+            alignItems: 'center',
+            height: 200,
+            paddingTop: 15,
+            paddingHorizontal: 5,
+          }}>
             <Text style={{
               fontSize: 16,
               color: item.bg_color,
@@ -517,23 +589,18 @@ const RenderElements = props => {
                 color: 'black',
                 fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',
                 marginTop: 7,
+                textAlign: 'center',
               }}>{item.post_gomma}</Text>
           </View>
         </View>
       </SwipeView><Divider size={-30}/></View>);
     }
     if (item.id === 'SHARE_BLOCK') {
-      i++;
-      if (i === 2) {
-        items.push(
-          <View>
-            <ShareBlock key={`key${index}`} data={item}/>
-          </View>,
-        );
-      } else {
-        items.push(<ShareBlock key={`key${index}`} data={item}/>);
-      }
-
+      items.push(
+        <View>
+          <ShareBlock key={`key${index}`} data={item}/>
+        </View>,
+      );
     }
     if (item.id === 'ICON_DESCRIPTION_GROUP') {
       items.push(<IconDescriptionGroup key={`key${index}`} data={item}/>);
@@ -553,6 +620,7 @@ const RenderElements = props => {
 };
 
 const BikePagePremium = props => {
+
   const {bikeData} = useStores();
 
 
@@ -562,7 +630,7 @@ const BikePagePremium = props => {
       source={Images.icons.ic_loading}/></View>;
   } else {
     if (bikeData.errorIf) {
-      return <ErrorView/>
+      return <ErrorView/>;
     } else {
       const uiData = toJS(bikeData.data);
       return (

@@ -33,7 +33,7 @@ const Sizes = {
 
     divider: StyleSheet.hairlineWidth,
 
-    button: 70,
+    button: 50,
 
     textDefault: 18,
 }

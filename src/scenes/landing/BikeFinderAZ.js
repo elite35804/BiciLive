@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {View, Text, ScrollView, TouchableOpacity, Image, FlatList} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
@@ -9,44 +9,40 @@ import {BlueButton, WhiteButton} from 'components/controls/Button';
 import Images from 'res/Images';
 import {toJS} from 'mobx';
 import {isIOS} from 'rn-tooltip/src/helpers';
+import analytics from '@react-native-firebase/analytics';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
-const preProcess = (rawData) => {
+const preProcess = (rawData, filter = '') => {
   const title = rawData.shift();
-  const filter = rawData.shift();
+  const filterPlaceholder = rawData.shift();
   const filterData = {};
   let color = "";
   rawData.map(item => {
     if (item.id === "TITLE" && !(item.titolo in filterData)) {
       let titleData = [];
       rawData.map(subItem => {
-        if (subItem.id === "FILTERABLE_LIST_ITEM" && subItem.titolo.charAt(0) === item.titolo) {
+        if (subItem.id === "FILTERABLE_LIST_ITEM" && subItem.titolo.charAt(0) === item.titolo && subItem.titolo.includes(filter.toUpperCase())) {
           titleData.push(subItem);
         }
       });
-      filterData[item.titolo] = titleData;
+      if (titleData.length) filterData[item.titolo] = titleData;
       color = item.colore;
     }
   });
-  return {title, filter, filterData, color};
+  return {title, filterPlaceholder, filterData, color};
 };
 
 const BikeFinderAZ = props => {
+  analytics().setCurrentScreen('brand_search_screen', 'BrandSearchPage');
   const {staticData} = useStores();
+  const [filter, setFilter] = useState('');
   console.log('brand_search_page=======', toJS(staticData.data.brand_search_page));
   const rawData = toJS(staticData.data.brand_search_page);
-  const {title, filter, filterData, color} = preProcess(rawData);
-  console.log('processed data==========', title, filter, filterData);
-  const data = [
-    {name: 'ABUS', count: 34},
-    {name: 'ADRIATICA', count: 34},
-    {name: 'AL-KO SAWIKO', count: 34},
-    {name: 'ALPEK', count: 34},
-    {name: 'ALPINA', count: 34},
-    {name: 'ARLIX', count: 34},
-  ];
+  const {title, filterPlaceholder, filterData, color} = preProcess(rawData, filter);
+  console.log('processed data==========', title, filterPlaceholder, filterData);
+
   const {brandData} = useStores();
   const goToBrand = (url) => {
     brandData.clearData();
@@ -59,13 +55,13 @@ const BikeFinderAZ = props => {
       <Container>
         <Title size={'40px'} color={themeProp('colorThird')} width={'35px'}>{title.titolo}</Title>
         <Divider size={'5px'}/>
-        <BaseTextFilter placeholder={filter.name}/>
+        <BaseTextFilter placeholder={filterPlaceholder.name} onEndEditing={(f) => setFilter(f)}/>
         <Divider size={'30px'}/>
         <CategoryText>A - Z</CategoryText>
         <Divider size={'10px'} />
 
         {Object.entries(filterData).map(([key, value]) => {
-          console.log('data=======', key,value);
+          // console.log('data=======', key,value);
           return (
             <View key={key}>
               <Divider size={'10px'} />

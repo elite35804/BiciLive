@@ -14,6 +14,7 @@ import {observer} from 'mobx-react';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import {Divider, ErrorView} from '../../components/controls/BaseUtils';
 import Image from 'react-native-image-progress';
+import analytics from '@react-native-firebase/analytics';
 
 
 Text.defaultProps = Text.defaultProps || {};
@@ -97,7 +98,7 @@ const PageSlider = (props) => {
         })}
       </Swiper>
       <Divider size={isIOS ? -50 : 10}/>
-      <View style={{width: '113%', alignSelf: 'center'}}>
+      <View style={{width: '108%', alignSelf: 'center'}}>
         <Stepper total={total} onPress={p => _swiper.current.scrollBy(p, true)}/>
       </View>
     </SwiperContainer>
@@ -117,25 +118,19 @@ const ImageReel = (props) => {
       <CategoryView>
         {props.data.img1 && <TouchableOpacity key="1" onPress={() => {
           goToBrand(get(props, 'data.url1', ''));
-        }}><Image
-          style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
+        }}><CategoryImage
           source={{uri: get(props, 'data.img1', '')}}/></TouchableOpacity>}
-        {props.data.img2 && <TouchableOpacity key="2" onPress={() => goToBrand(get(props, 'data.url2', ''))}><Image
-          style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
+        {props.data.img2 && <TouchableOpacity key="2" onPress={() => goToBrand(get(props, 'data.url2', ''))}><CategoryImage
           source={{uri: get(props, 'data.img2', '')}}/></TouchableOpacity>}
-        {props.data.img3 &&  <TouchableOpacity key="3" onPress={() => goToBrand(get(props, 'data.url3', ''))}><Image
-          style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
+        {props.data.img3 &&  <TouchableOpacity key="3" onPress={() => goToBrand(get(props, 'data.url3', ''))}><CategoryImage
           source={{uri: get(props, 'data.img3', '')}}/></TouchableOpacity>}
       </CategoryView>
       {props.data.img4 &&<CategoryView>
-        {props.data.img4 && <TouchableOpacity key="4" onPress={() => goToBrand(get(props, 'data.url4', ''))}><Image
-          style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
+        {props.data.img4 && <TouchableOpacity key="4" onPress={() => goToBrand(get(props, 'data.url4', ''))}><CategoryImage
           source={{uri: get(props, 'data.img4', '')}}/></TouchableOpacity>}
-        {props.data.img5 && <TouchableOpacity key="5" onPress={() => goToBrand(get(props, 'data.url5', ''))}><Image
-          style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
+        {props.data.img5 && <TouchableOpacity key="5" onPress={() => goToBrand(get(props, 'data.url5', ''))}><CategoryImage
           source={{uri: get(props, 'data.img5', '')}}/></TouchableOpacity>}
-        {props.data.img6 && <TouchableOpacity key="6" onPress={() => goToBrand(get(props, 'data.url6', ''))}><Image
-          style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
+        {props.data.img6 && <TouchableOpacity key="6" onPress={() => goToBrand(get(props, 'data.url6', ''))}><CategoryImage
           source={{uri: get(props, 'data.img6', '')}}/></TouchableOpacity>}
       </CategoryView>}
     </View>
@@ -200,6 +195,9 @@ const HomeElements = (props) => {
 };
 
 const Home = (props) => {
+  useEffect(() => {
+    analytics().setCurrentScreen('home_screen', 'Home');
+  }, [])
   const {homeData} = useStores();
   if (homeData.isLoading) {
     return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><DefaultImage style={{width: moderateScale(70), height: moderateScale(70), resizeMode: 'contain',marginTop: 14}} source={Images.icons.ic_loading}/></View>;
@@ -305,6 +303,7 @@ const CategoryText = styled(Text)`
 const CategoryView = styled(View)`
   flex-direction: row;
   justify-content: space-between;
+  
 `;
 
 const FinderView = styled(View)`
@@ -357,6 +356,15 @@ const DescTitle = styled(Text)`
 const SwiperContainer = styled(View)`
   width: 100%;
   flex: 1;
+`;
+
+const CategoryImage = styled(Image)`
+  margin-top: 20px
+  width: ${moderateScale(105)}; 
+  height: ${moderateScale(95)}; 
+  resize-mode: contain; 
+  border-width: 1; 
+  border-color: #ebebeb
 `;
 
 export default observer(Home);

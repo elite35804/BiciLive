@@ -33,6 +33,7 @@ import {observer} from 'mobx-react';
 import {toJS} from 'mobx';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import analytics from '@react-native-firebase/analytics';
 
 const isIOS = Platform.OS === 'ios';
 const AdBlock = props => {
@@ -45,6 +46,7 @@ const AdBlock = props => {
     style={{width: '100%', height: 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>;
 };
 const Result = props => {
+  analytics().setCurrentScreen('search_result_screen', 'ResultPage');
   const {bikeSearch} = useStores();
   if (bikeSearch.isLoading) {
     return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><DefaultImage
@@ -95,20 +97,20 @@ const Result = props => {
                         backgroundColor: 'red',
                         alignItems: 'center',
                         width: 70,
-                        height: '50%',
+                        height: '70%',
                         justifyContent: 'center',
                       }}>
                         <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_white}/>
                       </TouchableOpacity>
-                      <TouchableOpacity style={{
-                        backgroundColor: '#53DCD0',
-                        alignItems: 'center',
-                        width: 70,
-                        height: '50%',
-                        justifyContent: 'center',
-                      }}>
-                        <Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white}/>
-                      </TouchableOpacity>
+                      {/*<TouchableOpacity style={{*/}
+                        {/*backgroundColor: '#53DCD0',*/}
+                        {/*alignItems: 'center',*/}
+                        {/*width: 70,*/}
+                        {/*height: '50%',*/}
+                        {/*justifyContent: 'center',*/}
+                      {/*}}>*/}
+                        {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white}/>*/}
+                      {/*</TouchableOpacity>*/}
                     </View>)}
                     leftOpenValue={0}
                     rightOpenValue={-80}
@@ -127,25 +129,24 @@ const Result = props => {
                         backgroundColor: 'red',
                         alignItems: 'center',
                         width: 70,
-                        height: '50%',
+                        height: '70%',
                         justifyContent: 'center',
                       }}>
                         <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_white}/>
                       </TouchableOpacity>
-                      <TouchableOpacity style={{
-                        backgroundColor: '#53DCD0',
-                        alignItems: 'center',
-                        width: 70,
-                        height: '50%',
-                        justifyContent: 'center',
-                      }}>
-                        <Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white}/>
-                      </TouchableOpacity>
+                      {/*<TouchableOpacity style={{*/}
+                        {/*backgroundColor: '#53DCD0',*/}
+                        {/*alignItems: 'center',*/}
+                        {/*width: 70,*/}
+                        {/*height: '50%',*/}
+                        {/*justifyContent: 'center',*/}
+                      {/*}}>*/}
+                        {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white}/>*/}
+                      {/*</TouchableOpacity>*/}
                     </View>)}
                     leftOpenValue={0}
                     rightOpenValue={-80}
                   />
-
                   <DivideLine/>
                 </View>;
               }

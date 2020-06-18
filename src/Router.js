@@ -1,5 +1,5 @@
 import React from 'react';
-import {KeyboardAvoidingView, Platform, View, Image, Text, TouchableOpacity} from 'react-native';
+import {KeyboardAvoidingView, Platform, View, Image, Text, TouchableOpacity, StatusBar} from 'react-native';
 import {Router, Scene, Stack, Drawer, Modal, Tabs, Actions} from 'react-native-router-flux';
 import Images from 'res/Images';
 import Keys from './res/SceneKeys';
@@ -55,7 +55,7 @@ const TabBar =(props) => {
       {/*<View style={{height: 40, justifyContent: 'flex-end'}}>*/}
         {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare} />*/}
       {/*</View>*/}
-      {/*<Text style={{fontSize: 10, color: '#c9c3c5', fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular', marginTop: 10}}>CONFRONTO</Text>*/}
+      {/*<Text style={{fontSize: 10, color: '#c9TextInputc3c5', fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular', marginTop: 10}}>CONFRONTO</Text>*/}
     {/*</TouchableOpacity>*/}
     {/*<TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => Actions['NewsFinder']()}>*/}
       {/*<View style={{height: 40, justifyContent: 'flex-end'}}>*/}
@@ -64,7 +64,7 @@ const TabBar =(props) => {
       {/*<Text style={{fontSize: 10, color: '#c9c3c5', fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular', marginTop: 10}}>NEWS</Text>*/}
     {/*</TouchableOpacity>*/}
     <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => onDashboard()}>
-      <View style={{backgroundColor: 'red', width: 10, height: 10, borderRadius: 5, position: 'absolute', top: 0, right: 10}}/>
+      {/*<View style={{backgroundColor: 'red', width: 10, height: 10, borderRadius: 5, position: 'absolute', top: 0, right: 10}}/>*/}
       <View style={{height: 35, justifyContent: 'flex-end'}}>
         <Image style={{width: moderateScale(30), height: moderateScale(30), resizeMode: 'contain'}} source={Images.icons.ic_profile} />
       </View>
@@ -78,9 +78,7 @@ const Root = props => {
     <Container as={KeyboardAvoidingView} behavior='padding' enabled={isIOS}>
       <Router>
         <Modal>
-          <Scene key="landing" hideNavBar hideTabBar>
-            <Scene key={Keys.splash} component={Splash} hideNavBar/>
-          </Scene>
+          <Scene key={Keys.splash} component={Splash} hideNavBar hideTabBar/>
           <Scene key={Keys.welcome} component={Welcome} hideNavBar hideTabBar/>
           <Scene key={Keys.login} component={Login} hideNavBar hideTabBar/>
           <Scene key={Keys.register} component={Register} hideNavBar hideTabBar/>
@@ -128,6 +126,7 @@ const Root = props => {
           </Tabs>
         </Modal>
       </Router>
+      <StatusBar backgroundColor={'#333333'}/>
     </Container>
   );
 };

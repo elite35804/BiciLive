@@ -17,7 +17,8 @@ class HomeStore {
         this.data = response.data.content;
         this.errorIf = false;
         analytics().logEvent('openApp',{
-          url: 'http://biciapp.sepisolutions.com/api/v1/home'
+          url: 'http://biciapp.sepisolutions.com/api/v1/home',
+          page_title: '/home'
         }).then(res=>{
           console.log('result============', res);
         })

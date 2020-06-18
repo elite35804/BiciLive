@@ -22,6 +22,7 @@ import {DivideLine, Divider, ErrorView, ListBikeInfo} from '../../components/con
 import {moderateScale} from 'react-native-size-matters';
 import {observer} from 'mobx-react';
 import {toJS} from 'mobx';
+import analytics from '@react-native-firebase/analytics';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -99,6 +100,9 @@ const oswald_bold = isIOS ? 'Oswald-Bold' : 'oswald_bold';
 // );
 
 const Brand = props => {
+  useEffect(() => {
+    analytics().setCurrentScreen('loved_product_screen', 'LovedProductPage');
+  }, []);
   const {dashboard} = useStores();
   if (dashboard.isLoading) {
     return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><DefaultImage
@@ -124,9 +128,34 @@ const Brand = props => {
           {uiData.map((item, index) => {
             if (item.id === 'BIKE_RESUME_SMALL')
               return <View>
-            <ListBikeInfo key={index} data={item}/>
-            <DivideLine/>
-              </View>
+                <SwipeListView
+                  data={['']}
+                  renderItem={(data, rowMap) => (<View><ListBikeInfo data={item}/></View>)}
+                  renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
+                    <TouchableOpacity style={{
+                      backgroundColor: 'red',
+                      alignItems: 'center',
+                      width: 70,
+                      height: '70%',
+                      justifyContent: 'center',
+                    }}>
+                      <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_white}/>
+                    </TouchableOpacity>
+                    {/*<TouchableOpacity style={{*/}
+                    {/*backgroundColor: '#53DCD0',*/}
+                    {/*alignItems: 'center',*/}
+                    {/*width: 70,*/}
+                    {/*height: '50%',*/}
+                    {/*justifyContent: 'center',*/}
+                    {/*}}>*/}
+                    {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white}/>*/}
+                    {/*</TouchableOpacity>*/}
+                  </View>)}
+                  leftOpenValue={0}
+                  rightOpenValue={-80}
+                />
+                <DivideLine/>
+              </View>;
           })}
 
           {/*<SwipeListView*/}

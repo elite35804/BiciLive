@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Image, View, TouchableOpacity, Text, ScrollView, Platform} from 'react-native';
+import {Image, View, TouchableOpacity, Text, ScrollView, Platform, Dimensions, BackHandler} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {SafeAreaView} from 'react-native';
@@ -13,6 +13,9 @@ import {
   statusCodes,
 } from '@react-native-community/google-signin';
 import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
+import {ThemeProps} from 'react-native-elements';
+
+const isIOS = Platform.OS === "ios";
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -42,6 +45,17 @@ const Splash = props => {
       // accountName: '', // [Android] specifies an account name on the device that should be used
       iosClientId: '808976326604-62ut9ho77m6dm5lbp9irk5v9s9rs94h4.apps.googleusercontent.com', // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
     });
+
+    // const backAction = () => {
+    //   console.log('back button clicked');
+    //   BackHandler.exitApp();
+    //   return true;
+    // };
+    // const backHandler = BackHandler.addEventListener(
+    //   'hardwareBackPress',
+    //   backAction,
+    // );
+    // return () => backHandler.remove();
   }, []);
   const initUser = (token) => {
     fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + token)
@@ -111,14 +125,23 @@ const Splash = props => {
   }
   return (
     <Container>
+      <Image source={Images.background.bg_img} style={{position:'absolute', height: Dimensions.get('window').height, width: Dimensions.get('window').width, resizeMode: 'cover'}}/>
       <ImageView>
         <Logo style={{width : '80%', height: 140, resizeMode: 'contain'}} source={Images.background.logo1}/>
         {/*<Logo width={175} height={50} source={Images.background.title}/>*/}
       </ImageView>
+      <View style={{paddingHorizontal: 30}}>
+        <Text style={{textAlign: 'center', fontSize: 27, fontWeight: 'bold'}}>CERCA, TROVA,</Text>
+        <Text style={{textAlign: 'center', fontSize: 27, fontWeight: 'bold'}}>PEDALA...CON LA</Text>
+        <Text style={{textAlign: 'center', fontSize: 27, fontWeight: 'bold'}}>TUA NUOVA EBIKE</Text>
+      </View>
       <BtnView>
-        <BlueButton onPress={() => Actions.Login()}>LOGIN</BlueButton>
-        <Divider size="19px"/>
-        <WhiteButton onPress={() => Actions.Register()}>REGISTRATI</WhiteButton>
+        <BlueButton width={'85%'} height={'55px'} fontSize={'30px'} onPress={() => Actions.Login()}>LOGIN</BlueButton>
+        <Divider size="12px"/>
+        <WhiteButton width={'85%'} height={'55px'} fontSize={'30px'} backgroudColor={'#333333'} textColor={'#5fdcd2'} borderColor={'#5fdcd2'} onPress={() => Actions.Register()}>REGISTRATI</WhiteButton>
+        <Bottom onPress={() => Actions['Home']()}>
+          <BottomText>CONTINUA COME OSPITE</BottomText>
+        </Bottom>
       </BtnView>
       {/*<SocialBtnView>*/}
                     {/*/!*<GoogleSigninButton*!/*/}
@@ -155,17 +178,14 @@ const Splash = props => {
           {/*<View width={20}/>*/}
         {/*</GoogleBtn>*/}
       {/*</SocialBtnView>*/}
-      <Bottom onPress={() => Actions['Home']()}>
-        <BottomText>CONTINUA COME OSPITE</BottomText>
-      </Bottom>
+
     </Container>
   );
 };
 
-const Container = styled(ScrollView)`
-    background-color:#7cd9d0;
+const Container = styled(View)`
     flex: 1;
-    padding-horizontal: 4px;
+    height: 100%
 `;
 
 const Divider = styled(View)`
@@ -174,12 +194,14 @@ const Divider = styled(View)`
 
 const ImageView = styled(View)`
     align-items: center;
-    margin-top: 58px;
+    margin-top: 25px;
 `;
 
 const BtnView = styled(View)`
-    align-items: center;
-    margin-top: 72px;
+   width: 100%
+   alignItems: center
+   position: absolute
+   bottom: 0
 `;
 
 const SocialBtnView = styled(View)`
@@ -218,7 +240,7 @@ const IconTitle = styled(Text)`
 `;
 
 const Bottom = styled(TouchableOpacity)`
-  margin-top: 34px;
+  margin-top: 25px;
   align-items: center;
   margin-bottom: 30px;
 `;

@@ -28,6 +28,9 @@ import ImageZoom from 'react-native-image-pan-zoom';
 import ZoomableImage from 'components/controls/ZoomableImage';
 import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
 
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
+
 const isIOS = Platform.OS === 'ios';
 
 const oswald_bold = isIOS ? 'Oswald-Bold' : 'oswald_bold';
@@ -97,7 +100,7 @@ const MainBikeInfo = (props) => {
           <NameView>
             <Name numberOfLines={1} color={'#' + get(props, 'data.color', 'D75A2B')}
                   size={'38px'}>{get(props, 'data.modello', 'EB4')}</Name>
-            <Image width={20} height={20} source={Images.icons.arrow_right}/>
+            {/*<Image width={20} height={20} source={Images.icons.arrow_right}/>*/}
           </NameView>
           <Sort style={{marginTop: moderateScale(-15)}}
                 size={moderateScale(21)}>{get(props, 'data.prezzo', '1390')}</Sort>
@@ -166,7 +169,7 @@ const ListBikeInfo = (props) => {
               <View style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                marginRight: isIOS ? 15 : 0,
+                marginRight: isIOS ? 15 : 5,
                 position: 'absolute',
                 top: 0,
                 right: 0,
@@ -202,7 +205,7 @@ const ListBikeInfo = (props) => {
               fontFamily: oswald_bold,
               fontSize: 13,
             }}>{get(props, 'data.motore', 'Bosh, Performance CX')}</Text>
-            <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+            <View style={{justifyContent: 'space-between', flexDirection: 'row', marginRight: 5}}>
               <View style={{flexDirection: 'row', marginRight: 20}}>
                 <View style={{marginTop: 10, marginRight: 3}}>
                   <Image style={{width: 15, height: 20, resizeMode: 'contain'}}
@@ -316,9 +319,9 @@ const AdvResumeBig = (props) => {
           <Sort size={moderateScale(22)}>{get(props, 'data.brand', 'ASKOLL')}</Sort>
           <Divider size={moderateScale(-10)}/>
           <NameView>
-            <Name color={'#' + get(props, 'data.color', 'D75A2B')}
+            <Name numberOfLines={1} color={'#' + get(props, 'data.color', 'D75A2B')}
                   size={moderateScale(35)}>{get(props, 'data.modello', 'EB4')}</Name>
-            <Image width={20} height={20} source={Images.icons.arrow_right}/>
+            {/*<Image width={20} height={20} source={Images.icons.arrow_right}/>*/}
           </NameView>
           <Sort style={{marginTop: moderateScale(-15)}}
                 size={moderateScale(22)}>{get(props, 'data.prezzo', '1390')}</Sort>

@@ -11,6 +11,10 @@ import {cities, sesso} from '../../res/data';
 import {get} from 'lodash';
 import {useActionSheet} from '@expo/react-native-action-sheet';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import analytics from '@react-native-firebase/analytics';
+
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
 
 const SelectElement = (props) => {
   const [brand, setBrand] = useState();
@@ -40,7 +44,8 @@ const SelectElement = (props) => {
 };
 
 const Register = props => {
-  const { auth, alert } = useStores();
+  analytics().setCurrentScreen('register_screen', 'RegisterPage');
+  const { auth, alert, hud } = useStores();
   const [checked, setChecked] = useState(true);
   const [checked1, setChecked1] = useState(true);
   const [date, setDate] = useState(new Date(1598051730000));
@@ -49,7 +54,7 @@ const Register = props => {
   useEffect(() => {
     const backAction = () => {
       console.log('back button clicked');
-      Actions.landing();
+      Actions.Splash();
       return true;
     };
     const backHandler = BackHandler.addEventListener(
@@ -62,7 +67,6 @@ const Register = props => {
   for(let item = 1920; item <= 2020; item++) {
     ageData.push(item.toString());
   }
-  console.log('ageE===', ageData);
 
   const onDateChange = (event, selectedDate)  => {
     setShow(Platform.OS === 'ios');
@@ -74,7 +78,7 @@ const Register = props => {
 
 
 
-  const onRegister = () => {
+  const onRegister = async () => {
     for (let [key, value] of Object.entries(auth.registerData)) {
       if (key === 'email' && !validationEmail(value)) {
         alert.showWarn("Questo campo è obbligatorio", 'Email'.toUpperCase())
@@ -86,12 +90,18 @@ const Register = props => {
       }
 
     }
-    auth.register();
-    Actions.Welcome();
+    hud.show();
+    await auth.register();
+    hud.hide();
+    auth.errorIf && alert.showError(auth.err_string, "Register")
+    if (!auth.errorIf) {
+      alert.showSuccess("Grazie per esserti registrato! A breve riceverai un link di conferma per attivare il tuo account.", "Register")
+      Actions.Splash();
+    }
   };
 
   const validationEmail = email => {
-    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})+$/;
+    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,10})+$/;
     return re.test(String(email).toLowerCase());
   };
 
@@ -110,10 +120,10 @@ const Register = props => {
         <SelectElement data={sesso} value= "sesso" title="SESSO"/>
       </View>
       <Divider size="60px" />
-      <BaseSelectBox checked={checked} onPress={() => setChecked(!checked)} text="
+      <BaseSelectBox checked={checked} onPress={() => {auth.setParam('privacy', checked ? 1 : 0); setChecked(!checked); }} text="
       Lorem Ipsum dolor sit amet, consecteur adipiscing eUt,  sed do elusmod tempor
       "/>
-      <BaseSelectBox checked={checked1} onPress={() => setChecked1(!checked1)} text="
+      <BaseSelectBox checked={checked1} onPress={() => {auth.setParam('dem', checked1 ? 1 : 0); setChecked1(!checked1); }} text="
       Lorem Ipsum dolor sit amet, consecteur adipiscing eUt,  sed do elusmod tempor
       "/>
       {show && (

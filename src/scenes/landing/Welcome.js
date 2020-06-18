@@ -11,7 +11,7 @@ import {SingleSelectBox, MultiSelectBox, Divider} from '../../components/control
 import {get} from 'lodash';
 
 const Welcome = props => {
-  const {question, alert} = useStores();
+  const {question, alert, auth} = useStores();
   const [data, setData] = useState(toJS(question.data));
   const [uiData, setUiData] = useState([]);
   const [reset, setReset] = useState(1);
@@ -47,7 +47,7 @@ const Welcome = props => {
         return
       }
     }
-    question.submit();
+    question.submit(auth.token);
     Actions.Home()
   };
 

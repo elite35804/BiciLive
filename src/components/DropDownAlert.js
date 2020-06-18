@@ -46,7 +46,7 @@ const Alert = props => {
             messageNumOfLines={0}
             titleStyle={titleStyle}
             messagesStyle={messaageStyle}
-            successColor='#3c2deb'
+            successColor='#333333'
             onClose={ alert.hide }/>
     )
 };

@@ -32,6 +32,7 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import axios from 'axios';
 const isIOS = Platform.OS === "ios";
+import analytics from '@react-native-firebase/analytics';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -47,7 +48,7 @@ const RelatedElements = (item, index) => {
     <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10}}>
       {item.map((item0, index) =>
         <View key={index} style={{width: '33%', borderLeftColor: '#c9c3c5', borderLeftWidth: 7, paddingHorizontal: 5}}>
-          <TouchableOpacity onPress={() => goToBike(item0.url)}><Image style={{width: '100%', height: 60}}
+          <TouchableOpacity onPress={() => goToBike(item0.url)}><Image style={{width: '100%', height: 60, resizeMode: 'contain'}}
                                                                        source={{uri: item0.img_url}}/></TouchableOpacity>
           <Text style={{
             color: '#909090',
@@ -148,16 +149,17 @@ const Expandible_Wrapper = props => {
               data={[""]}
               renderItem={(data, rowMap) => (<View><ListBikeInfo key={index} data={item}/></View>)}
               renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
-                <TouchableOpacity style={{backgroundColor: 'red', alignItems: 'center', width: 70,height: '50%', justifyContent: 'center'}}>
+                <TouchableOpacity style={{backgroundColor: 'red', alignItems: 'center', width: 70,height: '70%', justifyContent: 'center'}}>
                   <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_white} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{backgroundColor: '#53DCD0', alignItems: 'center', width: 70,height: '50%', justifyContent: 'center'}}>
-                  <Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white} />
-                </TouchableOpacity>
+                {/*<TouchableOpacity style={{backgroundColor: '#53DCD0', alignItems: 'center', width: 70,height: '50%', justifyContent: 'center'}}>*/}
+                  {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white} />*/}
+                {/*</TouchableOpacity>*/}
               </View>)}
               leftOpenValue={0}
               rightOpenValue={-80}
-            /><DivideLine/></View>
+            />
+            <DivideLine/></View>
         if (item.id === "BIKE_RESUME_BIG")
           return <View>
             <SwipeListView
@@ -167,9 +169,9 @@ const Expandible_Wrapper = props => {
                 <TouchableOpacity style={{backgroundColor: 'red', alignItems: 'center', width: 70,height: '30%', justifyContent: 'center'}}>
                   <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_white} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{backgroundColor: '#53DCD0', alignItems: 'center', width: 70,height: '30%', justifyContent: 'center'}}>
-                  <Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white} />
-                </TouchableOpacity>
+                {/*<TouchableOpacity style={{backgroundColor: '#53DCD0', alignItems: 'center', width: 70,height: '30%', justifyContent: 'center'}}>*/}
+                  {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white} />*/}
+                {/*</TouchableOpacity>*/}
               </View>)}
               leftOpenValue={0}
               rightOpenValue={-80}
@@ -194,28 +196,22 @@ const ImageReel = (props) => {
   };
   return (
     <View>
-    <CategoryView>
-      {props.data.img1 && <TouchableOpacity key="1" onPress={() => {
-        goToBrand(get(props, 'data.url1', ''));
-      }}><Image
-        style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
-        source={{uri: get(props, 'data.img1', '')}}/></TouchableOpacity>}
-      {props.data.img2 && <TouchableOpacity key="2" onPress={() => goToBrand(get(props, 'data.url2', ''))}><Image
-        style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
-        source={{uri: get(props, 'data.img2', '')}}/></TouchableOpacity>}
-      {props.data.img3 &&  <TouchableOpacity key="3" onPress={() => goToBrand(get(props, 'data.url3', ''))}><Image
-        style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
-        source={{uri: get(props, 'data.img3', '')}}/></TouchableOpacity>}
-    </CategoryView>
+      <CategoryView>
+        {props.data.img1 && <TouchableOpacity key="1" onPress={() => {
+          goToBrand(get(props, 'data.url1', ''));
+        }}><CategoryImage
+          source={{uri: get(props, 'data.img1', '')}}/></TouchableOpacity>}
+        {props.data.img2 && <TouchableOpacity key="2" onPress={() => goToBrand(get(props, 'data.url2', ''))}><CategoryImage
+          source={{uri: get(props, 'data.img2', '')}}/></TouchableOpacity>}
+        {props.data.img3 &&  <TouchableOpacity key="3" onPress={() => goToBrand(get(props, 'data.url3', ''))}><CategoryImage
+          source={{uri: get(props, 'data.img3', '')}}/></TouchableOpacity>}
+      </CategoryView>
       {props.data.img4 &&<CategoryView>
-        {props.data.img4 && <TouchableOpacity key="4" onPress={() => goToBrand(get(props, 'data.url4', ''))}><Image
-          style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
+        {props.data.img4 && <TouchableOpacity key="4" onPress={() => goToBrand(get(props, 'data.url4', ''))}><CategoryImage
           source={{uri: get(props, 'data.img4', '')}}/></TouchableOpacity>}
-        {props.data.img5 && <TouchableOpacity key="5" onPress={() => goToBrand(get(props, 'data.url5', ''))}><Image
-          style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
+        {props.data.img5 && <TouchableOpacity key="5" onPress={() => goToBrand(get(props, 'data.url5', ''))}><CategoryImage
           source={{uri: get(props, 'data.img5', '')}}/></TouchableOpacity>}
-        {props.data.img6 && <TouchableOpacity key="6" onPress={() => goToBrand(get(props, 'data.url6', ''))}><Image
-          style={{width: moderateScale(105), height: moderateScale(105), resizeMode: 'contain'}}
+        {props.data.img6 && <TouchableOpacity key="6" onPress={() => goToBrand(get(props, 'data.url6', ''))}><CategoryImage
           source={{uri: get(props, 'data.img6', '')}}/></TouchableOpacity>}
       </CategoryView>}
     </View>
@@ -285,30 +281,31 @@ const PageSlider = (props) => {
 const ShareBlock = props => {
   const {auth} = useStores();
   const [isLike, setLike] = useState(false);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        axios.get(
-          `http://biciapp.sepisolutions.com${props.data.like_url}`,
-          {
-            headers: {
-              'Authorization' : `Bearer ${auth.token}`
-            }
+  const fetchData = async () => {
+    try {
+      axios.get(
+        `http://biciapp.sepisolutions.com${props.data.like_url}`,
+        {
+          headers: {
+            'Authorization' : `Bearer ${auth.token}`
           }
-        ).then(res => {
-          console.log('======', res.data);
-          if (res.data.err_code === "ERR_OK") {
-            setLike(res.data.status)
-          }
-        });
-      } catch (e) {
-        console.log(e);
-      }
+        }
+      ).then(res => {
+        console.log('======', res.data);
+        if (res.data.err_code === "ERR_OK") {
+          setLike(res.data.status)
+        }
+      });
+    } catch (e) {
+      console.log(e);
     }
+  }
+
+  useEffect(() => {
     fetchData();
   }, []);
   return <View><ShareView>
-    <TouchableOpacity onPress={() => setLike(!isLike)}><Image width={'100%'} height={'100%'} source={isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart} /></TouchableOpacity>
+    <TouchableOpacity onPress={() => {fetchData();setLike(!isLike)}}><Image width={'100%'} height={'100%'} source={isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart} /></TouchableOpacity>
     <ShareTooltip/>
   </ShareView>
     <Divider size={15}/>
@@ -324,6 +321,7 @@ const AdBlock = props => {
   return <View><Divider size={30}/><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image style={{width: '100%', height: 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>
 };
 const BrandPagePremium = props => {
+
   const {brandData} = useStores();
   // const [titleData, setTitleData] = useState({});
 
@@ -543,5 +541,13 @@ const SwiperContainer = styled(View)`
   width: 100%;
 `;
 
+const CategoryImage = styled(Image)`
+  margin-top: 20px
+  width: ${moderateScale(105)}; 
+  height: ${moderateScale(95)}; 
+  resize-mode: contain; 
+  border-width: 1; 
+  border-color: #ebebeb
+`;
 
 export default observer(BrandPagePremium);

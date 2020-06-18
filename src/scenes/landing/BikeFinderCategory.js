@@ -36,7 +36,7 @@ const FinderItem = props => {
   };
   return (
     <View>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginRight: 10}}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginRight: 20}}>
           <CheckBox checked={checked} onPress={() => setChecked(!checked)} text={get(props, 'data.title','').toUpperCase()}/>
         <CustomTooltip from="category" tooltipText={get(props, 'data.infotext', 'No Info')}/>
       </View>
@@ -212,7 +212,6 @@ const BikeFinderCategory = props => {
                 return <SelectElement data={item} key={index}/>;
               }
               if (item.id === "FORM_INPUT_SELECT" && item.title === "Marca") {
-                item.title = "Marca Ebike";
                 return <View><SelectElement data={item} key={index}/><Divider size={5}/></View>;
               }
               if (item.id === "FORM_INPUT_SELECT" && item.name === "brand_motore"){
@@ -223,7 +222,6 @@ const BikeFinderCategory = props => {
           {uiData.map((item,index) => {
             if (item.id === "FORM_INPUT_SLIDER" && item.name === "prezzo") return <FinderItem data={item} key={index}/>;
             if (item.id === "FORM_INPUT_SLIDER" && item.name === "densita_energetica"){
-              item.title = "Capacita Batteria";
               return <View><Divider size={-10}/><FinderItem data={item} key={index}/></View>
             }
           })}

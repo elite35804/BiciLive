@@ -6,11 +6,17 @@ import { themeProp }  from '../../utils/CssUtil';
 import {get} from 'lodash';
 import Colors from 'res/Colors'
 
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
+
+TextInput.defaultProps = TextInput.defaultProps || {};
+TextInput.defaultProps.allowFontScaling = false;
+
 const BaseTextInput= (props) => (
   <View style={{flex: 1, flexDirection: 'row'}}>
     <LineView {...props}/>
   <InputView>
-    <Input secureTextEntry={get(props, 'isPassword', false)} placeholder={props.placeholder} placeholderTextColor={'#c9c3c5'} onChangeText={text => props.onChange(text)}/>
+    <Input secureTextEntry={get(props, 'isPassword', false)} placeholder={props.placeholder} placeholderTextColor={'#c9c3c5'} onEndEditing={f => props.onChange(f.nativeEvent.text)}/>
     <Image width={20} height={20} source={Images.icons.keyboard} />
   </InputView>
   </View>
@@ -18,7 +24,7 @@ const BaseTextInput= (props) => (
 
 const BaseTextFilter= (props) => (
   <FilterView>
-    <Input placeholder={props.placeholder} placeholderTextColor={'#c9c3c5'}/>
+    <Input onEndEditing={f => props.onEndEditing(f.nativeEvent.text)} placeholder={props.placeholder} placeholderTextColor={'#c9c3c5'}/>
     <Image width={20} height={20} source={Images.icons.filter} />
   </FilterView>
 );
