@@ -10,27 +10,28 @@ import Images from 'res/Images';
 import {
   Divider,
 } from 'components/controls/BaseUtils';
+import { useNavigation } from '@react-navigation/native';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
 
 const Dashboard = props => {
-  const {auth, dashboard} = useStores();
-  const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImlzcyI6ImJpY2lsaXZlLml0In0.eyJ1aWQiOiIxIiwiZW1haWwiOiJhQGIuYyJ9.4SJz8le-RIzeuvDdZXUNpBqtE4MENz6vrA93wEhfqHhuALEsbxYF82bjQa1wq_h17EXw0axaVPHKGuCOo2donA';
+  const navigation = useNavigation();
+  const {auth, likeBrand, likeProduct, account} = useStores();
   return (
       <Container>
         <Title size={'40px'} color={themeProp('colorPrimary')} width={'35px'}>DASHBOARD</Title>
         <Divider size={20}/>
-        <ItemView onPress={() => {dashboard.getData('brand', auth.token); Actions.Brand()}}>
+        <ItemView onPress={() => {likeBrand.getData(auth.token); navigation.navigate('LikeBrand')}}>
           <Image width={'100%'} height={'100%'} style={{marginTop: 10}} source={Images.icons.ic_heart_sm}/>
           <Title size={'10px'} color={themeProp('colorThird')} width={'35px'}>BRAND</Title>
         </ItemView>
-        <ItemView onPress={() => {dashboard.getData('product', auth.token); Actions.EBike()}}>
+        <ItemView onPress={() => {likeProduct.getData(auth.token); navigation.navigate('LikeProduct')}}>
           <Image width={'100%'} height={'100%'} style={{marginTop: 10}} source={Images.icons.ic_heart_sm}/>
           <Title size={'10px'} color={themeProp('colorThird')} width={'35px'}>EBIKE</Title>
         </ItemView>
-        <ItemView onPress={() => {dashboard.getData('account', auth.token); Actions.User()}}>
+        <ItemView onPress={() => {account.getData(auth.token); navigation.navigate('Account')}}>
           <Image width={'100%'} height={'100%'} style={{marginTop: 10}} source={Images.icons.ic_user_sm}/>
           <Title size={'10px'} color={themeProp('colorDescription')} width={'35px'}>ACCOUNT</Title>
         </ItemView>

@@ -9,8 +9,10 @@ import {BlueButton, WhiteButton} from 'components/controls/Button';
 import {toJS} from 'mobx';
 import {SingleSelectBox, MultiSelectBox, Divider} from '../../components/controls/BaseUtils';
 import {get} from 'lodash';
+import { useNavigation } from '@react-navigation/native';
 
 const Welcome = props => {
+  const navigation = useNavigation();
   const {question, alert, auth} = useStores();
   const [data, setData] = useState(toJS(question.data));
   const [uiData, setUiData] = useState([]);
@@ -48,7 +50,7 @@ const Welcome = props => {
       }
     }
     question.submit(auth.token);
-    Actions.Home()
+    navigation.navigate('Main')
   };
 
   console.log('length=====', Object.entries(toJS(question.data)).length);

@@ -4,34 +4,99 @@
     <list default="true" id="55ba93a2-98b0-48b8-9cd7-248b6595da0e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/blame/res/debug/multi-v2/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/blame/res/debug/multi-v2/debug.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/blame/res/debug/single/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/blame/res/debug/single/debug.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/bundle_manifest/debug/processDebugManifest/bundle-manifest/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/bundle_manifest/debug/processDebugManifest/bundle-manifest/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/generated/rncli/src/main/java/com/facebook/react/PackageList.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/generated/rncli/src/main/java/com/facebook/react/PackageList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/incremental/debug-mergeJavaRes/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/incremental/debug-mergeJavaRes/merge-state" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/incremental/debug-mergeJniLibs/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/incremental/debug-mergeJniLibs/merge-state" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/incremental/mergeDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/incremental/packageDebug/tmp/debug/file-input-save-data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/incremental/packageDebug/tmp/debug/file-input-save-data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/instant_app_manifest/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/instant_app_manifest/debug/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/processed_res/debug/processDebugResources/out/resources-debug.ap_" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/processed_res/debug/processDebugResources/out/resources-debug.ap_" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/facebook/react/PackageList.class" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/facebook/react/PackageList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/merged_assets/debug/out/index.android.bundle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/merged_assets/debug/out/index.android.bundle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/12.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/12.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/13.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/13.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/14.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/14.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/15.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/15.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/16.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/16.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/17.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/17.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/18.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/18.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/19.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/19.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/20.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/20.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/21.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/21.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/22.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/22.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/23.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/23.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/24.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/24.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/25.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/25.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/26.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/26.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/27.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/27.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/28.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/28.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/30.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/30.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/31.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/31.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/32.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/32.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/33.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/33.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/34.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/34.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/35.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/35.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/36.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/36.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/37.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/37.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/38.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/38.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/39.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/39.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/40.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/40.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/41.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/41.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/42.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/42.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/43.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/43.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/44.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/44.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/45.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/45.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/46.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/46.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/47.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/47.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/48.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/48.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/49.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/49.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/50.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/50.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/51.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/51.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/52.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/52.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/53.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/53.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/54.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/54.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/55.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/55.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/56.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/56.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/57.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/57.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/60.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/60.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/61.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/61.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/62.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/62.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/63.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/63.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/66.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/66.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/67.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/67.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/68.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/68.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/__content__.json" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexBuilder/debug/__content__.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexMerger/debug/__content__.json" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/dexMerger/debug/__content__.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/externalLibsDexMerger/debug/0/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/externalLibsDexMerger/debug/0/classes.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/mergeJavaRes/debug/0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/mergeJavaRes/debug/0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build/intermediates/transforms/mergeJavaRes/debug/__content__.json" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/intermediates/transforms/mergeJavaRes/debug/__content__.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/assets/index.android.bundle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/assets/index.android.bundle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StoresContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/StoresContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/controls/BaseUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/controls/BaseUtils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/Images.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/Images.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scenes/landing/BikeFinder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/landing/BikeFinder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scenes/landing/BikeFinderAZ.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/landing/BikeFinderAZ.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scenes/landing/BikeFinderCategory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/landing/BikeFinderCategory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scenes/landing/BikePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/landing/BikePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scenes/landing/BikePagePremium.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/landing/BikePagePremium.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scenes/landing/Brand.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/landing/Brand.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scenes/landing/BrandPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/landing/BrandPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scenes/landing/BrandPagePremium.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/landing/BrandPagePremium.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scenes/landing/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/landing/Dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scenes/landing/EBike.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/landing/EBike.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scenes/landing/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/landing/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scenes/landing/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/landing/Register.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scenes/landing/Result.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/landing/Result.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scenes/landing/Splash.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/landing/Splash.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scenes/landing/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/landing/User.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scenes/landing/Welcome.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scenes/landing/Welcome.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stores/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -46,22 +111,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/scenes/landing/BikeFinderCategory.js">
+        <entry file="file://$PROJECT_DIR$/src/scenes/landing/BrandPagePremium.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-20">
-              <caret line="280" column="17" selection-start-line="280" selection-start-column="17" selection-end-line="280" selection-end-column="17" />
+            <state relative-caret-position="133">
+              <caret line="282" selection-start-line="282" selection-end-line="282" />
               <folding>
-                <element signature="e#0#57#0" expanded="true" />
+                <element signature="e#0#49#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/stores/QuestionStore.js">
+        <entry file="file://$PROJECT_DIR$/src/stores/BikeSearchStore.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="41" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
+            <state relative-caret-position="513">
+              <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -70,20 +135,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/stores/CategoryStore.js">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/stores/WebViewStore.js">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/stores/BikeStore.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+            <state relative-caret-position="343">
+              <caret line="53" column="11" selection-start-line="53" selection-start-column="2" selection-end-line="53" selection-end-column="11" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -92,10 +147,35 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/scenes/landing/EBike.js">
+        <entry file="file://$PROJECT_DIR$/src/stores/BrandStore.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="125" column="21" selection-start-line="125" selection-start-column="21" selection-end-line="125" selection-end-column="21" />
+            <state relative-caret-position="324">
+              <caret line="57" column="2" selection-start-line="57" selection-start-column="2" selection-end-line="60" selection-end-column="3" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Router.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="146" lean-forward="true" selection-start-line="146" selection-end-line="146" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+                <element signature="e#277#309#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/scenes/landing/Home.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="59" column="26" lean-forward="true" selection-start-line="59" selection-start-column="26" selection-end-line="59" selection-end-column="26" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
               </folding>
@@ -106,34 +186,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/scenes/landing/Result.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="552">
-              <caret line="165" column="23" selection-start-line="165" selection-start-column="23" selection-end-line="165" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#49#0" expanded="true" />
-                <element signature="e#3409#4832#0" />
-                <element signature="e#4884#6306#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/stores/BikeSearchStore.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="35" column="57" selection-start-line="35" selection-start-column="57" selection-end-line="35" selection-end-column="57" />
-              <folding>
-                <element signature="e#0#40#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/scenes/landing/User.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="48" selection-start-line="48" selection-end-line="48" />
+            <state relative-caret-position="272">
+              <caret line="65" column="31" selection-start-line="65" selection-start-column="31" selection-end-line="65" selection-end-column="31" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
               </folding>
@@ -142,12 +196,36 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Router.js">
+        <entry file="file://$PROJECT_DIR$/src/scenes/landing/BikeFinderCategory.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="107" column="17" selection-start-line="107" selection-start-column="17" selection-end-line="107" selection-end-column="17" />
+            <state relative-caret-position="42">
+              <caret line="180" column="12" selection-start-line="180" selection-start-column="12" selection-end-line="180" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#57#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/StoresContext.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="29" column="12" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="12" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/scenes/landing/BikePagePremium.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="107">
+              <caret line="209" column="11" selection-start-line="209" selection-start-column="11" selection-end-line="209" selection-end-column="11" />
+              <folding>
+                <element signature="e#0#49#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -165,36 +243,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ImageReel</find>
-      <find>granc</find>
-      <find>RelatedGroup</find>
-      <find>re</find>
-      <find>marca</find>
-      <find>success</find>
-      <find>image</find>
-      <find>successImageSrc</find>
-      <find>DropdownAlertProps</find>
-      <find>renderImage</find>
-      <find>preProcess</find>
-      <find>onchang</find>
-      <find>onend</find>
-      <find>data=======</find>
-      <find>filter</find>
-      <find>scali</find>
-      <find>statusbar</find>
-      <find>ImageBackground</find>
-      <find>LoginBackgroud</find>
-      <find>BtnView</find>
-      <find>ageE===</find>
-      <find>szbutton</find>
-      <find>reel</find>
-      <find>imagereel</find>
-      <find>landing</find>
-      <find>whats</find>
-      <find>shareb</find>
-      <find>shareblo</find>
+      <find>usena</find>
+      <find>goto</find>
+      <find>got</find>
+      <find>Action</find>
+      <find>use</find>
+      <find>contextType</find>
+      <find>Stack</find>
+      <find>*</find>
+      <find>navigation</find>
+      <find>login</find>
+      <find>Action.</find>
+      <find>setcyr</find>
+      <find>setc</find>
+      <find>setCurrentScreen</find>
+      <find>setcu</find>
+      <find>type</find>
+      <find>dashboard</find>
+      <find>likeBrand</find>
+      <find>dash</find>
+      <find>hud</find>
+      <find>home</find>
+      <find>FBLoginButton</find>
+      <find>action</find>
+      <find>shar</find>
       <find>ShareBlock</find>
-      <find>LikeBlock</find>
+      <find>back</find>
+      <find>useNavigation</find>
+      <find>pop</find>
+      <find>sharebl</find>
+      <find>shareb</find>
     </findStrings>
     <replaceStrings>
       <replace>&lt;TouchableOpacity onPress={() =&gt; Actions.BikeFinderCategory()}&gt;&lt;Title</replace>
@@ -212,6 +290,8 @@
       <replace>120</replace>
       <replace>moderateScale(110)</replace>
       <replace>105</replace>
+      <replace>Tab</replace>
+      <replace>likeBrand</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -220,23 +300,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/android/app/build.gradle" />
-        <option value="$PROJECT_DIR$/node_modules/react-native-fbsdk/lib/module/index.js" />
-        <option value="$PROJECT_DIR$/node_modules/react-native-fbsdk/lib/module/FBLoginButton.js" />
-        <option value="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/src/scenes/landing/BikeFinder.js" />
-        <option value="$PROJECT_DIR$/src/res/cities.json" />
-        <option value="$PROJECT_DIR$/android/build.gradle" />
         <option value="$PROJECT_DIR$/src/stores/WebViewStore.js" />
         <option value="$PROJECT_DIR$/src/res/SceneKeys.js" />
         <option value="$PROJECT_DIR$/ios/Podfile" />
-        <option value="$PROJECT_DIR$/src/scenes/landing/WebViewer.js" />
         <option value="$PROJECT_DIR$/src/components/controls/ZoomableImage.js" />
         <option value="$PROJECT_DIR$/src/stores/AlertStore.js" />
         <option value="$PROJECT_DIR$/src/components/hud/index.js" />
-        <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/src/stores/index.js" />
-        <option value="$PROJECT_DIR$/src/StoresContext.js" />
         <option value="$PROJECT_DIR$/src/config/package.json" />
         <option value="$PROJECT_DIR$/src/config/Config.js" />
         <option value="$PROJECT_DIR$/src/stores/DashboardStore.js" />
@@ -245,32 +314,43 @@
         <option value="$PROJECT_DIR$/src/stores/BikeSearchStore.js" />
         <option value="$PROJECT_DIR$/src/components/controls/CustomTooltip.js" />
         <option value="$PROJECT_DIR$/src/components/DropDownAlert.js" />
-        <option value="$PROJECT_DIR$/src/components/controls/BaseUtils.js" />
         <option value="$PROJECT_DIR$/node_modules/react-native-dropdownalert/imageview.js" />
-        <option value="$PROJECT_DIR$/src/res/Images.js" />
         <option value="$PROJECT_DIR$/src/res/Sizes.js" />
         <option value="$PROJECT_DIR$/src/components/controls/Button.js" />
         <option value="$PROJECT_DIR$/src/res/data.js" />
         <option value="$PROJECT_DIR$/src/components/controls/BaseTextInput.js" />
         <option value="$PROJECT_DIR$/src/stores/AuthStore.js" />
-        <option value="$PROJECT_DIR$/src/scenes/landing/BikeFinderAZ.js" />
-        <option value="$PROJECT_DIR$/src/Router.js" />
-        <option value="$PROJECT_DIR$/src/scenes/landing/Register.js" />
-        <option value="$PROJECT_DIR$/src/scenes/landing/Login.js" />
+        <option value="$PROJECT_DIR$/src/stores/QuestionStore.js" />
+        <option value="$PROJECT_DIR$/node_modules/@react-navigation/stack/src/index.tsx" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/scenes/landing/BikePage.js" />
+        <option value="$PROJECT_DIR$/src/scenes/landing/BrandPage.js" />
         <option value="$PROJECT_DIR$/src/scenes/landing/Splash.js" />
-        <option value="$PROJECT_DIR$/src/stores/BikeStore.js" />
-        <option value="$PROJECT_DIR$/src/stores/BrandStore.js" />
-        <option value="$PROJECT_DIR$/src/scenes/landing/Home.js" />
+        <option value="$PROJECT_DIR$/src/components/controls/BaseUtils.js" />
         <option value="$PROJECT_DIR$/src/scenes/landing/Welcome.js" />
-        <option value="$PROJECT_DIR$/src/scenes/landing/BrandPagePremium.js" />
-        <option value="$PROJECT_DIR$/src/scenes/landing/BikePagePremium.js" />
-        <option value="$PROJECT_DIR$/src/scenes/landing/Brand.js" />
+        <option value="$PROJECT_DIR$/src/scenes/landing/Login.js" />
+        <option value="$PROJECT_DIR$/src/scenes/landing/Register.js" />
+        <option value="$PROJECT_DIR$/src/stores/LikeBrandStore.js" />
+        <option value="$PROJECT_DIR$/src/stores/LikeProductStore.js" />
+        <option value="$PROJECT_DIR$/src/stores/AccountStore.js" />
+        <option value="$PROJECT_DIR$/src/stores/index.js" />
+        <option value="$PROJECT_DIR$/src/StoresContext.js" />
         <option value="$PROJECT_DIR$/src/scenes/landing/Dashboard.js" />
-        <option value="$PROJECT_DIR$/src/scenes/landing/EBike.js" />
+        <option value="$PROJECT_DIR$/src/scenes/landing/Brand.js" />
         <option value="$PROJECT_DIR$/src/scenes/landing/User.js" />
+        <option value="$PROJECT_DIR$/src/scenes/landing/WebViewer.js" />
+        <option value="$PROJECT_DIR$/src/scenes/landing/BikeFinderAZ.js" />
+        <option value="$PROJECT_DIR$/src/res/Images.js" />
+        <option value="$PROJECT_DIR$/src/scenes/landing/EBike.js" />
         <option value="$PROJECT_DIR$/src/scenes/landing/Result.js" />
         <option value="$PROJECT_DIR$/src/scenes/landing/BikeFinderCategory.js" />
-        <option value="$PROJECT_DIR$/src/stores/QuestionStore.js" />
+        <option value="$PROJECT_DIR$/src/scenes/landing/BikeFinder.js" />
+        <option value="$PROJECT_DIR$/src/stores/BrandStore.js" />
+        <option value="$PROJECT_DIR$/src/scenes/landing/BrandPagePremium.js" />
+        <option value="$PROJECT_DIR$/src/stores/BikeStore.js" />
+        <option value="$PROJECT_DIR$/src/scenes/landing/BikePagePremium.js" />
+        <option value="$PROJECT_DIR$/src/Router.js" />
+        <option value="$PROJECT_DIR$/src/scenes/landing/Home.js" />
       </list>
     </option>
   </component>
@@ -281,8 +361,8 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="52" />
-    <option name="y" value="40" />
+    <option name="x" value="45" />
+    <option name="y" value="23" />
     <option name="width" value="1876" />
     <option name="height" value="1057" />
   </component>
@@ -295,7 +375,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -350,6 +429,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -449,6 +529,7 @@
       <workItem from="1591757586805" duration="121873000" />
       <workItem from="1592300793956" duration="14947000" />
       <workItem from="1592363467300" duration="41500000" />
+      <workItem from="1592563355913" duration="19218000" />
     </task>
     <task id="LOCAL-00001" summary="connected static and home data api">
       <created>1589472295832</created>
@@ -485,11 +566,18 @@
       <option name="project" value="LOCAL" />
       <updated>1592279978436</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="react native router flux">
+      <created>1592539353384</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1592539353384</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="689181000" />
+    <option name="totallyTimeSpent" value="718558000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -501,10 +589,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="45" y="23" width="1876" height="1057" extended-state="6" />
+    <frame x="44" y="23" width="1876" height="1057" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49741825" visible="true" weight="0.21351351" />
-      <window_info id="Structure" order="1" sideWeight="0.5025818" side_tool="true" weight="0.21351351" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49602544" visible="true" weight="0.21351351" />
+      <window_info id="Structure" order="1" sideWeight="0.50397456" side_tool="true" weight="0.21351351" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -517,7 +606,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50054055" side_tool="true" weight="0.20610687" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49945945" visible="true" weight="0.35005453" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49945945" visible="true" weight="0.3140676" />
       <window_info anchor="bottom" id="TypeScript" order="11" weight="0.3293348" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.3293348" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -527,11 +616,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-    <option name="exactExcludedFiles">
-      <list>
-        <option value="$PROJECT_DIR$/node_modules/react-native-svg/src/index.d.ts" />
-      </list>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="connected static and home data api" />
@@ -540,7 +624,8 @@
     <MESSAGE value="google-firebase-login" />
     <MESSAGE value="facebook-login" />
     <MESSAGE value="facebook-sharing" />
-    <option name="LAST_COMMIT_MESSAGE" value="facebook-sharing" />
+    <MESSAGE value="react native router flux" />
+    <option name="LAST_COMMIT_MESSAGE" value="react native router flux" />
   </component>
   <component name="WindowStateProjectService">
     <state x="581" y="217" key="#Inspections" timestamp="1589472995966">
@@ -549,270 +634,6 @@
     <state x="581" y="217" key="#Inspections/43.23.1877.1057@43.23.1877.1057" timestamp="1589472995966" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/styled-components/native/dist/styled-components.native.esm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="5931" column="9" selection-start-line="5931" selection-start-column="9" selection-end-line="5931" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/StoresContext.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="741">
-          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/hud/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="33" column="15" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/images/ic_footer_profile.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/react-native-dropdownalert/assets/error.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/react-native-dropdownalert/assets/success@3x.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/react-native-dropdownalert/assets/success@2x.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/react-native-dropdownalert/assets/success.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/react-native-swipe-list-view/types/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="378" column="13" selection-start-line="378" selection-start-column="13" selection-end-line="378" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/patches/react-native-dropdownalert+4.2.1.patch">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/controls/CustomTooltip.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="73" column="3" selection-start-line="73" selection-start-column="3" selection-end-line="73" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/images/bg_image.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/Images.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="76" column="8" selection-start-line="76" selection-start-column="8" selection-end-line="76" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/controls/BaseUtils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="362" column="15" selection-start-line="362" selection-start-column="15" selection-end-line="362" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/Sizes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
-          <folding>
-            <element signature="e#0#79#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/Themes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="120" column="24" selection-start-line="120" selection-start-column="24" selection-end-line="120" selection-end-column="24" />
-          <folding>
-            <element signature="e#41#91#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/controls/Button.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/data.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="680" selection-start-column="680" selection-end-column="680" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/controls/BaseTextInput.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="17" column="13" lean-forward="true" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stores/HomeStore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@react-native-firebase/analytics/lib/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="707" column="4" selection-start-line="707" selection-start-column="4" selection-end-line="707" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/landing/BikeFinderAZ.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/SceneKeys.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="19" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/landing/Register.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="98" column="20" selection-start-line="98" selection-start-column="20" selection-end-line="98" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stores/BrandStore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="47" column="62" selection-start-line="47" selection-start-column="62" selection-end-line="47" selection-end-column="62" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/landing/Splash.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-262">
-          <caret line="57" column="28" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/landing/Home.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="197" selection-start-line="197" selection-end-line="197" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stores/AuthStore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-248">
-          <caret line="20" column="15" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/landing/Login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="46" column="26" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/landing/Welcome.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="49" column="30" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/landing/BrandPagePremium.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="303" column="19" selection-start-line="303" selection-start-column="19" selection-end-line="303" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/react-native-router-flux/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="116" column="11" selection-start-line="116" selection-start-column="11" selection-end-line="116" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="1" selection-start-column="1" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/DropDownAlert.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
@@ -837,99 +658,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/landing/BikePagePremium.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="450" column="42" lean-forward="true" selection-start-line="450" selection-start-column="42" selection-end-line="450" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-            <element signature="e#15625#20237#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/landing/Dashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="24" column="35" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/landing/Brand.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="98" column="59" lean-forward="true" selection-start-line="98" selection-start-column="59" selection-end-line="98" selection-end-column="59" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/landing/EBike.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="125" column="21" selection-start-line="125" selection-start-column="21" selection-end-line="125" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/landing/User.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="48" selection-start-line="48" selection-end-line="48" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Router.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="107" column="17" selection-start-line="107" selection-start-column="17" selection-end-line="107" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stores/BikeSearchStore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="35" column="57" selection-start-line="35" selection-start-column="57" selection-end-line="35" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/landing/Result.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="165" column="23" selection-start-line="165" selection-start-column="23" selection-end-line="165" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-            <element signature="e#3409#4832#0" />
-            <element signature="e#4884#6306#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scenes/landing/BikeFinderCategory.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-20">
-          <caret line="280" column="17" selection-start-line="280" selection-start-column="17" selection-end-line="280" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/stores/QuestionStore.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -940,18 +668,402 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@react-navigation/stack/lib/typescript/src/navigators/createStackNavigator.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/images/ic_heart_red_sm.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/images/ic_user_sm.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/images/ic_compare_white.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/images/ic_heart_border_sm.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@react-navigation/stack/src/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
+          <folding>
+            <element signature="e#0#85#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/react-native/Libraries/react-native/react-native-implementation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="69" column="6" selection-start-line="69" selection-start-column="6" selection-end-line="69" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/stores/CategoryStore.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/stores/WebViewStore.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/stores/BikeStore.js">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        <state relative-caret-position="274">
+          <caret line="31" column="24" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stores/HomeStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/BikeFinder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="30" column="20" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/BikePage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="8" column="8" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/BrandPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="80" column="131" selection-start-line="80" selection-start-column="131" selection-end-line="80" selection-end-column="131" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/NewsFinder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/Register.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/Splash.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="143" column="40" selection-start-line="143" selection-start-column="40" selection-end-line="143" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="11" lean-forward="true" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/Login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stores/LikeProductStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stores/LikeBrandStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="20" lean-forward="true" selection-end-line="42" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stores/DashboardStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="39" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stores/AccountStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="19" column="11" lean-forward="true" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stores/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="48" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/Dashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="34" column="17" lean-forward="true" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/User.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="30" column="16" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/WebViewer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="32" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/Welcome.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="98" column="17" selection-start-line="98" selection-start-column="17" selection-end-line="98" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/BikeFinderAZ.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="124" lean-forward="true" selection-start-line="124" selection-end-line="124" />
+          <folding>
+            <element signature="e#0#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/controls/Button.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/controls/FBLoginButton.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="27" column="30" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/controls/CustomTooltip.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/controls/BaseUtils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3">
+          <caret line="147" column="33" lean-forward="true" selection-start-line="147" selection-start-column="33" selection-end-line="147" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/images/ic_heart_white.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/Images.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="63" column="49" lean-forward="true" selection-start-line="63" selection-start-column="49" selection-end-line="63" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/Brand.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="22" column="2" lean-forward="true" selection-start-line="22" selection-start-column="2" selection-end-line="41" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/EBike.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="114" column="19" lean-forward="true" selection-start-line="114" selection-start-column="19" selection-end-line="114" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/Result.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="65" column="31" selection-start-line="65" selection-start-column="31" selection-end-line="65" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/BikeFinderCategory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="180" column="12" selection-start-line="180" selection-start-column="12" selection-end-line="180" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stores/BikeSearchStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/BrandPagePremium.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="282" selection-start-line="282" selection-end-line="282" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stores/BrandStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="57" column="2" selection-start-line="57" selection-start-column="2" selection-end-line="60" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StoresContext.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="29" column="12" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stores/BikeStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="53" column="11" selection-start-line="53" selection-start-column="2" selection-end-line="53" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="146" lean-forward="true" selection-start-line="146" selection-end-line="146" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#277#309#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/Home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="59" column="26" lean-forward="true" selection-start-line="59" selection-start-column="26" selection-end-line="59" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scenes/landing/BikePagePremium.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="209" column="11" selection-start-line="209" selection-start-column="11" selection-end-line="209" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
           </folding>
         </state>
       </provider>

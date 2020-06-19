@@ -12,7 +12,10 @@ import {
     AuthStore,
     WebViewStore,
     QuestionStore,
-    DashboardStore
+    DashboardStore,
+    LikeBrandStore,
+    LikeProductStore,
+    AccountStore,
 } from './stores';
 // Import stores here.
 
@@ -30,6 +33,9 @@ const store = {
     web: new WebViewStore(),
     question: new QuestionStore(),
     dashboard: new DashboardStore(),
+    likeBrand: new LikeBrandStore(),
+    likeProduct: new LikeProductStore,
+    account: new AccountStore()
 };
 
 const StoresContext = React.createContext(store);

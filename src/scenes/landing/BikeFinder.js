@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {View, Text, ScrollView, TouchableOpacity, Image} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
-import {Actions} from 'react-native-router-flux';
 import {useStores} from 'hooks/Utils';
 import {Header} from 'components/controls/BaseUtils'
 import {BaseTextInput, BaseSelect} from 'components/controls/BaseTextInput';
@@ -11,12 +10,14 @@ import Images from 'res/Images';
 import {toJS} from 'mobx';
 import { get } from 'lodash';
 import {scale, verticalScale} from 'react-native-size-matters';
+import { useNavigation } from '@react-navigation/native';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
 
 const BikeFinder = props => {
+  const navigation = useNavigation();
   const {staticData, category, bikeSearch} = useStores();
   console.log("search_landing", toJS(staticData.data.search_landing));
   const goToCategory = (id, title, color) => {
@@ -24,11 +25,11 @@ const BikeFinder = props => {
     console.log('id====', id);
     switch (true) {
       case (id === 2):
-        Actions.BikeFinderAZ();
+        navigation.navigate('BikeFinderAZ');
         break;
       case (id>=4 && id<=10):
         category.setId(id, title, color);
-        Actions.BikeFinderCategory();
+        navigation.navigate('BikeFinderCategory');
         break;
       default:
     }
@@ -36,7 +37,7 @@ const BikeFinder = props => {
   return (
     <View>
       <Header>
-        <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => Actions.pop()}>
+        <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => navigation.goBack()}>
           <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
                  style={{
                    position: 'absolute',
@@ -59,7 +60,7 @@ const BikeFinder = props => {
           </View>)
         })}
       </Container>
-      <Bottom onPress={() => Actions.Home()}>
+      <Bottom onPress={() => navigation.navigate('Home')}>
         <Image width={50} height={50} source={Images.icons.ic_close} />
       </Bottom>
     </View>

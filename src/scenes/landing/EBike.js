@@ -22,7 +22,7 @@ import {DivideLine, Divider, ErrorView, ListBikeInfo} from '../../components/con
 import {moderateScale} from 'react-native-size-matters';
 import {observer} from 'mobx-react';
 import {toJS} from 'mobx';
-import analytics from '@react-native-firebase/analytics';
+import axios from 'axios';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -99,20 +99,64 @@ const oswald_bold = isIOS ? 'Oswald-Bold' : 'oswald_bold';
 //   </MainInfo>
 // );
 
+const LikeBlock = props => {
+  const {auth} = useStores();
+  const [isLike, setIsLike] = useState(true);
+  const setStatus = async () => {
+    try {
+      console.log('set============');
+      axios.get(
+        `http://biciapp.sepisolutions.com${props.data.like_url}`,
+        {
+          headers: {
+            'Authorization' : `Bearer ${auth.token}`
+          }
+        }
+      ).then(res => {
+        console.log('======', res.data);
+        if (res.data.err_code === "ERR_OK") {
+          setIsLike(res.data.status)
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  return <View>
+    <TouchableOpacity style={{
+      backgroundColor: 'red',
+      alignItems: 'center',
+      width: 70,
+      height: '80%',
+      justifyContent: 'center',
+    }}
+      onPress={() => setStatus()}
+    >
+
+      <Image width={'100%'} height={'100%'} source={isLike ? Images.icons.ic_heart_white_full : Images.icons.ic_heart_white}/>
+    </TouchableOpacity>
+    {/*<TouchableOpacity style={{*/}
+    {/*backgroundColor: '#53DCD0',*/}
+    {/*alignItems: 'center',*/}
+    {/*width: 70,*/}
+    {/*height: '50%',*/}
+    {/*justifyContent: 'center',*/}
+    {/*}}>*/}
+    {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white}/>*/}
+    {/*</TouchableOpacity>*/}
+  </View>
+}
+
 const Brand = props => {
-  useEffect(() => {
-    analytics().setCurrentScreen('loved_product_screen', 'LovedProductPage');
-  }, []);
-  const {dashboard} = useStores();
-  if (dashboard.isLoading) {
-    return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><DefaultImage
-      style={{width: moderateScale(70), height: moderateScale(70), resizeMode: 'contain', marginTop: 14}}
-      source={Images.icons.ic_loading}/></View>;
+  const {likeProduct, hud} = useStores();
+  if (likeProduct.isLoading) {
+    hud.show()
   } else {
-    if (dashboard.errorIf) {
+    if (likeProduct.errorIf) {
       return <ErrorView/>;
     } else {
-      const uiData = toJS(dashboard.data);
+      hud.hide()
+      const uiData = toJS(likeProduct.data);
       console.log('jererererer', uiData);
       const titleData1 = uiData.shift();
       const titleData2 = uiData.shift();
@@ -133,24 +177,7 @@ const Brand = props => {
                   data={['']}
                   renderItem={(data, rowMap) => (<View><ListBikeInfo data={item}/></View>)}
                   renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
-                    <TouchableOpacity style={{
-                      backgroundColor: 'red',
-                      alignItems: 'center',
-                      width: 70,
-                      height: '70%',
-                      justifyContent: 'center',
-                    }}>
-                      <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_white}/>
-                    </TouchableOpacity>
-                    {/*<TouchableOpacity style={{*/}
-                    {/*backgroundColor: '#53DCD0',*/}
-                    {/*alignItems: 'center',*/}
-                    {/*width: 70,*/}
-                    {/*height: '50%',*/}
-                    {/*justifyContent: 'center',*/}
-                    {/*}}>*/}
-                    {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white}/>*/}
-                    {/*</TouchableOpacity>*/}
+                    <LikeBlock data={item}/>
                   </View>)}
                   leftOpenValue={0}
                   rightOpenValue={-80}

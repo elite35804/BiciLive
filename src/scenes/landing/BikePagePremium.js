@@ -47,6 +47,7 @@ import {moderateScale, verticalScale, scale} from 'react-native-size-matters';
 import {LoginButton, ShareDialog} from 'react-native-fbsdk';
 import analytics from '@react-native-firebase/analytics';
 import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -156,23 +157,62 @@ const BrandLogo = props => {
   );
 };
 
-const ShareBlock = props => {
-  const {auth} = useStores();
-  const [isLike, setLike] = useState(false);
+// const ShareBlock = props => {
+//   const {auth} = useStores();
+//   const [isLike, setLike] = useState(false);
+//   const fetchData = async () => {
+//     try {
+//       console.log('getshardata=========');
+//       axios.get(
+//         `http://biciapp.sepisolutions.com${props.data.like_url}`,
+//         {
+//           headers: {
+//             'Authorization': `Bearer ${auth.token}`,
+//           },
+//         },
+//       ).then(res => {
+//         console.log('======', res.data);
+//         if (res.data.err_code === 'ERR_OK') {
+//           setLike(res.data.status);
+//         }
+//       });
+//     } catch (e) {
+//       console.log(e);
+//     }
+//   };
+//
+//   useEffect(() => {
+//     setLike(props.data.starred)
+//   }, []);
+//   return (
+//     <View>
+//       <ShareView>
+//         <ShareIcon>
+//           <TouchableOpacity onPress={() => fetchData()}><Image width={'100%'} height={'100%'}
+//                                                                source={isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart}/></TouchableOpacity>
+//           {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare} style={{marginLeft: 25}}/>*/}
+//         </ShareIcon>
+//         <ShareTooltip onWhatsapp={() => shareWhatsapp()} onFB={() => shareFacebook()}/>
+//       </ShareView>
+//     </View>
+//   );
+// };
+
+const ShareBlock = observer(props => {
+  const {auth, bikeData} = useStores();
   const fetchData = async () => {
     try {
-      console.log('getshardata=========');
       axios.get(
         `http://biciapp.sepisolutions.com${props.data.like_url}`,
         {
           headers: {
-            'Authorization': `Bearer ${auth.token}`,
-          },
-        },
+            'Authorization' : `Bearer ${auth.token}`
+          }
+        }
       ).then(res => {
         console.log('======', res.data);
-        if (res.data.err_code === 'ERR_OK') {
-          setLike(res.data.status);
+        if (res.data.err_code === "ERR_OK") {
+          bikeData.setIsLike(res.data.status)
         }
       });
     } catch (e) {
@@ -181,21 +221,16 @@ const ShareBlock = props => {
   };
 
   useEffect(() => {
-    fetchData();
+    bikeData.setIsLike(props.data.starred)
   }, []);
-  return (
-    <View>
-      <ShareView>
-        <ShareIcon>
-          <TouchableOpacity onPress={() => fetchData()}><Image width={'100%'} height={'100%'}
-                                                               source={isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart}/></TouchableOpacity>
-          {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare} style={{marginLeft: 25}}/>*/}
-        </ShareIcon>
-        <ShareTooltip onWhatsapp={() => shareWhatsapp()} onFB={() => shareFacebook()}/>
-      </ShareView>
-    </View>
-  );
-};
+
+  return <View><ShareView>
+    <TouchableOpacity onPress={() => fetchData()}><Image width={'100%'} height={'100%'} source={bikeData.isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart} /></TouchableOpacity>
+    <ShareTooltip/>
+  </ShareView>
+    <Divider size={15}/>
+  </View>
+});
 
 const IconDescriptionGroup = props => {
   return (
@@ -282,11 +317,12 @@ const IconDescriptionGroup = props => {
 };
 
 const RelatedElements = (item, index) => {
+  const navigation = useNavigation();
   const {bikeData} = useStores();
   const goToBike = url => {
     bikeData.clearData();
     bikeData.getData(url);
-    Actions.BikePagePremium();
+    navigation.navigate('Product');
   };
   return (
     <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10}}>
@@ -620,23 +656,23 @@ const RenderElements = props => {
 };
 
 const BikePagePremium = props => {
+  const navigation = useNavigation();
 
-  const {bikeData} = useStores();
+  const {bikeData, hud} = useStores();
 
 
   if (bikeData.isLoading) {
-    return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><DefaultImage
-      style={{width: moderateScale(70), height: moderateScale(70), resizeMode: 'contain', marginTop: 14}}
-      source={Images.icons.ic_loading}/></View>;
+    hud.show()
   } else {
     if (bikeData.errorIf) {
       return <ErrorView/>;
     } else {
+      hud.hide()
       const uiData = toJS(bikeData.data);
       return (
         <View>
           <Header>
-            <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => Actions.pop()}>
+            <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => navigation.goBack()}>
               <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
                      style={{
                        position: 'absolute',

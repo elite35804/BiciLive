@@ -13,7 +13,6 @@ import {observer} from 'mobx-react';
 import {toJS} from 'mobx';
 import axios from 'axios';
 import config from '../../config/Config';
-import analytics from '@react-native-firebase/analytics';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -46,10 +45,7 @@ const LikeBlock = props => {
 
 const Brand = props => {
 
-  useEffect(() => {
-    analytics().setCurrentScreen('loved_brand_screen', 'LovedBrandPage');
-  }, []);
-  const {auth} = useStores();
+  const {auth, hud} = useStores();
   const data = [
     {name: 'ABUS', count: 34},
     {name: 'ADRIATICA', count: 34},
@@ -75,16 +71,15 @@ const Brand = props => {
 
     }
   }
-  const {dashboard} = useStores();
-  if (dashboard.isLoading) {
-    return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><DefaultImage
-      style={{width: moderateScale(70), height: moderateScale(70), resizeMode: 'contain', marginTop: 14}}
-      source={Images.icons.ic_loading}/></View>;
+  const {likeBrand} = useStores();
+  if (likeBrand.isLoading) {
+    hud.show()
   } else {
-    if (dashboard.errorIf) {
+    if (likeBrand.errorIf) {
       return <ErrorView/>;
     } else {
-      const uiData = toJS(dashboard.data);
+      hud.hide()
+      const uiData = toJS(likeBrand.data);
       console.log('jererererer', uiData);
       const titleData1 = uiData.shift();
       const titleData2 = uiData.shift();

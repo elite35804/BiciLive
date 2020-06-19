@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {Image, View, TouchableOpacity, Text, ScrollView, Platform, Linking, Image as DefaultImage} from 'react-native';
-import {Actions} from 'react-native-router-flux';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {useStores} from 'hooks/Utils';
@@ -30,6 +29,7 @@ import Swiper from 'react-native-swiper';
 import StepIndicator from 'react-native-step-indicator';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 const isIOS = Platform.OS === "ios";
 import analytics from '@react-native-firebase/analytics';
@@ -38,11 +38,12 @@ Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
 const RelatedElements = (item, index) => {
+  const navigation = useNavigation();
   const {bikeData} = useStores();
   const goToBike = url => {
     bikeData.clearData();
     bikeData.getData(url);
-    Actions.BikePagePremium();
+    navigation.navigate('Product');
   };
   return (
     <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10}}>
@@ -187,12 +188,13 @@ const Expandible_Wrapper = props => {
 };
 
 const ImageReel = (props) => {
+  const navigation = useNavigation();
   const {brandData} = useStores();
   const goToBrand = (url) => {
     console.log('url=====', url);
     brandData.clearData();
     brandData.getData(url);
-    Actions.BrandPagePremium();
+    navigation.navigate('Brand');
   };
   return (
     <View>
@@ -278,67 +280,77 @@ const PageSlider = (props) => {
   );
 };
 
+
+
 const ShareBlock = props => {
   const {auth} = useStores();
   const [isLike, setLike] = useState(false);
   const fetchData = async () => {
     try {
+      console.log('getshardata=========');
       axios.get(
         `http://biciapp.sepisolutions.com${props.data.like_url}`,
         {
           headers: {
-            'Authorization' : `Bearer ${auth.token}`
-          }
-        }
+            'Authorization': `Bearer ${auth.token}`,
+          },
+        },
       ).then(res => {
         console.log('======', res.data);
-        if (res.data.err_code === "ERR_OK") {
-          setLike(res.data.status)
+        if (res.data.err_code === 'ERR_OK') {
+          setLike(res.data.status);
         }
       });
     } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchData();
+    setLike(props.data.starred)
   }, []);
-  return <View><ShareView>
-    <TouchableOpacity onPress={() => {fetchData();setLike(!isLike)}}><Image width={'100%'} height={'100%'} source={isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart} /></TouchableOpacity>
-    <ShareTooltip/>
-  </ShareView>
-    <Divider size={15}/>
-  </View>
+  return (
+    <View>
+      <ShareView>
+        <ShareIcon>
+          <TouchableOpacity onPress={() => fetchData()}><Image width={'100%'} height={'100%'}
+                                                               source={isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart}/></TouchableOpacity>
+          {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare} style={{marginLeft: 25}}/>*/}
+        </ShareIcon>
+        <ShareTooltip onWhatsapp={() => shareWhatsapp()} onFB={() => shareFacebook()}/>
+      </ShareView>
+    </View>
+  );
 };
 
 const AdBlock = props => {
+  const navigation = useNavigation();
   const {web} = useStores();
   const openWebViewer = (url) => {
     web.url = url;
-    Actions.WebViewer();
+    navigation.navigate('WebViewer');
   };
   return <View><Divider size={30}/><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image style={{width: '100%', height: 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>
 };
 const BrandPagePremium = props => {
-
-  const {brandData} = useStores();
+  const navigation = useNavigation();
+  const {brandData, bikeData, hud} = useStores();
   // const [titleData, setTitleData] = useState({});
 
 
-  const {bikeData} = useStores();
   const goToBike = url => {
     bikeData.clearData();
     bikeData.getData(url);
-    Actions.BikePagePremium();
+    navigation.navigate('Bike');
   }
 
   if (brandData.isLoading) {
-    return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><DefaultImage style={{width: moderateScale(70), height: moderateScale(70), resizeMode: 'contain',marginTop: 14}} source={Images.icons.ic_loading}/></View>;
+    hud.show()
   } else {
     if (brandData.errorIf) {
       return <ErrorView/>
     } else {
+      hud.hide()
       const uiData = toJS(brandData.data);
       let titleData = {};
       console.log('111111==========', uiData);
@@ -348,7 +360,7 @@ const BrandPagePremium = props => {
       return (
         <View>
           <Header>
-            <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => Actions.pop()}>
+            <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => navigation.goBack()}>
               <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
                      style={{
                        position: 'absolute',

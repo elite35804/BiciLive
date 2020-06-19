@@ -15,27 +15,21 @@ import {observer} from 'mobx-react';
 import {moderateScale} from 'react-native-size-matters';
 import {ErrorView} from '../../components/controls/BaseUtils';
 import {toJS} from 'mobx';
-import analytics from '@react-native-firebase/analytics';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
 
 const Dashboard = props => {
-
-  useEffect(() => {
-    analytics().setCurrentScreen('account_screen', 'AccountPage');
-  }, []);
-  const {dashboard} = useStores();
-  if (dashboard.isLoading) {
-    return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><DefaultImage
-      style={{width: moderateScale(70), height: moderateScale(70), resizeMode: 'contain', marginTop: 14}}
-      source={Images.icons.ic_loading}/></View>;
+  const {account, hud} = useStores();
+  if (account.isLoading) {
+    hud.show()
   } else {
-    if (dashboard.errorIf) {
+    if (account.errorIf) {
       return <ErrorView/>;
     } else {
-      const uiData = toJS(dashboard.data);
+      hud.hide()
+      const uiData = toJS(account.data);
       const titleData1 = uiData.shift();
       const titleData2 = uiData.shift();
       return (

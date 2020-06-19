@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Image, View, TouchableOpacity, Text, ScrollView, Platform} from 'react-native';
-import {Actions} from 'react-native-router-flux';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {useStores} from 'hooks/Utils';
@@ -20,13 +19,15 @@ import {
   DetailMore
 } from 'components/controls/BaseUtils';
 import {BaseTextInput, BaseSelect, BaseTextFilter} from 'components/controls/BaseTextInput';
+import { useNavigation } from '@react-navigation/native';
 const isIOS = Platform.OS === "ios";
 
 const BikePage = props => {
+  const navigation = useNavigation();
   const [isLike, setLike] = useState(false);
   return (
     <Container>
-      <TouchableOpacity onPress={() => Actions.BrandPage()} style={{position: 'absolute', left: 0, top: 165, zIndex: 10000000}}>
+      <TouchableOpacity onPress={() => navigation.navigate('BrandPage')} style={{position: 'absolute', left: 0, top: 165, zIndex: 10000000}}>
         <Image width={50} height={100} resizeMode="stretch" source={Images.btn.btn_back} style={{width: 37, height: 75}}/></TouchableOpacity>
       <View style={{paddingHorizontal: 10, marginTop: 40}}>
         <MainBikeInfo isBack={true}/>

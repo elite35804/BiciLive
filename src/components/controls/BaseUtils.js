@@ -1,7 +1,6 @@
 import StepIndicator from 'react-native-step-indicator';
 import React, {useEffect, useState, useRef} from 'react';
 import {themeProp} from 'utils/CssUtil';
-import {Actions} from 'react-native-router-flux';
 import styled from 'styled-components/native/dist/styled-components.native.esm';
 import {
   Dimensions,
@@ -24,9 +23,10 @@ import {useStores} from 'hooks/Utils';
 import ImageView from 'react-native-image-viewing';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
-import ImageZoom from 'react-native-image-pan-zoom';
-import ZoomableImage from 'components/controls/ZoomableImage';
-import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
+import { useNavigation } from '@react-navigation/native';
+// import ImageZoom from 'react-native-image-pan-zoom';
+// import ZoomableImage from 'components/controls/ZoomableImage';
+// import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -65,11 +65,12 @@ const CheckBox = (props) => (
 );
 
 const MainBikeInfo = (props) => {
+  const navigation = useNavigation();
   const {bikeData} = useStores();
   const goToBike = url => {
     bikeData.clearData();
     bikeData.getData(url);
-    Actions.BikePagePremium();
+    navigation.navigate('Product');
   };
   return (
     <MainInfo>
@@ -145,11 +146,12 @@ const MainBikeInfo = (props) => {
 };
 
 const ListBikeInfo = (props) => {
+  const navigation = useNavigation();
   const {bikeData} = useStores();
   const goToBike = url => {
     bikeData.clearData();
     bikeData.getData(url);
-    Actions.BikePagePremium();
+    navigation.navigate('Product');
   };
   return (
     <MainInfo>
@@ -233,13 +235,14 @@ const ListBikeInfo = (props) => {
 };
 
 const AdvResumeBig = (props) => {
+  const navigation = useNavigation();
   const {bikeData} = useStores();
   const [isVisible, setIsVisible] = React.useState(false);
   const _image = useRef(null);
   const goToBike = url => {
     bikeData.clearData();
     bikeData.getData(url);
-    Actions.BikePagePremium();
+    navigation.navigate('Product');
   };
   const images = [{
     uri: 'http://biciapp.sepisolutions.com' + get(props, 'data.immagine_zoom', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg'),
@@ -340,6 +343,7 @@ const ErrorView = props => {
 };
 
 const LoginModal = props => {
+  const navigation = useNavigation();
   const [visible, setVisible] = useState(false);
   const {bikeData} = useStores();
   useEffect(() => {
@@ -354,7 +358,7 @@ const LoginModal = props => {
     presentationStyle="fullScreen"
     onRequestClose={() => {
       // Alert.alert("Modal has been closed.");
-      Actions.pop();
+      navigation.goBack();
     }}
   >
     <View style={{flex: 1}}>
@@ -367,12 +371,12 @@ const LoginModal = props => {
           <BlueButton borderColor='#00c6e5' textColor={'#00c6e5'} onPress={() => {
             setVisible(false);
             bikeData.clearData();
-            Actions.Login();
+            navigation.replace('Login');
           }}>LOGIN</BlueButton>
           <Divider size={10}/>
           <WhiteButton backgroudColor={'#00c6e5'} onPress={() => {
             setVisible(false);
-            Actions.Register();
+            navigation.replace('Register');
           }}>REGISTRATI</WhiteButton>
         </LoginView>
       </LoginBackgroud>

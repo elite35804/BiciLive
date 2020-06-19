@@ -14,7 +14,7 @@ import {observer} from 'mobx-react';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import {Divider, ErrorView} from '../../components/controls/BaseUtils';
 import Image from 'react-native-image-progress';
-import analytics from '@react-native-firebase/analytics';
+import { useNavigation } from '@react-navigation/native';
 
 
 Text.defaultProps = Text.defaultProps || {};
@@ -54,10 +54,11 @@ const Stepper = observer(props => {
 
 const PageElement = props => {
   const {bikeData} = useStores();
+  const navigation = useNavigation();
   const goToBike = url => {
     bikeData.clearData();
     bikeData.getData(url);
-    Actions.BikePagePremium();
+    navigation.navigate('Product', {url: url});
   };
   return (
     <View>
@@ -108,10 +109,11 @@ const PageSlider = (props) => {
 
 const ImageReel = (props) => {
   const {brandData} = useStores();
+  const navigation = useNavigation();
   const goToBrand = (url) => {
     brandData.clearData();
     brandData.getData(url);
-    Actions.replace('BrandPagePremium');
+    navigation.navigate('Brand')
   };
   return (
     <View>
@@ -138,12 +140,13 @@ const ImageReel = (props) => {
 };
 
 const Finder = () => {
+  const navigation = useNavigation();
   return (
     <FinderView>
       <Title color={themeProp('colorThird')}>EBIKE FINDER</Title>
       <SubTitle>Cerca la tua bici ideale</SubTitle>
       <TouchableOpacity onPress={() => {
-        Actions.BikeFinder();
+        navigation.navigate('BikeFinder');
       }}>
         <DefaultImage style={{width: 170, height: 170, resizeMode: 'contain',marginTop: 14}} source={Images.btn.btn_finder_animated}/></TouchableOpacity>
         {/*<Image width={92} height={92} source={Images.btn.bike_finder} style={{marginTop: 14}}/></TouchableOpacity>*/}
@@ -162,10 +165,11 @@ const Finder = () => {
 // };
 
 const AdBlock = props => {
+  const navigation = useNavigation();
   const {web} = useStores();
   const openWebViewer = (url) => {
     web.url = url;
-    Actions.WebViewer();
+    navigation.navigate('WebViewer')
   };
   return <View><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image style={{width: '100%', height: 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>
 };
@@ -195,16 +199,17 @@ const HomeElements = (props) => {
 };
 
 const Home = (props) => {
+  const {hud} = useStores();
   useEffect(() => {
-    analytics().setCurrentScreen('home_screen', 'Home');
   }, [])
   const {homeData} = useStores();
   if (homeData.isLoading) {
-    return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><DefaultImage style={{width: moderateScale(70), height: moderateScale(70), resizeMode: 'contain',marginTop: 14}} source={Images.icons.ic_loading}/></View>;
+    hud.show()
   } else {
     if (homeData.errorIf) {
       return <ErrorView/>
     } else {
+      hud.hide()
       const uiData = toJS(get(homeData, 'data', []));
       console.log('homeData====', uiData);
       homeData.setPosition(0);

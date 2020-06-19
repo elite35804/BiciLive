@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Image, View, TouchableOpacity, Text, ScrollView, Platform} from 'react-native';
-import {Actions} from 'react-native-router-flux';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {useStores} from 'hooks/Utils';
@@ -21,6 +20,7 @@ import {
 } from 'components/controls/BaseUtils';
 import {BaseTextInput, BaseSelect, BaseTextFilter} from 'components/controls/BaseTextInput';
 import {Oswald, UniSansBold, UniSansBook, UniSansHeavy} from '../../utils/fontFamily';
+import { useNavigation } from '@react-navigation/native';
 const isIOS = Platform.OS === "ios";
 
 const BrandPage = props => {

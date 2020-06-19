@@ -2,7 +2,6 @@ import React, {useState, useRef, useEffect} from 'react';
 import {Image, Platform, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
-import {Actions} from 'react-native-router-flux';
 import {useStores} from 'hooks/Utils';
 import Images from 'res/Images';
 import {BlueButton, GreenButton, WhiteButton} from 'components/controls/Button';
@@ -16,6 +15,7 @@ import Swiper from 'react-native-swiper';
 import StepIndicator from 'react-native-step-indicator';
 import CustomTooltip from 'components/controls/CustomTooltip';
 import {scale, verticalScale} from 'react-native-size-matters';
+import { useNavigation } from '@react-navigation/native';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -127,6 +127,7 @@ const processSelectData = (predata) => {
   return {title, texts, values};
 };
 const BikeFinderCategory = props => {
+  const navigation = useNavigation();
   const {staticData, category, bikeSearch} = useStores();
   console.log('currentid=====111111', toJS(category.currentId));
   const uiData = toJS(staticData.data.search_forms[category.currentId]);
@@ -164,7 +165,7 @@ const BikeFinderCategory = props => {
   const goToResult = (url) => {
     bikeSearch.clearResult();
     bikeSearch.getData(url);
-    Actions.Result();
+    navigation.navigate('Result');
   };
 
   useEffect(() => {
@@ -180,7 +181,7 @@ const BikeFinderCategory = props => {
     return (
       <View style={{flex: 1}}>
         <Header>
-          <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => Actions.pop()}>
+          <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => navigation.goBack()}>
             <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
                    style={{
                      position: 'absolute',

@@ -20,6 +20,8 @@ import com.reactnativecommunity.art.ARTPackage;
 import com.reactcommunity.rndatetimepicker.RNDateTimePickerPackage;
 // @react-native-community/google-signin
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
+// @react-native-community/masked-view
+import org.reactnative.maskedview.RNCMaskedViewPackage;
 // @react-native-firebase/analytics
 import io.invertase.firebase.analytics.ReactNativeFirebaseAnalyticsPackage;
 // @react-native-firebase/app
@@ -28,6 +30,8 @@ import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+// react-native-safe-area-context
+import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
 // react-native-share
 import cl.json.RNSharePackage;
 // react-native-svg
@@ -88,10 +92,12 @@ public class PackageList {
       new ARTPackage(),
       new RNDateTimePickerPackage(),
       new RNGoogleSigninPackage(),
+      new RNCMaskedViewPackage(),
       new ReactNativeFirebaseAnalyticsPackage(),
       new ReactNativeFirebaseAppPackage(),
       new FBSDKPackage(),
       new RNGestureHandlerPackage(),
+      new SafeAreaContextPackage(),
       new RNSharePackage(),
       new SvgPackage(),
       new VectorIconsPackage(),

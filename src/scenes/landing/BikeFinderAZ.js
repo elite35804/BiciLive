@@ -9,7 +9,7 @@ import {BlueButton, WhiteButton} from 'components/controls/Button';
 import Images from 'res/Images';
 import {toJS} from 'mobx';
 import {isIOS} from 'rn-tooltip/src/helpers';
-import analytics from '@react-native-firebase/analytics';
+import { useNavigation } from '@react-navigation/native';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -35,7 +35,7 @@ const preProcess = (rawData, filter = '') => {
 };
 
 const BikeFinderAZ = props => {
-  analytics().setCurrentScreen('brand_search_screen', 'BrandSearchPage');
+  const navigation = useNavigation();
   const {staticData} = useStores();
   const [filter, setFilter] = useState('');
   console.log('brand_search_page=======', toJS(staticData.data.brand_search_page));
@@ -47,7 +47,7 @@ const BikeFinderAZ = props => {
   const goToBrand = (url) => {
     brandData.clearData();
     brandData.getData(url);
-    Actions.BrandPagePremium();
+    navigation.navigate('Brand');
   };
 
   return (
@@ -103,8 +103,8 @@ const BikeFinderAZ = props => {
         <Divider size={'10px'} />
       </Container>
       <Bottom>
-        <TouchableOpacity onPress={() => Actions.BikeFinder()}><Image width={50} height={50} source={Images.icons.ic_arrow_left} /></TouchableOpacity>
-        <TouchableOpacity onPress={() => Actions.Home()}><Image width={50} height={50} source={Images.icons.ic_close} /></TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('BikeFinder')}><Image width={50} height={50} source={Images.icons.ic_arrow_left} /></TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}><Image width={50} height={50} source={Images.icons.ic_close} /></TouchableOpacity>
       </Bottom>
     </View>
   );
@@ -119,7 +119,7 @@ const Bottom = styled(View)`
   flex-direction: row;
   align-items: center;
   margin-horizontal: 16px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   margin-top: 10px;
 `;
 

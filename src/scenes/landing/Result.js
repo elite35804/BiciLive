@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
-import {Actions} from 'react-native-router-flux';
 import {useStores} from 'hooks/Utils';
 import Images from 'res/Images';
 import {BlueButton, WhiteButton, GreenButton} from 'components/controls/Button';
@@ -33,35 +32,34 @@ import {observer} from 'mobx-react';
 import {toJS} from 'mobx';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
-import analytics from '@react-native-firebase/analytics';
-
+import { useNavigation } from '@react-navigation/native';
 const isIOS = Platform.OS === 'ios';
 const AdBlock = props => {
+  const navigation = useNavigation();
   const {web} = useStores();
   const openWebViewer = (url) => {
     web.url = url;
-    Actions.WebViewer();
+    navigation.navigate('WebViewer');
   };
   return <View><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image
     style={{width: '100%', height: 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>;
 };
 const Result = props => {
-  analytics().setCurrentScreen('search_result_screen', 'ResultPage');
-  const {bikeSearch} = useStores();
+  const navigation = useNavigation();
+  const {bikeSearch, hud} = useStores();
   if (bikeSearch.isLoading) {
-    return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><DefaultImage
-      style={{width: moderateScale(70), height: moderateScale(70), resizeMode: 'contain', marginTop: 14}}
-      source={Images.icons.ic_loading}/></View>;
+    hud.show()
   } else {
     if (bikeSearch.errorIf) {
       return <ErrorView/>
     } else {
+      hud.hide()
       const uiData = toJS(bikeSearch.data);
       console.log('uridata=======', bikeSearch.isLoading, bikeSearch.errorIf, uiData);
       return (
         <View style={{flex: 1}}>
           <Header>
-            <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => Actions.pop()}>
+            <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => navigation.goBack()}>
               <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
                      style={{
                        position: 'absolute',

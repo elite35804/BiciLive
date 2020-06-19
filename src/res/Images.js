@@ -57,6 +57,7 @@ const Images = {
         ic_heart_sm: require('./images/ic_heart_border_sm.png'),
         ic_heart_red_sm: require('./images/ic_heart_red_sm.png'),
         ic_heart_white: require('./images/ic_heart_white.png'),
+        ic_heart_white_full: require('./images/ic_heart_white_full.png'),
         ic_compare_white: require('./images/ic_compare_white.png'),
         ic_zoom_in: require('./images/icon_zoom.png'),
         ic_loading: require('./images/loading.gif'),

@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Image, View, TouchableOpacity, Text, ScrollView, Platform, Dimensions, BackHandler} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
-import {SafeAreaView} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {useStores} from 'hooks/Utils';
 import Images from 'res/Images';
@@ -14,6 +13,7 @@ import {
 } from '@react-native-community/google-signin';
 import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 import {ThemeProps} from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 
 const isIOS = Platform.OS === "ios";
 
@@ -22,6 +22,7 @@ Text.defaultProps.allowFontScaling = false;
 
 const Splash = props => {
   const {staticData, homeData, auth} = useStores();
+  const navigation = useNavigation();
   useEffect(() => {
     staticData.getData();
     homeData.getData();
@@ -136,10 +137,10 @@ const Splash = props => {
         <Text style={{textAlign: 'center', fontSize: 27, fontWeight: 'bold'}}>TUA NUOVA EBIKE</Text>
       </View>
       <BtnView>
-        <BlueButton width={'85%'} height={'55px'} fontSize={'30px'} onPress={() => Actions.Login()}>LOGIN</BlueButton>
+        <BlueButton width={'85%'} height={'55px'} fontSize={'30px'} onPress={() => navigation.navigate('Login')}>LOGIN</BlueButton>
         <Divider size="12px"/>
-        <WhiteButton width={'85%'} height={'55px'} fontSize={'30px'} backgroudColor={'#333333'} textColor={'#5fdcd2'} borderColor={'#5fdcd2'} onPress={() => Actions.Register()}>REGISTRATI</WhiteButton>
-        <Bottom onPress={() => Actions['Home']()}>
+        <WhiteButton width={'85%'} height={'55px'} fontSize={'30px'} backgroudColor={'#333333'} textColor={'#5fdcd2'} borderColor={'#5fdcd2'} onPress={() => navigation.navigate('Register')}>REGISTRATI</WhiteButton>
+        <Bottom onPress={() => navigation.navigate('Main')}>
           <BottomText>CONTINUA COME OSPITE</BottomText>
         </Bottom>
       </BtnView>

@@ -11,5 +11,12 @@ import AuthStore from './AuthStore';
 import WebViewStore from './WebViewStore'
 import QuestionStore from './QuestionStore';
 import DashboardStore from './DashboardStore';
+import LikeBrandStore from './LikeBrandStore';
+import LikeProductStore from './LikeProductStore'
+import AccountStore from './AccountStore'
 
-export { AlertStore, HudStore, StaticStore, HomeStore, CategoryStore, SwiperState, BrandStore, BikeStore, BikeSearchStore, AuthStore, WebViewStore, QuestionStore, DashboardStore};
+export { AlertStore, HudStore, StaticStore, HomeStore, CategoryStore,
+  SwiperState, BrandStore, BikeStore, BikeSearchStore,
+  AuthStore, WebViewStore, QuestionStore, DashboardStore,
+  LikeBrandStore, LikeProductStore, AccountStore
+};

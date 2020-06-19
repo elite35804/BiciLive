@@ -190,8 +190,10 @@
     <orderEntry type="module" module-name="react-native-gesture-handler" />
     <orderEntry type="module" module-name="react-native-community_datetimepicker" />
     <orderEntry type="module" module-name="react-native-community_google-signin" />
+    <orderEntry type="module" module-name="android-react-native-community_masked-view" />
     <orderEntry type="module" module-name="react-native-fbsdk" />
-    <orderEntry type="module" module-name="react-native-share-android-react-native-share" />
+    <orderEntry type="module" module-name="android-react-native-safe-area-context" />
+    <orderEntry type="module" module-name="node_modules-react-native-share-android-react-native-share~1" />
     <orderEntry type="module" module-name="react-native-svg" />
     <orderEntry type="module" module-name="react-native-vector-icons" />
     <orderEntry type="module" module-name="react-native-reanimated" />

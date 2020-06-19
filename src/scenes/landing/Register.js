@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Image, View, TouchableOpacity, Text, ScrollView, Platform, BackHandler} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
-import { Actions } from 'react-native-router-flux';
 import {useStores} from 'hooks/Utils';
 import {BaseTextInput, BaseSelect, CustomSelect } from 'components/controls/BaseTextInput';
 import BaseSelectBox from 'components/controls/BaseSelectBox';
@@ -11,7 +10,7 @@ import {cities, sesso} from '../../res/data';
 import {get} from 'lodash';
 import {useActionSheet} from '@expo/react-native-action-sheet';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import analytics from '@react-native-firebase/analytics';
+import { useNavigation } from '@react-navigation/native';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -44,25 +43,13 @@ const SelectElement = (props) => {
 };
 
 const Register = props => {
-  analytics().setCurrentScreen('register_screen', 'RegisterPage');
+  const navigation = useNavigation();
   const { auth, alert, hud } = useStores();
   const [checked, setChecked] = useState(true);
   const [checked1, setChecked1] = useState(true);
   const [date, setDate] = useState(new Date(1598051730000));
   const [show, setShow] = useState(false);
   const [displayDate, setDisplayDate] = useState(null);
-  useEffect(() => {
-    const backAction = () => {
-      console.log('back button clicked');
-      Actions.Splash();
-      return true;
-    };
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
-    return () => backHandler.remove();
-  });
   const ageData = [];
   for(let item = 1920; item <= 2020; item++) {
     ageData.push(item.toString());
@@ -96,7 +83,7 @@ const Register = props => {
     auth.errorIf && alert.showError(auth.err_string, "Register")
     if (!auth.errorIf) {
       alert.showSuccess("Grazie per esserti registrato! A breve riceverai un link di conferma per attivare il tuo account.", "Register")
-      Actions.Splash();
+      navigation.navigate('Login');
     }
   };
 
