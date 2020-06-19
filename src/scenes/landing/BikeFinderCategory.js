@@ -271,7 +271,7 @@ const BikeFinderCategory = props => {
               })}
             </View>
 
-            <Divider size={30}/>
+            <Divider size={35}/>
             <Title size={'0'} color={themeProp('colorThird')} width={'28px'}
                    style={{paddingHorizontal: 10}}>COMPONENTI</Title>
             <View style={{paddingLeft: 13, marginBottom: 30, marginTop: 10}}>
@@ -279,17 +279,23 @@ const BikeFinderCategory = props => {
                 if (item.id === "FORM_INPUT_SELECT" && item.name === "tipo_ammortizzatore") {
                   return <SelectElement data={item} key={index}/>;
                 }
+                if (item.id === "FORM_INPUT_SELECT" && item.name === "ruota_anteriore"){
+                  return <SelectElement data={item} key={index}/>
+                }
+                if (item.id === "FORM_INPUT_SELECT" && item.name === "ruota_posteriore"){
+                  return <View><SelectElement data={item} key={index}/></View>
+                }
               })}
             </View>
-            <Divider size={-25}/>
-            {uiData.map((item,index) => {
-              if (item.id === "FORM_INPUT_SLIDER" && item.name === "ruota_anteriore"){
-                return <FinderItem data={item} key={index}/>
-              }
-              if (item.id === "FORM_INPUT_SLIDER" && item.name === "ruota_posteriore"){
-                return <View><Divider size={-10}/><FinderItem data={item} key={index}/></View>
-              }
-            })}
+            {/*<Divider size={-25}/>*/}
+            {/*{uiData.map((item,index) => {*/}
+              {/*if (item.id === "FORM_INPUT_SELECT" && item.name === "ruota_anteriore"){*/}
+                {/*return <SelectElement data={item} key={index}/>*/}
+              {/*}*/}
+              {/*if (item.id === "FORM_INPUT_SELECT" && item.name === "ruota_posteriore"){*/}
+                {/*return <View><Divider size={-10}/><SelectElement data={item} key={index}/></View>*/}
+              {/*}*/}
+            {/*})}*/}
           </View>}
 
           {uiData.map((item,index) => {

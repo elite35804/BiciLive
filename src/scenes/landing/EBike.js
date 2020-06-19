@@ -121,9 +121,10 @@ const Brand = props => {
           <Title size={'40px'} color={titleData1.colore} width={'35px'}>{titleData1.titolo.toUpperCase()}</Title>
           <Divider size={20}/>
           <ItemView>
-            <Image width={'100%'} height={'100%'} source={Images.icons.ic_user_sm}/>
+            <Image style={{width: moderateScale(25), height: moderateScale(25), resizeMode: 'contain', marginTop: 10}} source={Images.icons.ic_user_sm}/>
             <Title size={'10px'} color={titleData2.colore} width={'35px'}>{titleData2.titolo.toUpperCase()}</Title>
           </ItemView>
+
           <Divider size={20}/>
           {uiData.map((item, index) => {
             if (item.id === 'BIKE_RESUME_SMALL')

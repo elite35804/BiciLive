@@ -193,8 +193,8 @@
     <orderEntry type="module" module-name="react-native-fbsdk" />
     <orderEntry type="module" module-name="react-native-share-android-react-native-share" />
     <orderEntry type="module" module-name="react-native-svg" />
-    <orderEntry type="module" module-name="node_modules-react-native-vector-icons-android-react-native-vector-icons~2" />
-    <orderEntry type="module" module-name="node_modules-react-native-reanimated-android-react-native-reanimated~2" />
-    <orderEntry type="module" module-name="node_modules-react-native-screens-android-react-native-screens~2" />
+    <orderEntry type="module" module-name="react-native-vector-icons" />
+    <orderEntry type="module" module-name="react-native-reanimated" />
+    <orderEntry type="module" module-name="react-native-screens" />
   </component>
 </module>

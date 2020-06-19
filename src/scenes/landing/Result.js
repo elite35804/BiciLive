@@ -151,7 +151,19 @@ const Result = props => {
                 </View>;
               }
               if (item.id === 'AD_BANNER_ENGAGE') {
-                return <View><Divider size={20}/><AdBlock data={item}/></View>;
+                return <View>
+                  <Divider size={20}/>
+                  <AdBlock data={item}/>
+                </View>;
+              }
+              if (item.id === "TITLED_TEXT") {
+                return <View>
+                  <Divider size={5}/>
+                  <Text style={{fontSize: 20, color: item.title_color}}>{item.title}</Text>
+                  <Divider size={10}/>
+                  <Text style={{fontSize: 18, color: item.text_color}}>{item.text}</Text>
+                  <Divider size={35}/>
+                </View>
               }
             })}
             {get(uiData[0], 'count', 0) === 0 &&

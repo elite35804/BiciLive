@@ -23,15 +23,15 @@ const Dashboard = props => {
         <Title size={'40px'} color={themeProp('colorPrimary')} width={'35px'}>DASHBOARD</Title>
         <Divider size={20}/>
         <ItemView onPress={() => {dashboard.getData('brand', auth.token); Actions.Brand()}}>
-          <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_sm}/>
+          <Image width={'100%'} height={'100%'} style={{marginTop: 10}} source={Images.icons.ic_heart_sm}/>
           <Title size={'10px'} color={themeProp('colorThird')} width={'35px'}>BRAND</Title>
         </ItemView>
         <ItemView onPress={() => {dashboard.getData('product', auth.token); Actions.EBike()}}>
-          <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_sm}/>
+          <Image width={'100%'} height={'100%'} style={{marginTop: 10}} source={Images.icons.ic_heart_sm}/>
           <Title size={'10px'} color={themeProp('colorThird')} width={'35px'}>EBIKE</Title>
         </ItemView>
         <ItemView onPress={() => {dashboard.getData('account', auth.token); Actions.User()}}>
-          <Image width={'100%'} height={'100%'} source={Images.icons.ic_user_sm}/>
+          <Image width={'100%'} height={'100%'} style={{marginTop: 10}} source={Images.icons.ic_user_sm}/>
           <Title size={'10px'} color={themeProp('colorDescription')} width={'35px'}>ACCOUNT</Title>
         </ItemView>
       </Container>
