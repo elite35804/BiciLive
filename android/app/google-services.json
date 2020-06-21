@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "808976326604",
+    "firebase_url": "https://bicilive-f8d96.firebaseio.com",
+    "project_id": "bicilive-f8d96",
+    "storage_bucket": "bicilive-f8d96.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:808976326604:android:140538c35113cde559c769",
+        "android_client_info": {
+          "package_name": "com.bicilive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "808976326604-jcrncliu28jglmhebog2tu1au1h387lg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKqDfSBChB_J6kQYnpZacRKY_nNSFNQHA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "808976326604-jcrncliu28jglmhebog2tu1au1h387lg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

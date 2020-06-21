@@ -1,5 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {Image, View, TouchableOpacity, Text, ScrollView, Platform, Dimensions, BackHandler} from 'react-native';
+import {
+  Image,
+  View,
+  TouchableOpacity,
+  Text,
+  ScrollView,
+  Platform,
+  Dimensions,
+  BackHandler,
+  Linking,
+} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import { Actions } from 'react-native-router-flux';
@@ -14,6 +24,7 @@ import {
 import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 import {ThemeProps} from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
+import RNInstallReferrer from 'react-native-install-referrer';
 
 const isIOS = Platform.OS === "ios";
 
@@ -23,6 +34,20 @@ Text.defaultProps.allowFontScaling = false;
 const Splash = props => {
   const {staticData, homeData, auth} = useStores();
   const navigation = useNavigation();
+  const _handleOpenURL = event => {
+    console.log('oprnurlurl======', event.url);
+  };
+  const navigate = url => {
+    const routeName = url.split('://')[1];
+    if (routeName.includes('/')) {
+      const routeName1 = routeName.split('/')[0];
+      const routename2 = routeName.split('/')[1];
+      console.log('urls===========', routeName1, routename2);
+      navigation.navigate(routeName1, {aaa: routename2});
+    } else {
+      navigation.navigate(routeName);
+    }
+  };
   useEffect(() => {
     staticData.getData();
     homeData.getData();
@@ -46,17 +71,19 @@ const Splash = props => {
       // accountName: '', // [Android] specifies an account name on the device that should be used
       iosClientId: '808976326604-62ut9ho77m6dm5lbp9irk5v9s9rs94h4.apps.googleusercontent.com', // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
     });
+    if(!isIOS) {
+      Linking.getInitialURL().then(url => {
+        console.log('initial url=----------', url);
+        if (url !== null) {
+          navigate(url)
+        }
+      })
+      // RNInstallReferrer.getReferrer().then(referrer=>console.log('referererere', referrer));
+    } else {
+      Linking.addEventListener('url', _handleOpenURL)
+    }
 
-    // const backAction = () => {
-    //   console.log('back button clicked');
-    //   BackHandler.exitApp();
-    //   return true;
-    // };
-    // const backHandler = BackHandler.addEventListener(
-    //   'hardwareBackPress',
-    //   backAction,
-    // );
-    // return () => backHandler.remove();
+    return () => Linking.removeEventListener('url', _handleOpenURL);
   }, []);
   const initUser = (token) => {
     fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + token)

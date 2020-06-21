@@ -23,7 +23,7 @@ import {useStores} from 'hooks/Utils';
 import ImageView from 'react-native-image-viewing';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 // import ImageZoom from 'react-native-image-pan-zoom';
 // import ZoomableImage from 'components/controls/ZoomableImage';
 // import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
@@ -70,7 +70,7 @@ const MainBikeInfo = (props) => {
   const goToBike = url => {
     bikeData.clearData();
     bikeData.getData(url);
-    navigation.navigate('Product');
+    navigation.navigate('Product', {url: url});
   };
   return (
     <MainInfo>
@@ -151,7 +151,7 @@ const ListBikeInfo = (props) => {
   const goToBike = url => {
     bikeData.clearData();
     bikeData.getData(url);
-    navigation.navigate('Product');
+    navigation.navigate('Product', {url: url});
   };
   return (
     <MainInfo>
@@ -242,7 +242,7 @@ const AdvResumeBig = (props) => {
   const goToBike = url => {
     bikeData.clearData();
     bikeData.getData(url);
-    navigation.navigate('Product');
+    navigation.navigate('Product', {url: url});
   };
   const images = [{
     uri: 'http://biciapp.sepisolutions.com' + get(props, 'data.immagine_zoom', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg'),
@@ -346,11 +346,20 @@ const LoginModal = props => {
   const navigation = useNavigation();
   const [visible, setVisible] = useState(false);
   const {bikeData} = useStores();
+  let timer = undefined
   useEffect(() => {
-    setTimeout(() => {
+    timer = setTimeout(() => {
       setVisible(true);
     }, 5000);
+    return () => clearTimeout(timer);
   }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        clearTimeout(timer)
+      };
+    },[])
+  );
 
   return <Modal
     animationType="slide"

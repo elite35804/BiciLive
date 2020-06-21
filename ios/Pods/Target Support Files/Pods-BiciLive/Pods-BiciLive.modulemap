@@ -1,0 +1,6 @@
+module Pods_BiciLive {
+  umbrella header "Pods-BiciLive-umbrella.h"
+
+  export *
+  module * { export * }
+}

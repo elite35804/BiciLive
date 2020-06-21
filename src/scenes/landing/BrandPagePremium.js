@@ -33,6 +33,7 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 const isIOS = Platform.OS === "ios";
 import analytics from '@react-native-firebase/analytics';
+import RNInstallReferrer from 'react-native-install-referrer';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -43,7 +44,7 @@ const RelatedElements = (item, index) => {
   const goToBike = url => {
     bikeData.clearData();
     bikeData.getData(url);
-    navigation.navigate('Product');
+    navigation.navigate('Product', {url: url});
   };
   return (
     <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10}}>
@@ -194,7 +195,7 @@ const ImageReel = (props) => {
     console.log('url=====', url);
     brandData.clearData();
     brandData.getData(url);
-    navigation.navigate('Brand');
+    navigation.navigate('Brand', {url: url});
   };
   return (
     <View>
@@ -337,11 +338,24 @@ const BrandPagePremium = props => {
   const {brandData, bikeData, hud} = useStores();
   // const [titleData, setTitleData] = useState({});
 
+  useEffect(() => {
+    if (props.route.params){
+      const {url} = props.route.params;
+      console.log('url-[-----', url.split('?')[0].substring(7));
+      analytics().setCurrentScreen(url.split('?')[0].substring(7));
+    }
+
+  });
+
+  useEffect(() => {
+    if (!isIOS) RNInstallReferrer.getReferrer().then(referrer=>console.log('brand page referer', referrer));
+  }, [])
+
 
   const goToBike = url => {
     bikeData.clearData();
     bikeData.getData(url);
-    navigation.navigate('Bike');
+    navigation.navigate('Bike',{url: url});
   }
 
   if (brandData.isLoading) {

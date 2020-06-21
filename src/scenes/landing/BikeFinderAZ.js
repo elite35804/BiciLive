@@ -47,7 +47,7 @@ const BikeFinderAZ = props => {
   const goToBrand = (url) => {
     brandData.clearData();
     brandData.getData(url);
-    navigation.navigate('Brand');
+    navigation.navigate('Brand', {url: url});
   };
 
   return (

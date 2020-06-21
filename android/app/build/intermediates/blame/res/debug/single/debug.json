@@ -5,7 +5,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_com_facebook_profile_picture_blank_portrait.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-mdpi-v4/com_facebook_profile_picture_blank_portrait.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-mdpi-v4/com_facebook_profile_picture_blank_portrait.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_star_black_36dp.png.flat",
@@ -57,7 +57,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_com_facebook_tooltip_blue_bottomnub.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-hdpi-v4/com_facebook_tooltip_blue_bottomnub.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-hdpi-v4/com_facebook_tooltip_blue_bottomnub.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher_round.png.flat",
@@ -65,7 +65,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_com_facebook_tooltip_black_background.9.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-xhdpi-v4/com_facebook_tooltip_black_background.9.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-xhdpi-v4/com_facebook_tooltip_black_background.9.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_mtrl_alert_dialog_actions.xml.flat",
@@ -93,7 +93,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_com_facebook_tooltip_blue_background.9.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-mdpi-v4/com_facebook_tooltip_blue_background.9.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-mdpi-v4/com_facebook_tooltip_blue_background.9.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_scrubber_control_off_mtrl_alpha.png.flat",
@@ -137,7 +137,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_com_facebook_button_like_icon_selected.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/drawable-xhdpi-v4/com_facebook_button_like_icon_selected.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/drawable-xhdpi-v4/com_facebook_button_like_icon_selected.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_arrow_down_sm.png.flat",
@@ -149,7 +149,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_com_facebook_tooltip_black_xout.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-mdpi-v4/com_facebook_tooltip_black_xout.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-mdpi-v4/com_facebook_tooltip_black_xout.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_list_longpressed_holo.9.png.flat",
@@ -165,7 +165,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_com_facebook_login_fragment.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/layout/com_facebook_login_fragment.xml"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/layout/com_facebook_login_fragment.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_abc_seekbar_track_material.xml.flat",
@@ -253,7 +253,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_com_facebook_tooltip_blue_background.9.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-hdpi-v4/com_facebook_tooltip_blue_background.9.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-hdpi-v4/com_facebook_tooltip_blue_background.9.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_mtrl_calendar_month_labeled.xml.flat",
@@ -369,7 +369,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_com_facebook_button_send_icon_white.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c950929f4c23319c8b872bec16d69872/res/drawable-mdpi-v4/com_facebook_button_send_icon_white.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/370bfaad250354477c51c5d1bc6a6513/res/drawable-mdpi-v4/com_facebook_button_send_icon_white.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_fps_view.xml.flat",
@@ -405,7 +405,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_com_facebook_tooltip_black_topnub.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-mdpi-v4/com_facebook_tooltip_black_topnub.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-mdpi-v4/com_facebook_tooltip_black_topnub.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/interpolator_mtrl_fast_out_linear_in.xml.flat",
@@ -441,7 +441,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_com_facebook_profile_picture_blank_square.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-mdpi-v4/com_facebook_profile_picture_blank_square.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-mdpi-v4/com_facebook_profile_picture_blank_square.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/color_mtrl_extended_fab_ripple_color.xml.flat",
@@ -477,7 +477,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_com_facebook_activity_layout.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/layout/com_facebook_activity_layout.xml"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/layout/com_facebook_activity_layout.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/color_abc_hint_foreground_material_dark.xml.flat",
@@ -541,7 +541,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_com_facebook_tooltip_bubble.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/layout/com_facebook_tooltip_bubble.xml"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/layout/com_facebook_tooltip_bubble.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_design_navigation_item_subheader.xml.flat",
@@ -593,7 +593,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_com_facebook_tooltip_black_xout.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-xhdpi-v4/com_facebook_tooltip_black_xout.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-xhdpi-v4/com_facebook_tooltip_black_xout.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/interpolator_mtrl_linear.xml.flat",
@@ -765,7 +765,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_com_facebook_favicon_blue.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/drawable/com_facebook_favicon_blue.xml"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/drawable/com_facebook_favicon_blue.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_img_bike_haibike.png.flat",
@@ -789,7 +789,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_com_facebook_auth_dialog_header_background.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/drawable/com_facebook_auth_dialog_header_background.xml"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/drawable/com_facebook_auth_dialog_header_background.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_reactnativevectoricons_glyphmaps_entypo.json.flat",
@@ -877,7 +877,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_com_facebook_button_send_icon_blue.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c950929f4c23319c8b872bec16d69872/res/drawable-mdpi-v4/com_facebook_button_send_icon_blue.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/370bfaad250354477c51c5d1bc6a6513/res/drawable-mdpi-v4/com_facebook_button_send_icon_blue.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_design_bottom_navigation_item_background.xml.flat",
@@ -1021,15 +1021,15 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_com_facebook_tooltip_black_background.9.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-mdpi-v4/com_facebook_tooltip_black_background.9.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-mdpi-v4/com_facebook_tooltip_black_background.9.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_com_facebook_button_like_background.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/drawable/com_facebook_button_like_background.xml"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/drawable/com_facebook_button_like_background.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_com_facebook_tooltip_blue_background.9.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_background.9.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_background.9.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_ic_compare_white.png.flat",
@@ -1225,7 +1225,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_com_facebook_tooltip_blue_topnub.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_topnub.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_topnub.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_ic_star_half_black_16dp.png.flat",
@@ -1301,7 +1301,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_com_facebook_button_background.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/drawable/com_facebook_button_background.xml"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/drawable/com_facebook_button_background.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_lg_mark_motori_3.png.flat",
@@ -1497,7 +1497,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_com_facebook_close.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/drawable-xxhdpi-v4/com_facebook_close.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/drawable-xxhdpi-v4/com_facebook_close.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_ic_footer_profile.png.flat",
@@ -1625,7 +1625,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_com_facebook_close.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/drawable-hdpi-v4/com_facebook_close.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/drawable-hdpi-v4/com_facebook_close.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_ic_compare_white.png.flat",
@@ -1657,7 +1657,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_com_facebook_tooltip_black_bottomnub.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-hdpi-v4/com_facebook_tooltip_black_bottomnub.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-hdpi-v4/com_facebook_tooltip_black_bottomnub.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_messenger_button_white_bg_round.xml.flat",
@@ -1673,7 +1673,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_com_facebook_button_send_icon_white.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c950929f4c23319c8b872bec16d69872/res/drawable-xxhdpi-v4/com_facebook_button_send_icon_white.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/370bfaad250354477c51c5d1bc6a6513/res/drawable-xxhdpi-v4/com_facebook_button_send_icon_white.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_ic_velocity_meter.png.flat",
@@ -1697,7 +1697,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/color_com_facebook_button_text_color.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/color/com_facebook_button_text_color.xml"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/color/com_facebook_button_text_color.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_ic_heart_white.png.flat",
@@ -1797,7 +1797,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_com_facebook_button_like_icon_selected.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/drawable-xxhdpi-v4/com_facebook_button_like_icon_selected.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/drawable-xxhdpi-v4/com_facebook_button_like_icon_selected.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_btn_activated2.gif.flat",
@@ -2025,7 +2025,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_com_facebook_button_like_icon_selected.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/drawable-hdpi-v4/com_facebook_button_like_icon_selected.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/drawable-hdpi-v4/com_facebook_button_like_icon_selected.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/anim_fragment_close_enter.xml.flat",
@@ -2085,7 +2085,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_com_facebook_button_send_icon_white.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c950929f4c23319c8b872bec16d69872/res/drawable-xhdpi-v4/com_facebook_button_send_icon_white.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/370bfaad250354477c51c5d1bc6a6513/res/drawable-xhdpi-v4/com_facebook_button_send_icon_white.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
@@ -2093,7 +2093,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_com_facebook_close.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/drawable-xhdpi-v4/com_facebook_close.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/drawable-xhdpi-v4/com_facebook_close.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_abc_ic_go_search_api_material.xml.flat",
@@ -2113,7 +2113,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_com_facebook_tooltip_black_bottomnub.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-xhdpi-v4/com_facebook_tooltip_black_bottomnub.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-xhdpi-v4/com_facebook_tooltip_black_bottomnub.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_abc_btn_default_mtrl_shape.xml.flat",
@@ -2441,7 +2441,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_com_facebook_smart_device_dialog_fragment.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/layout/com_facebook_smart_device_dialog_fragment.xml"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/layout/com_facebook_smart_device_dialog_fragment.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_ic_battery.png.flat",
@@ -2485,7 +2485,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_com_facebook_tooltip_black_bottomnub.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-mdpi-v4/com_facebook_tooltip_black_bottomnub.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-mdpi-v4/com_facebook_tooltip_black_bottomnub.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_abc_ratingbar_indicator_material.xml.flat",
@@ -2553,7 +2553,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_com_facebook_tooltip_blue_topnub.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-mdpi-v4/com_facebook_tooltip_blue_topnub.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-mdpi-v4/com_facebook_tooltip_blue_topnub.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_ic_heart_red_sm.png.flat",
@@ -2581,7 +2581,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_com_facebook_tooltip_black_topnub.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-xhdpi-v4/com_facebook_tooltip_black_topnub.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-xhdpi-v4/com_facebook_tooltip_black_topnub.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_messenger_bubble_large_blue.png.flat",
@@ -2741,7 +2741,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_com_facebook_send_button_icon.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c950929f4c23319c8b872bec16d69872/res/drawable/com_facebook_send_button_icon.xml"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/370bfaad250354477c51c5d1bc6a6513/res/drawable/com_facebook_send_button_icon.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_lg_mark_motori_5.png.flat",
@@ -2865,7 +2865,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_com_facebook_tooltip_blue_topnub.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-hdpi-v4/com_facebook_tooltip_blue_topnub.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-hdpi-v4/com_facebook_tooltip_blue_topnub.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_ic_user_sm.png.flat",
@@ -2877,7 +2877,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_com_facebook_button_icon.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/drawable/com_facebook_button_icon.xml"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/drawable/com_facebook_button_icon.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_lg_mark_ebike_5.png.flat",
@@ -2985,11 +2985,11 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_com_facebook_tooltip_blue_bottomnub.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-mdpi-v4/com_facebook_tooltip_blue_bottomnub.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-mdpi-v4/com_facebook_tooltip_blue_bottomnub.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_com_facebook_tooltip_black_xout.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-hdpi-v4/com_facebook_tooltip_black_xout.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-hdpi-v4/com_facebook_tooltip_black_xout.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_ic_clear_black_24dp.xml.flat",
@@ -3033,7 +3033,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_com_facebook_tooltip_blue_bottomnub.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_bottomnub.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_bottomnub.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_ic_social_linkedin.png.flat",
@@ -3193,7 +3193,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_com_facebook_close.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/drawable-mdpi-v4/com_facebook_close.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/drawable-mdpi-v4/com_facebook_close.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi_src_res_images_ic_battery_lg.png.flat",
@@ -3233,7 +3233,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/color_com_facebook_send_button_text_color.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c950929f4c23319c8b872bec16d69872/res/color/com_facebook_send_button_text_color.xml"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/370bfaad250354477c51c5d1bc6a6513/res/color/com_facebook_send_button_text_color.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/color_abc_secondary_text_material_light.xml.flat",
@@ -3285,7 +3285,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_com_facebook_tooltip_blue_xout.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-hdpi-v4/com_facebook_tooltip_blue_xout.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-hdpi-v4/com_facebook_tooltip_blue_xout.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat",
@@ -3293,7 +3293,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_com_facebook_button_send_background.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c950929f4c23319c8b872bec16d69872/res/drawable/com_facebook_button_send_background.xml"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/370bfaad250354477c51c5d1bc6a6513/res/drawable/com_facebook_button_send_background.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/raw_node_modules_reactnativevectoricons_glyphmaps_zocial.json.flat",
@@ -3329,7 +3329,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_com_facebook_tooltip_blue_xout.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_xout.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_xout.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_ic_facebook_full.png.flat",
@@ -3349,7 +3349,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_com_facebook_auth_dialog_background.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/drawable/com_facebook_auth_dialog_background.xml"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/drawable/com_facebook_auth_dialog_background.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_src_res_images_ic_connector.png.flat",
@@ -3453,7 +3453,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_com_facebook_button_send_icon_white.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c950929f4c23319c8b872bec16d69872/res/drawable-hdpi-v4/com_facebook_button_send_icon_white.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/370bfaad250354477c51c5d1bc6a6513/res/drawable-hdpi-v4/com_facebook_button_send_icon_white.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_img_bike_atala.png.flat",
@@ -3473,7 +3473,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_com_facebook_auth_dialog_cancel_background.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/drawable/com_facebook_auth_dialog_cancel_background.xml"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/drawable/com_facebook_auth_dialog_cancel_background.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_node_modules_reactnativedropdownalert_assets_info.png.flat",
@@ -3553,7 +3553,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_com_facebook_tooltip_blue_xout.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-mdpi-v4/com_facebook_tooltip_blue_xout.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-mdpi-v4/com_facebook_tooltip_blue_xout.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_menu_paste_mtrl_am_alpha.png.flat",
@@ -3561,7 +3561,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_com_facebook_tooltip_black_background.9.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-hdpi-v4/com_facebook_tooltip_black_background.9.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-hdpi-v4/com_facebook_tooltip_black_background.9.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_mtrl_picker_fullscreen.xml.flat",
@@ -3869,7 +3869,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_com_facebook_button_send_icon_blue.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c950929f4c23319c8b872bec16d69872/res/drawable-hdpi-v4/com_facebook_button_send_icon_blue.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/370bfaad250354477c51c5d1bc6a6513/res/drawable-hdpi-v4/com_facebook_button_send_icon_blue.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_light.xml.flat",
@@ -3881,7 +3881,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_com_facebook_button_send_icon_blue.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c950929f4c23319c8b872bec16d69872/res/drawable-xhdpi-v4/com_facebook_button_send_icon_blue.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/370bfaad250354477c51c5d1bc6a6513/res/drawable-xhdpi-v4/com_facebook_button_send_icon_blue.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_design_navigation_item_separator.xml.flat",
@@ -3897,7 +3897,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_com_facebook_device_auth_dialog_fragment.xml.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/layout/com_facebook_device_auth_dialog_fragment.xml"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/layout/com_facebook_device_auth_dialog_fragment.xml"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/layout_design_bottom_sheet_dialog.xml.flat",
@@ -3961,7 +3961,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_com_facebook_button_like_icon_selected.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/89fb81a19cbe1a621700aafd03de5a74/res/drawable-mdpi-v4/com_facebook_button_like_icon_selected.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/c4560068caf8337f6e3c21ad80c58efd/res/drawable-mdpi-v4/com_facebook_button_like_icon_selected.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/color_mtrl_text_btn_text_color_selector.xml.flat",
@@ -3985,7 +3985,7 @@
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_com_facebook_tooltip_black_topnub.png.flat",
-        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/04dcd16c5cd14c624a634416171273ea/res/drawable-hdpi-v4/com_facebook_tooltip_black_topnub.png"
+        "source": "/Users/gentle/.gradle/caches/transforms-2/files-2.1/ad44da0645d0683ada9965e29c6b2648/res/drawable-hdpi-v4/com_facebook_tooltip_black_topnub.png"
     },
     {
         "merged": "/Volumes/Workspace/bickilive-project/BiciLive/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_src_res_images_lg_mark_motori_2.png.flat",

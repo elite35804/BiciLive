@@ -47,7 +47,8 @@ import {moderateScale, verticalScale, scale} from 'react-native-size-matters';
 import {LoginButton, ShareDialog} from 'react-native-fbsdk';
 import analytics from '@react-native-firebase/analytics';
 import axios from 'axios';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import RNInstallReferrer from 'react-native-install-referrer';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -322,7 +323,7 @@ const RelatedElements = (item, index) => {
   const goToBike = url => {
     bikeData.clearData();
     bikeData.getData(url);
-    navigation.navigate('Product');
+    navigation.navigate('Product', {url: url});
   };
   return (
     <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10}}>
@@ -657,9 +658,22 @@ const RenderElements = props => {
 
 const BikePagePremium = props => {
   const navigation = useNavigation();
-
   const {bikeData, hud} = useStores();
+  // useEffect(() => {
+  //   const focusListener = navigation.addListener('focus', () => {
+  //     console.log('focused========');
+  //   });
+  //   return () => focusListener.remove();
+  // }, []);
 
+  useEffect(() => {
+    if (props.route.params){
+      const {url} = props.route.params;
+      console.log('url-[-----', url.split('?')[0].substring(7));
+      analytics().setCurrentScreen(url.split('?')[0].substring(7));
+    }
+    if (!isIOS) RNInstallReferrer.getReferrer().then(referrer=>console.log('bike page referer', referrer));
+  });
 
   if (bikeData.isLoading) {
     hud.show()

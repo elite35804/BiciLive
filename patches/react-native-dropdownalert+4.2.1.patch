@@ -1,0 +1,21 @@
+diff --git a/node_modules/react-native-dropdownalert/imageview.js b/node_modules/react-native-dropdownalert/imageview.js
+index b70e9a6..354b1c8 100644
+--- a/node_modules/react-native-dropdownalert/imageview.js
++++ b/node_modules/react-native-dropdownalert/imageview.js
+@@ -1,6 +1,6 @@
+ import React, { Component } from 'react';
+ import PropTypes from 'prop-types';
+-import { Image } from 'react-native';
++import {Image, View} from 'react-native';
+ import { DEFAULT_IMAGE_DIMENSIONS } from './constants';
+ 
+ export default class ImageView extends Component {
+@@ -32,6 +32,7 @@ export default class ImageView extends Component {
+       style['height'] = DEFAULT_IMAGE_DIMENSIONS;
+     }
+     const src = isRemote ? { uri: source } : source;
+-    return <Image {...imageProps} style={style} source={src} />;
++    // return <Image {...imageProps} style={style} source={src} />;
++    return <View/>
+   }
+ }

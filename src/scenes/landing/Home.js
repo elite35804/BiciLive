@@ -15,6 +15,7 @@ import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import {Divider, ErrorView} from '../../components/controls/BaseUtils';
 import Image from 'react-native-image-progress';
 import { useNavigation } from '@react-navigation/native';
+import RNInstallReferrer from 'react-native-install-referrer';
 
 
 Text.defaultProps = Text.defaultProps || {};
@@ -113,7 +114,7 @@ const ImageReel = (props) => {
   const goToBrand = (url) => {
     brandData.clearData();
     brandData.getData(url);
-    navigation.navigate('Brand')
+    navigation.navigate('Brand', {url: url})
   };
   return (
     <View>
@@ -199,9 +200,18 @@ const HomeElements = (props) => {
 };
 
 const Home = (props) => {
+  const navigation = useNavigation();
   const {hud} = useStores();
   useEffect(() => {
+    if (!isIOS) RNInstallReferrer.getReferrer().then(referrer=>console.log('referererere', referrer));
+
   }, [])
+  useEffect(() => {
+    if (props.route.params) {
+      console.log('params==========', props.route.params.aaa);
+      navigation.navigate(props.route.params.aaa);
+    }
+  });
   const {homeData} = useStores();
   if (homeData.isLoading) {
     hud.show()

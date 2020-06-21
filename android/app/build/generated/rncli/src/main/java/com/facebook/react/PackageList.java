@@ -30,6 +30,8 @@ import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+// react-native-install-referrer
+import com.reactlibrary.RNInstallReferrerPackage;
 // react-native-safe-area-context
 import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
 // react-native-share
@@ -97,6 +99,7 @@ public class PackageList {
       new ReactNativeFirebaseAppPackage(),
       new FBSDKPackage(),
       new RNGestureHandlerPackage(),
+      new RNInstallReferrerPackage(),
       new SafeAreaContextPackage(),
       new RNSharePackage(),
       new SvgPackage(),

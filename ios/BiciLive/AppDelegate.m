@@ -14,6 +14,7 @@
 #import <Firebase.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
 
+#import <React/RCTLinkingManager.h>
 
 @implementation AppDelegate
 
@@ -49,6 +50,13 @@
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
   return [RNGoogleSignin application:app openURL:url options:options];
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+  return [RCTLinkingManager application:app openURL:url
+                      sourceApplication:sourceApplication annotation:annotation];
 }
 
 @end
