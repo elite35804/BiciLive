@@ -186,10 +186,10 @@ const shareTwitter = url => {
   }).catch(err => console.error('An error occurred', err));
 };
 const BrandLogo = props => {
-  const {brandData} = useStores();
+  const {brandData, bikeData} = useStores();
   const goToBrand = (url) => {
     brandData.clearData();
-    brandData.getData(url);
+    brandData.getData(url, bikeData.url);
     Actions.BrandPagePremium();
   };
   return (
@@ -397,7 +397,7 @@ const RelatedElements = (item, index) => {
   const {bikeData} = useStores();
   const goToBike = url => {
     bikeData.clearData();
-    bikeData.getData(url);
+    bikeData.getData(url, bikeData.url);
     navigation.navigate('Product', {url: url});
   };
   return (
@@ -766,7 +766,6 @@ const BikePagePremium = props => {
       console.log('url-[-----', url.split('?')[0].substring(7));
       analytics().setCurrentScreen(url.split('?')[0].substring(7));
     }
-    if (!isIOS) RNInstallReferrer.getReferrer().then(referrer=>console.log('bike page referer', referrer));
   });
 
   if (bikeData.isLoading) {

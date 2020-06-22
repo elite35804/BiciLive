@@ -5,15 +5,22 @@ import analytics from '@react-native-firebase/analytics';
 class BrandStore {
   data = {};
   errorIf = false;
+  url = '';
   @observable position = 0;
   @observable isLoading = false;
   @observable isLike = false;
   @action
-  getData = async (url) => {
+  getData = async (url, referer = '') => {
+    console.log('brand refererererer========', referer);
+    this.url = url;
     this.isLoading = true;
     try {
-      const response = await axios.get('http://biciapp.sepisolutions.com'+url);
-      console.log(response.data, 'homeData =====================');
+      const response = await axios.get(
+        'http://biciapp.sepisolutions.com'+url,
+        {
+          'Referer': referer
+        }
+      );
       if (response.data.err_code === "ERR_OK") {
         this.data = response.data.content;
         this.errorIf = false;

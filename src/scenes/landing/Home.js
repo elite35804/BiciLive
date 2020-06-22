@@ -54,11 +54,11 @@ const Stepper = observer(props => {
 });
 
 const PageElement = props => {
-  const {bikeData} = useStores();
+  const {bikeData, homeData} = useStores();
   const navigation = useNavigation();
   const goToBike = url => {
     bikeData.clearData();
-    bikeData.getData(url);
+    bikeData.getData(url, homeData.url);
     navigation.navigate('Product', {url: url});
   };
   return (
@@ -109,11 +109,11 @@ const PageSlider = (props) => {
 
 
 const ImageReel = (props) => {
-  const {brandData} = useStores();
+  const {brandData, homeData} = useStores();
   const navigation = useNavigation();
   const goToBrand = (url) => {
     brandData.clearData();
-    brandData.getData(url);
+    brandData.getData(url, homeData.url);
     navigation.navigate('Brand', {url: url})
   };
   return (
@@ -230,8 +230,7 @@ const Home = (props) => {
   }, [])
   useEffect(() => {
     if (props.route.params) {
-      console.log('params==========', props.route.params.aaa);
-      navigation.navigate(props.route.params.aaa);
+      console.log('params==========', props.route.params.url);
     }
   });
   const {homeData} = useStores();

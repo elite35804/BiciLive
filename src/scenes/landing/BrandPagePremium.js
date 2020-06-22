@@ -205,7 +205,7 @@ const ImageReel = (props) => {
   const goToBrand = (url) => {
     console.log('url=====', url);
     brandData.clearData();
-    brandData.getData(url);
+    brandData.getData(url, brandData.url);
     navigation.navigate('Brand', {url: url});
   };
   return (
@@ -445,7 +445,7 @@ const BrandPagePremium = props => {
 
   const goToBike = url => {
     bikeData.clearData();
-    bikeData.getData(url);
+    bikeData.getData(url, brandData.url);
     navigation.navigate('Bike',{url: url});
   }
 

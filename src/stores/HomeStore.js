@@ -5,6 +5,7 @@ import analytics from '@react-native-firebase/analytics';
 class HomeStore {
   data = {};
   errorIf = false;
+  url = '/api/v1/home';
   @observable position = 0;
   @observable isLoading = false;
   @action.bound

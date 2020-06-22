@@ -9,11 +9,17 @@ class BikeStore {
   @observable isLoading = false;
   @observable isLike = false;
   @action
-  getData = async (url) => {
+  getData = async (url, referer='') => {
+    console.log('bike referereree=====', referer);
     this.url = url;
     this.isLoading = true;
     try {
-      const response = await axios.get('http://biciapp.sepisolutions.com'+url);
+      const response = await axios.get
+      ('http://biciapp.sepisolutions.com'+url,
+        {
+          'Referer': referer
+        }
+      );
       console.log(response.data, 'homeData =====================');
       if (response.data.err_code === "ERR_OK") {
         this.data = response.data.content;

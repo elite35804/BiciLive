@@ -1,9 +1,7 @@
-import React, {useState} from 'react';
-import {KeyboardAvoidingView, Platform, View, Image, Text, TouchableOpacity, StatusBar, Linking} from 'react-native';
-import StoresContext from './StoresContext';
+import React from 'react';
+import {Image, Platform, Text, TouchableOpacity, View} from 'react-native';
 // import {Router, Scene, Stack, Drawer, Modal, Tabs, Actions} from 'react-native-router-flux';
 import Images from 'res/Images';
-import Keys from './res/SceneKeys';
 import Splash from './scenes/landing/Splash';
 import Register from './scenes/landing/Register';
 import Welcome from './scenes/landing/Welcome';
@@ -12,24 +10,21 @@ import BikeFinder from './scenes/landing/BikeFinder';
 import BikeFinderAZ from './scenes/landing/BikeFinderAZ';
 import BikeFinderCategory from './scenes/landing/BikeFinderCategory';
 import Result from './scenes/landing/Result';
-import BikePage from './scenes/landing/BikePage';
 import BikePagePremium from './scenes/landing/BikePagePremium';
 import BrandPagePremium from './scenes/landing/BrandPagePremium';
-import BrandPage from './scenes/landing/BrandPage';
-import NewsFinder from './scenes/landing/NewsFinder';
 import Dashboard from './scenes/landing/Dashboard';
 import Brand from './scenes/landing/Brand';
 import EBike from './scenes/landing/EBike';
 import User from './scenes/landing/User';
-import styled from 'styled-components/native';
 import {useStores} from './hooks/Utils';
-import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
+import {moderateScale} from 'react-native-size-matters';
 import Login from './scenes/landing/Login';
 import WebViewer from './scenes/landing/WebViewer';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import analytics from '@react-native-firebase/analytics';
+import dynamicLinks from '@react-native-firebase/dynamic-links';
 
 
 const isIOS = Platform.OS === 'ios';
@@ -142,31 +137,21 @@ const Root = props => {
   // const navigation = useNavigation();
   const routeNameRef = React.useRef();
   const navigationRef = React.useRef();
-  const {bikeData, brandData} = useStores();
-  const [initialScreen, setInitialScreen] = useState('Login');
 
-
-
-  const navigate = ({url})=> {
-    console.log('urllistenter=====', url);
-    const routeName = url.split('://')[1];
-    if (routeName.includes('??')) {
-      const type = routeName.split('??')[0];
-      const data = routeName.split('??')[1].split('==')[1];
-      console.log('data===========', data);
-      if (type === 'Product') {
-        bikeData.getData(data);
-      }
-      if (type === 'Brand') {
-        brandData.getData(data);
-      }
-      // navigation.navigate(type, {url: url});
-    } else {
-      // navigation.navigate(routeName);
-      console.log('roputemtammdmdm===', routeName)
-      setInitialScreen(routeName);
-    }
+  const buildLink = async () => {
+    return await dynamicLinks().buildLink({
+      link: 'https://bicilive.app',
+      // domainUriPrefix is created in your Firebase console
+      domainUriPrefix: 'https://xyz.page.link',
+      // optional set up which updates Firebase analytics campaign
+      // "banner". This also needs setting up before hand
+      analytics: {
+        campaign: 'banner',
+      },
+    });
   };
+
+
   React.useEffect(() => {
     const state = navigationRef.current.getRootState();
 

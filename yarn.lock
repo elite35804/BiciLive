@@ -1200,6 +1200,11 @@
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
 
+"@react-native-firebase/dynamic-links@^7.2.0":
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/dynamic-links/-/dynamic-links-7.2.0.tgz#07b10dee4dfc20b0e550f15614a15f5a114f4f19"
+  integrity sha512-5Qoja1Anai2mSRYEL6neVD5GK9staufQCfKUBBYisNmiiT6vdkPLdVgo+O2OnPpLLLjby3KQKzSKq8ePQNRWAw==
+
 "@react-navigation/bottom-tabs@^5.5.2":
   version "5.5.2"
   resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-5.5.2.tgz#b3d95e2a05eba47f7aa34fb9f2331ddede0ee4d5"
