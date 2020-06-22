@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity, Linking} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import { Actions } from 'react-native-router-flux';
@@ -13,10 +13,34 @@ import { useNavigation } from '@react-navigation/native';
 
 const Welcome = props => {
   const navigation = useNavigation();
-  const {question, alert, auth} = useStores();
+  const {question, alert, auth, bikeData, brandData} = useStores();
   const [data, setData] = useState(toJS(question.data));
   const [uiData, setUiData] = useState([]);
   const [reset, setReset] = useState(1);
+  const navigate = url => {
+    console.log('deeplinkurl==========', url);
+    const routeName = url.split('://')[1];
+    if (routeName.includes('??')) {
+      const type = routeName.split('??')[0];
+      const data = routeName.split('??')[1].split('==')[1];
+      console.log('data===========', data);
+      if (type === 'Product') {
+        bikeData.clearData()
+        bikeData.getData(data);
+      }
+      if (type === 'Brand') {
+        brandData.clearData()
+        brandData.getData(data);
+      }
+      navigation.navigate(type, {url: url});
+    } else {
+      navigation.navigate(routeName);
+    }
+  };
+  useEffect(() => {
+    Linking.addEventListener('url', event => navigate(event.url))
+    return () => Linking.removeEventListener('url', event => navigate(event.url));
+  }, []);
   useEffect(() => {
     const temp = [];
     data.map(item => {
@@ -50,7 +74,7 @@ const Welcome = props => {
       }
     }
     question.submit(auth.token);
-    navigation.navigate('Main')
+    navigation.navigate('Home')
   };
 
   console.log('length=====', Object.entries(toJS(question.data)).length);

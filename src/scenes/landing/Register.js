@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Image, View, TouchableOpacity, Text, ScrollView, Platform, BackHandler} from 'react-native';
+import {Image, View, TouchableOpacity, Text, ScrollView, Platform, BackHandler, Linking} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {useStores} from 'hooks/Utils';
@@ -44,13 +44,38 @@ const SelectElement = (props) => {
 
 const Register = props => {
   const navigation = useNavigation();
-  const { auth, alert, hud } = useStores();
+  const { auth, alert, hud, bikeData, brandData } = useStores();
   const [checked, setChecked] = useState(true);
   const [checked1, setChecked1] = useState(true);
   const [date, setDate] = useState(new Date(1598051730000));
   const [show, setShow] = useState(false);
   const [displayDate, setDisplayDate] = useState(null);
   const ageData = [];
+
+  const navigate = url => {
+    console.log('deeplinkurl==========', url);
+    const routeName = url.split('://')[1];
+    if (routeName.includes('??')) {
+      const type = routeName.split('??')[0];
+      const data = routeName.split('??')[1].split('==')[1];
+      console.log('data===========', data);
+      if (type === 'Product') {
+        bikeData.clearData()
+        bikeData.getData(data);
+      }
+      if (type === 'Brand') {
+        brandData.clearData()
+        brandData.getData(data);
+      }
+      navigation.navigate(type, {url: url});
+    } else {
+      navigation.navigate(routeName);
+    }
+  };
+  useEffect(() => {
+    Linking.addEventListener('url', event => navigate(event.url))
+    return () => Linking.removeEventListener('url', event => navigate(event.url));
+  }, []);
   for(let item = 1920; item <= 2020; item++) {
     ageData.push(item.toString());
   }

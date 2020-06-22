@@ -5,10 +5,12 @@ import analytics from '@react-native-firebase/analytics';
 class BikeStore {
   data = [];
   errorIf = false;
+  url = '';
   @observable isLoading = false;
   @observable isLike = false;
   @action
   getData = async (url) => {
+    this.url = url;
     this.isLoading = true;
     try {
       const response = await axios.get('http://biciapp.sepisolutions.com'+url);

@@ -46,7 +46,31 @@ const AdBlock = props => {
 };
 const Result = props => {
   const navigation = useNavigation();
-  const {bikeSearch, hud} = useStores();
+  const {bikeSearch, hud, bikeData, brandData} = useStores();
+  const navigate = url => {
+    console.log('deeplinkurl==========', url);
+    const routeName = url.split('://')[1];
+    if (routeName.includes('??')) {
+      const type = routeName.split('??')[0];
+      const data = routeName.split('??')[1].split('==')[1];
+      console.log('data===========', data);
+      if (type === 'Product') {
+        bikeData.clearData()
+        bikeData.getData(data);
+      }
+      if (type === 'Brand') {
+        brandData.clearData()
+        brandData.getData(data);
+      }
+      navigation.navigate(type, {url: url});
+    } else {
+      navigation.navigate(routeName);
+    }
+  };
+  useEffect(() => {
+    Linking.addEventListener('url', event => navigate(event.url))
+    return () => Linking.removeEventListener('url', event => navigate(event.url));
+  }, []);
   if (bikeSearch.isLoading) {
     hud.show()
   } else {

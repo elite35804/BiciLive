@@ -55,12 +55,14 @@ Text.defaultProps.allowFontScaling = false;
 
 const isIOS = Platform.OS === 'ios';
 
-const shareFacebook = () => {
+const shareFacebook = (url) => {
+  const server = 'http://biciapp.sepisolutions.com';
   const shareLinkContent = {
     contentType: 'link',
-    contentUrl: 'http://biciapp.sepisolutions.com/z-content/images/ebike/r-raymon/wfmXeuPBAWf1QiZijXxa4UlqdtnKgNeG_320.jpg',
+    contentUrl: `bicilive://Product?data=${url}`,
     contentDescription: 'Facebook sharing is easy!',
   };
+  console.log('shringcontent======', shareLinkContent);
   ShareDialog.canShow(shareLinkContent).then(
     function (canShow) {
       if (canShow) {
@@ -80,12 +82,13 @@ const shareFacebook = () => {
     },
   );
 };
-const shareWhatsapp = () => {
-  const text = 'this';
+const shareWhatsapp = (shareurl) => {
+  const server = 'http://biciapp.sepisolutions.com';
+  const content = `bicilive://Product??data==${server}${shareurl}`;
   const phoneNumber = '8618240331746';
   const downloadUrl = isIOS ? 'https://apps.apple.com/it/app/whatsapp-messenger/id310633997' : 'https://play.google.com/store/apps/details?id=com.whatsapp&hl=it';
   // Linking.openURL(`whatsapp://send?text=${text}`)
-  const url = `whatsapp://send?text=${text}&phone=${phoneNumber}`;
+  const url = `whatsapp://send?text=${content}&phone=${phoneNumber}`;
   Linking.canOpenURL(url).then(supported => {
     console.log('supported======', supported);
     if (!supported) {
@@ -107,6 +110,78 @@ const shareWhatsapp = () => {
       );
     } else {
       return Linking.openURL(url);
+    }
+  }).catch(err => console.error('An error occurred', err));
+};
+
+const shareEmail = url => {
+  const shareURL = `bicilive://Product??data==${url}`
+  const emailURL = `mailto:support@example.com?subject=Bicilive&body=${shareURL}`;
+  Linking.canOpenURL(emailURL).then(supported => {
+    console.log('supported======', supported);
+    if (!supported) {
+      console.log('Can\'t handle url: ' + emailURL);
+    } else {
+      return Linking.openURL(emailURL);
+    }
+  }).catch(err => console.error('An error occurred', err));
+};
+
+const shareTwitter = url => {
+  // const deepLink = `bicilive://Product??data==${url}`;
+  // const downloadUrl = 'https://play.google.com/store/apps/details?id=com.twitter.android&hl=en';
+  // const shareUrl = `twitter://post?message=${deepLink}`;
+  let TwitterParameters = '';
+  let TwitterShareURL = `bicilive://Product??data==${url}`;
+  let TweetContent = 'Bicilive';
+  let TwitterViaAccount = 'davide_giovi';
+  if (TwitterParameters.includes('?') === false) {
+    TwitterParameters =
+      TwitterParameters + '?url=' + encodeURI(TwitterShareURL);
+  } else {
+    TwitterParameters =
+      TwitterParameters + '&url=' + encodeURI(TwitterShareURL);
+  }
+  if (TweetContent !== undefined) {
+    if (TwitterParameters.includes('?') === false) {
+      TwitterParameters =
+        TwitterParameters + '?text=' + encodeURI(TweetContent);
+    } else {
+      TwitterParameters =
+        TwitterParameters + '&text=' + encodeURI(TweetContent);
+    }
+  }
+  if (TwitterViaAccount !== undefined) {
+    if (TwitterParameters.includes('?') === false) {
+      TwitterParameters =
+        TwitterParameters + '?via=' + encodeURI(TwitterViaAccount);
+    } else {
+      TwitterParameters =
+        TwitterParameters + '&via=' + encodeURI(TwitterViaAccount);
+    }
+  }
+  let shareUrl = 'https://twitter.com/intent/tweet' + TwitterParameters;
+  Linking.canOpenURL(shareUrl).then(supported => {
+    console.log('supported======', supported);
+    if (!supported) {
+      console.log('Can\'t handle url: ' + shareUrl);
+      Alert.alert(
+        'Your phone does not have Twitter app',
+        'Do you want to install Twitter app?',
+        [
+          {
+            text: 'Install Twitter',
+            onPress: () => Linking.openURL(downloadUrl),
+          },
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+        ],
+        {cancelable: false},
+        )
+    } else {
+      return Linking.openURL(shareUrl);
     }
   }).catch(err => console.error('An error occurred', err));
 };
@@ -227,7 +302,7 @@ const ShareBlock = observer(props => {
 
   return <View><ShareView>
     <TouchableOpacity onPress={() => fetchData()}><Image width={'100%'} height={'100%'} source={bikeData.isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart} /></TouchableOpacity>
-    <ShareTooltip/>
+    <ShareTooltip onWhatsapp={() => shareWhatsapp(bikeData.url)} onFB={() => shareFacebook(bikeData.url)} onEmail={() => shareEmail(bikeData.url)} onTwitter={() => shareTwitter(bikeData.url)}/>
   </ShareView>
     <Divider size={15}/>
   </View>
@@ -648,9 +723,9 @@ const RenderElements = props => {
     if (item.id === 'AD_BANNER_ENGAGE') {
       items.push(<View><Divider size={23}/><AdBlock data={item}/></View>);
     }
-    if (item.id === 'SIGN_IN_PLACEHOLDER' && !auth.loginState) {
-      items.push(<LoginModal data={item}/>);
-    }
+    // if (item.id === 'SIGN_IN_PLACEHOLDER' && !auth.loginState) {
+    //   items.push(<LoginModal data={item}/>);
+    // }
     items.push(<Divider key={`divider${index}`} size={20}/>);
   });
   return items;
@@ -658,13 +733,32 @@ const RenderElements = props => {
 
 const BikePagePremium = props => {
   const navigation = useNavigation();
-  const {bikeData, hud} = useStores();
-  // useEffect(() => {
-  //   const focusListener = navigation.addListener('focus', () => {
-  //     console.log('focused========');
-  //   });
-  //   return () => focusListener.remove();
-  // }, []);
+  const {bikeData, brandData, hud} = useStores();
+
+  const navigate = url => {
+    console.log('deeplinkurl==========', url);
+    const routeName = url.split('://')[1];
+    if (routeName.includes('??')) {
+      const type = routeName.split('??')[0];
+      const data = routeName.split('??')[1].split('==')[1];
+      console.log('data===========', data);
+      if (type === 'Product') {
+        bikeData.clearData()
+        bikeData.getData(data);
+      }
+      if (type === 'Brand') {
+        brandData.clearData()
+        brandData.getData(data);
+      }
+      navigation.navigate(type, {url: url});
+    } else {
+      navigation.navigate(routeName);
+    }
+  };
+  useEffect(() => {
+    Linking.addEventListener('url', event => navigate(event.url))
+    return () => Linking.removeEventListener('url', event => navigate(event.url));
+  }, [])
 
   useEffect(() => {
     if (props.route.params){

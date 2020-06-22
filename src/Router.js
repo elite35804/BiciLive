@@ -1,5 +1,5 @@
-import React from 'react';
-import {KeyboardAvoidingView, Platform, View, Image, Text, TouchableOpacity, StatusBar} from 'react-native';
+import React, {useState} from 'react';
+import {KeyboardAvoidingView, Platform, View, Image, Text, TouchableOpacity, StatusBar, Linking} from 'react-native';
 import StoresContext from './StoresContext';
 // import {Router, Scene, Stack, Drawer, Modal, Tabs, Actions} from 'react-native-router-flux';
 import Images from 'res/Images';
@@ -139,14 +139,43 @@ const getActiveRouteName = state => {
 };
 
 const Root = props => {
+  // const navigation = useNavigation();
   const routeNameRef = React.useRef();
   const navigationRef = React.useRef();
+  const {bikeData, brandData} = useStores();
+  const [initialScreen, setInitialScreen] = useState('Login');
 
+
+
+  const navigate = ({url})=> {
+    console.log('urllistenter=====', url);
+    const routeName = url.split('://')[1];
+    if (routeName.includes('??')) {
+      const type = routeName.split('??')[0];
+      const data = routeName.split('??')[1].split('==')[1];
+      console.log('data===========', data);
+      if (type === 'Product') {
+        bikeData.getData(data);
+      }
+      if (type === 'Brand') {
+        brandData.getData(data);
+      }
+      // navigation.navigate(type, {url: url});
+    } else {
+      // navigation.navigate(routeName);
+      console.log('roputemtammdmdm===', routeName)
+      setInitialScreen(routeName);
+    }
+  };
   React.useEffect(() => {
     const state = navigationRef.current.getRootState();
 
     // Save the initial route name
     routeNameRef.current = getActiveRouteName(state);
+
+    // Linking.addEventListener('url', navigate)
+    //
+    // return () => Linking.removeEventListener('url', navigate)
   }, []);
   return (
     <NavigationContainer
@@ -171,20 +200,86 @@ const Root = props => {
         <Stack.Screen name="Login" component={Login}/>
         <Stack.Screen name="Register" component={Register}/>
         <Stack.Screen name="Survey" component={Welcome}/>
-        <Stack.Screen name="Main">
+        <Stack.Screen name="Home">
           {() =>
             <Tab.Navigator tabBar={props => <TabBar {...props}/>}>
               <Tab.Screen name="Home" component={Home}/>
+            </Tab.Navigator>
+          }
+        </Stack.Screen>
+        <Stack.Screen name="Product">
+          {() =>
+            <Tab.Navigator tabBar={props => <TabBar {...props}/>}>
               <Tab.Screen name="Product" component={BikePagePremium}/>
+            </Tab.Navigator>
+          }
+        </Stack.Screen>
+        <Stack.Screen name="Brand">
+          {() =>
+            <Tab.Navigator tabBar={props => <TabBar {...props}/>}>
               <Tab.Screen name="Brand" component={BrandPagePremium}/>
+            </Tab.Navigator>
+          }
+        </Stack.Screen>
+        <Stack.Screen name="BikeFinder">
+          {() =>
+            <Tab.Navigator tabBar={props => <TabBar {...props}/>}>
               <Tab.Screen name="BikeFinder" component={BikeFinder}/>
+            </Tab.Navigator>
+          }
+        </Stack.Screen>
+        <Stack.Screen name="BikeFinderAZ">
+          {() =>
+            <Tab.Navigator tabBar={props => <TabBar {...props}/>}>
               <Tab.Screen name="BikeFinderAZ" component={BikeFinderAZ}/>
+            </Tab.Navigator>
+          }
+        </Stack.Screen>
+        <Stack.Screen name="BikeFinderCategory">
+          {() =>
+            <Tab.Navigator tabBar={props => <TabBar {...props}/>}>
               <Tab.Screen name="BikeFinderCategory" component={BikeFinderCategory}/>
+            </Tab.Navigator>
+          }
+        </Stack.Screen>
+        <Stack.Screen name="WebViewer">
+          {() =>
+            <Tab.Navigator tabBar={props => <TabBar {...props}/>}>
               <Tab.Screen name="WebViewer" component={WebViewer}/>
+            </Tab.Navigator>
+          }
+        </Stack.Screen>
+        <Stack.Screen name="Result">
+          {() =>
+            <Tab.Navigator tabBar={props => <TabBar {...props}/>}>
               <Tab.Screen name="Result" component={Result}/>
+            </Tab.Navigator>
+          }
+        </Stack.Screen>
+        <Stack.Screen name="Dashboard">
+          {() =>
+            <Tab.Navigator tabBar={props => <TabBar {...props}/>}>
               <Tab.Screen name="Dashboard" component={Dashboard}/>
+            </Tab.Navigator>
+          }
+        </Stack.Screen>
+        <Stack.Screen name="LikeProduct">
+          {() =>
+            <Tab.Navigator tabBar={props => <TabBar {...props}/>}>
               <Tab.Screen name="LikeProduct" component={EBike}/>
+            </Tab.Navigator>
+          }
+        </Stack.Screen>
+        <Stack.Screen name="LikeBrand">
+          {() =>
+            <Tab.Navigator tabBar={props => <TabBar {...props}/>}>
               <Tab.Screen name="LikeBrand" component={Brand}/>
+            </Tab.Navigator>
+          }
+        </Stack.Screen>
+        <Stack.Screen name="Account">
+          {() =>
+            <Tab.Navigator tabBar={props => <TabBar {...props}/>}>
               <Tab.Screen name="Account" component={User}/>
             </Tab.Navigator>
           }

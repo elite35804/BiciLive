@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Text, ScrollView, TouchableOpacity, Image} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, ScrollView, TouchableOpacity, Image, Linking} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {useStores} from 'hooks/Utils';
@@ -18,8 +18,31 @@ Text.defaultProps.allowFontScaling = false;
 
 const BikeFinder = props => {
   const navigation = useNavigation();
-  const {staticData, category, bikeSearch} = useStores();
-  console.log("search_landing", toJS(staticData.data.search_landing));
+  const {staticData, category, bikeSearch, bikeData, brandData} = useStores();
+  const navigate = url => {
+    console.log('deeplinkurl==========', url);
+    const routeName = url.split('://')[1];
+    if (routeName.includes('??')) {
+      const type = routeName.split('??')[0];
+      const data = routeName.split('??')[1].split('==')[1];
+      console.log('data===========', data);
+      if (type === 'Product') {
+        bikeData.clearData()
+        bikeData.getData(data);
+      }
+      if (type === 'Brand') {
+        brandData.clearData()
+        brandData.getData(data);
+      }
+      navigation.navigate(type, {url: url});
+    } else {
+      navigation.navigate(routeName);
+    }
+  };
+  useEffect(() => {
+    Linking.addEventListener('url', event => navigate(event.url))
+    return () => Linking.removeEventListener('url', event => navigate(event.url));
+  }, [])
   const goToCategory = (id, title, color) => {
     bikeSearch.clearRequest();
     console.log('id====', id);

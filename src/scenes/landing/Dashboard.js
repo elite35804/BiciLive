@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, ScrollView, TouchableOpacity, Image, FlatList} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity, Image, FlatList, Linking} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {Actions} from 'react-native-router-flux';
@@ -18,7 +18,31 @@ Text.defaultProps.allowFontScaling = false;
 
 const Dashboard = props => {
   const navigation = useNavigation();
-  const {auth, likeBrand, likeProduct, account} = useStores();
+  const {auth, likeBrand, likeProduct, account, bikeData, brandData} = useStores();
+  const navigate = url => {
+    console.log('deeplinkurl==========', url);
+    const routeName = url.split('://')[1];
+    if (routeName.includes('??')) {
+      const type = routeName.split('??')[0];
+      const data = routeName.split('??')[1].split('==')[1];
+      console.log('data===========', data);
+      if (type === 'Product') {
+        bikeData.clearData()
+        bikeData.getData(data);
+      }
+      if (type === 'Brand') {
+        brandData.clearData()
+        brandData.getData(data);
+      }
+      navigation.navigate(type, {url: url});
+    } else {
+      navigation.navigate(routeName);
+    }
+  };
+  useEffect(() => {
+    Linking.addEventListener('url', event => navigate(event.url))
+    return () => Linking.removeEventListener('url', event => navigate(event.url));
+  }, []);
   return (
       <Container>
         <Title size={'40px'} color={themeProp('colorPrimary')} width={'35px'}>DASHBOARD</Title>

@@ -32,18 +32,27 @@ Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
 const Splash = props => {
-  const {staticData, homeData, auth} = useStores();
+  const {staticData, homeData, auth, bikeData, brandData} = useStores();
   const navigation = useNavigation();
   const _handleOpenURL = event => {
     console.log('oprnurlurl======', event.url);
   };
   const navigate = url => {
+    console.log('deeplinkurl==========', url);
     const routeName = url.split('://')[1];
-    if (routeName.includes('/')) {
-      const routeName1 = routeName.split('/')[0];
-      const routename2 = routeName.split('/')[1];
-      console.log('urls===========', routeName1, routename2);
-      navigation.navigate(routeName1, {aaa: routename2});
+    if (routeName.includes('??')) {
+      const type = routeName.split('??')[0];
+      const data = routeName.split('??')[1].split('==')[1];
+      console.log('data===========', data);
+      if (type === 'Product') {
+        bikeData.clearData()
+        bikeData.getData(data);
+      }
+      if (type === 'Brand') {
+        brandData.clearData()
+        brandData.getData(data);
+      }
+      navigation.navigate(type, {url: url});
     } else {
       navigation.navigate(routeName);
     }
@@ -79,11 +88,10 @@ const Splash = props => {
         }
       })
       // RNInstallReferrer.getReferrer().then(referrer=>console.log('referererere', referrer));
-    } else {
-      Linking.addEventListener('url', _handleOpenURL)
     }
+    Linking.addEventListener('url', event => navigate(event.url))
 
-    return () => Linking.removeEventListener('url', _handleOpenURL);
+    return () => Linking.removeEventListener('url', event => navigate(event.url));
   }, []);
   const initUser = (token) => {
     fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + token)
@@ -167,7 +175,7 @@ const Splash = props => {
         <BlueButton width={'85%'} height={'55px'} fontSize={'30px'} onPress={() => navigation.navigate('Login')}>LOGIN</BlueButton>
         <Divider size="12px"/>
         <WhiteButton width={'85%'} height={'55px'} fontSize={'30px'} backgroudColor={'#333333'} textColor={'#5fdcd2'} borderColor={'#5fdcd2'} onPress={() => navigation.navigate('Register')}>REGISTRATI</WhiteButton>
-        <Bottom onPress={() => navigation.navigate('Main')}>
+        <Bottom onPress={() => navigation.navigate('Home')}>
           <BottomText>CONTINUA COME OSPITE</BottomText>
         </Bottom>
       </BtnView>

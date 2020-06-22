@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import {View, Text, ScrollView, TouchableOpacity, Image, FlatList} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity, Image, FlatList, Linking} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {Actions} from 'react-native-router-flux';
@@ -36,14 +36,36 @@ const preProcess = (rawData, filter = '') => {
 
 const BikeFinderAZ = props => {
   const navigation = useNavigation();
-  const {staticData} = useStores();
+  const {staticData, brandData, bikeData} = useStores();
   const [filter, setFilter] = useState('');
-  console.log('brand_search_page=======', toJS(staticData.data.brand_search_page));
   const rawData = toJS(staticData.data.brand_search_page);
   const {title, filterPlaceholder, filterData, color} = preProcess(rawData, filter);
-  console.log('processed data==========', title, filterPlaceholder, filterData);
 
-  const {brandData} = useStores();
+  const navigate = url => {
+    console.log('deeplinkurl==========', url);
+    const routeName = url.split('://')[1];
+    if (routeName.includes('??')) {
+      const type = routeName.split('??')[0];
+      const data = routeName.split('??')[1].split('==')[1];
+      console.log('data===========', data);
+      if (type === 'Product') {
+        bikeData.clearData()
+        bikeData.getData(data);
+      }
+      if (type === 'Brand') {
+        brandData.clearData()
+        brandData.getData(data);
+      }
+      navigation.navigate(type, {url: url});
+    } else {
+      navigation.navigate(routeName);
+    }
+  };
+  useEffect(() => {
+    Linking.addEventListener('url', event => navigate(event.url))
+    return () => Linking.removeEventListener('url', event => navigate(event.url));
+  }, []);
+
   const goToBrand = (url) => {
     brandData.clearData();
     brandData.getData(url);

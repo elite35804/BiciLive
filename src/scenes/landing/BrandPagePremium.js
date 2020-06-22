@@ -1,5 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {Image, View, TouchableOpacity, Text, ScrollView, Platform, Linking, Image as DefaultImage} from 'react-native';
+import {
+  Image,
+  View,
+  TouchableOpacity,
+  Text,
+  ScrollView,
+  Platform,
+  Linking,
+  Image as DefaultImage,
+  Alert,
+} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {useStores} from 'hooks/Utils';
@@ -34,6 +44,7 @@ import axios from 'axios';
 const isIOS = Platform.OS === "ios";
 import analytics from '@react-native-firebase/analytics';
 import RNInstallReferrer from 'react-native-install-referrer';
+import {ShareDialog} from 'react-native-fbsdk';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -281,7 +292,31 @@ const PageSlider = (props) => {
   );
 };
 
-
+const shareFacebook = () => {
+  const shareLinkContent = {
+    contentType: 'link',
+    contentUrl: 'http://biciapp.sepisolutions.com/z-content/images/ebike/r-raymon/wfmXeuPBAWf1QiZijXxa4UlqdtnKgNeG_320.jpg',
+    contentDescription: 'Facebook sharing is easy!',
+  };
+  ShareDialog.canShow(shareLinkContent).then(
+    function (canShow) {
+      if (canShow) {
+        return ShareDialog.show(shareLinkContent);
+      }
+    },
+  ).then(
+    function (result) {
+      if (result.isCancelled) {
+        alert('Share cancelled');
+      } else {
+        alert('Share success with postId: ' + result.postId);
+      }
+    },
+    function (error) {
+      alert('Share fail with error: ' + error);
+    },
+  );
+};
 
 const ShareBlock = props => {
   const {auth} = useStores();
@@ -324,6 +359,37 @@ const ShareBlock = props => {
   );
 };
 
+const shareWhatsapp = () => {
+  const text = 'this';
+  const phoneNumber = '8618240331746';
+  const downloadUrl = isIOS ? 'https://apps.apple.com/it/app/whatsapp-messenger/id310633997' : 'https://play.google.com/store/apps/details?id=com.whatsapp&hl=it';
+  // Linking.openURL(`whatsapp://send?text=${text}`)
+  const url = `whatsapp://send?text=${text}&phone=${phoneNumber}`;
+  Linking.canOpenURL(url).then(supported => {
+    console.log('supported======', supported);
+    if (!supported) {
+      console.log('Can\'t handle url: ' + url);
+      Alert.alert(
+        'Your phone does not have whatsapp',
+        'Do you want to install whatsapp?',
+        [
+          {
+            text: 'Install Whatsapp',
+            onPress: () => Linking.openURL(downloadUrl),
+          },
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+        ],
+        {cancelable: false},
+      );
+    } else {
+      return Linking.openURL(url);
+    }
+  }).catch(err => console.error('An error occurred', err));
+};
+
 const AdBlock = props => {
   const navigation = useNavigation();
   const {web} = useStores();
@@ -338,6 +404,31 @@ const BrandPagePremium = props => {
   const {brandData, bikeData, hud} = useStores();
   // const [titleData, setTitleData] = useState({});
 
+  const navigate = url => {
+    console.log('deeplinkurl==========', url);
+    const routeName = url.split('://')[1];
+    if (routeName.includes('??')) {
+      const type = routeName.split('??')[0];
+      const data = routeName.split('??')[1].split('==')[1];
+      console.log('data===========', data);
+      if (type === 'Product') {
+        bikeData.clearData()
+        bikeData.getData(data);
+      }
+      if (type === 'Brand') {
+        brandData.clearData()
+        brandData.getData(data);
+      }
+      navigation.navigate(type, {url: url});
+    } else {
+      navigation.navigate(routeName);
+    }
+  };
+  useEffect(() => {
+    Linking.addEventListener('url', event => navigate(event.url))
+    return () => Linking.removeEventListener('url', event => navigate(event.url));
+  }, [])
+
   useEffect(() => {
     if (props.route.params){
       const {url} = props.route.params;
@@ -346,10 +437,10 @@ const BrandPagePremium = props => {
     }
 
   });
-
-  useEffect(() => {
-    if (!isIOS) RNInstallReferrer.getReferrer().then(referrer=>console.log('brand page referer', referrer));
-  }, [])
+  //
+  // useEffect(() => {
+  //   if (!isIOS) RNInstallReferrer.getReferrer().then(referrer=>console.log('brand page referer', referrer));
+  // }, [])
 
 
   const goToBike = url => {

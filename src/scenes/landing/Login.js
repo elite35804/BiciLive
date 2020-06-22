@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, TouchableOpacity, Text, ScrollView, Platform} from 'react-native';
+import {View, TouchableOpacity, Text, ScrollView, Platform, Linking} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {useStores} from 'hooks/Utils';
@@ -12,7 +12,31 @@ Text.defaultProps.allowFontScaling = false;
 
 const Login = props => {
   const navigation = useNavigation();
-  const {auth, alert, hud, question} = useStores();
+  const {auth, alert, hud, question, bikeData, brandData} = useStores();
+  const navigate = url => {
+    console.log('deeplinkurl==========', url);
+    const routeName = url.split('://')[1];
+    if (routeName.includes('??')) {
+      const type = routeName.split('??')[0];
+      const data = routeName.split('??')[1].split('==')[1];
+      console.log('data===========', data);
+      if (type === 'Product') {
+        bikeData.clearData()
+        bikeData.getData(data);
+      }
+      if (type === 'Brand') {
+        brandData.clearData()
+        brandData.getData(data);
+      }
+      navigation.navigate(type, {url: url});
+    } else {
+      navigation.navigate(routeName);
+    }
+  };
+  useEffect(() => {
+    Linking.addEventListener('url', event => navigate(event.url))
+    return () => Linking.removeEventListener('url', event => navigate(event.url));
+  }, []);
   const onLogin = async () => {
     for (let [key, value] of Object.entries(auth.loginData)) {
       if (key === 'user' && !validationEmail(value)) {

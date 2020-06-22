@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, ScrollView, TouchableOpacity, Image, FlatList, Image as DefaultImage} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity, Image, FlatList, Image as DefaultImage, Linking} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {Actions} from 'react-native-router-flux';
@@ -45,7 +45,33 @@ const LikeBlock = props => {
 
 const Brand = props => {
 
-  const {auth, hud} = useStores();
+  const {auth, hud, bikeData, brandData} = useStores();
+
+  const navigate = url => {
+    console.log('deeplinkurl==========', url);
+    const routeName = url.split('://')[1];
+    if (routeName.includes('??')) {
+      const type = routeName.split('??')[0];
+      const data = routeName.split('??')[1].split('==')[1];
+      console.log('data===========', data);
+      if (type === 'Product') {
+        bikeData.clearData()
+        bikeData.getData(data);
+      }
+      if (type === 'Brand') {
+        brandData.clearData()
+        brandData.getData(data);
+      }
+      navigation.navigate(type, {url: url});
+    } else {
+      navigation.navigate(routeName);
+    }
+  };
+  useEffect(() => {
+    Linking.addEventListener('url', event => navigate(event.url))
+    return () => Linking.removeEventListener('url', event => navigate(event.url));
+  }, []);
+
   const data = [
     {name: 'ABUS', count: 34},
     {name: 'ADRIATICA', count: 34},

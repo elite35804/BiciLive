@@ -5,7 +5,9 @@ import StoresContext from '../StoresContext';
  * useStores
  * @return {[type]} [description]
  */
-const useStores = () => React.useContext(StoresContext);
+const useStores = () => {
+    return React.useContext(StoresContext);
+};
 
 /**
  * [React hook that is most commonly used for search in UI e.g. List Search]
