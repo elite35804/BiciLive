@@ -8,7 +8,7 @@ import {
   Platform,
   Linking,
   Image as DefaultImage,
-  Alert,
+  Alert, Dimensions,
 } from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
@@ -45,16 +45,20 @@ const isIOS = Platform.OS === "ios";
 import analytics from '@react-native-firebase/analytics';
 import RNInstallReferrer from 'react-native-install-referrer';
 import {ShareDialog} from 'react-native-fbsdk';
+import config from '../../config/Config';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
+const {height, width} = Dimensions.get('window');
+const ratio = height/width;
+
 const RelatedElements = (item, index) => {
   const navigation = useNavigation();
-  const {bikeData} = useStores();
+  const {bikeData, brandData, auth} = useStores();
   const goToBike = url => {
     bikeData.clearData();
-    bikeData.getData(url);
+    bikeData.getData(url, brandData.url, auth.token);
     navigation.navigate('Product', {url: url});
   };
   return (
@@ -146,6 +150,7 @@ const RelatedGroup = props => {
 };
 const Expandible_Wrapper = props => {
   const [isCollapse, setCollapse] = useState(false);
+  const {brandData} = useStores();
   return <View>
     <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}} onPress={() => setCollapse(!isCollapse)}>
       <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
@@ -160,14 +165,9 @@ const Expandible_Wrapper = props => {
           return <View>
             <SwipeListView
               data={[""]}
-              renderItem={(data, rowMap) => (<View><ListBikeInfo key={index} data={item}/></View>)}
+              renderItem={(data, rowMap) => (<View><ListBikeInfo key={index} data={item} referer={brandData.url}/></View>)}
               renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
-                <TouchableOpacity style={{backgroundColor: 'red', alignItems: 'center', width: 70,height: '70%', justifyContent: 'center'}}>
-                  <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_white} />
-                </TouchableOpacity>
-                {/*<TouchableOpacity style={{backgroundColor: '#53DCD0', alignItems: 'center', width: 70,height: '50%', justifyContent: 'center'}}>*/}
-                  {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white} />*/}
-                {/*</TouchableOpacity>*/}
+                <LikeBlock data={item}/>
               </View>)}
               leftOpenValue={0}
               rightOpenValue={-80}
@@ -177,11 +177,9 @@ const Expandible_Wrapper = props => {
           return <View>
             <SwipeListView
               data={[""]}
-              renderItem={(data, rowMap) => (<View><MainBikeInfo data={item}/></View>)}
+              renderItem={(data, rowMap) => (<View><MainBikeInfo data={item} referer={brandData.url}/></View>)}
               renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
-                <TouchableOpacity style={{backgroundColor: 'red', alignItems: 'center', width: 70,height: '30%', justifyContent: 'center'}}>
-                  <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_white} />
-                </TouchableOpacity>
+                <LikeBlock data={item}/>
                 {/*<TouchableOpacity style={{backgroundColor: '#53DCD0', alignItems: 'center', width: 70,height: '30%', justifyContent: 'center'}}>*/}
                   {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white} />*/}
                 {/*</TouchableOpacity>*/}
@@ -201,11 +199,11 @@ const Expandible_Wrapper = props => {
 
 const ImageReel = (props) => {
   const navigation = useNavigation();
-  const {brandData} = useStores();
+  const {brandData, auth} = useStores();
   const goToBrand = (url) => {
     console.log('url=====', url);
     brandData.clearData();
-    brandData.getData(url, brandData.url);
+    brandData.getData(url, brandData.url, auth.token);
     navigation.navigate('Brand', {url: url});
   };
   return (
@@ -272,7 +270,7 @@ const PageSlider = (props) => {
     <SwiperContainer>
       <Swiper
         ref={_swiper}
-        containerStyle={{height: isIOS ? 400 : 420}}
+        containerStyle={{height: isIOS ? ratio < 1.5 ? 650 : 400 : 420}}
         showsPagination={false}
         autoplay={true}
         autoplayTimeout = {4}
@@ -280,7 +278,7 @@ const PageSlider = (props) => {
         onIndexChanged={(index) => brandData.setPosition(index)}
       >
         {props.data.content.map((item, index) => {
-          return <MainBikeInfo key={index} data={item}/>;
+          return <MainBikeInfo key={index} data={item} referer={brandData.url}/>;
         })}
       </Swiper>
       <Divider size={20}/>
@@ -292,12 +290,15 @@ const PageSlider = (props) => {
   );
 };
 
-const shareFacebook = () => {
+const shareFacebook = (url, share_url) => {
+  const temp = url.split('?')[0].split('/');
+  const index = temp[temp.length-1];
   const shareLinkContent = {
     contentType: 'link',
-    contentUrl: 'http://biciapp.sepisolutions.com/z-content/images/ebike/r-raymon/wfmXeuPBAWf1QiZijXxa4UlqdtnKgNeG_320.jpg',
+    contentUrl: `${share_url}?data=${url}`,
     contentDescription: 'Facebook sharing is easy!',
   };
+  console.log('shareconent=====', shareLinkContent);
   ShareDialog.canShow(shareLinkContent).then(
     function (canShow) {
       if (canShow) {
@@ -309,7 +310,7 @@ const shareFacebook = () => {
       if (result.isCancelled) {
         alert('Share cancelled');
       } else {
-        alert('Share success with postId: ' + result.postId);
+        alert('Successfully Shared');
       }
     },
     function (error) {
@@ -318,14 +319,59 @@ const shareFacebook = () => {
   );
 };
 
-const ShareBlock = props => {
+const LikeBlock = props => {
   const {auth} = useStores();
+  const [isLike, setIsLike] = useState(false);
+  const setStatus = async () => {
+    try {
+      if (auth.loginState) {
+        console.log('set============', auth.token);
+        axios.get(
+          `${config.server}${props.data.like_url}`,
+          {
+            headers: {
+              'Authorization' : `Bearer ${auth.token}`
+            }
+          }
+        ).then(res => {
+          console.log('======', res.data);
+          if (res.data.err_code === "ERR_OK") {
+            setIsLike(res.data.status)
+          }
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    setIsLike(props.data.starred)
+  }, []);
+  return <View>
+    <TouchableOpacity style={{
+      backgroundColor: 'red',
+      alignItems: 'center',
+      width: 70,
+      height: 70,
+      justifyContent: 'center',
+    }}
+                      onPress={() => setStatus()}
+    >
+      <Image width={'100%'} height={'100%'} source={isLike ? Images.icons.ic_heart_white_full : Images.icons.ic_heart_white}/>
+    </TouchableOpacity>
+  </View>
+}
+
+const ShareBlock = props => {
+  const navigation = useNavigation();
+  const {auth, brandData} = useStores();
   const [isLike, setLike] = useState(false);
   const fetchData = async () => {
+    auth.loginState || navigation.navigate('Login');
     try {
       console.log('getshardata=========');
       axios.get(
-        `http://biciapp.sepisolutions.com${props.data.like_url}`,
+        `${config.server}${props.data.like_url}`,
         {
           headers: {
             'Authorization': `Bearer ${auth.token}`,
@@ -349,22 +395,22 @@ const ShareBlock = props => {
     <View>
       <ShareView>
         <ShareIcon>
-          <TouchableOpacity onPress={() => fetchData()}><Image width={'100%'} height={'100%'}
+          <TouchableOpacity onPress={() => fetchData()}><Image style={{width: ratio < 1.5 ? 70 : 40, height: ratio < 1.5 ? 70 : 40, resizeMode: 'contain'}}
                                                                source={isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart}/></TouchableOpacity>
           {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare} style={{marginLeft: 25}}/>*/}
         </ShareIcon>
-        <ShareTooltip onWhatsapp={() => shareWhatsapp()} onFB={() => shareFacebook()}/>
+        <ShareTooltip onWhatsapp={() => shareWhatsapp(brandData.url, props.data.share_url)} onFB={() => shareFacebook(brandData.url, props.data.share_url)} onEmail={() => shareEmail(brandData.url, props.data.share_url)} onTwitter={() => shareTwitter(brandData.url, props.data.share_url)}/>
       </ShareView>
     </View>
   );
 };
 
-const shareWhatsapp = () => {
-  const text = 'this';
+const shareWhatsapp = (shareurl, share_url) => {
+  const content = `${share_url}?data=${shareurl}`;
   const phoneNumber = '8618240331746';
   const downloadUrl = isIOS ? 'https://apps.apple.com/it/app/whatsapp-messenger/id310633997' : 'https://play.google.com/store/apps/details?id=com.whatsapp&hl=it';
   // Linking.openURL(`whatsapp://send?text=${text}`)
-  const url = `whatsapp://send?text=${text}&phone=${phoneNumber}`;
+  const url = `whatsapp://send?text=${content}`;
   Linking.canOpenURL(url).then(supported => {
     console.log('supported======', supported);
     if (!supported) {
@@ -390,6 +436,57 @@ const shareWhatsapp = () => {
   }).catch(err => console.error('An error occurred', err));
 };
 
+const shareEmail = (url, share_url) => {
+  const shareURL = `${share_url}?data=${url}`
+  const emailURL = `mailto:support@example.com?subject=Bicilive&body=${shareURL}`;
+  Linking.canOpenURL(emailURL).then(supported => {
+    console.log('supported======', supported);
+    if (!supported) {
+      console.log('Can\'t handle url: ' + emailURL);
+    } else {
+      return Linking.openURL(emailURL);
+    }
+  }).catch(err => console.error('An error occurred', err));
+};
+
+const shareTwitter = (url, share_url) => {
+  let TwitterParameters = '';
+  let TwitterShareURL = `${share_url}?data=${url}`;
+  let TweetContent = 'Bicilive';
+  let TwitterViaAccount = 'davide_giovi';
+  if (TwitterParameters.includes('?') === false) {
+    TwitterParameters =
+      TwitterParameters + '?url=' + encodeURI(TwitterShareURL);
+  } else {
+    TwitterParameters =
+      TwitterParameters + '&url=' + encodeURI(TwitterShareURL);
+  }
+  let shareUrl = 'https://twitter.com/intent/tweet' + TwitterParameters;
+  Linking.canOpenURL(shareUrl).then(supported => {
+    console.log('supported======', supported);
+    if (!supported) {
+      console.log('Can\'t handle url: ' + shareUrl);
+      Alert.alert(
+        'Your phone does not have Twitter app',
+        'Do you want to install Twitter app?',
+        [
+          {
+            text: 'Install Twitter',
+            onPress: () => Linking.openURL(downloadUrl),
+          },
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+        ],
+        {cancelable: false},
+      )
+    } else {
+      return Linking.openURL(shareUrl);
+    }
+  }).catch(err => console.error('An error occurred', err));
+};
+
 const AdBlock = props => {
   const navigation = useNavigation();
   const {web} = useStores();
@@ -397,42 +494,17 @@ const AdBlock = props => {
     web.url = url;
     navigation.navigate('WebViewer');
   };
-  return <View><Divider size={30}/><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image style={{width: '100%', height: 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>
+  return <View><Divider size={30}/><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image style={{width: '100%', height: ratio < 1.5 ? 250 : 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>
 };
 const BrandPagePremium = props => {
   const navigation = useNavigation();
-  const {brandData, bikeData, hud} = useStores();
-  // const [titleData, setTitleData] = useState({});
+  const {brandData, bikeData, hud, auth} = useStores();
 
-  const navigate = url => {
-    console.log('deeplinkurl==========', url);
-    const routeName = url.split('://')[1];
-    if (routeName.includes('??')) {
-      const type = routeName.split('??')[0];
-      const data = routeName.split('??')[1].split('==')[1];
-      console.log('data===========', data);
-      if (type === 'Product') {
-        bikeData.clearData()
-        bikeData.getData(data);
-      }
-      if (type === 'Brand') {
-        brandData.clearData()
-        brandData.getData(data);
-      }
-      navigation.navigate(type, {url: url});
-    } else {
-      navigation.navigate(routeName);
-    }
-  };
-  useEffect(() => {
-    Linking.addEventListener('url', event => navigate(event.url))
-    return () => Linking.removeEventListener('url', event => navigate(event.url));
-  }, [])
 
   useEffect(() => {
     if (props.route.params){
       const {url} = props.route.params;
-      console.log('url-[-----', url.split('?')[0].substring(7));
+      // console.log('url-[-----', url.split('?')[0].substring(7));
       analytics().setCurrentScreen(url.split('?')[0].substring(7));
     }
 
@@ -445,7 +517,7 @@ const BrandPagePremium = props => {
 
   const goToBike = url => {
     bikeData.clearData();
-    bikeData.getData(url, brandData.url);
+    bikeData.getData(url, brandData.url, auth.token);
     navigation.navigate('Bike',{url: url});
   }
 
@@ -458,24 +530,23 @@ const BrandPagePremium = props => {
       hud.hide()
       const uiData = toJS(brandData.data);
       let titleData = {};
-      console.log('111111==========', uiData);
       if (uiData[0].id === "TITLE") {
         titleData = uiData.shift();
       }
       return (
-        <View>
+        <View style={{backgroundColor: themeProp('colorSecondary')}}>
           <Header>
             <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => navigation.goBack()}>
               <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
                      style={{
                        position: 'absolute',
                        left: 0,
-                       width: scale(37),
-                       height: verticalScale(23),
+                       width: isIOS ? scale(35) : scale(37),
+                       height: isIOS ? verticalScale(19) : verticalScale(23),
                        resizeMode: 'contain',
                        marginTop: verticalScale(14),
                      }}/>
-              <Text style={{textAlign: 'center', fontSize: 19, lineHeight: 49}}>BRAND PAGE</Text>
+              <Text style={{textAlign: 'center', fontSize: ratio < 1.5 ? 30 : 19, lineHeight : ratio < 1.5 ? 90 : (ratio > 2 ? 59 : 49)}}>BRAND PAGE</Text>
             </TouchableOpacity>
           </Header>
         <Container>
@@ -486,8 +557,8 @@ const BrandPagePremium = props => {
               if (item.id === "SHARE_BLOCK") return <ShareBlock data={item}/>
               if (item.id === "EXPANDIBLE_WRAPPER_BADGE") return <View><Expandible_Wrapper key={index} data={item}/><Divider size={5}/></View>
               if (item.id === "IMAGE_REEL") return <ImageReel key={`key${index}`} data={item}/>
-              if (item.id === "BIKE_RESUME_SMALL") return <View><ListBikeInfo key={index} data={item} goToBike={goToBike}/></View>
-              if (item.id === "BIKE_RESUME_BIG") return <View><Divider size={30}/><MainBikeInfo key={index} data={item} goToBike={goToBike}/><Divider size={60}/></View>
+              if (item.id === "BIKE_RESUME_SMALL") return <View><ListBikeInfo key={index} data={item} goToBike={goToBike} referer={brandData.url}/></View>
+              if (item.id === "BIKE_RESUME_BIG") return <View><Divider size={30}/><MainBikeInfo key={index} data={item} goToBike={goToBike} referer={brandData.url}/><Divider size={60}/></View>
               if (item.id === "BRAND_LOGO_BIG")
                 return <View style={{alignItems: 'center', justifyContent: 'center'}}>
                   <Image
@@ -518,7 +589,7 @@ const BrandPagePremium = props => {
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
     margin-bottom: 10px;
-    marginTop: ${verticalScale(50)}
+    marginTop: ${isIOS ? (ratio < 1.5 ? verticalScale(50) : (ratio < 1.8 ? verticalScale(75) : verticalScale(65))) : verticalScale(50)}
 `;
 
 const Badge = styled(View)`
@@ -660,10 +731,10 @@ const SwiperContainer = styled(View)`
 
 const CategoryImage = styled(Image)`
   margin-top: 20px
-  width: ${moderateScale(105)}; 
-  height: ${moderateScale(95)}; 
-  resize-mode: contain; 
-  border-width: 1; 
+  width: ${moderateScale(105)};
+  height: ${moderateScale(95)};
+  resize-mode: contain;
+  border-width: 1;
   border-color: #ebebeb
 `;
 

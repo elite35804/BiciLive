@@ -26,6 +26,8 @@ import org.reactnative.maskedview.RNCMaskedViewPackage;
 import io.invertase.firebase.analytics.ReactNativeFirebaseAnalyticsPackage;
 // @react-native-firebase/app
 import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
+// @react-native-firebase/dynamic-links
+import io.invertase.firebase.dynamiclinks.ReactNativeFirebaseDynamicLinksPackage;
 // react-native-fbsdk
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 // react-native-gesture-handler
@@ -97,6 +99,7 @@ public class PackageList {
       new RNCMaskedViewPackage(),
       new ReactNativeFirebaseAnalyticsPackage(),
       new ReactNativeFirebaseAppPackage(),
+      new ReactNativeFirebaseDynamicLinksPackage(),
       new FBSDKPackage(),
       new RNGestureHandlerPackage(),
       new RNInstallReferrerPackage(),

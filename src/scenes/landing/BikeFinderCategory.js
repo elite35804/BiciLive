@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {Image, Platform, ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {Dimensions, Image, Platform, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {useStores} from 'hooks/Utils';
@@ -19,7 +19,8 @@ import { useNavigation } from '@react-navigation/native';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
-
+const {height, width} = Dimensions.get('window');
+const ratio = height/width;
 const isIOS = Platform.OS === 'ios';
 
 
@@ -91,7 +92,7 @@ const PageSlider = (props) => {
     <SwiperContainer>
       <Swiper
         ref={_swiper}
-        containerStyle={{height: isIOS ? 350 : 380}}
+        containerStyle={{height: isIOS ? ratio < 1.5 ? 650 : 350 : 380}}
         showsPagination={false}
         autoplay={true}
         autoplayTimeout = {4}
@@ -186,16 +187,16 @@ const BikeFinderCategory = props => {
                    style={{
                      position: 'absolute',
                      left: 0,
-                     width: scale(37),
-                     height: verticalScale(23),
+                     width: isIOS ? scale(35) : scale(37),
+                     height: isIOS ? verticalScale(19) : verticalScale(23),
                      resizeMode: 'contain',
                      marginTop: verticalScale(14),
                    }}/>
-            <Text style={{textAlign: 'center', fontSize: 19, lineHeight: 49}}>EBIKE FINDER</Text>
+            <Text style={{textAlign: 'center', fontSize: ratio < 1.5 ? 30 : 19, lineHeight: ratio < 1.5 ? 90 : (ratio > 2 ? 59 : 49)}}>EBIKE FINDER</Text>
           </TouchableOpacity>
         </Header>
         <Container ref={_container}>
-          <View style={{paddingLeft: 13,paddingHorizontal: 10}}>
+          <View style={{paddingHorizontal: 10, paddingTop: isIOS ? 10 : 0}}>
             {/*<Title size={'30px'} color={themeProp('colorThird')} width={'35px'}>EBIKE FINDER</Title>*/}
             <Title size={5} color={toJS(category.color)} width={'50px'}>{toJS(category.title)}</Title>
             {uiData.map((item,index) => {
@@ -301,7 +302,7 @@ const BikeFinderCategory = props => {
 
           {uiData.map((item,index) => {
             if (item.id === "FORM_INPUT_BUTTON" && item.action === "CERCA"){
-              return  <View style={{marginHorizontal : 10}}><GreenButton bg_color={item.bg_color} txt_color= {item.txt_color} onPress={() => goToResult(item.url)}>CERCA</GreenButton></View>
+              return  <View style={{marginHorizontal : 10, marginBottom: 10}}><GreenButton bg_color={item.bg_color} txt_color= {item.txt_color} onPress={() => goToResult(item.url)}>CERCA</GreenButton></View>
             }
           })}
         </Container>
@@ -323,8 +324,8 @@ const BikeFinderCategory = props => {
 
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
-    margin-bottom: 15px;
-    margin-top: 50px
+    padding-bottom: 15px;
+    marginTop: ${isIOS ? (ratio < 1.5 ? verticalScale(50) : (ratio < 1.8 ? verticalScale(75) : verticalScale(65))) : verticalScale(50)}
 `;
 
 const Bottom = styled(View)`

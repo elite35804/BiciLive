@@ -36,39 +36,32 @@ const preProcess = (rawData, filter = '') => {
 
 const BikeFinderAZ = props => {
   const navigation = useNavigation();
-  const {staticData, brandData, bikeData} = useStores();
+  const {staticData, brandData, bikeData, auth} = useStores();
   const [filter, setFilter] = useState('');
   const rawData = toJS(staticData.data.brand_search_page);
   const {title, filterPlaceholder, filterData, color} = preProcess(rawData, filter);
 
   const navigate = url => {
     console.log('deeplinkurl==========', url);
-    const routeName = url.split('://')[1];
-    if (routeName.includes('??')) {
-      const type = routeName.split('??')[0];
-      const data = routeName.split('??')[1].split('==')[1];
-      console.log('data===========', data);
-      if (type === 'Product') {
-        bikeData.clearData()
-        bikeData.getData(data);
-      }
-      if (type === 'Brand') {
-        brandData.clearData()
-        brandData.getData(data);
-      }
-      navigation.navigate(type, {url: url});
+    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
+    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
+    if (type === 'Product') {
+      bikeData.clearData();
+      bikeData.getData(data);
     } else {
-      navigation.navigate(routeName);
+      brandData.clearData();
+      brandData.getData(data);
     }
+    navigation.navigate(type, {url: type});
   };
-  useEffect(() => {
-    Linking.addEventListener('url', event => navigate(event.url))
-    return () => Linking.removeEventListener('url', event => navigate(event.url));
-  }, []);
+  // useEffect(() => {
+  //   Linking.addEventListener('url', event => navigate(event.url))
+  //   return () => Linking.removeEventListener('url', event => navigate(event.url));
+  // }, []);
 
   const goToBrand = (url) => {
     brandData.clearData();
-    brandData.getData(url);
+    brandData.getData(url, '', auth.token);
     navigation.navigate('Brand', {url: url});
   };
 
@@ -134,6 +127,7 @@ const BikeFinderAZ = props => {
 
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
+    padding-top: ${isIOS ? '20px' : '0px'}
 `;
 
 const Bottom = styled(View)`

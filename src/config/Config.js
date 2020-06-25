@@ -1,5 +1,5 @@
 const config = {
-  server: 'http://biciapp.sepisolutions.com'
+  server: 'https://biciapp.sepisolutions.com'
 };
 
 export default config

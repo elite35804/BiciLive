@@ -24,6 +24,8 @@ import ImageView from 'react-native-image-viewing';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import CustomTooltip from './CustomTooltip';
+import config from '../../config/Config';
 // import ImageZoom from 'react-native-image-pan-zoom';
 // import ZoomableImage from 'components/controls/ZoomableImage';
 // import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
@@ -32,6 +34,9 @@ Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
 const isIOS = Platform.OS === 'ios';
+
+const {height, width} = Dimensions.get('window');
+const ratio = height/width;
 
 const oswald_bold = isIOS ? 'Oswald-Bold' : 'oswald_bold';
 const label = ['', '', '', '', ''];
@@ -66,10 +71,10 @@ const CheckBox = (props) => (
 
 const MainBikeInfo = (props) => {
   const navigation = useNavigation();
-  const {bikeData} = useStores();
+  const {bikeData, auth} = useStores();
   const goToBike = url => {
     bikeData.clearData();
-    bikeData.getData(url);
+    bikeData.getData(url, get(props, 'referer', ''), auth.token);
     navigation.navigate('Product', {url: url});
   };
   return (
@@ -77,8 +82,8 @@ const MainBikeInfo = (props) => {
       <TouchableOpacity onPress={() => goToBike(get(props, 'data.url', ''))}>
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
           {props.data && <Image resizeMode="contain"
-                                source={{uri: `http://biciapp.sepisolutions.com${get(props, 'data.immagine', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg')}`}}
-                                style={{width: '95%', height: 230}}/>}
+                                source={{uri: `${config.server}${get(props, 'data.immagine', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg')}`}}
+                                style={{width: '95%', height: ratio < 1.5 ? 400 :230}}/>}
           {!props.data &&
           <Image width={'100%'} height={'100%'} resizeMode="contain" source={Images.background.bike_logo1}
                  style={{width: '95%', height: 230}}/>}
@@ -95,15 +100,15 @@ const MainBikeInfo = (props) => {
               <Sort size={moderateScale(21)}>{get(props, 'data.anno', '2020')}</Sort>
             </View>
           </View>
-          <Divider size={moderateScale(-11)}/>
+          <Divider size={isIOS ? ratio < 1.5 ? moderateScale(-3) : moderateScale(-8) : moderateScale(-11)}/>
           <Sort size={'23px'}>{get(props, 'data.brand', 'ASKOLL')}</Sort>
-          <Divider size={moderateScale(-10)}/>
+          <Divider size={ratio < 1.5 ? moderateScale(-20) : moderateScale(-10)}/>
           <NameView>
             <Name numberOfLines={1} color={'#' + get(props, 'data.color', 'D75A2B')}
                   size={'38px'}>{get(props, 'data.modello', 'EB4')}</Name>
             {/*<Image width={20} height={20} source={Images.icons.arrow_right}/>*/}
           </NameView>
-          <Sort style={{marginTop: moderateScale(-15)}}
+          <Sort style={{marginTop: isIOS ? moderateScale(-12) : moderateScale(-15)}}
                 size={moderateScale(21)}>{get(props, 'data.prezzo', '1390')}</Sort>
           <Text style={{
             marginTop: 3,
@@ -147,10 +152,10 @@ const MainBikeInfo = (props) => {
 
 const ListBikeInfo = (props) => {
   const navigation = useNavigation();
-  const {bikeData} = useStores();
+  const {bikeData, auth} = useStores();
   const goToBike = url => {
     bikeData.clearData();
-    bikeData.getData(url);
+    bikeData.getData(url, get(props, 'referer', ''), auth.token);
     navigation.navigate('Product', {url: url});
   };
   return (
@@ -158,15 +163,15 @@ const ListBikeInfo = (props) => {
       <TouchableOpacity onPress={() => goToBike(get(props, 'data.url', ''))}>
         <View style={{flexDirection: 'row'}}>
           <Image
-            source={{uri: `http://biciapp.sepisolutions.com${get(props, 'data.immagine', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg')}`}}
-            style={{width: '45%', height: 80, resizeMode: 'contain'}}/>
+            source={{uri: `${config.server}${get(props, 'data.immagine', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg')}`}}
+            style={{width: '45%', height: ratio < 1.5 ? 200 : 80, resizeMode: 'contain'}}/>
           {/*<Image*/}
           {/*source={Images.background.bike_logo1} style={{width: '45%', height: 80, resizeMode: 'contain'}}/>*/}
           <View width={'55%'}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: -8, width: '100%'}}>
               <View style={{marginTop: 8}}>
                 <TypeView bg_color={'#' + get(props, 'data.color', 'D75A2B')}><Type
-                  size={'10px'}>{get(props, 'data.categoria', 'eCity')}</Type></TypeView>
+                  size={ratio < 1.5 ? '20px' : '10px'}>{get(props, 'data.categoria', 'eCity')}</Type></TypeView>
               </View>
               <View style={{
                 flexDirection: 'row',
@@ -181,16 +186,16 @@ const ListBikeInfo = (props) => {
                 <Sort size={moderateScale(20)}>2020</Sort>
               </View>
             </View>
-            <View style={{marginTop: isIOS ? -1 : -3}}>
-              <Sort size={'14px'}>{get(props, 'data.brand', 'HIBIKER')}</Sort>
+            <View style={{marginTop: isIOS ? -1 : -3, marginBottom: isIOS ? 3 : 0}}>
+              <Sort size={ratio < 1.5 ? '25px' : '14px'}>{get(props, 'data.brand', 'HIBIKER')}</Sort>
             </View>
-            <Divider size={-23}/>
+            <Divider size={ratio < 1.5 ? -50 : -23}/>
             <NameView>
               <Name color={'#' + get(props, 'data.color', 'D75A2B')} numberOfLines={1}
                     size={'23px'}>{get(props, 'data.modello', 'XDURO NDURO 3.5')}</Name>
               <Image width={10} height={10} source={Images.icons.arrow_right} style={{width: 5, height: 9}}/>
             </NameView>
-            <View style={{marginTop: isIOS ? -11 : -15}}/>
+            <View style={{marginTop: isIOS ? ratio < 1.5 ? -30 : -11 : -15}}/>
             <Sort size={'23px'}>{get(props, 'data.prezzo', '1390')}</Sort>
           </View>
         </View>
@@ -199,32 +204,32 @@ const ListBikeInfo = (props) => {
             style={{
               color: '#' + get(props, 'data.color', 'D75A2B'),
               fontFamily: oswald_bold,
-              fontSize: 11,
+              fontSize: ratio < 1.5 ? 20 :11,
             }}>MOTORE</Text>
           <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: -5}}>
             <Text style={{
               color: '#909090',
               fontFamily: oswald_bold,
-              fontSize: 13,
+              fontSize: ratio < 1.5 ? 23 : 13,
             }}>{get(props, 'data.motore', 'Bosh, Performance CX')}</Text>
             <View style={{justifyContent: 'space-between', flexDirection: 'row', marginRight: 5}}>
               <View style={{flexDirection: 'row', marginRight: 20}}>
                 <View style={{marginTop: 10, marginRight: 3}}>
-                  <Image style={{width: 15, height: 20, resizeMode: 'contain'}}
+                  <Image style={{width: ratio < 1.5 ? 25 : 15, height: ratio < 1.5 ? 30 : 20, resizeMode: 'contain'}}
                          source={{uri: get(props, 'data.img_nm', '')}}/>
                   {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_graph}/>*/}
                 </View>
-                <Sort size={'23px'}>{get(props, 'data.coppia', '75')}</Sort>
-                <Text style={{color: '#909090', fontFamily: oswald_bold, fontSize: 15, marginTop: 10}}>Nm</Text>
+                <Sort size={ratio < 1.5 ? '30px' : '23px'}>{get(props, 'data.coppia', '75')}</Sort>
+                <Text style={{color: '#909090', fontFamily: oswald_bold, fontSize: ratio < 1.5 ? 25 : 15, marginTop: ratio < 1.5 ? 5 : 10}}>Nm</Text>
               </View>
               <View style={{flexDirection: 'row'}}>
                 <View style={{marginTop: 10, marginRight: 3}}>
-                  <Image style={{width: 15, height: 20, resizeMode: 'contain'}}
+                  <Image style={{width: ratio < 1.5 ? 25 : 15, height: ratio < 1.5 ? 30 : 20, resizeMode: 'contain'}}
                          source={{uri: get(props, 'data.img_wh', '')}}/>
                   {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_battery}/>*/}
                 </View>
-                <Sort size={'23px'}>{get(props, 'data.batteria', '625')}</Sort>
-                <Text style={{color: '#909090', fontFamily: oswald_bold, fontSize: 15, marginTop: 10}}>Wh</Text>
+                <Sort size={ratio < 1.5 ? '30px' : '23px'}>{get(props, 'data.batteria', '625')}</Sort>
+                <Text style={{color: '#909090', fontFamily: oswald_bold, fontSize: ratio < 1.5 ? 25 : 15, marginTop: ratio < 1.5 ? 5 : 10}}>Wh</Text>
               </View>
             </View>
           </View>
@@ -236,16 +241,16 @@ const ListBikeInfo = (props) => {
 
 const AdvResumeBig = (props) => {
   const navigation = useNavigation();
-  const {bikeData} = useStores();
+  const {bikeData, auth} = useStores();
   const [isVisible, setIsVisible] = React.useState(false);
   const _image = useRef(null);
   const goToBike = url => {
     bikeData.clearData();
-    bikeData.getData(url);
+    bikeData.getData(url, get(props, 'referer', ''), auth.token);
     navigation.navigate('Product', {url: url});
   };
   const images = [{
-    uri: 'http://biciapp.sepisolutions.com' + get(props, 'data.immagine_zoom', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg'),
+    uri: config.server + get(props, 'data.immagine_zoom', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg'),
   }];
   return (
     <View>
@@ -296,17 +301,17 @@ const AdvResumeBig = (props) => {
         <TouchableOpacity onPress={() => !props.productIf ? goToBike(props.data.url) : {}}
                           style={{justifyContent: 'center', alignItems: 'center'}}>
           {props.data && <Image resizeMode="contain"
-                                source={{uri: `http://biciapp.sepisolutions.com${get(props, 'data.immagine', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg')}`}}
-                                style={{width: '95%', height: 230}}/>}
+                                source={{uri: `${config.server}${get(props, 'data.immagine', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg')}`}}
+                                style={{width: '95%', height: ratio < 1.5 ? 400 : 230}}/>}
           {!props.data &&
-          <Image width={'100%'} height={'100%'} resizeMode="contain" source={Images.background.bike_logo1}
+          <Image  resizeMode="contain" source={Images.background.bike_logo1}
                  style={{width: '95%', height: 230}}/>}
           {!props.isBack ? <Image resizeMode="stretch" source={Images.icons.ic_badge_empty}
                                   style={{position: 'absolute', right: 0, top: 0, width: 50, height: 50}}/> : <View/>
           }
         </TouchableOpacity>
         {props.productIf ?
-          <TouchableOpacity style={{position: 'absolute', right: 0, top: 200}} onPress={() => setIsVisible(true)}><Image
+          <TouchableOpacity style={{position: 'absolute', right: 0, top: ratio < 1.5 ? 300 : 200}} onPress={() => setIsVisible(true)}><Image
             style={{height: moderateScale(27, 0.8), width: moderateScale(27, 0.8), resizeMode: 'contain'}}
             source={Images.icons.ic_zoom_in}/></TouchableOpacity> : <View/>}
         <View style={{marginLeft: 5}}>
@@ -326,7 +331,7 @@ const AdvResumeBig = (props) => {
                   size={moderateScale(35)}>{get(props, 'data.modello', 'EB4')}</Name>
             {/*<Image width={20} height={20} source={Images.icons.arrow_right}/>*/}
           </NameView>
-          <Sort style={{marginTop: moderateScale(-15)}}
+          <Sort style={{marginTop: isIOS ? moderateScale(-12) :moderateScale(-15)}}
                 size={moderateScale(22)}>{get(props, 'data.prezzo', '1390')}</Sort>
         </View>
       </MainInfo>
@@ -345,7 +350,7 @@ const ErrorView = props => {
 const LoginModal = props => {
   const navigation = useNavigation();
   const [visible, setVisible] = useState(false);
-  const {bikeData} = useStores();
+  const {bikeData, auth} = useStores();
   let timer = undefined
   useEffect(() => {
     timer = setTimeout(() => {
@@ -380,11 +385,13 @@ const LoginModal = props => {
           <BlueButton borderColor='#00c6e5' textColor={'#00c6e5'} onPress={() => {
             setVisible(false);
             bikeData.clearData();
+            auth.referer= get(props, 'referer', '');
             navigation.replace('Login');
           }}>LOGIN</BlueButton>
           <Divider size={10}/>
           <WhiteButton backgroudColor={'#00c6e5'} onPress={() => {
             setVisible(false);
+            auth.referer= get(props, 'referer', '');
             navigation.replace('Register');
           }}>REGISTRATI</WhiteButton>
         </LoginView>
@@ -490,7 +497,7 @@ const Sort = styled(Text)`
 const NameView = styled(View)`
   flex-direction: row;
   align-items: center
-  margin-top: 15px
+  margin-top: ${isIOS ? (ratio < 1.5 ? '20px' : '10px') : '15px'}
 `;
 
 const Name = styled(Text)`
@@ -499,7 +506,7 @@ const Name = styled(Text)`
   font-size: ${props => props.size};
   margin-top: ${isIOS ? '-2px' : '-5px'};
   margin-right: 5px;
-  line-height: 42px
+  line-height: ${ratio < 1.5 ? '80px' : '42px'}
 `;
 
 const SelectView = styled(TouchableOpacity)`
@@ -546,12 +553,13 @@ const SymbolView = styled(Text)`
 `;
 
 const Header = styled(View)`
-  background-color: #f7f7f7
+  background-color: #f2f2f2
   flex: 1;
   position: absolute;
   width: 100%;
   top:0
   height: ${verticalScale(50)}
+  margin-top: ${isIOS && ratio > 1.5 ? '30px' : '0px'}
 `;
 
 const LoginBackgroud = styled(ImageBackground)`
@@ -638,18 +646,21 @@ const Detail = (props) => (
 );
 
 const DetailMore = (props) => (
-  <View style={{marginTop: -20, marginBottom: 4}}>
+  <View style={{marginTop: -15, marginBottom: 4}}>
+    <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
     <Text style={{
       fontSize: 16,
-      color: props.title_color,
+      color: props.data.title_color,
       fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',
       marginTop: 3,
-    }}>{props.title}</Text>
+    }}>{props.data.title}</Text>
+      {props.data.infobox && <CustomTooltip from="category" tooltipText={get(props, 'data.infobox', 'No Info')}/>}
+  </View>
     <Text style={{
       fontSize: 24,
-      color: props.text_color,
+      color: props.data.text_color,
       fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',
-    }}>{props.desc}</Text>
+    }}>{props.data.text}</Text>
   </View>
 );
 

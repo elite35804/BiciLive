@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, Platform, Text, TouchableOpacity, View} from 'react-native';
+import {Dimensions, Image, Platform, Text, TouchableOpacity, View} from 'react-native';
 // import {Router, Scene, Stack, Drawer, Modal, Tabs, Actions} from 'react-native-router-flux';
 import Images from 'res/Images';
 import Splash from './scenes/landing/Splash';
@@ -19,6 +19,7 @@ import User from './scenes/landing/User';
 import {useStores} from './hooks/Utils';
 import {moderateScale} from 'react-native-size-matters';
 import Login from './scenes/landing/Login';
+import PasswordEmail from './scenes/password/PasswordEmail';
 import WebViewer from './scenes/landing/WebViewer';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -28,6 +29,9 @@ import dynamicLinks from '@react-native-firebase/dynamic-links';
 
 
 const isIOS = Platform.OS === 'ios';
+const {height, width} = Dimensions.get('window');
+const ratio = height/width;
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TabBar = (props) => {
@@ -43,11 +47,12 @@ const TabBar = (props) => {
   return (
     <View style={{
       width: '100%',
-      height: 90,
+      height: ratio < 1.5 ? 130 : 90,
       flexDirection: 'row',
       justifyContent: 'space-evenly',
       alignItems: 'center',
       backgroundColor: '#333333',
+      paddingTop : ratio < 1.5 ? 20 : 0
     }}>
       <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => {
         homeData.clearData();
@@ -55,11 +60,11 @@ const TabBar = (props) => {
         navigation.navigate('Home');
       }}>
         <View style={{height: 35, justifyContent: 'flex-end'}}>
-          <Image style={{width: moderateScale(30), height: moderateScale(30), resizeMode: 'contain'}}
+          <Image style={{width: ratio < 1.5 ? moderateScale(25) : moderateScale(30), height: moderateScale(30), resizeMode: 'contain'}}
                  source={Images.icons.ic_home}/>
         </View>
         <Text style={{
-          fontSize: 10,
+          fontSize: ratio < 1.5 ? 20 : 10,
           color: '#c9c3c5',
           fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular',
           marginTop: 10,
@@ -68,14 +73,14 @@ const TabBar = (props) => {
       <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => navigation.navigate('BikeFinder')}>
         <View style={{height: 35, justifyContent: 'flex-end'}}>
           <Image style={{
-            width: moderateScale(40),
+            width: ratio < 1.5 ? moderateScale(35) : moderateScale(40),
             height: moderateScale(40),
             resizeMode: 'contain',
             marginBottom: moderateScale(-5),
           }} source={Images.icons.ic_ebike}/>
         </View>
         <Text style={{
-          fontSize: 10,
+          fontSize: ratio < 1.5 ? 20 : 10,
           color: '#c9c3c5',
           fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular',
           marginTop: 10,
@@ -107,11 +112,11 @@ const TabBar = (props) => {
       <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => onDashboard()}>
         {/*<View style={{backgroundColor: 'red', width: 10, height: 10, borderRadius: 5, position: 'absolute', top: 0, right: 10}}/>*/}
         <View style={{height: 35, justifyContent: 'flex-end'}}>
-          <Image style={{width: moderateScale(30), height: moderateScale(30), resizeMode: 'contain'}}
+          <Image style={{width: ratio < 1.5 ? moderateScale(25) : moderateScale(30), height: moderateScale(30), resizeMode: 'contain'}}
                  source={Images.icons.ic_profile}/>
         </View>
         <Text style={{
-          fontSize: 10,
+          fontSize: ratio < 1.5 ? 20 : 10,
           color: '#c9c3c5',
           fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular',
           marginTop: 10,
@@ -266,6 +271,13 @@ const Root = props => {
           {() =>
             <Tab.Navigator tabBar={props => <TabBar {...props}/>}>
               <Tab.Screen name="Account" component={User}/>
+            </Tab.Navigator>
+          }
+        </Stack.Screen>
+        <Stack.Screen name="PasswordEmail">
+          {() =>
+            <Tab.Navigator tabBar={props => <TabBar {...props}/>}>
+              <Tab.Screen name="PasswordEmail" component={PasswordEmail}/>
             </Tab.Navigator>
           }
         </Stack.Screen>

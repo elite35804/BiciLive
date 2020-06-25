@@ -9,6 +9,7 @@ import {
   Dimensions,
   BackHandler,
   Linking,
+  AppState
 } from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
@@ -23,15 +24,21 @@ import {
 } from '@react-native-community/google-signin';
 import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 import {ThemeProps} from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import RNInstallReferrer from 'react-native-install-referrer';
+import axios from 'axios';
 
 const isIOS = Platform.OS === "ios";
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
+const {height, width} = Dimensions.get('window');
+const ratio = height/width;
+
 const Splash = props => {
+  const [loginState, setLoginState] = useState(false);
   const {staticData, homeData, auth, bikeData, brandData} = useStores();
   const navigation = useNavigation();
   const _handleOpenURL = event => {
@@ -39,37 +46,20 @@ const Splash = props => {
   };
   const navigate = url => {
     console.log('deeplinkurl==========', url);
-    const routeName = url.split('://')[1];
-    if (routeName.includes('??')) {
-      const type = routeName.split('??')[0];
-      const data = routeName.split('??')[1].split('==')[1];
-      console.log('data===========', data);
-      if (type === 'Product') {
-        bikeData.clearData()
-        bikeData.getData(data);
-      }
-      if (type === 'Brand') {
-        brandData.clearData()
-        brandData.getData(data);
-      }
-      navigation.navigate(type, {url: url});
+    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
+    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
+    if (type === 'Product') {
+      bikeData.clearData();
+      bikeData.getData(data);
     } else {
-      navigation.navigate(routeName);
+      brandData.clearData();
+      brandData.getData(data);
     }
+    navigation.navigate(type, {url: type});
   };
   useEffect(() => {
     staticData.getData();
     homeData.getData();
-    // GoogleSignin.configure({
-    //   scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
-    //   webClientId: '1070159144015-of4kjdl5h5q3cf50vv36njcaiaa3uh8j.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
-    //   offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
-    //   // hostedDomain: '', // specifies a hosted domain restriction
-    //   // loginHint: '', // [iOS] The user's ID, or email address, to be prefilled in the authentication UI if possible. [See docs here](https://developers.google.com/identity/sign-in/ios/api/interface_g_i_d_sign_in.html#a0a68c7504c31ab0b728432565f6e33fd)
-    //   forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
-    //   // accountName: '', // [Android] specifies an account name on the device that should be used
-    //   iosClientId: '1070159144015-skqn35jdj9u78qjn6qh7qqj29u740qvq.apps.googleusercontent.com', // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
-    // });
     GoogleSignin.configure({
       scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
       webClientId: '808976326604-jcrncliu28jglmhebog2tu1au1h387lg.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
@@ -80,19 +70,24 @@ const Splash = props => {
       // accountName: '', // [Android] specifies an account name on the device that should be used
       iosClientId: '808976326604-62ut9ho77m6dm5lbp9irk5v9s9rs94h4.apps.googleusercontent.com', // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
     });
-    if(!isIOS) {
       Linking.getInitialURL().then(url => {
         console.log('initial url=----------', url);
         if (url !== null) {
           navigate(url)
         }
       })
-      // RNInstallReferrer.getReferrer().then(referrer=>console.log('referererere', referrer));
-    }
+    console.log('ratio=====', ratio);
     Linking.addEventListener('url', event => navigate(event.url))
 
     return () => Linking.removeEventListener('url', event => navigate(event.url));
   }, []);
+
+
+  useFocusEffect(
+    React.useCallback(() => {
+      setLoginState(auth.loginState);
+    },[])
+  );
   const initUser = (token) => {
     fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + token)
       .then((response) => response.json())
@@ -163,22 +158,29 @@ const Splash = props => {
     <Container>
       <Image source={Images.background.bg_img} style={{position:'absolute', height: Dimensions.get('window').height, width: Dimensions.get('window').width, resizeMode: 'cover'}}/>
       <ImageView>
-        <Logo style={{width : '80%', height: 140, resizeMode: 'contain'}} source={Images.background.logo1}/>
+        <Logo style={{width : '80%', height: ratio < 1.5 ? 200 :140, resizeMode: 'contain'}} source={Images.background.logo1}/>
         {/*<Logo width={175} height={50} source={Images.background.title}/>*/}
       </ImageView>
-      <View style={{paddingHorizontal: 30}}>
-        <Text style={{textAlign: 'center', fontSize: 27, fontWeight: 'bold'}}>CERCA, TROVA,</Text>
-        <Text style={{textAlign: 'center', fontSize: 27, fontWeight: 'bold'}}>PEDALA...CON LA</Text>
-        <Text style={{textAlign: 'center', fontSize: 27, fontWeight: 'bold'}}>TUA NUOVA EBIKE</Text>
+      <View style={{paddingHorizontal: 30, marginTop: ratio < 1.5 ? 20 : 0}}>
+        <Text style={{textAlign: 'center', fontSize: ratio < 1.5 ? 40 : 27, fontWeight: 'bold'}}>CERCA, TROVA,</Text>
+        <Text style={{textAlign: 'center', fontSize: ratio < 1.5 ? 40 : 27, fontWeight: 'bold'}}>PEDALA...CON LA</Text>
+        <Text style={{textAlign: 'center', fontSize: ratio < 1.5 ? 40 : 27, fontWeight: 'bold'}}>TUA NUOVA EBIKE</Text>
       </View>
-      <BtnView>
-        <BlueButton width={'85%'} height={'55px'} fontSize={'30px'} onPress={() => navigation.navigate('Login')}>LOGIN</BlueButton>
+      {loginState || <BtnView>
+        <BlueButton width={'85%'} height={ratio < 1.5 ? '80px' : '55px'} fontSize={ratio < 1.5 ? '40px' : '30px'} onPress={() => navigation.navigate('Login')}>LOGIN</BlueButton>
         <Divider size="12px"/>
-        <WhiteButton width={'85%'} height={'55px'} fontSize={'30px'} backgroudColor={'#333333'} textColor={'#5fdcd2'} borderColor={'#5fdcd2'} onPress={() => navigation.navigate('Register')}>REGISTRATI</WhiteButton>
+        <WhiteButton width={'85%'} height={ratio < 1.5 ? '80px' : '55px'} fontSize={ratio < 1.5 ? '40px' : '30px'} backgroudColor={'#333333'} textColor={'#5fdcd2'} borderColor={'#5fdcd2'} onPress={() => navigation.navigate('Register')}>REGISTRATI</WhiteButton>
         <Bottom onPress={() => navigation.navigate('Home')}>
           <BottomText>CONTINUA COME OSPITE</BottomText>
         </Bottom>
-      </BtnView>
+      </BtnView>}
+      {loginState && <BtnView>
+        <BlueButton width={'85%'} height={ratio < 1.5 ? '80px' : '55px'} fontSize={ratio < 1.5 ? '40px' : '30px'} onPress={() => {homeData.clearData();homeData.getData();navigation.navigate('Home');}}>HOME</BlueButton>
+        <Divider size="12px"/>
+        <WhiteButton width={'85%'} height={ratio < 1.5 ? '80px' : '55px'} fontSize={ratio < 1.5 ? '40px' : '30px'} backgroudColor={'#333333'} textColor={'#5fdcd2'} borderColor={'#5fdcd2'} onPress={() => navigation.navigate('Dashboard')}>DASHBOARD</WhiteButton>
+        <Divider size={'60px'}/>
+      </BtnView>}
+
       {/*<SocialBtnView>*/}
                     {/*/!*<GoogleSigninButton*!/*/}
                       {/*/!*style={{ width: 192, height: 48 }}*!/*/}
@@ -228,16 +230,17 @@ const Divider = styled(View)`
   margin-top: ${props => props.size}
 `;
 
+
 const ImageView = styled(View)`
     align-items: center;
-    margin-top: 25px;
+    margin-top: ${isIOS ? (ratio < 1.5 ? 140 : (ratio < 1.8 ? 40 : 90)) : verticalScale(25)};
 `;
 
 const BtnView = styled(View)`
    width: 100%
    alignItems: center
    position: absolute
-   bottom: 0
+   bottom: ${isIOS ? (ratio < 1.8 ? verticalScale(20) : moderateScale(70)) : 0}
 `;
 
 const SocialBtnView = styled(View)`
@@ -246,7 +249,7 @@ const SocialBtnView = styled(View)`
 `;
 
 const BottomText = styled(Text)`
-  font-size: 18px;
+  font-size: ${ratio < 1.5 ? '25px' : '18px'};
   color: ${themeProp('colorSecondary')};
   font-family: ${Platform.OS === 'ios' ? 'UniSansBook' : 'uni_sans_book'};
   margin-top: 5px

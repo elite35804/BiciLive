@@ -1,19 +1,35 @@
 import React, {useEffect, useState} from 'react';
-import {Image, View, TouchableOpacity, Text, ScrollView, Platform, BackHandler, Linking} from 'react-native';
+import {
+  Image,
+  View,
+  TouchableOpacity,
+  Text,
+  ScrollView,
+  Platform,
+  BackHandler,
+  Linking,
+  Dimensions,
+} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {useStores} from 'hooks/Utils';
 import {BaseTextInput, BaseSelect, CustomSelect } from 'components/controls/BaseTextInput';
-import BaseSelectBox from 'components/controls/BaseSelectBox';
+import BaseSelectBox, {CustomSelectBox} from 'components/controls/BaseSelectBox';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
 import {cities, sesso} from '../../res/data';
 import {get} from 'lodash';
 import {useActionSheet} from '@expo/react-native-action-sheet';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation } from '@react-navigation/native';
+import config from '../../config/Config';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
+
+const isIOS = Platform.OS === 'ios';
+
+const {height, width} = Dimensions.get('window');
+const ratio = height/width;
 
 const SelectElement = (props) => {
   const [brand, setBrand] = useState();
@@ -44,9 +60,10 @@ const SelectElement = (props) => {
 
 const Register = props => {
   const navigation = useNavigation();
-  const { auth, alert, hud, bikeData, brandData } = useStores();
+  const { auth, alert, hud, bikeData, brandData, web } = useStores();
   const [checked, setChecked] = useState(true);
   const [checked1, setChecked1] = useState(true);
+  const [checked2, setChecked2] = useState(true);
   const [date, setDate] = useState(new Date(1598051730000));
   const [show, setShow] = useState(false);
   const [displayDate, setDisplayDate] = useState(null);
@@ -54,29 +71,22 @@ const Register = props => {
 
   const navigate = url => {
     console.log('deeplinkurl==========', url);
-    const routeName = url.split('://')[1];
-    if (routeName.includes('??')) {
-      const type = routeName.split('??')[0];
-      const data = routeName.split('??')[1].split('==')[1];
-      console.log('data===========', data);
-      if (type === 'Product') {
-        bikeData.clearData()
-        bikeData.getData(data);
-      }
-      if (type === 'Brand') {
-        brandData.clearData()
-        brandData.getData(data);
-      }
-      navigation.navigate(type, {url: url});
+    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
+    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
+    if (type === 'Product') {
+      bikeData.clearData();
+      bikeData.getData(data);
     } else {
-      navigation.navigate(routeName);
+      brandData.clearData();
+      brandData.getData(data);
     }
+    navigation.navigate(type, {url: type});
   };
-  useEffect(() => {
-    Linking.addEventListener('url', event => navigate(event.url))
-    return () => Linking.removeEventListener('url', event => navigate(event.url));
-  }, []);
-  for(let item = 1920; item <= 2020; item++) {
+  // useEffect(() => {
+  //   Linking.addEventListener('url', event => navigate(event.url))
+  //   return () => Linking.removeEventListener('url', event => navigate(event.url));
+  // }, []);
+  for(let item = 2020; item >= 1920; item--) {
     ageData.push(item.toString());
   }
 
@@ -94,6 +104,10 @@ const Register = props => {
     for (let [key, value] of Object.entries(auth.registerData)) {
       if (key === 'email' && !validationEmail(value)) {
         alert.showWarn("Questo campo è obbligatorio", 'Email'.toUpperCase())
+        return;
+      }
+      if (key === 'privacy' && value === 0) {
+        alert.showWarn("Questo campo è obbligatorio", key.toUpperCase())
         return;
       }
       if (value === '') {
@@ -117,6 +131,11 @@ const Register = props => {
     return re.test(String(email).toLowerCase());
   };
 
+  const openWebViewer = (url) => {
+    web.url = url;
+    navigation.navigate('WebViewer')
+  };
+
   return (
     <Container>
       <Title>REGISTRAZIONE</Title>
@@ -132,12 +151,29 @@ const Register = props => {
         <SelectElement data={sesso} value= "sesso" title="SESSO"/>
       </View>
       <Divider size="60px" />
-      <BaseSelectBox checked={checked} onPress={() => {auth.setParam('privacy', checked ? 1 : 0); setChecked(!checked); }} text="
-      Lorem Ipsum dolor sit amet, consecteur adipiscing eUt,  sed do elusmod tempor
-      "/>
-      <BaseSelectBox checked={checked1} onPress={() => {auth.setParam('dem', checked1 ? 1 : 0); setChecked1(!checked1); }} text="
-      Lorem Ipsum dolor sit amet, consecteur adipiscing eUt,  sed do elusmod tempor
-      "/>
+      {/*<BaseSelectBox checked={checked2} onPress={() => {auth.setParam('privacy', checked2 ? 1 : 0); setChecked2(!checked2); }} text="*/}
+      {/*Ho preso visione dell’informativa privacy*/}
+      {/*" textMarginTop={'2px'}/>*/}
+      <View style={{paddingHorizontal : ratio < 1.5 ? 15 : 0}}>
+      <CustomSelectBox checked={checked2} onPress={() => {auth.setParam('privacy', checked2 ? 1 : 0); setChecked2(!checked2); }}>
+        <SelectText marginTop={'2px'}>Ho preso visione dell’&nbsp;
+            <SelectLinkText onPress={() => openWebViewer(`${config.server}/gdpr/privacy-policy`)}>informativa privacy</SelectLinkText>
+        </SelectText>
+        {/*<TouchableOpacity onPress={() => openWebViewer(`${config.server}/gdpr/pivacy-policy`)}><SelectLinkText>Ho preso visione dell’informativa privacy</SelectLinkText></TouchableOpacity>*/}
+      </CustomSelectBox>
+      <CustomSelectBox checked={checked} onPress={() => {auth.setParam('dem', checked ? 1 : 0); setChecked(!checked); }}>
+        <SelectText>Voglio ricevere informazioni promozionali come indicato al punto 2.d dell’informativa</SelectText>
+      </CustomSelectBox>
+      <CustomSelectBox checked={checked1} onPress={() => {auth.setParam('terzi', checked1 ? 1 : 0); setChecked1(!checked1); }}>
+        <SelectText>Consento alla cessione dei miei dati a soggetti terzi come indicato al punto 2.e dell’informativa</SelectText>
+      </CustomSelectBox>
+      </View>
+      {/*<BaseSelectBox checked={checked} onPress={() => {auth.setParam('dem', checked ? 1 : 0); setChecked(!checked); }} text="*/}
+      {/*Voglio ricevere informazioni promozionali come indicato al punto 2.d dell’informativa*/}
+      {/*"/>*/}
+      {/*<BaseSelectBox checked={checked1} onPress={() => {auth.setParam('terzi', checked1 ? 1 : 0); setChecked1(!checked1); }} text="*/}
+      {/*Consento alla cessione dei miei dati a soggetti terzi come indicato al punto 2.e dell’informativa*/}
+      {/*"/>*/}
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
@@ -151,6 +187,15 @@ const Register = props => {
       <Bottom>
         <WhiteButton onPress={() => onRegister()}>REGISTRATI</WhiteButton>
       </Bottom>
+      <View style={{marginBottom: 30, paddingHorizontal : ratio < 1.5 ? 20 : 0}}>
+        <TextView>
+          <NormalText>
+            Selezionando il pulsante l’utente dichiara di aver preso visione dei&nbsp;&nbsp;
+            <LinkText onPress={() => openWebViewer(`${config.server}/gdpr/tos`)}>Termini e delle condizioni del servizio</LinkText>
+          </NormalText>
+
+        </TextView>
+      </View>
     </Container>
   );
 };
@@ -159,6 +204,7 @@ const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
     flex: 1;
     padding-horizontal: 5px;
+    padding-top: ${isIOS ? '20px' : '0px'}
 `;
 
 const Divider = styled(View)`
@@ -170,14 +216,42 @@ const Title = styled(Text)`
   color: #7cd9d0
   font-family: ${themeProp('fontUniHeavy')};
   margin-top: 40px;
-  padding-left: 8px;
+  padding-left: ${ratio < 1.5 ? '20px' : '8px'};
   margin-bottom: 10px
 `;
 
-const Bottom = styled(TouchableOpacity)`
+const Bottom = styled(View)`
   justify-content: flex-end;
   align-items: center;
-  margin-bottom: 30px;
+  padding-horizontal: ${ratio < 1.5 ? '10px' : '0px'}
+`;
+
+const TextView = styled(View)`
+  margin-top: 10px
+  margin-left: 5px
+  font-size: 15px;
+  
+`;
+const NormalText = styled(Text)`
+  color: #909090;
+`;
+const LinkText = styled(Text)`
+  color: #909090;
+  text-decoration-line: underline
+`;
+
+const SelectLinkText = styled(Text)`
+    font-family: ${isIOS ? 'UniSansBook' : 'uni_sans_book'};
+    color: #909090;
+    font-size: 15px;
+    text-decoration-line: underline
+`;
+const SelectText = styled(Text)`
+    font-family: ${isIOS ? 'UniSansBook' : 'uni_sans_book'};
+    color: #909090;
+    font-size: 15px;
+    margin-left: 10px;
+    margin-top: ${props => get(props, 'marginTop', '-3px')}
 `;
 
 export default Register;

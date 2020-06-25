@@ -23,6 +23,7 @@ import {moderateScale} from 'react-native-size-matters';
 import {observer} from 'mobx-react';
 import {toJS} from 'mobx';
 import axios from 'axios';
+import config from '../../config/Config';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -104,9 +105,10 @@ const LikeBlock = props => {
   const [isLike, setIsLike] = useState(true);
   const setStatus = async () => {
     try {
-      console.log('set============');
+      if (auth.loginState) {
+      console.log('set============', auth.token);
       axios.get(
-        `http://biciapp.sepisolutions.com${props.data.like_url}`,
+        `${config.server}${props.data.like_url}`,
         {
           headers: {
             'Authorization' : `Bearer ${auth.token}`
@@ -118,6 +120,7 @@ const LikeBlock = props => {
           setIsLike(res.data.status)
         }
       });
+      }
     } catch (e) {
       console.log(e);
     }
@@ -132,18 +135,8 @@ const LikeBlock = props => {
     }}
       onPress={() => setStatus()}
     >
-
       <Image width={'100%'} height={'100%'} source={isLike ? Images.icons.ic_heart_white_full : Images.icons.ic_heart_white}/>
     </TouchableOpacity>
-    {/*<TouchableOpacity style={{*/}
-    {/*backgroundColor: '#53DCD0',*/}
-    {/*alignItems: 'center',*/}
-    {/*width: 70,*/}
-    {/*height: '50%',*/}
-    {/*justifyContent: 'center',*/}
-    {/*}}>*/}
-    {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white}/>*/}
-    {/*</TouchableOpacity>*/}
   </View>
 }
 
@@ -151,28 +144,21 @@ const Brand = props => {
   const {likeProduct, hud, bikeData, brandData} = useStores();
   const navigate = url => {
     console.log('deeplinkurl==========', url);
-    const routeName = url.split('://')[1];
-    if (routeName.includes('??')) {
-      const type = routeName.split('??')[0];
-      const data = routeName.split('??')[1].split('==')[1];
-      console.log('data===========', data);
-      if (type === 'Product') {
-        bikeData.clearData()
-        bikeData.getData(data);
-      }
-      if (type === 'Brand') {
-        brandData.clearData()
-        brandData.getData(data);
-      }
-      navigation.navigate(type, {url: url});
+    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
+    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
+    if (type === 'Product') {
+      bikeData.clearData();
+      bikeData.getData(data);
     } else {
-      navigation.navigate(routeName);
+      brandData.clearData();
+      brandData.getData(data);
     }
+    navigation.navigate(type, {url: type});
   };
-  useEffect(() => {
-    Linking.addEventListener('url', event => navigate(event.url))
-    return () => Linking.removeEventListener('url', event => navigate(event.url));
-  }, []);
+  // useEffect(() => {
+  //   Linking.addEventListener('url', event => navigate(event.url))
+  //   return () => Linking.removeEventListener('url', event => navigate(event.url));
+  // }, []);
   if (likeProduct.isLoading) {
     hud.show()
   } else {
@@ -189,7 +175,7 @@ const Brand = props => {
           <Title size={'40px'} color={titleData1.colore} width={'35px'}>{titleData1.titolo.toUpperCase()}</Title>
           <Divider size={20}/>
           <ItemView>
-            <Image style={{width: moderateScale(25), height: moderateScale(25), resizeMode: 'contain', marginTop: 10}} source={Images.icons.ic_user_sm}/>
+            <Image style={{width: moderateScale(25), height: moderateScale(25), resizeMode: 'contain', marginTop: isIOS ? -4: 10}} source={Images.icons.ic_user_sm}/>
             <Title size={'10px'} color={titleData2.colore} width={'35px'}>{titleData2.titolo.toUpperCase()}</Title>
           </ItemView>
 
@@ -199,7 +185,7 @@ const Brand = props => {
               return <View>
                 <SwipeListView
                   data={['']}
-                  renderItem={(data, rowMap) => (<View><ListBikeInfo data={item}/></View>)}
+                  renderItem={(data, rowMap) => (<View><ListBikeInfo data={item} referer={likeProduct.url}/></View>)}
                   renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
                     <LikeBlock data={item}/>
                   </View>)}
@@ -252,6 +238,7 @@ const Brand = props => {
 
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
+    padding-top: ${isIOS ? '20px' : '0px'}
 `;
 
 const ItemView = styled(TouchableOpacity)`

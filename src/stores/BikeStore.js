@@ -1,6 +1,7 @@
 import {observable, action} from 'mobx';
 import axios from 'axios';
 import analytics from '@react-native-firebase/analytics';
+import config from '../config/Config';
 
 class BikeStore {
   data = [];
@@ -9,31 +10,59 @@ class BikeStore {
   @observable isLoading = false;
   @observable isLike = false;
   @action
-  getData = async (url, referer='') => {
-    console.log('bike referereree=====', referer);
+  getData = async (url, referer='', token = '') => {
+    console.log('bike referereree=====', config.server+url, token);
     this.url = url;
     this.isLoading = true;
-    try {
-      const response = await axios.get
-      ('http://biciapp.sepisolutions.com'+url,
-        {
-          'Referer': referer
+    if (token === '' || token === undefined) {
+      try {
+        const response = await axios.get
+        (config.server+url, {
+            headers: {
+              'Referer': referer,
+            }
+          }
+        );
+        if (response.data.err_code === "ERR_OK") {
+          this.data = response.data.content;
+          this.errorIf = false;
+          referer === '' || this.track(url);
+        } else {
+          this.errorIf = true;
+          console.log('erroror=====')
         }
-      );
-      console.log(response.data, 'homeData =====================');
-      if (response.data.err_code === "ERR_OK") {
-        this.data = response.data.content;
-        this.errorIf = false;
-        this.track(url);
-      } else {
+      } catch (e) {
+        console.log('e====: ', e);
         this.errorIf = true;
+      } finally {
+        this.isLoading = false;
       }
-    } catch (e) {
-      console.log('e: ', e);
-      this.errorIf = true;
-    } finally {
-      this.isLoading = false;
+    } else {
+      try {
+        const response = await axios.get
+        (config.server+url, {
+            headers: {
+              'Referer': referer,
+              'Authorization' : `Bearer ${token}`
+            }
+          }
+        );
+        if (response.data.err_code === "ERR_OK") {
+          this.data = response.data.content;
+          this.errorIf = false;
+          referer === '' || this.track(url);
+        } else {
+          this.errorIf = true;
+          console.log('erroror=====')
+        }
+      } catch (e) {
+        console.log('e====: ', e);
+        this.errorIf = true;
+      } finally {
+        this.isLoading = false;
+      }
     }
+
   };
   @action
   clearData = () => {

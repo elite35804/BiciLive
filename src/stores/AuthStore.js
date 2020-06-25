@@ -1,12 +1,14 @@
 import {observable, action} from 'mobx';
 import axios from 'axios';
 import analytics from '@react-native-firebase/analytics';
+import config from '../config/Config';
 
 class AuthStore{
   token : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImlzcyI6ImJpY2lsaXZlLml0In0.eyJ1aWQiOiIxIiwiZW1haWwiOiJhQGIuYyJ9.4SJz8le-RIzeuvDdZXUNpBqtE4MENz6vrA93wEhfqHhuALEsbxYF82bjQa1wq_h17EXw0axaVPHKGuCOo2donA';
   errorIf = false;
-  url = 'http://biciapp.sepisolutions.com/api/v1/auth';
-  registerUrl = 'http://biciapp.sepisolutions.com/api/v1/register';
+  url = '/api/v1/auth';
+  registerUrl = '/api/v1/register';
+  forgottenPasswordUrl = '/api/v1/reset-password';
   registerData = {
     email:'',
     password: '',
@@ -16,7 +18,8 @@ class AuthStore{
     eta: '',
     sesso: '',
     privacy: 0,
-    dem: 0
+    dem: 0,
+    terzi : 0
   };
   loginData = {
     user: '',
@@ -24,22 +27,24 @@ class AuthStore{
   };
   err_string = '';
   next_page = '';
+  referer = '';
   @observable loginState = false;
   @observable isLoading = false;
   @action
   login = async (data = this.loginData) => {
+    console.log('login referer=======', this.referer);
     this.loginState = false;
     let bodyFormData = new FormData();
     for (let [key, value] of Object.entries(data)) {
       bodyFormData.append(key, value);
     }
-    console.log('requestData =======', data);
+    console.log('requestData =======', data, config.server + this.url);
     try {
       return axios({
         method: 'post',
-        url: this.url,
+        url: config.server + this.url,
         data: bodyFormData,
-        headers: {'Content-Type': 'multipart/form-data'},
+        headers: {'Content-Type': 'multipart/form-data', 'Referer': this.referer},
       })
         .then(response => {
           console.log('response========', response.data);
@@ -83,6 +88,7 @@ class AuthStore{
   @action
   register = () => {
     console.log('requestdata-======', this.registerData);
+    console.log('register referer=======', this.referer);
     let bodyFormData = new FormData();
     for (let [key, value] of Object.entries(this.registerData)) {
       bodyFormData.append(key, value);
@@ -90,16 +96,18 @@ class AuthStore{
     try {
       return axios({
         method: 'post',
-        url: this.registerUrl,
+        url: config.server + this.registerUrl,
         data: bodyFormData,
-        headers: {'Content-Type': 'multipart/form-data'},
+        headers: {'Content-Type': 'multipart/form-data', 'Referer': this.referer},
       })
         .then(response => {
-          console.log('response========', response.data);
+          // console.log('=======response=======================', response.data.err_code);
           if (response.data.err_code === "ERR_OK") {
-            this.errorIf =  false
+            // console.log('after passworkd=====', response.data);
+            this.errorIf =  false;
+            this.err_string = response.data.err_string;
           } else {
-            this.errorIf = true
+            this.errorIf = true;
             this.err_string = response.data.err_string;
           }
         })
@@ -111,7 +119,42 @@ class AuthStore{
       console.log('e: ', e);
       this.errorIf = true;
     }
-  }
+  };
+
+  @action
+  passwordResetRequest = email => {
+    const data = {email: email};
+    console.log('datadata======', data);
+    let bodyFormData = new FormData();
+    for (let [key, value] of Object.entries(data)) {
+      bodyFormData.append(key, value);
+    }
+    try {
+      return axios({
+        method: 'post',
+        url: config.server + this.forgottenPasswordUrl,
+        data: bodyFormData,
+        headers: {'Content-Type': 'multipart/form-data'},
+      })
+        .then(response => {
+          console.log('response========', response.data);
+          this.errorIf = response.data.err_code !== "ERR_OK";
+          this.err_string = response.data.err_string;
+        })
+        .catch(e => {
+          console.log('error:', e);
+          this.errorIf = true
+        })
+    } catch (e) {
+      console.log('e: ', e);
+      this.errorIf = true;
+    }
+  };
+  @action
+  logout = () => {
+    this.loginState = false;
+    this.token = undefined;
+  };
 }
 
 export default AuthStore;

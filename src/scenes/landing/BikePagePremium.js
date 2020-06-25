@@ -9,7 +9,7 @@ import {
   Linking,
   Image as DefaultImage,
   Modal,
-  Alert,
+  Alert, Dimensions,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {themeProp} from 'utils/CssUtil';
@@ -49,17 +49,20 @@ import analytics from '@react-native-firebase/analytics';
 import axios from 'axios';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import RNInstallReferrer from 'react-native-install-referrer';
+import config from '../../config/Config';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
+const {height, width} = Dimensions.get('window');
+const ratio = height/width;
+
 const isIOS = Platform.OS === 'ios';
 
-const shareFacebook = (url) => {
-  const server = 'http://biciapp.sepisolutions.com';
+const shareFacebook = (url, share_url) => {
   const shareLinkContent = {
     contentType: 'link',
-    contentUrl: `bicilive://Product?data=${url}`,
+    contentUrl: `${share_url}?data=${url}`,
     contentDescription: 'Facebook sharing is easy!',
   };
   console.log('shringcontent======', shareLinkContent);
@@ -74,7 +77,7 @@ const shareFacebook = (url) => {
       if (result.isCancelled) {
         alert('Share cancelled');
       } else {
-        alert('Share success with postId: ' + result.postId);
+        alert('Successfully Shared');
       }
     },
     function (error) {
@@ -82,13 +85,12 @@ const shareFacebook = (url) => {
     },
   );
 };
-const shareWhatsapp = (shareurl) => {
-  const server = 'http://biciapp.sepisolutions.com';
-  const content = `bicilive://Product??data==${server}${shareurl}`;
+const shareWhatsapp = (shareurl, share_url) => {
+  const content = `${share_url}?data=${shareurl}`;
   const phoneNumber = '8618240331746';
   const downloadUrl = isIOS ? 'https://apps.apple.com/it/app/whatsapp-messenger/id310633997' : 'https://play.google.com/store/apps/details?id=com.whatsapp&hl=it';
   // Linking.openURL(`whatsapp://send?text=${text}`)
-  const url = `whatsapp://send?text=${content}&phone=${phoneNumber}`;
+  const url = `whatsapp://send?text=${content}`;
   Linking.canOpenURL(url).then(supported => {
     console.log('supported======', supported);
     if (!supported) {
@@ -114,8 +116,8 @@ const shareWhatsapp = (shareurl) => {
   }).catch(err => console.error('An error occurred', err));
 };
 
-const shareEmail = url => {
-  const shareURL = `bicilive://Product??data==${url}`
+const shareEmail = (url, share_url) => {
+  const shareURL = `${share_url}?data=${url}`
   const emailURL = `mailto:support@example.com?subject=Bicilive&body=${shareURL}`;
   Linking.canOpenURL(emailURL).then(supported => {
     console.log('supported======', supported);
@@ -127,12 +129,12 @@ const shareEmail = url => {
   }).catch(err => console.error('An error occurred', err));
 };
 
-const shareTwitter = url => {
+const shareTwitter = (url, share_url) => {
   // const deepLink = `bicilive://Product??data==${url}`;
   // const downloadUrl = 'https://play.google.com/store/apps/details?id=com.twitter.android&hl=en';
   // const shareUrl = `twitter://post?message=${deepLink}`;
   let TwitterParameters = '';
-  let TwitterShareURL = `bicilive://Product??data==${url}`;
+  let TwitterShareURL = `${share_url}?data=${url}`;
   let TweetContent = 'Bicilive';
   let TwitterViaAccount = 'davide_giovi';
   if (TwitterParameters.includes('?') === false) {
@@ -141,24 +143,6 @@ const shareTwitter = url => {
   } else {
     TwitterParameters =
       TwitterParameters + '&url=' + encodeURI(TwitterShareURL);
-  }
-  if (TweetContent !== undefined) {
-    if (TwitterParameters.includes('?') === false) {
-      TwitterParameters =
-        TwitterParameters + '?text=' + encodeURI(TweetContent);
-    } else {
-      TwitterParameters =
-        TwitterParameters + '&text=' + encodeURI(TweetContent);
-    }
-  }
-  if (TwitterViaAccount !== undefined) {
-    if (TwitterParameters.includes('?') === false) {
-      TwitterParameters =
-        TwitterParameters + '?via=' + encodeURI(TwitterViaAccount);
-    } else {
-      TwitterParameters =
-        TwitterParameters + '&via=' + encodeURI(TwitterViaAccount);
-    }
   }
   let shareUrl = 'https://twitter.com/intent/tweet' + TwitterParameters;
   Linking.canOpenURL(shareUrl).then(supported => {
@@ -186,11 +170,12 @@ const shareTwitter = url => {
   }).catch(err => console.error('An error occurred', err));
 };
 const BrandLogo = props => {
-  const {brandData, bikeData} = useStores();
+  const navigation = useNavigation();
+  const {brandData, bikeData, auth} = useStores();
   const goToBrand = (url) => {
     brandData.clearData();
-    brandData.getData(url, bikeData.url);
-    Actions.BrandPagePremium();
+    brandData.getData(url, bikeData.url, auth.token);
+    navigation.navigate('Brand');
   };
   return (
     <View>
@@ -233,53 +218,14 @@ const BrandLogo = props => {
   );
 };
 
-// const ShareBlock = props => {
-//   const {auth} = useStores();
-//   const [isLike, setLike] = useState(false);
-//   const fetchData = async () => {
-//     try {
-//       console.log('getshardata=========');
-//       axios.get(
-//         `http://biciapp.sepisolutions.com${props.data.like_url}`,
-//         {
-//           headers: {
-//             'Authorization': `Bearer ${auth.token}`,
-//           },
-//         },
-//       ).then(res => {
-//         console.log('======', res.data);
-//         if (res.data.err_code === 'ERR_OK') {
-//           setLike(res.data.status);
-//         }
-//       });
-//     } catch (e) {
-//       console.log(e);
-//     }
-//   };
-//
-//   useEffect(() => {
-//     setLike(props.data.starred)
-//   }, []);
-//   return (
-//     <View>
-//       <ShareView>
-//         <ShareIcon>
-//           <TouchableOpacity onPress={() => fetchData()}><Image width={'100%'} height={'100%'}
-//                                                                source={isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart}/></TouchableOpacity>
-//           {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare} style={{marginLeft: 25}}/>*/}
-//         </ShareIcon>
-//         <ShareTooltip onWhatsapp={() => shareWhatsapp()} onFB={() => shareFacebook()}/>
-//       </ShareView>
-//     </View>
-//   );
-// };
-
 const ShareBlock = observer(props => {
+  const navigation = useNavigation();
   const {auth, bikeData} = useStores();
   const fetchData = async () => {
+    auth.loginState || navigation.navigate('Login');
     try {
       axios.get(
-        `http://biciapp.sepisolutions.com${props.data.like_url}`,
+        `${config.server}${props.data.like_url}`,
         {
           headers: {
             'Authorization' : `Bearer ${auth.token}`
@@ -301,8 +247,8 @@ const ShareBlock = observer(props => {
   }, []);
 
   return <View><ShareView>
-    <TouchableOpacity onPress={() => fetchData()}><Image width={'100%'} height={'100%'} source={bikeData.isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart} /></TouchableOpacity>
-    <ShareTooltip onWhatsapp={() => shareWhatsapp(bikeData.url)} onFB={() => shareFacebook(bikeData.url)} onEmail={() => shareEmail(bikeData.url)} onTwitter={() => shareTwitter(bikeData.url)}/>
+    <TouchableOpacity onPress={() => fetchData()}><Image style={{width: ratio < 1.5 ? 70 : 40, height: ratio < 1.5 ? 70 : 40, resizeMode: 'contain'}} source={bikeData.isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart} /></TouchableOpacity>
+    <ShareTooltip onWhatsapp={() => shareWhatsapp(bikeData.url, props.data.share_url)} onFB={() => shareFacebook(bikeData.url, props.data.share_url)} onEmail={() => shareEmail(bikeData.url, props.data.share_url)} onTwitter={() => shareTwitter(bikeData.url, props.data.share_url)}/>
   </ShareView>
     <Divider size={15}/>
   </View>
@@ -327,7 +273,6 @@ const IconDescriptionGroup = props => {
           alignItems: 'center',
           marginBottom: 8,
           backgroundColor: get(props, 'data.bg_color1', ''),
-          marginTop: -1,
         }}>
           <Image resizeMode="contain" source={{uri: get(props, 'data.icona1', '')}}
                  style={{width: 100, height: 70, marginBottom: 20}}/>
@@ -353,7 +298,6 @@ const IconDescriptionGroup = props => {
           alignItems: 'center',
           marginBottom: 8,
           backgroundColor: get(props, 'data.bg_color2', ''),
-          marginTop: -1,
         }}>
           <Image source={{uri: get(props, 'data.icona2', '')}}
                  style={{width: 100, height: 70, marginBottom: 20, resizeMode: 'contain'}}/>
@@ -394,10 +338,10 @@ const IconDescriptionGroup = props => {
 
 const RelatedElements = (item, index) => {
   const navigation = useNavigation();
-  const {bikeData} = useStores();
+  const {bikeData, auth} = useStores();
   const goToBike = url => {
     bikeData.clearData();
-    bikeData.getData(url, bikeData.url);
+    bikeData.getData(url, bikeData.url, auth.token);
     navigation.navigate('Product', {url: url});
   };
   return (
@@ -405,7 +349,7 @@ const RelatedElements = (item, index) => {
       {item.map((item0, index) =>
         <View key={index} style={{width: '33%', borderLeftColor: '#c9c3c5', borderLeftWidth: 7, paddingHorizontal: 5}}>
           <TouchableOpacity onPress={() => goToBike(item0.url)}><Image
-            style={{width: '100%', height: 60, resizeMode: 'contain'}}
+            style={{width: '100%', height: ratio < 1.5 ? 100 : 60, resizeMode: 'contain'}}
             source={{uri: item0.img_url}}/></TouchableOpacity>
           <Text style={{
             color: '#909090',
@@ -503,7 +447,7 @@ const RelatedGroup = props => {
         }}>{get(props, 'data.titolo', '')}</Text>
         {/*<TouchableOpacity><Image width={'100%'} height={'100%'} source={Images.icons.ic_close_sm}/></TouchableOpacity>*/}
       </View>
-      <View style={{height: 180}}>
+      <View style={{height: ratio < 1.5 ? 210 : 180}}>
         <Swiper ref={_swiper} showsPagination={false} index={swiperState.position} autoplay={true}
                 autoplayTimeout={4}
                 onIndexChanged={(index) => swiperState.setPosition(index)}>
@@ -529,18 +473,29 @@ const openUrl = (url) => {
 };
 
 const AdBlock = props => {
+  const navigation = useNavigation();
   const {web} = useStores();
   const openWebViewer = (url) => {
     web.url = url;
-    Actions.WebViewer();
+    navigation.navigate('WebViewer');
   };
   return <View><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image
-    style={{width: '100%', height: 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>;
+    style={{width: '100%', height: ratio < 1.5 ? 250 : 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>;
+};
+
+const TitleContainer = props => {
+  return <View>
+    <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+      <Title color={get(props, 'data.colore')}>{props.data.titolo}</Title>
+      {props.data.infobox && <CustomTooltip from="category" tooltipText={get(props, 'data.infobox', 'No Info')}/>}
+    </View>
+    <SubTitle1 color={get(props, 'data.sub_color', '#ffffff')}>{props.data.sub}</SubTitle1><Divider size={-25}/>
+  </View>
 };
 
 const RenderElements = props => {
   // console.log(props);
-  const {auth} = useStores();
+  const {auth, bikeData} = useStores();
   const uiData = props.uiData;
   const items = [];
   let i = 0;
@@ -550,15 +505,13 @@ const RenderElements = props => {
     }
     if (item.id === 'ADV_RESUME_BIG') {
       items.push(<View><AdvResumeBig isBack={true} productIf={true} style={{marginTop: '20px'}} key={`key${index}`}
-                                     data={item}/><Divider size={-40}/></View>);
+                                     data={item} referer={bikeData.url}/><Divider size={-40}/></View>);
     }
     if (item.id === 'TITLE') {
-      items.push(<View><Title key={`key${index}`} color={get(item, 'colore')}>{item.titolo}</Title><SubTitle1
-        color={get(item, 'sub_color', '#ffffff')}>{item.sub}</SubTitle1><Divider size={-25}/></View>);
+      items.push(<TitleContainer key={`key${index}`} data={item}/>)
     }
     if (item.id === 'TITLED_TEXT') {
-      items.push(<DetailMore key={index} title={item.title} desc={item.text} title_color={item.title_color}
-                             text_color={item.text_color}/>);
+      items.push(<DetailMore key={index} data={item}/>);
     }
     if (item.id === 'WHEEL_DETAIL_GROUP') {
       items.push(<View><Divider size={-18}/><SwipeView>
@@ -571,7 +524,7 @@ const RenderElements = props => {
             paddingTop: 5,
           }}>
             <Text style={{
-              fontSize: 15,
+              fontSize: ratio < 1.5 ? 20 : 15,
               color: 'white',
               fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular',
               marginHorizontal: 10,
@@ -581,8 +534,8 @@ const RenderElements = props => {
             backgroundColor: '#333333',
             alignItems: 'center',
             justifyContent: 'center',
-            height: 100,
-            paddingBottom: 13,
+            flex: 0,
+            paddingVertical: 5,
           }}>
             <Text
               style={{
@@ -601,7 +554,8 @@ const RenderElements = props => {
           <View style={{
             backgroundColor: '#F2F2F2',
             alignItems: 'center',
-            height: 200,
+            flex: 0,
+            paddingBottom: 10,
             paddingTop: 15,
             paddingHorizontal: 5,
           }}>
@@ -617,7 +571,8 @@ const RenderElements = props => {
                 color: 'black',
                 fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',
                 marginTop: 7,
-              }}>{item.ant_ruota}</Text>
+                textAlign: 'center',
+              }} numberOfLines={2}>{item.ant_ruota}</Text>
             <Text style={{
               fontSize: 16,
               color: item.bg_color,
@@ -643,7 +598,7 @@ const RenderElements = props => {
             paddingTop: 5,
           }}>
             <Text style={{
-              fontSize: 15,
+              fontSize: ratio < 1.5 ? 20 : 15,
               color: 'white',
               fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular',
               marginHorizontal: 10,
@@ -653,8 +608,8 @@ const RenderElements = props => {
             backgroundColor: '#333333',
             alignItems: 'center',
             justifyContent: 'center',
-            height: 100,
-            paddingBottom: 13,
+            flex: 0,
+            paddingVertical: 5,
           }}>
             <Text
               style={{
@@ -672,7 +627,8 @@ const RenderElements = props => {
           <View style={{
             backgroundColor: '#F2F2F2',
             alignItems: 'center',
-            height: 200,
+            flex: 0,
+            paddingBottom: 10,
             paddingTop: 15,
             paddingHorizontal: 5,
           }}>
@@ -724,7 +680,7 @@ const RenderElements = props => {
       items.push(<View><Divider size={23}/><AdBlock data={item}/></View>);
     }
     // if (item.id === 'SIGN_IN_PLACEHOLDER' && !auth.loginState) {
-    //   items.push(<LoginModal data={item}/>);
+    //   items.push(<LoginModal data={item} referer={bikeData.url}/>);
     // }
     items.push(<Divider key={`divider${index}`} size={20}/>);
   });
@@ -736,34 +692,27 @@ const BikePagePremium = props => {
   const {bikeData, brandData, hud} = useStores();
 
   const navigate = url => {
-    console.log('deeplinkurl==========', url);
-    const routeName = url.split('://')[1];
-    if (routeName.includes('??')) {
-      const type = routeName.split('??')[0];
-      const data = routeName.split('??')[1].split('==')[1];
-      console.log('data===========', data);
-      if (type === 'Product') {
-        bikeData.clearData()
-        bikeData.getData(data);
-      }
-      if (type === 'Brand') {
-        brandData.clearData()
-        brandData.getData(data);
-      }
-      navigation.navigate(type, {url: url});
+    console.log('bike deep link==========', url);
+    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
+    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
+    if (type === 'Product') {
+      bikeData.clearData();
+      bikeData.getData(data);
     } else {
-      navigation.navigate(routeName);
+      brandData.clearData();
+      brandData.getData(data);
     }
+    navigation.navigate(type, {url: type});
   };
-  useEffect(() => {
-    Linking.addEventListener('url', event => navigate(event.url))
-    return () => Linking.removeEventListener('url', event => navigate(event.url));
-  }, [])
+  // useEffect(() => {
+  //   Linking.addEventListener('url', event => navigate(event.url))
+  //   return () => Linking.removeEventListener('url', event => navigate(event.url));
+  // }, [])
 
   useEffect(() => {
     if (props.route.params){
       const {url} = props.route.params;
-      console.log('url-[-----', url.split('?')[0].substring(7));
+      // console.log('url-[-----', url.split('?')[0].substring(7));
       analytics().setCurrentScreen(url.split('?')[0].substring(7));
     }
   });
@@ -774,7 +723,7 @@ const BikePagePremium = props => {
     if (bikeData.errorIf) {
       return <ErrorView/>;
     } else {
-      hud.hide()
+      hud.hide();
       const uiData = toJS(bikeData.data);
       return (
         <View>
@@ -784,12 +733,12 @@ const BikePagePremium = props => {
                      style={{
                        position: 'absolute',
                        left: 0,
-                       width: scale(37),
-                       height: verticalScale(23),
+                       width: isIOS ? scale(35) : scale(37),
+                       height: isIOS ? verticalScale(19) : verticalScale(23),
                        resizeMode: 'contain',
                        marginTop: verticalScale(14),
                      }}/>
-              <Text style={{textAlign: 'center', fontSize: 19, lineHeight: 49}}>SCHEDA BICI</Text>
+              <Text style={{textAlign: 'center', fontSize: ratio < 1.5 ? 30 : 19, lineHeight: ratio < 1.5 ? 90 : (ratio > 2 ? 59 : 49)}}>SCHEDA BICI</Text>
             </TouchableOpacity>
           </Header>
 
@@ -807,7 +756,8 @@ const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
     margin-bottom: 10px;
     paddingHorizontal: ${scale(8)} 
-    marginTop: ${verticalScale(50)}
+    marginTop: ${isIOS ? (ratio < 1.5 ? verticalScale(50) : (ratio < 1.8 ? verticalScale(75) : verticalScale(65))) : verticalScale(50)}
+    paddingTop: ${verticalScale(10)}
 `;
 
 const BadgeView = styled(View)`
@@ -909,6 +859,7 @@ const ShareView = styled(View)`
 `;
 
 const Title = styled(Text)`
+  margin-top: ${isIOS ? ratio < 1.5 ? '15px' : '10px' : '0px'}
   color: ${props => props.color};
   font-family: ${themeProp('fontUniHeavy')}
   font-size: ${props => props.size ? moderateScale(props.size) : moderateScale(30)}

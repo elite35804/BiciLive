@@ -4,6 +4,9 @@ import React from 'react';
 import Images from 'res/Images';
 import styled from 'styled-components/native/dist/styled-components.native.esm';
 
+const {height, width} = Dimensions.get('window');
+const ratio = height/width;
+
 const ShareTooltip = (props) => (
   <Tooltip
     width={Dimensions.get('window').width-20}
@@ -22,7 +25,7 @@ const ShareTooltip = (props) => (
   >
     <ShareBtn>
       {/*<ShareTitle>CONDIVIDI</ShareTitle>*/}
-      <Image width={'100%'} height={'100%'} source={Images.btn.btn_share} style={{marginLeft: 10, width: 130, height: 40, resizeMode: 'contain'}} />
+      <Image width={'100%'} height={'100%'} source={Images.btn.btn_share} style={{marginLeft: 10, width: ratio < 1.5 ? 200 : 130, height: ratio < 1.5 ? 100 : 40, resizeMode: 'contain'}} />
     </ShareBtn>
   </Tooltip>
 );

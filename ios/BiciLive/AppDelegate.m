@@ -23,8 +23,7 @@
 
   if ([FIRApp defaultApp] == nil) {
     [FIRApp configure];
-  }
-  RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
+  }		  RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"BiciLive"
                                             initialProperties:nil];
@@ -36,6 +35,8 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  
   return YES;
 }
 
@@ -54,9 +55,16 @@
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
+{ 
   return [RCTLinkingManager application:app openURL:url
                       sourceApplication:sourceApplication annotation:annotation];
 }
 
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
+  return [RCTLinkingManager
+     application:application
+     continueUserActivity:userActivity
+     restorationHandler:restorationHandler
+  ];
+}
 @end

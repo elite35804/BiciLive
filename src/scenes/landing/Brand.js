@@ -1,5 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, ScrollView, TouchableOpacity, Image, FlatList, Image as DefaultImage, Linking} from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  FlatList,
+  Image as DefaultImage,
+  Linking,
+  Platform,
+} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {Actions} from 'react-native-router-flux';
@@ -17,6 +27,8 @@ import config from '../../config/Config';
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
+const isIOS = Platform.OS === 'ios';
+
 const LikeBlock = props => {
   const {auth} = useStores();
   const [isLike, setLike] = useState(true);
@@ -24,7 +36,7 @@ const LikeBlock = props => {
     try {
       console.log('set============');
       axios.get(
-        `http://biciapp.sepisolutions.com${props.url}`,
+        `${config.server}${props.url}`,
         {
           headers: {
             'Authorization' : `Bearer ${auth.token}`
@@ -49,28 +61,21 @@ const Brand = props => {
 
   const navigate = url => {
     console.log('deeplinkurl==========', url);
-    const routeName = url.split('://')[1];
-    if (routeName.includes('??')) {
-      const type = routeName.split('??')[0];
-      const data = routeName.split('??')[1].split('==')[1];
-      console.log('data===========', data);
-      if (type === 'Product') {
-        bikeData.clearData()
-        bikeData.getData(data);
-      }
-      if (type === 'Brand') {
-        brandData.clearData()
-        brandData.getData(data);
-      }
-      navigation.navigate(type, {url: url});
+    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
+    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
+    if (type === 'Product') {
+      bikeData.clearData();
+      bikeData.getData(data);
     } else {
-      navigation.navigate(routeName);
+      brandData.clearData();
+      brandData.getData(data);
     }
+    navigation.navigate(type, {url: type});
   };
-  useEffect(() => {
-    Linking.addEventListener('url', event => navigate(event.url))
-    return () => Linking.removeEventListener('url', event => navigate(event.url));
-  }, []);
+  // useEffect(() => {
+  //   Linking.addEventListener('url', event => navigate(event.url))
+  //   return () => Linking.removeEventListener('url', event => navigate(event.url));
+  // }, []);
 
   const data = [
     {name: 'ABUS', count: 34},
@@ -114,7 +119,7 @@ const Brand = props => {
           <Title size={'40px'} color={titleData1.colore} width={'35px'}>{titleData1.titolo.toUpperCase()}</Title>
           <Divider size={20}/>
           <ItemView>
-            <Image style={{width: moderateScale(25), height: moderateScale(25), resizeMode: 'contain', marginTop: 10}} source={Images.icons.ic_user_sm}/>
+            <Image style={{width: moderateScale(25), height: moderateScale(25), resizeMode: 'contain', marginTop: isIOS ? -4: 10}} source={Images.icons.ic_user_sm}/>
             <Title size={'10px'} color={titleData2.colore} width={'35px'}>{titleData2.titolo.toUpperCase()}</Title>
           </ItemView>
           {Object.entries(uiData).length !== 0 && <FlatList
@@ -142,6 +147,7 @@ const Brand = props => {
 
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
+    padding-top: ${isIOS ? '20px' : '0px'}
 `;
 
 const ItemView = styled(TouchableOpacity)`

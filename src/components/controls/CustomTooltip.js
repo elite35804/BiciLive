@@ -43,7 +43,7 @@ class CustomTooltip extends Component {
         </Text>
       </View>
     );
-  }
+  };
 
   render() {
     const {
@@ -66,7 +66,7 @@ class CustomTooltip extends Component {
       >
         <View>
           {/*<Text>Press Me!</Text>*/}
-          {this.props.from === "category" ? <Image style={{width: 27, height: 27, resizeMode: 'contain'}} source={Images.icons.ic_info_green}/> : <Image style={{width: 20, height: 20}} source={Images.icons.ic_info_black}/>}
+          {this.props.from === "category" ? <Image style={{width: 27, height: 27, resizeMode: 'contain'}} source={Images.icons.ic_info_green}/> : <Image style={{width: 20, height: 20, resizeMode: 'contain'}} source={Images.icons.ic_info_black}/>}
         </View>
         {this.renderHiddenBoxToGetHeight()}
       </RNETooltip>

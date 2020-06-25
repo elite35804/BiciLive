@@ -1,19 +1,20 @@
 import {observable, action} from 'mobx';
 import axios from 'axios';
 import analytics from '@react-native-firebase/analytics';
+import config from '../config/Config';
 
 class QuestionStore {
   data = [];
   errorIf = false;
   requestData = {};
-  url = 'http://biciapp.sepisolutions.com/api/v1/onboard_survey'
+  url = '/api/v1/onboard_survey';
   @observable isLoading = false;
   @action
   getData = (token) => {
     this.isLoading = true;
     try {
       return axios.get(
-        this.url,
+        config.server + this.url,
         {
           headers: {
             'Authorization' : `Bearer ${token}`
@@ -55,11 +56,11 @@ class QuestionStore {
       }
 
     }
-    console.log('formdata=========', bodyFormData);
+    // console.log('formdata=========', bodyFormData);
     try {
       return axios({
         method: 'post',
-        url: this.url,
+        url: config.server + this.url,
         data: bodyFormData,
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -67,7 +68,7 @@ class QuestionStore {
         },
       })
         .then(response => {
-          console.log('response========', response.data);
+          // console.log('response========', response.data);
           this.errorIf = response.data.err_code !== 'ERR_OK';
           if (response.data.err_code === 'ERR_OK') {
           } else {

@@ -21,6 +21,9 @@ import RNInstallReferrer from 'react-native-install-referrer';
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
+const {height, width} = Dimensions.get('window');
+const ratio = height/width;
+
 const isIOS = Platform.OS === 'ios';
 const Stepper = observer(props => {
   const {homeData} = useStores();
@@ -54,18 +57,18 @@ const Stepper = observer(props => {
 });
 
 const PageElement = props => {
-  const {bikeData, homeData} = useStores();
+  const {bikeData, homeData, auth} = useStores();
   const navigation = useNavigation();
   const goToBike = url => {
     bikeData.clearData();
-    bikeData.getData(url, homeData.url);
+    bikeData.getData(url, homeData.url, auth.token);
     navigation.navigate('Product', {url: url});
   };
   return (
     <View>
       <LogoView onPress={() => goToBike(get(props, 'data.url', ''))}>
         <DefaultImage source={{uri: 'http://biciapp.sepisolutions.com' + get(props, 'data.immagine', '')}}
-              style={{width: Dimensions.get('window').width * 0.95, height: isIOS ? 260 : 230, resizeMode: 'contain'}}/>
+              style={{width: Dimensions.get('window').width * 0.95, height: isIOS ? (ratio < 1.5 ? 500 : 260) : 230, resizeMode: 'contain'}}/>
       </LogoView>
       <Content>
         <TypeView
@@ -73,7 +76,7 @@ const PageElement = props => {
         <Sort>{get(props, 'data.brand', '')}</Sort>
         <NameView>
           <Name numberOfLines={1} color={'#' + get(props, 'data.color', themeProp('colorType'))}>{get(props, 'data.modello', '')}</Name>
-          <Image width={moderateScale(20)} height={moderateScale(20)} style={{marginTop: moderateScale(-17)}} source={Images.icons.arrow_right}/>
+          {/*<Image width={ratio < 1.5 ? moderateScale(40) : moderateScale(20)} height={ratio < 1.5 ? moderateScale(40) : moderateScale(20)} style={{marginTop: moderateScale(-17)}}  source={Images.icons.arrow_right}/>*/}
         </NameView>
       </Content>
     </View>
@@ -88,7 +91,7 @@ const PageSlider = (props) => {
     <SwiperContainer>
       <Swiper
         ref={_swiper}
-        containerStyle={{height: isIOS ? verticalScale(320) : moderateScale(335, 0.1)}}
+        containerStyle={{height: isIOS ? moderateScale(390) : moderateScale(335, 0.1)}}
         showsPagination={false}
         autoplay={true}
         autoplayTimeout = {4}
@@ -109,11 +112,11 @@ const PageSlider = (props) => {
 
 
 const ImageReel = (props) => {
-  const {brandData, homeData} = useStores();
+  const {brandData, homeData, auth} = useStores();
   const navigation = useNavigation();
   const goToBrand = (url) => {
     brandData.clearData();
-    brandData.getData(url, homeData.url);
+    brandData.getData(url, homeData.url, auth.token);
     navigation.navigate('Brand', {url: url})
   };
   return (
@@ -149,7 +152,7 @@ const Finder = () => {
       <TouchableOpacity onPress={() => {
         navigation.navigate('BikeFinder');
       }}>
-        <DefaultImage style={{width: 170, height: 170, resizeMode: 'contain',marginTop: 14}} source={Images.btn.btn_finder_animated}/></TouchableOpacity>
+        <DefaultImage style={{width: ratio < 1.5 ? 220 : 170, height: ratio < 1.5 ? 220 : 170, resizeMode: 'contain',marginTop: 14}} source={Images.btn.btn_finder_animated}/></TouchableOpacity>
         {/*<Image width={92} height={92} source={Images.btn.bike_finder} style={{marginTop: 14}}/></TouchableOpacity>*/}
     </FinderView>
   );
@@ -172,7 +175,7 @@ const AdBlock = props => {
     web.url = url;
     navigation.navigate('WebViewer')
   };
-  return <View><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image style={{width: '100%', height: 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>
+  return <View><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image style={{width: '100%', height: ratio < 1.5 ? 250 : 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>
 };
 
 const HomeElements = (props) => {
@@ -183,7 +186,7 @@ const HomeElements = (props) => {
       items.push(<View><PageSlider key={`key${index}`} data={item}/><Divider size={20}/></View>);
     }
     if (item.id === 'TITLE') {
-      items.push(<View><Title key={`key${index}`} color={item.colore}>{item.titolo}</Title></View>);
+      items.push(<View><Divider size={ratio < 1.5 ? 50 : 0}/><Title key={`key${index}`} color={item.colore}>{item.titolo}</Title></View>);
     }
     if (item.id === 'IMAGE_REEL') {
       items.push(<View><Divider size={-20}/><ImageReel key={`key${index}`} data={item}/></View>);
@@ -206,33 +209,25 @@ const Home = (props) => {
   const {hud, bikeData, brandData} = useStores();
   const navigate = url => {
     console.log('deeplinkurl==========', url);
-    const routeName = url.split('://')[1];
-    if (routeName.includes('??')) {
-      const type = routeName.split('??')[0];
-      const data = routeName.split('??')[1].split('==')[1];
-      console.log('data===========', data);
-      if (type === 'Product') {
-        bikeData.clearData()
-        bikeData.getData(data);
-      }
-      if (type === 'Brand') {
-        brandData.clearData()
-        brandData.getData(data);
-      }
-      navigation.navigate(type, {url: url});
+    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
+    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
+    if (type === 'Product') {
+      bikeData.clearData();
+      bikeData.getData(data);
     } else {
-      navigation.navigate(routeName);
+      brandData.clearData();
+      brandData.getData(data);
     }
+    navigation.navigate(type, {url: type});
   };
+  // useEffect(() => {
+  //   Linking.addEventListener('url', event => navigate(event.url))
+  //   return () => Linking.removeEventListener('url', event => navigate(event.url));
+  // }, [])
   useEffect(() => {
-    Linking.addEventListener('url', event => navigate(event.url))
-    return () => Linking.removeEventListener('url', event => navigate(event.url));
-  }, [])
-  useEffect(() => {
-    if (props.route.params) {
-      console.log('params==========', props.route.params.url);
-    }
-  });
+    console.log('ratioratio=======', ratio);
+
+  }, []);
   const {homeData} = useStores();
   if (homeData.isLoading) {
     hud.show()
@@ -242,8 +237,9 @@ const Home = (props) => {
     } else {
       hud.hide()
       const uiData = toJS(get(homeData, 'data', []));
-      console.log('homeData====', uiData);
+      // console.log('homeData====', uiData);
       homeData.setPosition(0);
+
       return (
         <Container>
           <HomeElements data={uiData}/>
@@ -257,6 +253,7 @@ const Home = (props) => {
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
     padding-horizontal: ${scale(10)};
+    padding-vertical: ${isIOS ? verticalScale(20) : 0}
 `;
 
 const Date = styled(Text)`
@@ -345,7 +342,7 @@ const CategoryView = styled(View)`
 const FinderView = styled(View)`
   justify-content: center;
   align-items: center;
-  margin-top: 48px;
+  margin-top: ${ratio < 1.5 ? '80px' : '48px'};
 `;
 
 const NewsFinderView = styled(View)`
@@ -363,7 +360,7 @@ const Title = styled(Text)`
 const SubTitle = styled(Text)`
   color: ${themeProp('colorDescription')};
   font-family: ${themeProp('fontUniBook')}
-  font-size: 14px;
+  font-size: ${ratio < 1.5 ? '25px' : '14px'};
 `;
 
 const NewsView = styled(View)`
@@ -396,7 +393,7 @@ const SwiperContainer = styled(View)`
 
 const CategoryImage = styled(Image)`
   margin-top: 20px
-  width: ${moderateScale(105)}; 
+  width: ${ratio < 1.5 ? moderateScale(150)  : moderateScale(105)}; 
   height: ${moderateScale(95)}; 
   resize-mode: contain; 
   border-width: 1; 

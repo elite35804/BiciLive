@@ -33,7 +33,13 @@ import {toJS} from 'mobx';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+import config from '../../config/Config';
 const isIOS = Platform.OS === 'ios';
+
+const {height, width} = Dimensions.get('window');
+const ratio = height/width;
+
 const AdBlock = props => {
   const navigation = useNavigation();
   const {web} = useStores();
@@ -42,35 +48,71 @@ const AdBlock = props => {
     navigation.navigate('WebViewer');
   };
   return <View><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image
-    style={{width: '100%', height: 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>;
+    style={{width: '100%', height: ratio < 1.5 ? 250 : 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>;
 };
+
+const LikeBlock = props => {
+  const {auth} = useStores();
+  const [isLike, setIsLike] = useState(true);
+  const setStatus = async () => {
+    try {
+      if (auth.loginState) {
+        console.log('set============', auth.token);
+        axios.get(
+          `${config.server}${props.data.like_url}`,
+          {
+            headers: {
+              'Authorization' : `Bearer ${auth.token}`
+            }
+          }
+        ).then(res => {
+          console.log('======', res.data);
+          if (res.data.err_code === "ERR_OK") {
+            setIsLike(res.data.status)
+          }
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    setIsLike(props.data.starred)
+  }, []);
+  return <View>
+    <TouchableOpacity style={{
+      backgroundColor: 'red',
+      alignItems: 'center',
+      width: 70,
+      height: '80%',
+      justifyContent: 'center',
+    }}
+                      onPress={() => setStatus()}
+    >
+      <Image width={'100%'} height={'100%'} source={isLike ? Images.icons.ic_heart_white_full : Images.icons.ic_heart_white}/>
+    </TouchableOpacity>
+  </View>
+}
 const Result = props => {
   const navigation = useNavigation();
   const {bikeSearch, hud, bikeData, brandData} = useStores();
   const navigate = url => {
     console.log('deeplinkurl==========', url);
-    const routeName = url.split('://')[1];
-    if (routeName.includes('??')) {
-      const type = routeName.split('??')[0];
-      const data = routeName.split('??')[1].split('==')[1];
-      console.log('data===========', data);
-      if (type === 'Product') {
-        bikeData.clearData()
-        bikeData.getData(data);
-      }
-      if (type === 'Brand') {
-        brandData.clearData()
-        brandData.getData(data);
-      }
-      navigation.navigate(type, {url: url});
+    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
+    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
+    if (type === 'Product') {
+      bikeData.clearData();
+      bikeData.getData(data);
     } else {
-      navigation.navigate(routeName);
+      brandData.clearData();
+      brandData.getData(data);
     }
+    navigation.navigate(type, {url: type});
   };
-  useEffect(() => {
-    Linking.addEventListener('url', event => navigate(event.url))
-    return () => Linking.removeEventListener('url', event => navigate(event.url));
-  }, []);
+  // useEffect(() => {
+  //   Linking.addEventListener('url', event => navigate(event.url))
+  //   return () => Linking.removeEventListener('url', event => navigate(event.url));
+  // }, []);
   if (bikeSearch.isLoading) {
     hud.show()
   } else {
@@ -88,17 +130,17 @@ const Result = props => {
                      style={{
                        position: 'absolute',
                        left: 0,
-                       width: scale(37),
-                       height: verticalScale(23),
+                       width: isIOS ? scale(35) : scale(37),
+                       height: isIOS ? verticalScale(19) : verticalScale(23),
                        resizeMode: 'contain',
                        marginTop: verticalScale(14),
                      }}/>
-              <Text style={{textAlign: 'center', fontSize: 19, lineHeight: 49}}>RISULTATI DI RICERCA</Text>
+              <Text style={{textAlign: 'center', fontSize: ratio < 1.5 ? 30 : 19, lineHeight: ratio < 1.5 ? 90 : (ratio > 2 ? 59 : 49)}}>RISULTATI DI RICERCA</Text>
               <Text style={{
                 position: 'absolute',
                 right: 10,
-                fontSize: 19,
-                lineHeight: 49,
+                fontSize: ratio < 1.5 ? 30 : 19,
+                lineHeight: ratio < 1.5 ? 90 : 49,
                 color: '#FB0203',
               }}>{get(uiData[0], 'count', 0)}</Text>
             </TouchableOpacity>
@@ -115,15 +157,7 @@ const Result = props => {
                     data={['']}
                     renderItem={(data, rowMap) => (<View><MainBikeInfo data={item}/></View>)}
                     renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
-                      <TouchableOpacity style={{
-                        backgroundColor: 'red',
-                        alignItems: 'center',
-                        width: 70,
-                        height: '70%',
-                        justifyContent: 'center',
-                      }}>
-                        <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_white}/>
-                      </TouchableOpacity>
+                      <LikeBlock data={item}/>
                       {/*<TouchableOpacity style={{*/}
                         {/*backgroundColor: '#53DCD0',*/}
                         {/*alignItems: 'center',*/}
@@ -147,24 +181,7 @@ const Result = props => {
                     data={['']}
                     renderItem={(data, rowMap) => (<View><ListBikeInfo data={item}/></View>)}
                     renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
-                      <TouchableOpacity style={{
-                        backgroundColor: 'red',
-                        alignItems: 'center',
-                        width: 70,
-                        height: '70%',
-                        justifyContent: 'center',
-                      }}>
-                        <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_white}/>
-                      </TouchableOpacity>
-                      {/*<TouchableOpacity style={{*/}
-                        {/*backgroundColor: '#53DCD0',*/}
-                        {/*alignItems: 'center',*/}
-                        {/*width: 70,*/}
-                        {/*height: '50%',*/}
-                        {/*justifyContent: 'center',*/}
-                      {/*}}>*/}
-                        {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white}/>*/}
-                      {/*</TouchableOpacity>*/}
+                      <LikeBlock data={item}/>
                     </View>)}
                     leftOpenValue={0}
                     rightOpenValue={-80}
@@ -207,7 +224,8 @@ const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
     margin-bottom: 10px;
     padding-horizontal: 10px;
-    margin-top: ${verticalScale(50)}
+    marginTop: ${isIOS ? (ratio < 1.5 ? verticalScale(50) : (ratio < 1.8 ? verticalScale(75) : verticalScale(65))) : verticalScale(50)}
+    paddingTop: ${verticalScale(10)}
 `;
 
 const TitleView = styled(View)`

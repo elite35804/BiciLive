@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, ScrollView, TouchableOpacity, Image, Linking} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity, Image, Linking, Dimensions, Platform} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {useStores} from 'hooks/Utils';
@@ -12,6 +12,11 @@ import { get } from 'lodash';
 import {scale, verticalScale} from 'react-native-size-matters';
 import { useNavigation } from '@react-navigation/native';
 
+const {height, width} = Dimensions.get('window');
+const ratio = height/width;
+
+const isIOS = Platform.OS === 'ios';
+
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
@@ -21,28 +26,21 @@ const BikeFinder = props => {
   const {staticData, category, bikeSearch, bikeData, brandData} = useStores();
   const navigate = url => {
     console.log('deeplinkurl==========', url);
-    const routeName = url.split('://')[1];
-    if (routeName.includes('??')) {
-      const type = routeName.split('??')[0];
-      const data = routeName.split('??')[1].split('==')[1];
-      console.log('data===========', data);
-      if (type === 'Product') {
-        bikeData.clearData()
-        bikeData.getData(data);
-      }
-      if (type === 'Brand') {
-        brandData.clearData()
-        brandData.getData(data);
-      }
-      navigation.navigate(type, {url: url});
+    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
+    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
+    if (type === 'Product') {
+      bikeData.clearData();
+      bikeData.getData(data);
     } else {
-      navigation.navigate(routeName);
+      brandData.clearData();
+      brandData.getData(data);
     }
+    navigation.navigate(type, {url: type});
   };
-  useEffect(() => {
-    Linking.addEventListener('url', event => navigate(event.url))
-    return () => Linking.removeEventListener('url', event => navigate(event.url));
-  }, [])
+  // useEffect(() => {
+  //   Linking.addEventListener('url', event => navigate(event.url))
+  //   return () => Linking.removeEventListener('url', event => navigate(event.url));
+  // }, [])
   const goToCategory = (id, title, color) => {
     bikeSearch.clearRequest();
     console.log('id====', id);
@@ -58,19 +56,19 @@ const BikeFinder = props => {
     }
   };
   return (
-    <View>
+    <View style={{flex: 1}}>
       <Header>
         <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => navigation.goBack()}>
           <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
                  style={{
                    position: 'absolute',
                    left: 0,
-                   width: scale(37),
-                   height: verticalScale(23),
+                   width: isIOS ? scale(35) : scale(37),
+                   height: isIOS ? verticalScale(19) : verticalScale(23),
                    resizeMode: 'contain',
                    marginTop: verticalScale(14),
                  }}/>
-          <Text style={{textAlign: 'center', fontSize: 19, lineHeight: 49}}>EBIKE FINDER</Text>
+          <Text style={{textAlign: 'center', fontSize: ratio < 1.5 ? 30 : 19, lineHeight: ratio < 1.5 ? 90 : (ratio > 2 ? 59 : 49)}}>EBIKE FINDER</Text>
         </TouchableOpacity>
       </Header>
       <Container>
@@ -93,14 +91,16 @@ const BikeFinder = props => {
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
     padding-left: 13px;
-    marginTop: ${verticalScale(50)}
+    marginTop: ${isIOS ? (ratio < 1.5 ? verticalScale(50) : (ratio < 1.8 ? verticalScale(75) : verticalScale(65))) : verticalScale(50)}
+    paddingTop: ${verticalScale(10)}
 `;
 
 const Bottom = styled(TouchableOpacity)`
+  background-color:${themeProp('colorSecondary')};
   justify-content: flex-end;
   align-items: flex-end;
-  margin-right: 16px;
-  margin-bottom: 30px;
+  padding-right: 16px;
+  padding-vertical: 20px;
 `;
 
 const Divider = styled(View)`

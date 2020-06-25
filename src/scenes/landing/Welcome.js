@@ -19,28 +19,21 @@ const Welcome = props => {
   const [reset, setReset] = useState(1);
   const navigate = url => {
     console.log('deeplinkurl==========', url);
-    const routeName = url.split('://')[1];
-    if (routeName.includes('??')) {
-      const type = routeName.split('??')[0];
-      const data = routeName.split('??')[1].split('==')[1];
-      console.log('data===========', data);
-      if (type === 'Product') {
-        bikeData.clearData()
-        bikeData.getData(data);
-      }
-      if (type === 'Brand') {
-        brandData.clearData()
-        brandData.getData(data);
-      }
-      navigation.navigate(type, {url: url});
+    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
+    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
+    if (type === 'Product') {
+      bikeData.clearData();
+      bikeData.getData(data);
     } else {
-      navigation.navigate(routeName);
+      brandData.clearData();
+      brandData.getData(data);
     }
+    navigation.navigate(type, {url: type});
   };
-  useEffect(() => {
-    Linking.addEventListener('url', event => navigate(event.url))
-    return () => Linking.removeEventListener('url', event => navigate(event.url));
-  }, []);
+  // useEffect(() => {
+  //   Linking.addEventListener('url', event => navigate(event.url))
+  //   return () => Linking.removeEventListener('url', event => navigate(event.url));
+  // }, []);
   useEffect(() => {
     const temp = [];
     data.map(item => {
@@ -63,6 +56,7 @@ const Welcome = props => {
     });
     setReset(reset + 1);
     setUiData(temp)
+    question.requestData = {};
   };
 
   const onSubmit = () => {
@@ -74,7 +68,7 @@ const Welcome = props => {
       }
     }
     question.submit(auth.token);
-    navigation.navigate('Home')
+    navigation.replace('Home')
   };
 
   console.log('length=====', Object.entries(toJS(question.data)).length);

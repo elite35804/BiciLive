@@ -51,7 +51,7 @@
 			<string>bicilive</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>bicilive</string>
+				<string>biciapp	</string>
 			</array>
 		</dict>
 	</array>

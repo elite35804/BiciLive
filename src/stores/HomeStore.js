@@ -1,6 +1,7 @@
 import {observable, action} from 'mobx';
 import axios from 'axios';
 import analytics from '@react-native-firebase/analytics';
+import config from '../config/Config';
 
 class HomeStore {
   data = {};
@@ -12,20 +13,20 @@ class HomeStore {
   getData = async () => {
     this.isLoading = true;
     try {
-      const response = await axios.get('http://biciapp.sepisolutions.com/api/v1/home');
+      const response = await axios.get(`${config.server}/api/v1/home`);
       console.log('homeData =====================');
       if (response.data.err_code === "ERR_OK") {
         this.data = response.data.content;
         this.errorIf = false;
-        analytics().logEvent('openApp',{
-          url: 'http://biciapp.sepisolutions.com/api/v1/home',
-          page_title: '/home'
-        }).then(res=>{
-          console.log('result============', res);
-        })
-          .catch(error => {
-            console.log("---------------------------------------Error occured-------------------", error);
-          });
+        // analytics().logEvent('openApp',{
+        //   url: 'http://biciapp.sepisolutions.com/api/v1/home',
+        //   page_title: '/home'
+        // }).then(res=>{
+        //   console.log('result============', res);
+        // })
+        //   .catch(error => {
+        //     console.log("---------------------------------------Error occured-------------------", error);
+        //   });
       } else {
         this.errorIf = true;
       }
