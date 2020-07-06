@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useCallback} from 'react';
 import {Dimensions, Image, Platform, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
@@ -15,7 +15,7 @@ import Swiper from 'react-native-swiper';
 import StepIndicator from 'react-native-step-indicator';
 import CustomTooltip from 'components/controls/CustomTooltip';
 import {scale, verticalScale} from 'react-native-size-matters';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -24,35 +24,7 @@ const ratio = height/width;
 const isIOS = Platform.OS === 'ios';
 
 
-const FinderItem = props => {
-  const {bikeSearch} = useStores();
-  const [checked, setChecked] = useState(false);
-  const min = props.data.min_val < props.data.max_val ? props.data.min_val : props.data.max_val;
-  const max = props.data.min_val > props.data.max_val ? props.data.min_val : props.data.max_val;
-  const [range, setRange] = useState([min, max]);
-  const onChange = (e) => {
-    let request = `${e[0].toString()}#${e[1].toString()}`;
-    bikeSearch.setRequest(get(props, 'data.name', ''), request);
-    setRange(e);
-  };
-  return (
-    <View>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginRight: 20}}>
-          <CheckBox checked={checked} onPress={() => setChecked(!checked)} text={get(props, 'data.title','').toUpperCase()}/>
-        <CustomTooltip from="category" tooltipText={get(props, 'data.infotext', 'No Info')}/>
-      </View>
-      {
-        checked &&
-        <View style={{marginLeft: 10}}>
-          <Price left={range[0]} right={range[1]} symbol={props.data.um}/>
-          <Slider min={props.data.min_val} max={props.data.max_val} values={range} step={props.data.step}
-                  onChangeFinish={(e) => onChange(e)} onChange={(e) => setRange(e)}/>
-        </View>
-      }
-      <Divider size={10}/>
-    </View>
-  );
-};
+
 const Stepper = observer(props => {
   const {category} = useStores();
   const label = ['', '', '', '', ''];
@@ -127,56 +99,172 @@ const processSelectData = (predata) => {
   });
   return {title, texts, values};
 };
+const SelectElement = (props) => {
+  const {bikeSearch} = useStores();
+  const {showActionSheetWithOptions} = useActionSheet();
+  const preData = props.data;
+  const [brand, setBrand] = useState();
+  const _onOpenActionSheet = (id, cb) => {
+    const {title, texts, values} = processSelectData(preData);
+    const options = ['Cancel', ...texts];
+    const cancelButtonIndex = 0;
+    showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex
+      },
+      buttonIndex => {
+        if (buttonIndex !== 0) {
+          bikeSearch.setRequest(get(preData, 'name', ''), values[buttonIndex - 1]);
+          cb(texts[buttonIndex - 1]);
+          // Do something here depending on the button index selected
+        } else {
+          cb('');
+          bikeSearch.removeRequest(get(preData, 'name', ''));
+        }
+
+      },
+    );
+  };
+  return <BaseSelect text={get(preData, 'title', '').toUpperCase()} value={brand}
+                     onPress={() => _onOpenActionSheet(0, setBrand)}/>;
+};
+
+const FinderItem = props => {
+  const {bikeSearch} = useStores();
+  const [checked, setChecked] = useState(false);
+  const min = props.data.min_val < props.data.max_val ? props.data.min_val : props.data.max_val;
+  const max = props.data.min_val > props.data.max_val ? props.data.min_val : props.data.max_val;
+  const [range, setRange] = useState([min, max]);
+  const onChange = (e) => {
+    let request = `${e[0].toString()}#${e[1].toString()}`;
+    bikeSearch.setRequest(get(props, 'data.name', ''), request);
+    setRange(e);
+  };
+  return (
+    <View>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginRight: 20}}>
+        <CheckBox checked={checked} onPress={() => setChecked(!checked)} text={get(props, 'data.title','').toUpperCase()}/>
+        <CustomTooltip from="category" tooltipText={get(props, 'data.infotext', 'No Info')}/>
+      </View>
+      {
+        checked &&
+        <View style={{marginLeft: 10}}>
+          <Price left={range[0]} right={range[1]} symbol={props.data.um}/>
+          <Slider min={props.data.min_val} max={props.data.max_val} values={range} step={props.data.step}
+                  onChangeFinish={(e) => onChange(e)} onChange={(e) => setRange(e)}/>
+        </View>
+      }
+      <Divider size={10}/>
+    </View>
+  );
+};
+
+const ExtraSearch = props => {
+  const {uiData} = props;
+  return <View>
+    <Title size={'0'} color={themeProp('colorThird')} width={'30px'}
+           style={{paddingHorizontal: 10}}>MOTORE</Title>
+    {uiData.map((item,index) => {
+      if (item.id === "FORM_INPUT_SLIDER" && item.name === "potenza_motore") {
+        return (
+          <View>
+            <FinderItem data={item} key={index}/>
+            <Divider size={20}/>
+          </View>
+
+        );
+      }
+      if (item.id === "FORM_INPUT_SLIDER" && item.name === "coppia_motore"){
+        return (
+          <View>
+            <Divider size={-30}/>
+            <FinderItem data={item} key={index}/>
+          </View>
+        )
+      }
+    })}
+    <Divider size={30}/>
+    <Title size={'0'} color={themeProp('colorThird')} width={'30px'}
+           style={{paddingHorizontal: 10}}>SPECIFICHE</Title>
+    {uiData.map((item,index) => {
+      if (item.id === "FORM_INPUT_SLIDER" && item.name === "peso"){
+        return <FinderItem data={item} key={index}/>
+      }
+    })}
+    <View style={{paddingLeft: 13}}>
+      {uiData.map((item,index) => {
+        if (item.id === "FORM_INPUT_SELECT" && item.name === "materiale_telaio") {
+          return <SelectElement data={item} key={index}/>;
+        }
+      })}
+    </View>
+
+    <Divider size={35}/>
+    <Title size={'0'} color={themeProp('colorThird')} width={'28px'}
+           style={{paddingHorizontal: 10}}>COMPONENTI</Title>
+    <View style={{paddingLeft: 13, marginBottom: 30, marginTop: 10}}>
+      {uiData.map((item,index) => {
+        if (item.id === "FORM_INPUT_SELECT" && item.name === "tipo_ammortizzatore") {
+          return <SelectElement data={item} key={index}/>;
+        }
+        if (item.id === "FORM_INPUT_SELECT" && item.name === "ruota_anteriore"){
+          return <SelectElement data={item} key={index}/>
+        }
+        if (item.id === "FORM_INPUT_SELECT" && item.name === "ruota_posteriore"){
+          return <View><SelectElement data={item} key={index}/></View>
+        }
+      })}
+    </View>
+    {/*<Divider size={-25}/>*/}
+    {/*{uiData.map((item,index) => {*/}
+    {/*if (item.id === "FORM_INPUT_SELECT" && item.name === "ruota_anteriore"){*/}
+    {/*return <SelectElement data={item} key={index}/>*/}
+    {/*}*/}
+    {/*if (item.id === "FORM_INPUT_SELECT" && item.name === "ruota_posteriore"){*/}
+    {/*return <View><Divider size={-10}/><SelectElement data={item} key={index}/></View>*/}
+    {/*}*/}
+    {/*})}*/}
+  </View>
+};
 const BikeFinderCategory = props => {
   const navigation = useNavigation();
   const {staticData, category, bikeSearch} = useStores();
   console.log('currentid=====111111', toJS(category.currentId));
   const uiData = toJS(staticData.data.search_forms[category.currentId]);
-  const {showActionSheetWithOptions} = useActionSheet();
+
   const [collapse, setCollapsed] = useState(false);
+  const [counter, setCounter] = useState(0);
   const _container = useRef(null);
 
-  const SelectElement = (props) => {
-
-    const preData = props.data;
-    const [brand, setBrand] = useState();
-    const _onOpenActionSheet = (id, cb) => {
-      const {title, texts, values} = processSelectData(preData);
-      const options = ['Cancel', ...texts];
-      const cancelButtonIndex = 0;
-      showActionSheetWithOptions(
-        {
-          options,
-          cancelButtonIndex
-        },
-        buttonIndex => {
-          if (buttonIndex !== 0) {
-            bikeSearch.setRequest(get(preData, 'name', ''), values[buttonIndex - 1]);
-            cb(texts[buttonIndex - 1]);
-            // Do something here depending on the button index selected
-          }
-
-        },
-      );
-    };
-    return <BaseSelect text={get(preData, 'title', '').toUpperCase()} value={brand}
-                       onPress={() => _onOpenActionSheet(0, setBrand)}/>;
-  };
 
   const goToResult = (url) => {
     bikeSearch.clearResult();
     bikeSearch.getData(url);
-    navigation.navigate('Result');
+    navigation.replace('Result');
   };
 
   useEffect(() => {
     if (collapse) {
       setTimeout(() => {
-        _container.current.scrollTo({y: 600, animated: true})
+        _container.current.scrollTo({y: 650, animated: true})
       }, 100)
     }
 
   },[collapse]);
+
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     category.setPosition(category.position + 1);
+  //     console.log('category counter increment');
+  //     setCounter(counter + 1);
+  //     setCounter(false);
+  //     return () => {
+  //
+  //     }
+  //
+  //   }, [])
+  // )
 
   if (Object.keys(uiData).length !== 0) {
     return (
@@ -235,70 +323,7 @@ const BikeFinderCategory = props => {
             <Image width={20} height={20} source={Images.icons.ic_arrow_down}/>
           </TouchableOpacity>
           <Divider size={34}/>
-          {collapse && <View>
-            <Title size={'0'} color={themeProp('colorThird')} width={'30px'}
-                   style={{paddingHorizontal: 10}}>MOTORE</Title>
-            {uiData.map((item,index) => {
-              if (item.id === "FORM_INPUT_SLIDER" && item.name === "potenza_motore") {
-                return (
-                  <View>
-                    <FinderItem data={item} key={index}/>
-                    <Divider size={20}/>
-                  </View>
-
-                );
-              }
-              if (item.id === "FORM_INPUT_SLIDER" && item.name === "coppia_motore"){
-                return (
-                  <View>
-                    <Divider size={-30}/>
-                    <FinderItem data={item} key={index}/>
-                  </View>
-                )
-              }
-            })}
-            <Divider size={30}/>
-            <Title size={'0'} color={themeProp('colorThird')} width={'30px'}
-                   style={{paddingHorizontal: 10}}>SPECIFICHE</Title>
-            {uiData.map((item,index) => {
-              if (item.id === "FORM_INPUT_SLIDER" && item.name === "peso"){
-                return <FinderItem data={item} key={index}/>
-              }
-            })}
-            <View style={{paddingLeft: 13}}>
-              {uiData.map((item,index) => {
-                if (item.id === "FORM_INPUT_SELECT" && item.name === "materiale_telaio") {
-                  return <SelectElement data={item} key={index}/>;
-                }
-              })}
-            </View>
-
-            <Divider size={35}/>
-            <Title size={'0'} color={themeProp('colorThird')} width={'28px'}
-                   style={{paddingHorizontal: 10}}>COMPONENTI</Title>
-            <View style={{paddingLeft: 13, marginBottom: 30, marginTop: 10}}>
-              {uiData.map((item,index) => {
-                if (item.id === "FORM_INPUT_SELECT" && item.name === "tipo_ammortizzatore") {
-                  return <SelectElement data={item} key={index}/>;
-                }
-                if (item.id === "FORM_INPUT_SELECT" && item.name === "ruota_anteriore"){
-                  return <SelectElement data={item} key={index}/>
-                }
-                if (item.id === "FORM_INPUT_SELECT" && item.name === "ruota_posteriore"){
-                  return <View><SelectElement data={item} key={index}/></View>
-                }
-              })}
-            </View>
-            {/*<Divider size={-25}/>*/}
-            {/*{uiData.map((item,index) => {*/}
-              {/*if (item.id === "FORM_INPUT_SELECT" && item.name === "ruota_anteriore"){*/}
-                {/*return <SelectElement data={item} key={index}/>*/}
-              {/*}*/}
-              {/*if (item.id === "FORM_INPUT_SELECT" && item.name === "ruota_posteriore"){*/}
-                {/*return <View><Divider size={-10}/><SelectElement data={item} key={index}/></View>*/}
-              {/*}*/}
-            {/*})}*/}
-          </View>}
+          {collapse && <ExtraSearch uiData={uiData}/>}
 
           {uiData.map((item,index) => {
             if (item.id === "FORM_INPUT_BUTTON" && item.action === "CERCA"){

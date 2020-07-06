@@ -1,11 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import {View, TouchableOpacity, Text, ScrollView, Platform, Linking, Dimensions} from 'react-native';
+import {View, TouchableOpacity, Text, ScrollView, Platform, Linking, Dimensions, Image, AsyncStorage} from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {useStores} from 'hooks/Utils';
 import {BaseTextInput, BaseSelect, CustomSelect} from 'components/controls/BaseTextInput';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
 import { useNavigation } from '@react-navigation/native';
+import {scale, verticalScale} from 'react-native-size-matters';
+import {Header} from '../../components/controls/BaseUtils';
+import Images from 'res/Images';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -50,7 +53,8 @@ const Login = props => {
     await auth.login();
     hud.hide();
     if (auth.loginState) {
-      alert.showSuccess('Login effettuato con successo', 'Login');
+      alert.showSuccess('Login effettuato con successo');
+      AsyncStorage.setItem('biciliveUser', auth.token);
       if(auth.next_page === 'survey') {
         await question.getData(auth.token);
         navigation.replace('Survey');
@@ -68,7 +72,22 @@ const Login = props => {
   };
 
   return (
-    <Container>
+    <View style={{flex: 1}}>
+      {isIOS &&
+      <Header>
+        <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => navigation.goBack()}>
+          <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
+                 style={{
+                   position: 'absolute',
+                   left: 0,
+                   width: isIOS ? scale(35) : scale(37),
+                   height: isIOS ? verticalScale(19) : verticalScale(23),
+                   resizeMode: 'contain',
+                   marginTop: verticalScale(14),
+                 }}/>
+        </TouchableOpacity>
+      </Header>}
+    <Container style={{flex: 1}}>
       <Title>LOGIN</Title>
       <View style={{alignItems: 'center', marginBottom: -5}}>
         <BaseTextInput required={true} placeholder="EMAIL" onChange={(value) => auth.setLoginParam('user', value)}/>
@@ -81,14 +100,14 @@ const Login = props => {
         <WhiteButton onPress={() => onLogin()}>LOGIN</WhiteButton>
       </Bottom>
     </Container>
+    </View>
   );
 };
 
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
-    flex: 1;
     padding-horizontal: 5px;
-    padding-top: ${isIOS ? '20px' : '0px'}
+    marginTop: ${isIOS ? (ratio < 1.5 ? verticalScale(50) : (ratio < 1.8 ? verticalScale(75) : verticalScale(65))) : verticalScale(0)}
 `;
 
 const Divider = styled(View)`
@@ -107,7 +126,7 @@ const Title = styled(Text)`
 const Bottom = styled(TouchableOpacity)`
   justify-content: flex-end;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 0;
   padding-horizontal: ${ratio < 1.5 ? '10px' : '0px'}
 `;
 

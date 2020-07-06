@@ -57,20 +57,20 @@ const BikeFinder = props => {
   };
   return (
     <View style={{flex: 1}}>
-      <Header>
-        <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => navigation.goBack()}>
-          <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
-                 style={{
-                   position: 'absolute',
-                   left: 0,
-                   width: isIOS ? scale(35) : scale(37),
-                   height: isIOS ? verticalScale(19) : verticalScale(23),
-                   resizeMode: 'contain',
-                   marginTop: verticalScale(14),
-                 }}/>
-          <Text style={{textAlign: 'center', fontSize: ratio < 1.5 ? 30 : 19, lineHeight: ratio < 1.5 ? 90 : (ratio > 2 ? 59 : 49)}}>EBIKE FINDER</Text>
-        </TouchableOpacity>
-      </Header>
+      {/*<Header>*/}
+        {/*<TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => navigation.goBack()}>*/}
+          {/*<Image resizeMode="contain" source={Images.btn.btn_back_arrow}*/}
+                 {/*style={{*/}
+                   {/*position: 'absolute',*/}
+                   {/*left: 0,*/}
+                   {/*width: isIOS ? scale(35) : scale(37),*/}
+                   {/*height: isIOS ? verticalScale(19) : verticalScale(23),*/}
+                   {/*resizeMode: 'contain',*/}
+                   {/*marginTop: verticalScale(14),*/}
+                 {/*}}/>*/}
+          {/*<Text style={{textAlign: 'center', fontSize: ratio < 1.5 ? 30 : 19, lineHeight: ratio < 1.5 ? 90 : (ratio > 2 ? 59 : 49)}}>EBIKE FINDER</Text>*/}
+        {/*</TouchableOpacity>*/}
+      {/*</Header>*/}
       <Container>
         <Divider size={25}/>
         {/*<CategoryText>TUTTIIMODELLI</CategoryText>*/}
@@ -91,8 +91,7 @@ const BikeFinder = props => {
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
     padding-left: 13px;
-    marginTop: ${isIOS ? (ratio < 1.5 ? verticalScale(50) : (ratio < 1.8 ? verticalScale(75) : verticalScale(65))) : verticalScale(50)}
-    paddingTop: ${verticalScale(10)}
+    paddingTop: ${isIOS ? (ratio < 1.5 ? verticalScale(40) : (ratio < 1.8 ? verticalScale(65) : verticalScale(55))) : verticalScale(10)}
 `;
 
 const Bottom = styled(TouchableOpacity)`
@@ -100,7 +99,7 @@ const Bottom = styled(TouchableOpacity)`
   justify-content: flex-end;
   align-items: flex-end;
   padding-right: 16px;
-  padding-vertical: 20px;
+  padding-vertical: 10px;
 `;
 
 const Divider = styled(View)`

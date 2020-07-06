@@ -22,6 +22,9 @@ import {useActionSheet} from '@expo/react-native-action-sheet';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation } from '@react-navigation/native';
 import config from '../../config/Config';
+import {Header} from '../../components/controls/BaseUtils';
+import {scale, verticalScale} from 'react-native-size-matters';
+import Images from 'res/Images';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -60,7 +63,7 @@ const SelectElement = (props) => {
 
 const Register = props => {
   const navigation = useNavigation();
-  const { auth, alert, hud, bikeData, brandData, web } = useStores();
+  const { auth, alert, hud, web } = useStores();
   const [checked, setChecked] = useState(true);
   const [checked1, setChecked1] = useState(true);
   const [checked2, setChecked2] = useState(true);
@@ -69,23 +72,9 @@ const Register = props => {
   const [displayDate, setDisplayDate] = useState(null);
   const ageData = [];
 
-  const navigate = url => {
-    console.log('deeplinkurl==========', url);
-    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
-    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
-    if (type === 'Product') {
-      bikeData.clearData();
-      bikeData.getData(data);
-    } else {
-      brandData.clearData();
-      brandData.getData(data);
-    }
-    navigation.navigate(type, {url: type});
-  };
-  // useEffect(() => {
-  //   Linking.addEventListener('url', event => navigate(event.url))
-  //   return () => Linking.removeEventListener('url', event => navigate(event.url));
-  // }, []);
+  useEffect(() => {
+    auth.clearRegisterParam();
+  }, []);
   for(let item = 2020; item >= 1920; item--) {
     ageData.push(item.toString());
   }
@@ -119,9 +108,9 @@ const Register = props => {
     hud.show();
     await auth.register();
     hud.hide();
-    auth.errorIf && alert.showError(auth.err_string, "Register")
+    auth.errorIf && alert.showError(auth.err_string, "Registrazione")
     if (!auth.errorIf) {
-      alert.showSuccess("Grazie per esserti registrato! A breve riceverai un link di conferma per attivare il tuo account.", "Register")
+      alert.showSuccess("Grazie per esserti registrato! A breve riceverai un link di conferma per attivare il tuo account.", "Registrazione", false)
       navigation.navigate('Login');
     }
   };
@@ -137,6 +126,21 @@ const Register = props => {
   };
 
   return (
+    <View style={{flex: 1}}>
+      {isIOS &&
+      <Header>
+        <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => navigation.goBack()}>
+          <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
+                 style={{
+                   position: 'absolute',
+                   left: 0,
+                   width: isIOS ? scale(35) : scale(37),
+                   height: isIOS ? verticalScale(19) : verticalScale(23),
+                   resizeMode: 'contain',
+                   marginTop: verticalScale(14),
+                 }}/>
+        </TouchableOpacity>
+      </Header>}
     <Container>
       <Title>REGISTRAZIONE</Title>
       <View style={{alignItems: 'center'}}>
@@ -150,7 +154,7 @@ const Register = props => {
         {/*<BaseSelect text="ETA" value={displayDate} onPress={() => setShow(true)}/>*/}
         <SelectElement data={sesso} value= "sesso" title="SESSO"/>
       </View>
-      <Divider size="60px" />
+      <Divider size="35px" />
       {/*<BaseSelectBox checked={checked2} onPress={() => {auth.setParam('privacy', checked2 ? 1 : 0); setChecked2(!checked2); }} text="*/}
       {/*Ho preso visione dell’informativa privacy*/}
       {/*" textMarginTop={'2px'}/>*/}
@@ -158,6 +162,7 @@ const Register = props => {
       <CustomSelectBox checked={checked2} onPress={() => {auth.setParam('privacy', checked2 ? 1 : 0); setChecked2(!checked2); }}>
         <SelectText marginTop={'2px'}>Ho preso visione dell’&nbsp;
             <SelectLinkText onPress={() => openWebViewer(`${config.server}/gdpr/privacy-policy`)}>informativa privacy</SelectLinkText>
+          <Text>&nbsp;*</Text>
         </SelectText>
         {/*<TouchableOpacity onPress={() => openWebViewer(`${config.server}/gdpr/pivacy-policy`)}><SelectLinkText>Ho preso visione dell’informativa privacy</SelectLinkText></TouchableOpacity>*/}
       </CustomSelectBox>
@@ -197,6 +202,7 @@ const Register = props => {
         </TextView>
       </View>
     </Container>
+    </View>
   );
 };
 
@@ -204,7 +210,7 @@ const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
     flex: 1;
     padding-horizontal: 5px;
-    padding-top: ${isIOS ? '20px' : '0px'}
+    marginTop: ${isIOS ? (ratio < 1.5 ? verticalScale(50) : (ratio < 1.8 ? verticalScale(75) : verticalScale(65))) : verticalScale(0)}
 `;
 
 const Divider = styled(View)`

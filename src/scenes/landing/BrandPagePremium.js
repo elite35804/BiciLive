@@ -46,6 +46,7 @@ import analytics from '@react-native-firebase/analytics';
 import RNInstallReferrer from 'react-native-install-referrer';
 import {ShareDialog} from 'react-native-fbsdk';
 import config from '../../config/Config';
+import Share from 'react-native-share';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -291,32 +292,33 @@ const PageSlider = (props) => {
 };
 
 const shareFacebook = (url, share_url) => {
-  const temp = url.split('?')[0].split('/');
-  const index = temp[temp.length-1];
-  const shareLinkContent = {
-    contentType: 'link',
-    contentUrl: `${share_url}?data=${url}`,
-    contentDescription: 'Facebook sharing is easy!',
+  const content = `${share_url}?data=${url}`;
+  const options = {
+    title: 'Bicklive',
+    message: 'Bicilive',
+    social: Share.Social.FACEBOOK,
+    url: content,
   };
-  console.log('shareconent=====', shareLinkContent);
-  ShareDialog.canShow(shareLinkContent).then(
-    function (canShow) {
-      if (canShow) {
-        return ShareDialog.show(shareLinkContent);
-      }
-    },
-  ).then(
-    function (result) {
-      if (result.isCancelled) {
-        alert('Share cancelled');
-      } else {
-        alert('Successfully Shared');
-      }
-    },
-    function (error) {
-      alert('Share fail with error: ' + error);
-    },
-  );
+  Share.shareSingle(options).then(res => {
+    console.log('res=====', res);
+  }).catch(e => {
+    console.log('e========', e);
+  });
+};
+
+const shareLinkedin = (url, share_url) => {
+  const content = `${share_url}?data=${url}`;
+  const options = {
+    title: 'Bicklive',
+    message: 'Bicilive',
+    social: Share.Social.LINKEDIN,
+    url: content,
+  }
+  Share.shareSingle(options).then(res => {
+    console.log('res=====', res);
+  }).catch(e => {
+    console.log('e========'.e);
+  });
 };
 
 const LikeBlock = props => {
@@ -399,7 +401,7 @@ const ShareBlock = props => {
                                                                source={isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart}/></TouchableOpacity>
           {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare} style={{marginLeft: 25}}/>*/}
         </ShareIcon>
-        <ShareTooltip onWhatsapp={() => shareWhatsapp(brandData.url, props.data.share_url)} onFB={() => shareFacebook(brandData.url, props.data.share_url)} onEmail={() => shareEmail(brandData.url, props.data.share_url)} onTwitter={() => shareTwitter(brandData.url, props.data.share_url)}/>
+        <ShareTooltip onWhatsapp={() => shareWhatsapp(brandData.url, props.data.share_url)} onFB={() => shareFacebook(brandData.url, props.data.share_url)} onEmail={() => shareEmail(brandData.url, props.data.share_url)} onTwitter={() => shareTwitter(brandData.url, props.data.share_url)} onLinkedin={() => shareLinkedin(brandData.url, props.data.share_url)}/>
       </ShareView>
     </View>
   );
@@ -411,10 +413,8 @@ const shareWhatsapp = (shareurl, share_url) => {
   const downloadUrl = isIOS ? 'https://apps.apple.com/it/app/whatsapp-messenger/id310633997' : 'https://play.google.com/store/apps/details?id=com.whatsapp&hl=it';
   // Linking.openURL(`whatsapp://send?text=${text}`)
   const url = `whatsapp://send?text=${content}`;
-  Linking.canOpenURL(url).then(supported => {
-    console.log('supported======', supported);
-    if (!supported) {
-      console.log('Can\'t handle url: ' + url);
+  if (isIOS) {
+    Linking.openURL(url).catch(e => {
       Alert.alert(
         'Your phone does not have whatsapp',
         'Do you want to install whatsapp?',
@@ -430,61 +430,75 @@ const shareWhatsapp = (shareurl, share_url) => {
         ],
         {cancelable: false},
       );
-    } else {
-      return Linking.openURL(url);
-    }
-  }).catch(err => console.error('An error occurred', err));
+    });
+  } else {
+    Linking.canOpenURL(url).then(supported => {
+      console.log('supported======', supported);
+      if (!supported) {
+        console.log('Can\'t handle url: ' + url);
+        Alert.alert(
+          'Your phone does not have whatsapp',
+          'Do you want to install whatsapp?',
+          [
+            {
+              text: 'Install Whatsapp',
+              onPress: () => Linking.openURL(downloadUrl),
+            },
+            {
+              text: 'Cancel',
+              style: 'cancel',
+            },
+          ],
+          {cancelable: false},
+        );
+      } else {
+        return Linking.openURL(url);
+      }
+    }).catch(err => console.error('An error occurred', err));
+  }
+  // const content = `${share_url}?data=${shareurl}`;
+  // const options = {
+  //   title: 'Bicklive',
+  //   message: 'Bicilive',
+  //   social: Share.Social.WHATSAPP,
+  //   url: content,
+  // }
+  // Share.shareSingle(options).then(res => {
+  //   console.log('res=====', res);
+  // }).catch(e => {
+  //   console.log('e========'.e);
+  // });
+
 };
 
 const shareEmail = (url, share_url) => {
-  const shareURL = `${share_url}?data=${url}`
-  const emailURL = `mailto:support@example.com?subject=Bicilive&body=${shareURL}`;
-  Linking.canOpenURL(emailURL).then(supported => {
-    console.log('supported======', supported);
-    if (!supported) {
-      console.log('Can\'t handle url: ' + emailURL);
-    } else {
-      return Linking.openURL(emailURL);
-    }
-  }).catch(err => console.error('An error occurred', err));
+  const content = `${share_url}?data=${url}`;
+  const options = {
+    title: 'Bicklive',
+    message: 'Bicilive',
+    social: Share.Social.EMAIL,
+    url: content,
+  }
+  Share.shareSingle(options).then(res => {
+    console.log('res=====', res);
+  }).catch(e => {
+    console.log('e========', e);
+  });
 };
 
 const shareTwitter = (url, share_url) => {
-  let TwitterParameters = '';
-  let TwitterShareURL = `${share_url}?data=${url}`;
-  let TweetContent = 'Bicilive';
-  let TwitterViaAccount = 'davide_giovi';
-  if (TwitterParameters.includes('?') === false) {
-    TwitterParameters =
-      TwitterParameters + '?url=' + encodeURI(TwitterShareURL);
-  } else {
-    TwitterParameters =
-      TwitterParameters + '&url=' + encodeURI(TwitterShareURL);
-  }
-  let shareUrl = 'https://twitter.com/intent/tweet' + TwitterParameters;
-  Linking.canOpenURL(shareUrl).then(supported => {
-    console.log('supported======', supported);
-    if (!supported) {
-      console.log('Can\'t handle url: ' + shareUrl);
-      Alert.alert(
-        'Your phone does not have Twitter app',
-        'Do you want to install Twitter app?',
-        [
-          {
-            text: 'Install Twitter',
-            onPress: () => Linking.openURL(downloadUrl),
-          },
-          {
-            text: 'Cancel',
-            style: 'cancel',
-          },
-        ],
-        {cancelable: false},
-      )
-    } else {
-      return Linking.openURL(shareUrl);
-    }
-  }).catch(err => console.error('An error occurred', err));
+  const content = `${share_url}?data=${url}`;
+  const options = {
+    title: 'Bicklive',
+    message: 'Bicilive',
+    social: Share.Social.TWITTER,
+    url: content,
+  };
+  Share.shareSingle(options).then(res => {
+    console.log('res=====', res);
+  }).catch(e => {
+    console.log('e========', e);
+  });
 };
 
 const AdBlock = props => {
@@ -494,7 +508,7 @@ const AdBlock = props => {
     web.url = url;
     navigation.navigate('WebViewer');
   };
-  return <View><Divider size={30}/><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image style={{width: '100%', height: ratio < 1.5 ? 250 : 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>
+  return <View><Divider size={30}/><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image style={{width: Dimensions.get('window').width - scale(20), height: (Dimensions.get('window').width - scale(20))/3, resizeMode: 'contain'}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>
 };
 const BrandPagePremium = props => {
   const navigation = useNavigation();

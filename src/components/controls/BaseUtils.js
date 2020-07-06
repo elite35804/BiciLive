@@ -376,7 +376,7 @@ const LoginModal = props => {
     }}
   >
     <View style={{flex: 1}}>
-      <LoginBackgroud source={{uri: get(props, 'data.image', '')}}>
+      <LoginBackgroud source={Images.background.guest_blur_img}>
         {/*<TouchableOpacity onPress={() => setVisible(false)}><Text>Close</Text></TouchableOpacity>*/}
         <LoginView>
           <LoginText>Stai utilizzando BiciLive APP come ospite, crea e naviga con il tuo account e scopri tutto di
@@ -537,6 +537,7 @@ const SelectText = styled(Text)`
     color: ${props => props.color};
     font-size: 18px;
     margin-left: 10px;
+    margin-top: ${isIOS ? '8px' : '1px'}
 `;
 
 const PriceView = styled(Text)`
@@ -553,8 +554,7 @@ const SymbolView = styled(Text)`
 `;
 
 const Header = styled(View)`
-  background-color: #f2f2f2
-  flex: 1;
+  background-color: #f2f2f2;
   position: absolute;
   width: 100%;
   top:0

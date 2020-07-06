@@ -16,6 +16,7 @@ import Dashboard from './scenes/landing/Dashboard';
 import Brand from './scenes/landing/Brand';
 import EBike from './scenes/landing/EBike';
 import User from './scenes/landing/User';
+import Continue from './scenes/landing/Continue';
 import {useStores} from './hooks/Utils';
 import {moderateScale} from 'react-native-size-matters';
 import Login from './scenes/landing/Login';
@@ -25,7 +26,7 @@ import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import analytics from '@react-native-firebase/analytics';
-import dynamicLinks from '@react-native-firebase/dynamic-links';
+// import dynamicLinks from '@react-native-firebase/dynamic-links';
 
 
 const isIOS = Platform.OS === 'ios';
@@ -87,28 +88,6 @@ const TabBar = (props) => {
           textAlign: 'center',
         }}>EBIKE FINDER</Text>
       </TouchableOpacity>
-      {/*<TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => Actions['BikePage']()}>*/}
-      {/*<View style={{height: 40, justifyContent: 'flex-end'}}>*/}
-      {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare}/>*/}
-      {/*</View>*/}
-      {/*<Text style={{*/}
-      {/*fontSize: 10,*/}
-      {/*color: '#c9TextInputc3c5',*/}
-      {/*fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular',*/}
-      {/*marginTop: 10,*/}
-      {/*}}>CONFRONTO</Text>*/}
-      {/*</TouchableOpacity>*!/*/}
-      {/*<TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => Actions['NewsFinder']()}>*/}
-      {/*<View style={{height: 40, justifyContent: 'flex-end'}}>*!/*/}
-      {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_news}/>*/}
-      {/*</View>*/}
-      {/*<Text style={{*/}
-      {/*fontSize: 10,*/}
-      {/*color: '#c9c3c5',*/}
-      {/*fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular',*/}
-      {/*marginTop: 10,*/}
-      {/*}}>NEWS</Text>*/}
-      {/*</TouchableOpacity>*/}
       <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => onDashboard()}>
         {/*<View style={{backgroundColor: 'red', width: 10, height: 10, borderRadius: 5, position: 'absolute', top: 0, right: 10}}/>*/}
         <View style={{height: 35, justifyContent: 'flex-end'}}>
@@ -162,10 +141,6 @@ const Root = props => {
 
     // Save the initial route name
     routeNameRef.current = getActiveRouteName(state);
-
-    // Linking.addEventListener('url', navigate)
-    //
-    // return () => Linking.removeEventListener('url', navigate)
   }, []);
   return (
     <NavigationContainer
@@ -190,6 +165,8 @@ const Root = props => {
         <Stack.Screen name="Login" component={Login}/>
         <Stack.Screen name="Register" component={Register}/>
         <Stack.Screen name="Survey" component={Welcome}/>
+        <Stack.Screen name="PasswordEmail" component={PasswordEmail}/>
+        <Stack.Screen name="Continue" component={Continue}/>
         <Stack.Screen name="Home">
           {() =>
             <Tab.Navigator tabBar={props => <TabBar {...props}/>}>
@@ -271,13 +248,6 @@ const Root = props => {
           {() =>
             <Tab.Navigator tabBar={props => <TabBar {...props}/>}>
               <Tab.Screen name="Account" component={User}/>
-            </Tab.Navigator>
-          }
-        </Stack.Screen>
-        <Stack.Screen name="PasswordEmail">
-          {() =>
-            <Tab.Navigator tabBar={props => <TabBar {...props}/>}>
-              <Tab.Screen name="PasswordEmail" component={PasswordEmail}/>
             </Tab.Navigator>
           }
         </Stack.Screen>

@@ -4,13 +4,20 @@ import config from '../config/Config';
 
 class BikeSearchStore {
   requestData = {};
-  data = {};
+  data = [];
+  extraData = [];
+  listData = [];
   errorIf = false;
   referer = '/api/v1/get_statics';
   @observable isLoading = false;
   @action
   setRequest = (key, data) => {
     this.requestData[key] = data;
+    console.log('=======', this.requestData);
+  };
+  @action
+  removeRequest = key => {
+    delete this.requestData[key]
     console.log('=======', this.requestData);
   };
   @action
@@ -39,6 +46,19 @@ class BikeSearchStore {
         .then(response => {
           if (response.data.err_code === 'ERR_OK') {
             this.data = response.data.content;
+            const temp1 = [], temp2 = [];
+            let id = 0;
+            this.data.map(item => {
+              if (item.id === "BIKE_RESUME_BIG" || item.id === "BIKE_RESUME_SMALL") {
+                id++;
+                item.keyId = id;
+                temp1.push(item);
+              } else {
+                temp2.push(item);
+              }
+            });
+            this.listData = temp1;
+            this.extraData = temp2;
             this.errorIf = false;
           } else {
             this.errorIf = true;

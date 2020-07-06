@@ -1200,10 +1200,10 @@
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
 
-"@react-native-firebase/dynamic-links@^7.2.0":
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/dynamic-links/-/dynamic-links-7.2.0.tgz#07b10dee4dfc20b0e550f15614a15f5a114f4f19"
-  integrity sha512-5Qoja1Anai2mSRYEL6neVD5GK9staufQCfKUBBYisNmiiT6vdkPLdVgo+O2OnPpLLLjby3KQKzSKq8ePQNRWAw==
+"@react-native-firebase/database@^7.2.4":
+  version "7.2.4"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/database/-/database-7.2.4.tgz#9e79c124ca3c98570c133101933bd178c08ee3bc"
+  integrity sha512-ILhiqAwZR++u/8U+Bm4lo9l6F9CG5iXrNYdkAf2xqaJUudqmBzvQCmj3TIcTJqDKrWSU6bGBtCqX3pxHoPRpyg==
 
 "@react-navigation/bottom-tabs@^5.5.2":
   version "5.5.2"

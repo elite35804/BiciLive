@@ -15,6 +15,7 @@ import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import {Divider, ErrorView} from '../../components/controls/BaseUtils';
 import Image from 'react-native-image-progress';
 import { useNavigation } from '@react-navigation/native';
+import config from '../../config/Config';
 import RNInstallReferrer from 'react-native-install-referrer';
 
 
@@ -67,7 +68,7 @@ const PageElement = props => {
   return (
     <View>
       <LogoView onPress={() => goToBike(get(props, 'data.url', ''))}>
-        <DefaultImage source={{uri: 'http://biciapp.sepisolutions.com' + get(props, 'data.immagine', '')}}
+        <DefaultImage source={{uri: config.server + get(props, 'data.immagine', '')}}
               style={{width: Dimensions.get('window').width * 0.95, height: isIOS ? (ratio < 1.5 ? 500 : 260) : 230, resizeMode: 'contain'}}/>
       </LogoView>
       <Content>
@@ -175,7 +176,7 @@ const AdBlock = props => {
     web.url = url;
     navigation.navigate('WebViewer')
   };
-  return <View><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image style={{width: '100%', height: ratio < 1.5 ? 250 : 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>
+  return <View><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image style={{width: Dimensions.get('window').width - scale(20), height: (Dimensions.get('window').width - scale(20))/3, resizeMode: 'contain'}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>
 };
 
 const HomeElements = (props) => {

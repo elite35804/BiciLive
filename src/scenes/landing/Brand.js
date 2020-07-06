@@ -8,7 +8,7 @@ import {
   FlatList,
   Image as DefaultImage,
   Linking,
-  Platform,
+  Platform, Dimensions,
 } from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
@@ -17,15 +17,18 @@ import {useStores} from 'hooks/Utils';
 import {BaseTextInput, BaseSelect, BaseTextFilter} from 'components/controls/BaseTextInput';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
 import Images from 'res/Images';
-import {moderateScale} from 'react-native-size-matters';
-import {ErrorView} from '../../components/controls/BaseUtils';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {ErrorView, Header} from '../../components/controls/BaseUtils';
 import {observer} from 'mobx-react';
 import {toJS} from 'mobx';
 import axios from 'axios';
 import config from '../../config/Config';
+import { useNavigation} from '@react-navigation/native';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
+const {height, width} = Dimensions.get('window');
+const ratio = height/width;
 
 const isIOS = Platform.OS === 'ios';
 
@@ -58,20 +61,7 @@ const LikeBlock = props => {
 const Brand = props => {
 
   const {auth, hud, bikeData, brandData} = useStores();
-
-  const navigate = url => {
-    console.log('deeplinkurl==========', url);
-    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
-    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
-    if (type === 'Product') {
-      bikeData.clearData();
-      bikeData.getData(data);
-    } else {
-      brandData.clearData();
-      brandData.getData(data);
-    }
-    navigation.navigate(type, {url: type});
-  };
+  const navigation = useNavigation();
   // useEffect(() => {
   //   Linking.addEventListener('url', event => navigate(event.url))
   //   return () => Linking.removeEventListener('url', event => navigate(event.url));
@@ -115,6 +105,20 @@ const Brand = props => {
       const titleData1 = uiData.shift();
       const titleData2 = uiData.shift();
       return (
+        <View style={{flex: 1}}>
+          {isIOS && <Header>
+            <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => {console.log('clicked');navigation.goBack()}}>
+              <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
+                     style={{
+                       position: 'absolute',
+                       left: 0,
+                       width: isIOS ? scale(35) : scale(37),
+                       height: isIOS ? verticalScale(19) : verticalScale(23),
+                       resizeMode: 'contain',
+                       marginTop: verticalScale(14),
+                     }}/>
+            </TouchableOpacity>
+          </Header>}
         <Container>
           <Title size={'40px'} color={titleData1.colore} width={'35px'}>{titleData1.titolo.toUpperCase()}</Title>
           <Divider size={20}/>
@@ -140,6 +144,7 @@ const Brand = props => {
 
 
         </Container>
+        </View>
       );
     }
   }
@@ -147,7 +152,8 @@ const Brand = props => {
 
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
-    padding-top: ${isIOS ? '20px' : '0px'}
+    padding-horizontal: 5px;
+    marginTop: ${isIOS ? (ratio < 1.5 ? verticalScale(50) : (ratio < 1.8 ? verticalScale(75) : verticalScale(65))) : verticalScale(0)}
 `;
 
 const ItemView = styled(TouchableOpacity)`

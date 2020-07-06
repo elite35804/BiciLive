@@ -4,7 +4,7 @@ import analytics from '@react-native-firebase/analytics';
 import config from '../config/Config';
 
 class AuthStore{
-  token : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImlzcyI6ImJpY2lsaXZlLml0In0.eyJ1aWQiOiIxIiwiZW1haWwiOiJhQGIuYyJ9.4SJz8le-RIzeuvDdZXUNpBqtE4MENz6vrA93wEhfqHhuALEsbxYF82bjQa1wq_h17EXw0axaVPHKGuCOo2donA';
+  token : '';
   errorIf = false;
   url = '/api/v1/auth';
   registerUrl = '/api/v1/register';
@@ -84,6 +84,22 @@ class AuthStore{
     this.loginData[key] = value;
     // console.log('loginData=====', key, value, this.loginData);
   };
+
+  @action
+  clearRegisterParam = () => {
+    this.registerData = {
+      email:'',
+      password: '',
+      nome: '',
+      cognome : '',
+      provincia: '',
+      eta: '',
+      sesso: '',
+      privacy: 0,
+      dem: 0,
+      terzi : 0
+    };
+  }
 
   @action
   register = () => {

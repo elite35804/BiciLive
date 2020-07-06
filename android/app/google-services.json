@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "808976326604-tkoa21fu70j5lkbr6vjfmmjaq9nbs1gl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bicilive",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
           "client_id": "808976326604-jcrncliu28jglmhebog2tu1au1h387lg.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -30,6 +38,14 @@
             {
               "client_id": "808976326604-jcrncliu28jglmhebog2tu1au1h387lg.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "808976326604-62ut9ho77m6dm5lbp9irk5v9s9rs94h4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.BiciLive",
+                "app_store_id": "123456789"
+              }
             }
           ]
         }

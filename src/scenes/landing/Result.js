@@ -7,7 +7,7 @@ import {
   ScrollView,
   Dimensions,
   Platform,
-  Image as DefaultImage, Linking,
+  Image as DefaultImage, Linking, FlatList,
 } from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
@@ -48,7 +48,7 @@ const AdBlock = props => {
     navigation.navigate('WebViewer');
   };
   return <View><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image
-    style={{width: '100%', height: ratio < 1.5 ? 250 : 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>;
+    style={{width: Dimensions.get('window').width - scale(20), height: (Dimensions.get('window').width - scale(20))/3, resizeMode: 'contain'}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>;
 };
 
 const LikeBlock = props => {
@@ -95,24 +95,7 @@ const LikeBlock = props => {
 }
 const Result = props => {
   const navigation = useNavigation();
-  const {bikeSearch, hud, bikeData, brandData} = useStores();
-  const navigate = url => {
-    console.log('deeplinkurl==========', url);
-    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
-    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
-    if (type === 'Product') {
-      bikeData.clearData();
-      bikeData.getData(data);
-    } else {
-      brandData.clearData();
-      brandData.getData(data);
-    }
-    navigation.navigate(type, {url: type});
-  };
-  // useEffect(() => {
-  //   Linking.addEventListener('url', event => navigate(event.url))
-  //   return () => Linking.removeEventListener('url', event => navigate(event.url));
-  // }, []);
+  const {bikeSearch, hud, category} = useStores();
   if (bikeSearch.isLoading) {
     hud.show()
   } else {
@@ -121,11 +104,16 @@ const Result = props => {
     } else {
       hud.hide()
       const uiData = toJS(bikeSearch.data);
-      console.log('uridata=======', bikeSearch.isLoading, bikeSearch.errorIf, uiData);
+      // console.log('listData=========', toJS(bikeSearch.listData));
+      const extraData = toJS(bikeSearch.extraData);
+      const listData = toJS(bikeSearch.listData);
+      console.log('data=================', extraData.length, listData.length)
+
+
       return (
         <View style={{flex: 1}}>
           <Header>
-            <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => navigation.goBack()}>
+            <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => navigation.navigate('BikeFinderCategory')}>
               <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
                      style={{
                        position: 'absolute',
@@ -142,15 +130,38 @@ const Result = props => {
                 fontSize: ratio < 1.5 ? 30 : 19,
                 lineHeight: ratio < 1.5 ? 90 : 49,
                 color: '#FB0203',
+                marginTop: isIOS ? 5: 0
               }}>{get(uiData[0], 'count', 0)}</Text>
             </TouchableOpacity>
           </Header>
           <Container>
-            {get(uiData[0], 'count', 0) === 0 || uiData.map((item, index) => {
+            {extraData.map((item, index) => {
               if (item.id === 'TITLE') {
                 return <View><Title size={18} width={'35px'}
                                     color={themeProp('colorBorder')}>{item.titolo}</Title></View>;
               }
+
+              if (item.id === 'AD_BANNER_ENGAGE') {
+                return <View>
+                  <Divider size={20}/>
+                  <AdBlock data={item}/>
+                </View>;
+              }
+              if (item.id === "TITLED_TEXT") {
+                return <View>
+                  <Divider size={5}/>
+                  <Text style={{fontSize: 20, color: item.title_color}}>{item.title}</Text>
+                  <Divider size={10}/>
+                  <Text style={{fontSize: 18, color: item.text_color}}>{item.text}</Text>
+                  <Divider size={35}/>
+                </View>
+              }
+            })}
+            {<FlatList data={listData}
+                       keyExtractor={item => item.keyId}
+                       initialNumToRender = {10}
+                       renderItem={({item, index}) => {
+              // console.log('item============', item.id, index);
               if (item.id === 'BIKE_RESUME_BIG') {
                 return <View>
                   <SwipeListView
@@ -159,19 +170,18 @@ const Result = props => {
                     renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
                       <LikeBlock data={item}/>
                       {/*<TouchableOpacity style={{*/}
-                        {/*backgroundColor: '#53DCD0',*/}
-                        {/*alignItems: 'center',*/}
-                        {/*width: 70,*/}
-                        {/*height: '50%',*/}
-                        {/*justifyContent: 'center',*/}
+                      {/*backgroundColor: '#53DCD0',*/}
+                      {/*alignItems: 'center',*/}
+                      {/*width: 70,*/}
+                      {/*height: '50%',*/}
+                      {/*justifyContent: 'center',*/}
                       {/*}}>*/}
-                        {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white}/>*/}
+                      {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white}/>*/}
                       {/*</TouchableOpacity>*/}
                     </View>)}
                     leftOpenValue={0}
                     rightOpenValue={-80}
                   />
-
                   <DivideLine/>
                 </View>;
               }
@@ -189,28 +199,8 @@ const Result = props => {
                   <DivideLine/>
                 </View>;
               }
-              if (item.id === 'AD_BANNER_ENGAGE') {
-                return <View>
-                  <Divider size={20}/>
-                  <AdBlock data={item}/>
-                </View>;
-              }
-              if (item.id === "TITLED_TEXT") {
-                return <View>
-                  <Divider size={5}/>
-                  <Text style={{fontSize: 20, color: item.title_color}}>{item.title}</Text>
-                  <Divider size={10}/>
-                  <Text style={{fontSize: 18, color: item.text_color}}>{item.text}</Text>
-                  <Divider size={35}/>
-                </View>
-              }
-            })}
-            {get(uiData[0], 'count', 0) === 0 &&
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><DefaultImage
-              style={{width: moderateScale(200), height: moderateScale(200), resizeMode: 'contain', marginTop: 14}}
-              source={Images.icons.ic_oops}/>
-              <Text style={{marginTop: 10, fontSize: 17}}>Nessun risultato con i parametri che hai selezionato</Text>
-            </View>}
+            }}/>}
+
           </Container>
         </View>
       );

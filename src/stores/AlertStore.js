@@ -15,6 +15,7 @@ class AlertStore {
     @observable message = '';
     @observable type = '';
     @observable visible = false;
+    autoClose = true;
 
     @action.bound
     show(type, message, title){
@@ -26,6 +27,7 @@ class AlertStore {
 
     @action.bound
     hide(){
+        console.log('hide alert')
         this.visible = false;
     }
 
@@ -41,7 +43,8 @@ class AlertStore {
         this.show(Types.warn, message, title);
     }
 
-    showSuccess(message, title){
+    showSuccess(message, title, autoClose = true){
+        this.autoClose = autoClose
         this.show(Types.success, message, title);
     }
 }

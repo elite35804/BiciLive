@@ -14,7 +14,7 @@ const ShareTooltip = (props) => (
     overlayColor={'rgba(0,0,0,0'}
     popover={
       <View style={{flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', width: '100%'}}>
-        <TouchableOpacity><Image width={'100%'} height={'100%'} source={Images.icons.ic_linkedin} /></TouchableOpacity>
+        {/*<TouchableOpacity onPress={() => props.onLinkedin()}><Image width={'100%'} height={'100%'} source={Images.icons.ic_linkedin} /></TouchableOpacity>*/}
         <TouchableOpacity onPress={() => props.onEmail()}><Image width={'100%'} height={'100%'} source={Images.icons.ic_alpha} /></TouchableOpacity>
         <TouchableOpacity onPress={() => props.onTwitter()}><Image width={'100%'} height={'100%'} source={Images.icons.ic_twitter} /></TouchableOpacity>
         <TouchableOpacity onPress={() => props.onWhatsapp()}><Image width={'100%'} height={'100%'} source={Images.icons.ic_whatsapp} /></TouchableOpacity>

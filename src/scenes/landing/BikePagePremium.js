@@ -11,7 +11,6 @@ import {
   Modal,
   Alert, Dimensions,
 } from 'react-native';
-import {Actions} from 'react-native-router-flux';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {useStores} from 'hooks/Utils';
@@ -50,6 +49,7 @@ import axios from 'axios';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import RNInstallReferrer from 'react-native-install-referrer';
 import config from '../../config/Config';
+import Share from "react-native-share";
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -60,30 +60,20 @@ const ratio = height/width;
 const isIOS = Platform.OS === 'ios';
 
 const shareFacebook = (url, share_url) => {
-  const shareLinkContent = {
-    contentType: 'link',
-    contentUrl: `${share_url}?data=${url}`,
-    contentDescription: 'Facebook sharing is easy!',
+  console.log('share url========', url, share_url);
+  const content = `${share_url}?data=${url}`;
+  console.log('facebook shar url=====', content);
+  const options = {
+    title: 'Bicklive',
+    message: 'Bicilive',
+    social: Share.Social.FACEBOOK,
+    url: content,
   };
-  console.log('shringcontent======', shareLinkContent);
-  ShareDialog.canShow(shareLinkContent).then(
-    function (canShow) {
-      if (canShow) {
-        return ShareDialog.show(shareLinkContent);
-      }
-    },
-  ).then(
-    function (result) {
-      if (result.isCancelled) {
-        alert('Share cancelled');
-      } else {
-        alert('Successfully Shared');
-      }
-    },
-    function (error) {
-      alert('Share fail with error: ' + error);
-    },
-  );
+  Share.shareSingle(options).then(res => {
+    console.log('res=====', res);
+  }).catch(e => {
+    console.log('e========', e);
+  });
 };
 const shareWhatsapp = (shareurl, share_url) => {
   const content = `${share_url}?data=${shareurl}`;
@@ -91,10 +81,8 @@ const shareWhatsapp = (shareurl, share_url) => {
   const downloadUrl = isIOS ? 'https://apps.apple.com/it/app/whatsapp-messenger/id310633997' : 'https://play.google.com/store/apps/details?id=com.whatsapp&hl=it';
   // Linking.openURL(`whatsapp://send?text=${text}`)
   const url = `whatsapp://send?text=${content}`;
-  Linking.canOpenURL(url).then(supported => {
-    console.log('supported======', supported);
-    if (!supported) {
-      console.log('Can\'t handle url: ' + url);
+  if (isIOS) {
+    Linking.openURL(url).catch(e => {
       Alert.alert(
         'Your phone does not have whatsapp',
         'Do you want to install whatsapp?',
@@ -110,64 +98,85 @@ const shareWhatsapp = (shareurl, share_url) => {
         ],
         {cancelable: false},
       );
-    } else {
-      return Linking.openURL(url);
-    }
-  }).catch(err => console.error('An error occurred', err));
+    });
+  } else {
+    Linking.canOpenURL(url).then(supported => {
+      console.log('supported======', supported);
+      if (!supported) {
+        console.log('Can\'t handle url: ' + url);
+        Alert.alert(
+          'Your phone does not have whatsapp',
+          'Do you want to install whatsapp?',
+          [
+            {
+              text: 'Install Whatsapp',
+              onPress: () => Linking.openURL(downloadUrl),
+            },
+            {
+              text: 'Cancel',
+              style: 'cancel',
+            },
+          ],
+          {cancelable: false},
+        );
+      } else {
+        return Linking.openURL(url);
+      }
+    }).catch(err => console.error('An error occurred', err));
+  }
+  // const content = `${share_url}?data=${shareurl}`;
+  // const options = {
+  //   title: 'Bicklive',
+  //   message: 'Bicilive',
+  //   social: Share.Social.WHATSAPP,
+  //   url: content,
+  // }
+  // Share.shareSingle(options).then(res => {
+  //   console.log('res=====', res);
+  // }).catch(e => {
+  //   console.log('e========'.e);
+  // });
+
 };
 
 const shareEmail = (url, share_url) => {
-  const shareURL = `${share_url}?data=${url}`
-  const emailURL = `mailto:support@example.com?subject=Bicilive&body=${shareURL}`;
-  Linking.canOpenURL(emailURL).then(supported => {
-    console.log('supported======', supported);
-    if (!supported) {
-      console.log('Can\'t handle url: ' + emailURL);
-    } else {
-      return Linking.openURL(emailURL);
-    }
-  }).catch(err => console.error('An error occurred', err));
+  // const shareURL = `${share_url}?data=${url}`
+  // const emailURL = `mailto:support@example.com?subject=Bicilive&body=${shareURL}`;
+  // Linking.canOpenURL(emailURL).then(supported => {
+  //   console.log('supported======', supported);
+  //   if (!supported) {
+  //     console.log('Can\'t handle url: ' + emailURL);
+  //   } else {
+  //     return Linking.openURL(emailURL);
+  //   }
+  // }).catch(err => console.error('An error occurred', err));
+  const content = `${share_url}?data=${url}`;
+  const options = {
+    title: 'Bicklive',
+    message: 'Bicilive',
+    social: Share.Social.EMAIL,
+    url: content,
+  }
+  Share.shareSingle(options).then(res => {
+    console.log('res=====', res);
+  }).catch(e => {
+    console.log('e========', e);
+  });
 };
 
 const shareTwitter = (url, share_url) => {
-  // const deepLink = `bicilive://Product??data==${url}`;
-  // const downloadUrl = 'https://play.google.com/store/apps/details?id=com.twitter.android&hl=en';
-  // const shareUrl = `twitter://post?message=${deepLink}`;
-  let TwitterParameters = '';
-  let TwitterShareURL = `${share_url}?data=${url}`;
-  let TweetContent = 'Bicilive';
-  let TwitterViaAccount = 'davide_giovi';
-  if (TwitterParameters.includes('?') === false) {
-    TwitterParameters =
-      TwitterParameters + '?url=' + encodeURI(TwitterShareURL);
-  } else {
-    TwitterParameters =
-      TwitterParameters + '&url=' + encodeURI(TwitterShareURL);
-  }
-  let shareUrl = 'https://twitter.com/intent/tweet' + TwitterParameters;
-  Linking.canOpenURL(shareUrl).then(supported => {
-    console.log('supported======', supported);
-    if (!supported) {
-      console.log('Can\'t handle url: ' + shareUrl);
-      Alert.alert(
-        'Your phone does not have Twitter app',
-        'Do you want to install Twitter app?',
-        [
-          {
-            text: 'Install Twitter',
-            onPress: () => Linking.openURL(downloadUrl),
-          },
-          {
-            text: 'Cancel',
-            style: 'cancel',
-          },
-        ],
-        {cancelable: false},
-        )
-    } else {
-      return Linking.openURL(shareUrl);
-    }
-  }).catch(err => console.error('An error occurred', err));
+  const content = `${share_url}?data=${url}`;
+  const options = {
+    title: 'Bicklive',
+    message: 'Bicilive',
+    social: Share.Social.TWITTER,
+    url: content,
+  };
+  Share.shareSingle(options).then(res => {
+    console.log('res=====', res);
+  }).catch(e => {
+    console.log('e========', e);
+  });
 };
 const BrandLogo = props => {
   const navigation = useNavigation();
@@ -242,13 +251,29 @@ const ShareBlock = observer(props => {
     }
   };
 
+  const shareLinkedin = (url, share_url) => {
+    const content = `${share_url}?data=${url}`;
+    const options = {
+      title: 'Bicklive',
+      message: 'Bicilive',
+      social: Share.Social.LINKEDIN,
+      url: content,
+    }
+    Share.shareSingle(options).then(res => {
+      console.log('res=====', res);
+    }).catch(e => {
+      console.log('e========', e);
+    });
+  };
+
   useEffect(() => {
+    console.log('starred=======', props.data.starred);
     bikeData.setIsLike(props.data.starred)
   }, []);
 
   return <View><ShareView>
     <TouchableOpacity onPress={() => fetchData()}><Image style={{width: ratio < 1.5 ? 70 : 40, height: ratio < 1.5 ? 70 : 40, resizeMode: 'contain'}} source={bikeData.isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart} /></TouchableOpacity>
-    <ShareTooltip onWhatsapp={() => shareWhatsapp(bikeData.url, props.data.share_url)} onFB={() => shareFacebook(bikeData.url, props.data.share_url)} onEmail={() => shareEmail(bikeData.url, props.data.share_url)} onTwitter={() => shareTwitter(bikeData.url, props.data.share_url)}/>
+    <ShareTooltip onWhatsapp={() => shareWhatsapp(bikeData.url, props.data.share_url)} onFB={() => shareFacebook(bikeData.url, props.data.share_url)} onEmail={() => shareEmail(bikeData.url, props.data.share_url)} onTwitter={() => shareTwitter(bikeData.url, props.data.share_url)} onLinkedin={() => shareLinkedin(bikeData.url, props.data.share_url)}/>
   </ShareView>
     <Divider size={15}/>
   </View>
@@ -480,7 +505,7 @@ const AdBlock = props => {
     navigation.navigate('WebViewer');
   };
   return <View><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image
-    style={{width: '100%', height: ratio < 1.5 ? 250 : 130}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>;
+    style={{width: Dimensions.get('window').width - scale(20), height: (Dimensions.get('window').width - scale(20))/3, resizeMode: 'contain'}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>;
 };
 
 const TitleContainer = props => {
@@ -554,7 +579,7 @@ const RenderElements = props => {
           <View style={{
             backgroundColor: '#F2F2F2',
             alignItems: 'center',
-            flex: 0,
+            height : 200,
             paddingBottom: 10,
             paddingTop: 15,
             paddingHorizontal: 5,
@@ -627,7 +652,7 @@ const RenderElements = props => {
           <View style={{
             backgroundColor: '#F2F2F2',
             alignItems: 'center',
-            flex: 0,
+            height : 200,
             paddingBottom: 10,
             paddingTop: 15,
             paddingHorizontal: 5,
@@ -679,9 +704,9 @@ const RenderElements = props => {
     if (item.id === 'AD_BANNER_ENGAGE') {
       items.push(<View><Divider size={23}/><AdBlock data={item}/></View>);
     }
-    // if (item.id === 'SIGN_IN_PLACEHOLDER' && !auth.loginState) {
-    //   items.push(<LoginModal data={item} referer={bikeData.url}/>);
-    // }
+    if (item.id === 'SIGN_IN_PLACEHOLDER') {
+      items.push(<LoginModal data={item} referer={bikeData.url}/>);
+    }
     items.push(<Divider key={`divider${index}`} size={20}/>);
   });
   return items;
@@ -754,7 +779,7 @@ const BikePagePremium = props => {
 
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
-    margin-bottom: 10px;
+    padding-bottom: 10px;
     paddingHorizontal: ${scale(8)} 
     marginTop: ${isIOS ? (ratio < 1.5 ? verticalScale(50) : (ratio < 1.8 ? verticalScale(75) : verticalScale(65))) : verticalScale(50)}
     paddingTop: ${verticalScale(10)}

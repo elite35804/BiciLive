@@ -4,12 +4,10 @@ import {
   View,
   TouchableOpacity,
   Text,
-  ScrollView,
   Platform,
   Dimensions,
-  BackHandler,
   Linking,
-  AppState
+  AsyncStorage
 } from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
@@ -26,8 +24,8 @@ import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 import {ThemeProps} from 'react-native-elements';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
-import RNInstallReferrer from 'react-native-install-referrer';
-import axios from 'axios';
+// import firestore from '@react-native-firebase/firestore';
+import database from '@react-native-firebase/database';
 
 const isIOS = Platform.OS === "ios";
 
@@ -57,7 +55,7 @@ const Splash = props => {
     }
     navigation.navigate(type, {url: type});
   };
-  useEffect(() => {
+  useEffect(async () => {
     staticData.getData();
     homeData.getData();
     GoogleSignin.configure({
@@ -76,9 +74,19 @@ const Splash = props => {
           navigate(url)
         }
       })
-    console.log('ratio=====', ratio);
-    Linking.addEventListener('url', event => navigate(event.url))
+    try {
+      const userData = await AsyncStorage.getItem('biciliveUser');
+      if (userData !== null) {
+        auth.loginState = true;
+        auth.token = userData;
+        setLoginState(true);
+      }
+      console.log('useData=======', userData);
+    }catch (e) {
+      console.log('get token error====', e);
+    }
 
+    Linking.addEventListener('url', event => navigate(event.url))
     return () => Linking.removeEventListener('url', event => navigate(event.url));
   }, []);
 
@@ -170,7 +178,7 @@ const Splash = props => {
         <BlueButton width={'85%'} height={ratio < 1.5 ? '80px' : '55px'} fontSize={ratio < 1.5 ? '40px' : '30px'} onPress={() => navigation.navigate('Login')}>LOGIN</BlueButton>
         <Divider size="12px"/>
         <WhiteButton width={'85%'} height={ratio < 1.5 ? '80px' : '55px'} fontSize={ratio < 1.5 ? '40px' : '30px'} backgroudColor={'#333333'} textColor={'#5fdcd2'} borderColor={'#5fdcd2'} onPress={() => navigation.navigate('Register')}>REGISTRATI</WhiteButton>
-        <Bottom onPress={() => navigation.navigate('Home')}>
+        <Bottom onPress={() => navigation.navigate('Continue')}>
           <BottomText>CONTINUA COME OSPITE</BottomText>
         </Bottom>
       </BtnView>}
@@ -222,6 +230,7 @@ const Splash = props => {
 };
 
 const Container = styled(View)`
+    backgroundColor: #333333;
     flex: 1;
     height: 100%
 `;
@@ -240,7 +249,7 @@ const BtnView = styled(View)`
    width: 100%
    alignItems: center
    position: absolute
-   bottom: ${isIOS ? (ratio < 1.8 ? verticalScale(20) : moderateScale(70)) : 0}
+   bottom: ${isIOS ? (ratio < 1.8 ? verticalScale(20) : moderateScale(70)) : verticalScale(0)}
 `;
 
 const SocialBtnView = styled(View)`

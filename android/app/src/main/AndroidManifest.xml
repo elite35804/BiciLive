@@ -15,7 +15,9 @@
         android:label="@string/app_name"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
         android:windowSoftInputMode="adjustResize"
-        android:launchMode="singleTask">
+        android:launchMode="singleTask"
+        android:screenOrientation="portrait"
+          >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
@@ -25,7 +27,7 @@
               <action android:name="android.intent.action.VIEW" />
               <category android:name="android.intent.category.DEFAULT" />
               <category android:name="android.intent.category.BROWSABLE" />
-              <data android:scheme="https" android:host="biciapp.sepisolutions.com" android:pathPrefix="/share"/>
+              <data android:scheme="https" android:host="www.bicilive.app" android:pathPrefix="/share"/>
           </intent-filter>
 
           <intent-filter >

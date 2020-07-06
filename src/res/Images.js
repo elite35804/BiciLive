@@ -75,7 +75,8 @@ const Images = {
         address: require('./images/mountainbike.biciliv.png'),
         haibike_lg: require('./images/lg_haibike_large.png'),
         haibike_md: require('./images/lg_haibike_md.png'),
-        bg_img: require('./images/bg_image.jpg')
+        bg_img: require('./images/bg_image.jpg'),
+        guest_blur_img: require('./images/guest_blur.jpg')
     },
     btn: {
         bike_finder: require('./images/btn_ebike_finder.png'),

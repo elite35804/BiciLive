@@ -47,7 +47,10 @@ const Alert = props => {
             titleStyle={titleStyle}
             messagesStyle={messaageStyle}
             successColor='#333333'
-            onClose={ alert.hide }/>
+            onClose={ alert.hide }
+            closeInterval={alert.autoClose ? 4000 : 0}
+            activeStatusBarStyle={'dark-content'}
+        />
     )
 };
 

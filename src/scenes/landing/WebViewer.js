@@ -30,29 +30,29 @@ const WebViewer = (props) => {
   return (
     <View style={{flex: 1}}>
       <WebView
-        onLoadStart={() => hud.show()}
-        onLoad={() => hud.hide()}
+        onLoadStart={() => setSpinnerVisible(true)}
+        onLoad={() => setSpinnerVisible(false)}
         source={{
           uri: web.url,
         }}
         style={{marginTop: isIOS ? 30 : 0, flex: 1}}
       />
-      {/*{spinnerVisible &&*/}
-      {/*<ActivityIndicator*/}
-        {/*style={{*/}
-          {/*flex: 1,*/}
-          {/*left: 0,*/}
-          {/*right: 0,*/}
-          {/*top: 0,*/}
-          {/*bottom: 0,*/}
-          {/*position: 'absolute',*/}
-          {/*alignItems: 'center',*/}
-          {/*justifyContent: 'center',*/}
-          {/*alignSelf: 'center'*/}
-        {/*}}*/}
-        {/*size="large"*/}
-      {/*/>*/}
-      {/*}*/}
+      {spinnerVisible &&
+      <ActivityIndicator
+        style={{
+          flex: 1,
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          position: 'absolute',
+          alignItems: 'center',
+          justifyContent: 'center',
+          alignSelf: 'center'
+        }}
+        size="large"
+      />
+      }
     </View>
   );
 };

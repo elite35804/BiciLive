@@ -8,7 +8,7 @@ import {
   FlatList,
   Image as DefaultImage,
   Linking,
-  Platform,
+  Platform, Dimensions,
 } from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
@@ -22,31 +22,22 @@ import {
 } from 'components/controls/BaseUtils';
 import {UniSansBold, UniSansBook, UniSansSemiBold} from '../../utils/fontFamily';
 import {observer} from 'mobx-react';
-import {moderateScale} from 'react-native-size-matters';
-import {ErrorView} from '../../components/controls/BaseUtils';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {ErrorView, Header} from '../../components/controls/BaseUtils';
 import {toJS} from 'mobx';
+import { useNavigation} from '@react-navigation/native';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
+const {height, width} = Dimensions.get('window');
+const ratio = height/width;
 
 const isIOS = Platform.OS === 'ios';
 
 
 const Dashboard = props => {
-  const {account, hud, bikeData, brandData} = useStores();
-  const navigate = url => {
-    console.log('deeplinkurl==========', url);
-    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
-    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
-    if (type === 'Product') {
-      bikeData.clearData();
-      bikeData.getData(data);
-    } else {
-      brandData.clearData();
-      brandData.getData(data);
-    }
-    navigation.navigate(type, {url: type});
-  };
+  const {account, hud} = useStores();
+  const navigation = useNavigation();
   // useEffect(() => {
   //   Linking.addEventListener('url', event => navigate(event.url))
   //   return () => Linking.removeEventListener('url', event => navigate(event.url));
@@ -62,6 +53,21 @@ const Dashboard = props => {
       const titleData1 = uiData.shift();
       const titleData2 = uiData.shift();
       return (
+        <View style={{flex: 1}}>
+          {isIOS && <Header>
+            <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => navigation.goBack()}>
+              <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
+                     style={{
+                       position: 'absolute',
+                       left: 0,
+                       width: isIOS ? scale(35) : scale(37),
+                       height: isIOS ? verticalScale(19) : verticalScale(23),
+                       resizeMode: 'contain',
+                       marginTop: verticalScale(14),
+                     }}/>
+              <Text style={{textAlign: 'center', fontSize: ratio < 1.5 ? 30 : 19, lineHeight: ratio < 1.5 ? 90 : (ratio > 2 ? 59 : 49)}}></Text>
+            </TouchableOpacity>
+          </Header>}
         <Container>
           <Title size={'40px'} color={titleData1.colore} width={'35px'}>{titleData1.titolo.toUpperCase()}</Title>
           <Divider size={20}/>
@@ -69,12 +75,6 @@ const Dashboard = props => {
             <Image style={{width: moderateScale(25), height: moderateScale(25), resizeMode: 'contain', marginTop: isIOS ? -4: 10}} source={Images.icons.ic_user_sm}/>
             <Title size={'10px'} color={titleData2.colore} width={'35px'}>{titleData2.titolo.toUpperCase()}</Title>
           </ItemView>
-          {/*<Title size={'40px'} color={themeProp('colorPrimary')} width={'35px'}>DASHBOARD</Title>*/}
-          {/*<Divider size={20}/>*/}
-          {/*<ItemView>*/}
-            {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_user_sm}/>*/}
-            {/*<Title size={'10px'} color={themeProp('colorDescription')} width={'35px'}>ACCOUNT</Title>*/}
-          {/*</ItemView>*/}
           <View style={{paddingHorizontal: 10, marginBottom: 30}}>
             {uiData.map(item => {
               if (item.id === 'TITLED_TEXT')
@@ -84,48 +84,10 @@ const Dashboard = props => {
                   style={{color: item.text_color, fontSize: 20, fontFamily: UniSansBook}}>{item.text}</Text>
               </View>
             })}
-            {/*<View style={{marginTop: 30}}>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansSemiBold}}>EMAIL</Text>*/}
-              {/*<Text*/}
-                {/*style={{color: '#333333', fontSize: 20, fontFamily: UniSansBook}}>riccardo.severgnini@gmail.com</Text>*/}
-            {/*</View>*/}
-            {/*<View style={{marginTop: 30}}>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansSemiBold}}>PASSWORD</Text>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansBook}}>••••••••••••••</Text>*/}
-            {/*</View>*/}
-            {/*<View style={{marginTop: 30}}>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansSemiBold}}>NOME</Text>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansBook}}>Riccardo</Text>*/}
-            {/*</View>*/}
-            {/*<View style={{marginTop: 30}}>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansSemiBold}}>COGNOME</Text>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansBook}}>Severgnini</Text>*/}
-            {/*</View>*/}
-            {/*<View style={{marginTop: 30}}>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansSemiBold}}>CITTÀ</Text>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansBook}}>Milano</Text>*/}
-            {/*</View>*/}
-            {/*<View style={{marginTop: 30}}>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansSemiBold}}>ETÀ</Text>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansBook}}>26</Text>*/}
-            {/*</View>*/}
-            {/*<View style={{marginTop: 30}}>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansSemiBold}}>SESSO</Text>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansBook}}>Uomo</Text>*/}
-            {/*</View>*/}
-            {/*<View style={{marginTop: 30}}>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansSemiBold}}>CATEGORIE PREFERITE</Text>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansBook}}>e-MTB</Text>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansBook}}>e-MTB</Text>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansBook}}>e-MTB</Text>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansBook}}>e-MTB</Text>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansBook}}>e-MTB</Text>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansBook}}>e-MTB</Text>*/}
-              {/*<Text style={{color: '#333333', fontSize: 20, fontFamily: UniSansBook}}>e-MTB</Text>*/}
-            {/*</View>*/}
           </View>
 
         </Container>
+        </View>
       );
     }
   }
@@ -133,7 +95,8 @@ const Dashboard = props => {
 
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
-    padding-top: ${isIOS ? '20px' : '0px'}
+    padding-horizontal: 5px;
+    marginTop: ${isIOS ? (ratio < 1.5 ? verticalScale(50) : (ratio < 1.8 ? verticalScale(75) : verticalScale(65))) : verticalScale(0)}
 `;
 
 const ItemView = styled(TouchableOpacity)`

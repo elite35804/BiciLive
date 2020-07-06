@@ -18,88 +18,21 @@ import {useStores} from 'hooks/Utils';
 import {BaseTextInput, BaseSelect, BaseTextFilter} from 'components/controls/BaseTextInput';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
 import Images from 'res/Images';
-import {DivideLine, Divider, ErrorView, ListBikeInfo} from '../../components/controls/BaseUtils';
-import {moderateScale} from 'react-native-size-matters';
+import {DivideLine, Divider, ErrorView, Header, ListBikeInfo} from '../../components/controls/BaseUtils';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {observer} from 'mobx-react';
 import {toJS} from 'mobx';
 import axios from 'axios';
 import config from '../../config/Config';
+import { useNavigation} from '@react-navigation/native';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
+const {height, width} = Dimensions.get('window');
+const ratio = height/width;
 
-
-const swipeoutBtns = [
-  {
-    component: (
-      <View>
-        <TouchableOpacity
-          style={{backgroundColor: 'red', alignItems: 'center', height: '50%', justifyContent: 'center'}}>
-          <Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_white}/>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{backgroundColor: '#53DCD0', alignItems: 'center', height: '50%', justifyContent: 'center'}}>
-          <Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white}/>
-        </TouchableOpacity>
-      </View>
-    ),
-  },
-];
-
-const data = ['', '', '', '', '', '', '', '', '', '', '', ''];
 const isIOS = Platform.OS === 'ios';
 const oswald_bold = isIOS ? 'Oswald-Bold' : 'oswald_bold';
-// const ListBikeInfo = (props) => (
-//   <MainInfo>
-//     <View style={{flexDirection: 'row'}}>
-//       <Image width={'40%'} height={'50%'} resizeMode="contain" source={Images.background.bike_logo1}
-//              style={{width: '40%', height: 100}}/>
-//       <View width={'60%'}>
-//         <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: -8}}>
-//           <View style={{marginTop: 8}}>
-//             <TypeView width={'33px'}><Type size={'10px'}>eMTB</Type></TypeView>
-//           </View>
-//           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-//             <Image width={40} height={40} source={Images.icons.ic_calendar} style={{marginRight: 5}}/>
-//             <Sort size={'23px'}>2020</Sort>
-//           </View>
-//         </View>
-//         <View style={{marginTop: -8}}>
-//           <Sort size={'14px'}>HAIBIKE</Sort>
-//         </View>
-//         <NameView>
-//           <Name size={'20px'}>XDURO NDURO 3.5</Name>
-//           <Image width={10} height={10} source={Images.icons.arrow_right} style={{width: 5, height: 9}}/>
-//         </NameView>
-//         <View style={{marginTop: -5}}/>
-//         <Sort size={'23px'}>5.499€</Sort>
-//       </View>
-//     </View>
-//     <View style={{paddingLeft: 5}}>
-//       <Text style={{color: '#D75A2B', fontFamily: oswald_bold, fontSize: 11}}>MOTORE</Text>
-//       <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
-//         <Text style={{color: '#909090', fontFamily: oswald_bold, fontSize: 13}}>Bosh, Performance CX</Text>
-//         <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
-//           <View style={{flexDirection: 'row', marginRight: 20}}>
-//             <View style={{marginTop: 7, marginRight: 3}}>
-//               <Image width={'100%'} height={'100%'} source={Images.icons.ic_graph}/>
-//             </View>
-//             <Sort size={'23px'}>75</Sort>
-//             <Text style={{color: '#909090', fontFamily: oswald_bold, fontSize: 15, marginTop: 10}}>Nm</Text>
-//           </View>
-//           <View style={{flexDirection: 'row'}}>
-//             <View style={{marginTop: 7, marginRight: 3}}>
-//               <Image width={'100%'} height={'100%'} source={Images.icons.ic_battery}/>
-//             </View>
-//             <Sort size={'23px'}>625</Sort>
-//             <Text style={{color: '#909090', fontFamily: oswald_bold, fontSize: 15, marginTop: 10}}>Wh</Text>
-//           </View>
-//         </View>
-//       </View>
-//     </View>
-//   </MainInfo>
-// );
-
 const LikeBlock = props => {
   const {auth} = useStores();
   const [isLike, setIsLike] = useState(true);
@@ -142,19 +75,7 @@ const LikeBlock = props => {
 
 const Brand = props => {
   const {likeProduct, hud, bikeData, brandData} = useStores();
-  const navigate = url => {
-    console.log('deeplinkurl==========', url);
-    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
-    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
-    if (type === 'Product') {
-      bikeData.clearData();
-      bikeData.getData(data);
-    } else {
-      brandData.clearData();
-      brandData.getData(data);
-    }
-    navigation.navigate(type, {url: type});
-  };
+  const navigation = useNavigation();
   // useEffect(() => {
   //   Linking.addEventListener('url', event => navigate(event.url))
   //   return () => Linking.removeEventListener('url', event => navigate(event.url));
@@ -171,6 +92,21 @@ const Brand = props => {
       const titleData1 = uiData.shift();
       const titleData2 = uiData.shift();
       return (
+        <View style={{flex: 1}}>
+          {isIOS && <Header>
+            <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => navigation.goBack()}>
+              <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
+                     style={{
+                       position: 'absolute',
+                       left: 0,
+                       width: isIOS ? scale(35) : scale(37),
+                       height: isIOS ? verticalScale(19) : verticalScale(23),
+                       resizeMode: 'contain',
+                       marginTop: verticalScale(14),
+                     }}/>
+              <Text style={{textAlign: 'center', fontSize: ratio < 1.5 ? 30 : 19, lineHeight: ratio < 1.5 ? 90 : (ratio > 2 ? 59 : 49)}}></Text>
+            </TouchableOpacity>
+          </Header>}
         <Container>
           <Title size={'40px'} color={titleData1.colore} width={'35px'}>{titleData1.titolo.toUpperCase()}</Title>
           <Divider size={20}/>
@@ -195,42 +131,8 @@ const Brand = props => {
                 <DivideLine/>
               </View>;
           })}
-
-          {/*<SwipeListView*/}
-            {/*data={data}*/}
-            {/*renderItem={(data, rowMap) => (*/}
-              {/*<View style={{backgroundColor: 'white'}}>*/}
-                {/*<ListBikeInfo from="ebike"/>*/}
-                {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_line}*/}
-                       {/*style={{width: '120%', marginVertical: 20}}/>*/}
-              {/*</View>*/}
-            {/*)}*/}
-            {/*renderHiddenItem={(data, rowMap) => (*/}
-              {/*<View style={{alignItems: 'flex-end', marginBottom: 45}}>*/}
-                {/*<TouchableOpacity style={{*/}
-                  {/*backgroundColor: 'red',*/}
-                  {/*alignItems: 'center',*/}
-                  {/*width: 70,*/}
-                  {/*height: '50%',*/}
-                  {/*justifyContent: 'center',*/}
-                {/*}}>*/}
-                  {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_heart_white}/>*/}
-                {/*</TouchableOpacity>*/}
-                {/*<TouchableOpacity style={{*/}
-                  {/*backgroundColor: '#53DCD0',*/}
-                  {/*alignItems: 'center',*/}
-                  {/*width: 70,*/}
-                  {/*height: '50%',*/}
-                  {/*justifyContent: 'center',*/}
-                {/*}}>*/}
-                  {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white}/>*/}
-                {/*</TouchableOpacity>*/}
-              {/*</View>*/}
-            {/*)}*/}
-            {/*leftOpenValue={0}*/}
-            {/*rightOpenValue={-80}*/}
-          {/*/>*/}
         </Container>
+        </View>
       );
     }
   }
@@ -238,7 +140,8 @@ const Brand = props => {
 
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
-    padding-top: ${isIOS ? '20px' : '0px'}
+    padding-horizontal: 5px;
+    marginTop: ${isIOS ? (ratio < 1.5 ? verticalScale(50) : (ratio < 1.8 ? verticalScale(75) : verticalScale(65))) : verticalScale(0)}
 `;
 
 const ItemView = styled(TouchableOpacity)`
