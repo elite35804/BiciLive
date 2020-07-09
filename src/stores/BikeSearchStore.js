@@ -57,6 +57,11 @@ class BikeSearchStore {
                 temp2.push(item);
               }
             });
+            temp1.sort((a,b) => {
+              if (a.prezzo === "€ n.d.") return 1;
+              if (b.prezzo === "€ n.d.") return -1;
+              return (a.prezzo > b.prezzo) ? -1 : 1
+            })
             this.listData = temp1;
             this.extraData = temp2;
             this.errorIf = false;

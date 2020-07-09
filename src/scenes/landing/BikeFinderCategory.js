@@ -90,8 +90,8 @@ const processSelectData = (predata) => {
     if (key === 'title') {
       title = value;
     }
-    if (key.includes('text')) {
-      texts.push(value);
+    if (key.toString().includes('text')) {
+      texts.push(value.toString());
     }
     if (key.includes('value') && !key.includes('values')) {
       values.push(value);

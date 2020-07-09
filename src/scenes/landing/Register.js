@@ -13,7 +13,7 @@ import {
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {useStores} from 'hooks/Utils';
-import {BaseTextInput, BaseSelect, CustomSelect } from 'components/controls/BaseTextInput';
+import {BaseTextInput, PasswordInput, BaseSelect, CustomSelect } from 'components/controls/BaseTextInput';
 import BaseSelectBox, {CustomSelectBox} from 'components/controls/BaseSelectBox';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
 import {cities, sesso} from '../../res/data';
@@ -145,11 +145,11 @@ const Register = props => {
       <Title>REGISTRAZIONE</Title>
       <View style={{alignItems: 'center'}}>
         <BaseTextInput required={true} placeholder="EMAIL" onChange = {(value) => auth.setParam('email', value)}/>
-        <BaseTextInput required={true} isPassword={true} placeholder="PASSWORD" onChange = {(value) => auth.setParam('password', value)}/>
+        <PasswordInput required={true} placeholder="PASSWORD" onChange = {(value) => auth.setParam('password', value)}/>
         <BaseTextInput required={true} placeholder="NOME" onChange = {(value) => auth.setParam('nome', value)}/>
         <BaseTextInput required={true} placeholder="COGNOME" onChange = {(value) => auth.setParam('cognome', value)}/>
         {/*<BaseTextInput placeholder="CITTÀ" onChange = {(value) => auth.setParam('citta', value)}/>*/}
-        <SelectElement title="PROVINCIA" value="provincia" data={cities}/>
+        <SelectElement title="PROVINCIA DI RESIDENZA " value="provincia" data={cities}/>
         <SelectElement title="ANNO DI NASCITA" value="eta" data={ageData}/>
         {/*<BaseSelect text="ETA" value={displayDate} onPress={() => setShow(true)}/>*/}
         <SelectElement data={sesso} value= "sesso" title="SESSO"/>

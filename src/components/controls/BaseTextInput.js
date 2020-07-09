@@ -5,6 +5,7 @@ import styled from 'styled-components/native';
 import { themeProp }  from '../../utils/CssUtil';
 import {get} from 'lodash';
 import Colors from 'res/Colors'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -16,11 +17,28 @@ const BaseTextInput= (props) => (
   <View style={{flex: 1, flexDirection: 'row'}}>
     <LineView {...props}/>
   <InputView>
-    <Input secureTextEntry={get(props, 'isPassword', false)} placeholder={props.placeholder} placeholderTextColor={'#c9c3c5'} onEndEditing={f => props.onChange(f.nativeEvent.text)}/>
+    <Input placeholder={props.placeholder} placeholderTextColor={'#c9c3c5'} onEndEditing={f => props.onChange(f.nativeEvent.text)}/>
     <Image width={20} height={20} source={Images.icons.keyboard} />
   </InputView>
   </View>
 );
+
+const PasswordInput = props => {
+  const [isShown, setIsShown] = useState(false);
+  return (
+  <View style={{flex: 1, flexDirection: 'row'}}>
+    <LineView {...props}/>
+    <InputView>
+      <Input secureTextEntry={!isShown} placeholder={props.placeholder}
+             placeholderTextColor={'#c9c3c5'} onEndEditing={f => props.onChange(f.nativeEvent.text)}/>
+      <TouchableOpacity onPress={() => setIsShown(isShown => !isShown)}>
+        {isShown || <Icon name="eye" size={20} color="#000"/>}
+        {isShown && <Icon name="eye-slash" size={20} color="#000"/>}
+      </TouchableOpacity>
+    </InputView>
+  </View>
+  )
+};
 
 const BaseTextFilter= (props) => (
   <FilterView>
@@ -149,4 +167,4 @@ const SelectList = styled(ScrollView)`
 const SelectItem = styled(TouchableOpacity)`
     
 `;
-export {BaseTextInput, BaseSelect, BaseTextFilter, CustomSelect};
+export {BaseTextInput, PasswordInput, BaseSelect, BaseTextFilter, CustomSelect};

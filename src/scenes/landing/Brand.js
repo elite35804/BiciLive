@@ -101,7 +101,6 @@ const Brand = props => {
     } else {
       hud.hide()
       const uiData = toJS(likeBrand.data);
-      console.log('jererererer', uiData);
       const titleData1 = uiData.shift();
       const titleData2 = uiData.shift();
       return (

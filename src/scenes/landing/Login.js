@@ -3,7 +3,7 @@ import {View, TouchableOpacity, Text, ScrollView, Platform, Linking, Dimensions,
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {useStores} from 'hooks/Utils';
-import {BaseTextInput, BaseSelect, CustomSelect} from 'components/controls/BaseTextInput';
+import {BaseTextInput, PasswordInput, BaseSelect, CustomSelect} from 'components/controls/BaseTextInput';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
 import { useNavigation } from '@react-navigation/native';
 import {scale, verticalScale} from 'react-native-size-matters';
@@ -21,23 +21,7 @@ const ratio = height/width;
 const Login = props => {
   const navigation = useNavigation();
   const {auth, alert, hud, question, bikeData, brandData} = useStores();
-  const navigate = url => {
-    console.log('deeplinkurl==========', url);
-    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
-    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
-    if (type === 'Product') {
-      bikeData.clearData();
-      bikeData.getData(data);
-    } else {
-      brandData.clearData();
-      brandData.getData(data);
-    }
-    navigation.navigate(type, {url: type});
-  };
-  // useEffect(() => {
-  //   Linking.addEventListener('url', event => navigate(event.url))
-  //   return () => Linking.removeEventListener('url', event => navigate(event.url));
-  // }, []);
+
   const onLogin = async () => {
     for (let [key, value] of Object.entries(auth.loginData)) {
       if (key === 'user' && !validationEmail(value)) {
@@ -91,7 +75,7 @@ const Login = props => {
       <Title>LOGIN</Title>
       <View style={{alignItems: 'center', marginBottom: -5}}>
         <BaseTextInput required={true} placeholder="EMAIL" onChange={(value) => auth.setLoginParam('user', value)}/>
-        <BaseTextInput required={true} isPassword={true} placeholder="PASSWORD"
+        <PasswordInput required={true} placeholder="PASSWORD"
                        onChange={(value) => auth.setLoginParam('pass', value)}/>
       </View>
       <LinkText onPress={() => navigation.navigate('PasswordEmail')}>Password dimenticata?</LinkText>
