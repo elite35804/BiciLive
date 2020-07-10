@@ -1,243 +1,60 @@
-import React, { Component } from "react";
-import { View, PanResponder, Image } from "react-native";
-import PropTypes from "prop-types";
+import React, {useEffect, useState} from 'react';
+import {Dimensions, TouchableOpacity, Image, Alert, Text, View} from 'react-native';
+import Modal from 'react-native-modal';
+import styled from 'styled-components/native/dist/styled-components.native.esm';
+import ImageZoom from 'react-native-image-pan-zoom';
+import {get} from 'lodash';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import config from '../../config/Config';
 
-function calcDistance(x1, y1, x2, y2) {
-  const dx = Math.abs(x1 - x2);
-  const dy = Math.abs(y1 - y2);
-  return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-}
-
-function calcCenter(x1, y1, x2, y2) {
-  function middle(p1, p2) {
-    return p1 > p2 ? p1 - (p1 - p2) / 2 : p2 - (p2 - p1) / 2;
-  }
-
-  return {
-    x: middle(x1, x2),
-    y: middle(y1, y2)
-  };
-}
-
-function maxOffset(offset, windowDimension, imageDimension) {
-  const max = windowDimension - imageDimension;
-  if (max >= 0) {
-    return 0;
-  }
-  return offset < max ? max : offset;
-}
-
-function calcOffsetByZoom(width, height, imageWidth, imageHeight, zoom) {
-  const xDiff = imageWidth * zoom - width;
-  const yDiff = imageHeight * zoom - height;
-  return {
-    left: -xDiff / 2,
-    top: -yDiff / 2
-  };
-}
-
-class ZoomableImage extends Component {
-  constructor(props) {
-    super(props);
-
-    this._onLayout = this._onLayout.bind(this);
-
-    this.state = {
-      zoom: null,
-      minZoom: null,
-      layoutKnown: false,
-      isZooming: false,
-      isMoving: false,
-      initialDistance: null,
-      initialX: null,
-      initalY: null,
-      offsetTop: 0,
-      offsetLeft: 0,
-      initialTop: 0,
-      initialLeft: 0,
-      initialTopWithoutZoom: 0,
-      initialLeftWithoutZoom: 0,
-      initialZoom: 1,
-      top: 0,
-      left: 0
-    };
-  }
-
-  processPinch(x1, y1, x2, y2) {
-    const distance = calcDistance(x1, y1, x2, y2);
-    const center = calcCenter(x1, y1, x2, y2);
-
-    if (!this.state.isZooming) {
-      const offsetByZoom = calcOffsetByZoom(
-        this.state.width,
-        this.state.height,
-        this.props.imageWidth,
-        this.props.imageHeight,
-        this.state.zoom
-      );
-      this.setState({
-        isZooming: true,
-        initialDistance: distance,
-        initialX: center.x,
-        initialY: center.y,
-        initialTop: this.state.top,
-        initialLeft: this.state.left,
-        initialZoom: this.state.zoom,
-        initialTopWithoutZoom: this.state.top - offsetByZoom.top,
-        initialLeftWithoutZoom: this.state.left - offsetByZoom.left
-      });
-    } else {
-      const touchZoom = distance / this.state.initialDistance;
-      const zoom =
-        touchZoom * this.state.initialZoom > this.state.minZoom
-          ? touchZoom * this.state.initialZoom
-          : this.state.minZoom;
-
-      const offsetByZoom = calcOffsetByZoom(
-        this.state.width,
-        this.state.height,
-        this.props.imageWidth,
-        this.props.imageHeight,
-        zoom
-      );
-      const left =
-        this.state.initialLeftWithoutZoom * touchZoom + offsetByZoom.left;
-      const top =
-        this.state.initialTopWithoutZoom * touchZoom + offsetByZoom.top;
-
-      this.setState({
-        zoom,
-        left:
-          left > 0
-            ? 0
-            : maxOffset(left, this.state.width, this.props.imageWidth * zoom),
-        top:
-          top > 0
-            ? 0
-            : maxOffset(top, this.state.height, this.props.imageHeight * zoom)
-      });
-    }
-  }
-
-  processTouch(x, y) {
-    if (!this.state.isMoving) {
-      this.setState({
-        isMoving: true,
-        initialX: x,
-        initialY: y,
-        initialTop: this.state.top,
-        initialLeft: this.state.left
-      });
-    } else {
-      const left = this.state.initialLeft + x - this.state.initialX;
-      const top = this.state.initialTop + y - this.state.initialY;
-
-      this.setState({
-        left:
-          left > 0
-            ? 0
-            : maxOffset(
-            left,
-            this.state.width,
-            this.props.imageWidth * this.state.zoom
-            ),
-        top:
-          top > 0
-            ? 0
-            : maxOffset(
-            top,
-            this.state.height,
-            this.props.imageHeight * this.state.zoom
-            )
-      });
-    }
-  }
-
-  _onLayout(event) {
-    const layout = event.nativeEvent.layout;
-
-    if (
-      layout.width === this.state.width &&
-      layout.height === this.state.height
-    ) {
-      return;
-    }
-
-    const zoom = layout.width / this.props.imageWidth;
-
-    const offsetTop =
-      layout.height > this.props.imageHeight * zoom
-        ? (layout.height - this.props.imageHeight * zoom) / 2
-        : 0;
-
-    this.setState({
-      layoutKnown: true,
-      width: layout.width,
-      height: layout.height,
-      zoom,
-      offsetTop,
-      minZoom: zoom
-    });
-  }
-
-  componentWillMount() {
-    this._panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onStartShouldSetPanResponderCapture: () => true,
-      onMoveShouldSetPanResponder: () => true,
-      onMoveShouldSetPanResponderCapture: () => true,
-      onPanResponderGrant: () => {},
-      onPanResponderMove: evt => {
-        const touches = evt.nativeEvent.touches;
-        if (touches.length === 2) {
-          this.processPinch(
-            touches[0].pageX,
-            touches[0].pageY,
-            touches[1].pageX,
-            touches[1].pageY
-          );
-        } else if (touches.length === 1 && !this.state.isZooming) {
-          this.processTouch(touches[0].pageX, touches[0].pageY);
-        }
-      },
-
-      onPanResponderTerminationRequest: () => true,
-      onPanResponderRelease: () => {
-        this.setState({
-          isZooming: false,
-          isMoving: false
-        });
-      },
-      onPanResponderTerminate: () => {},
-      onShouldBlockNativeResponder: () => true
-    });
-  }
-
-  render() {
+const ZoomableImage = props => {
+  const {width, height} = Dimensions.get('window');
+  const {scale} = props
+  if (scale !== 0) {
     return (
-      <View
-        style={this.props.style}
-        {...this._panResponder.panHandlers}
-        onLayout={this._onLayout}
-      >
-        <Image
-          style={{
-            position: "absolute",
-            top: this.state.offsetTop + this.state.top,
-            left: this.state.offsetLeft + this.state.left,
-            width: this.props.imageWidth * this.state.zoom,
-            height: this.props.imageHeight * this.state.zoom,
-          }}
-          source={this.props.source}
-        />
-      </View>
-    );
-  }
-}
+      <>
+        <ImageZoom
+          cropWidth={width}
+          cropHeight={height}
+          imageWidth={width}
+          imageHeight={height}
+          centerOn={{x: 0, y: 0, scale: parseFloat(scale), duration: 1}}
+        >
+          <ZoomImage source={{uri: config.server + get(props, 'imageUrl', '')}} width={width} height={height}/>
+        </ImageZoom>
+        <TouchableOpacity onPress={() => props.onClose()}
+                          style={{
+                            width: 44,
+                            height: 44,
+                            borderRadius:22,
+                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            position: 'absolute',
+                            right: 20,
+                            top: 40
+                          }}>
+          {/*<Icon name="close" size={20} color="#FFF"/>*/}
+          <Text style={{color:'white'}}>X</Text>
+        </TouchableOpacity>
 
-ZoomableImage.propTypes = {
-  imageWidth: PropTypes.number.isRequired,
-  imageHeight: PropTypes.number.isRequired,
-  source: PropTypes.object.isRequired
+      </>
+    );
+  } else {
+    return <View/>
+  }
+
+
 };
+
+const Container = styled(View)`
+  flex: 1;
+`;
+
+const ZoomImage = styled(Image)`
+  width: ${props => props.width};
+  height: ${props => props.height};
+  resize-mode: contain;
+`;
+
 export default ZoomableImage;

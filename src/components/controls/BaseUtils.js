@@ -26,6 +26,7 @@ import {BlueButton, WhiteButton} from 'components/controls/Button';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import CustomTooltip from './CustomTooltip';
 import config from '../../config/Config';
+import ZoomableImage from './ZoomableImage';
 // import ImageZoom from 'react-native-image-pan-zoom';
 // import ZoomableImage from 'components/controls/ZoomableImage';
 // import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
@@ -243,6 +244,7 @@ const AdvResumeBig = (props) => {
   const navigation = useNavigation();
   const {bikeData, auth} = useStores();
   const [isVisible, setIsVisible] = React.useState(false);
+  const [scale, setScale] = useState(1);
   const _image = useRef(null);
   const goToBike = url => {
     bikeData.clearData();
@@ -252,15 +254,21 @@ const AdvResumeBig = (props) => {
   const images = [{
     uri: config.server + get(props, 'data.immagine_zoom', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg'),
   }];
+  useEffect(() => {
+    Image.getSize(config.server + get(props, 'data.immagine_zoom', ''), (w, h) => {
+      setScale((height * w / (width * h)).toFixed(1))
+    });
+  }, []);
   return (
     <View>
-      <ImageView
-        images={images}
-        imageIndex={0}
-        visible={isVisible}
-        onRequestClose={() => setIsVisible(false)}
-        style={{height: 800}}
-      />
+      {/*<ImageView*/}
+        {/*images={images}*/}
+        {/*imageIndex={0}*/}
+        {/*visible={isVisible}*/}
+        {/*onRequestClose={() => setIsVisible(false)}*/}
+        {/*style={{height: 800}}*/}
+      {/*/>*/}
+
       {/*{isVisible &&*/}
       {/*<ImageZoom cropWidth={1000}*/}
       {/*cropHeight={Dimensions.get('window').height}*/}
@@ -270,32 +278,16 @@ const AdvResumeBig = (props) => {
       {/*source={{uri: 'http://biciapp.sepisolutions.com' + get(props, 'data.immagine_zoom', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg')}}/>*/}
       {/*</ImageZoom>*/}
       {/*}*/}
-      {/*<Modal*/}
-      {/*animationType="slide"*/}
-      {/*visible={isVisible}*/}
-      {/*presentationStyle="fullScreen"*/}
-      {/*onRequestClose={() => {*/}
-      {/*Alert.alert("Modal has been closed.");*/}
-      {/*}}*/}
-      {/*>*/}
-      {/*<View style={{flex: 1}}>*/}
-      {/*<TouchableOpacity onPress={() => setIsVisible(false)}><Text>Close</Text></TouchableOpacity>*/}
-        {/*/!*<TouchableOpacity onPress={() => _image.current.zoom({zoomScale:2.5, animated:true})}><Text>ZOOM</Text></TouchableOpacity>*!/*/}
-        {/*<ReactNativeZoomableView*/}
-          {/*maxZoom={15}*/}
-          {/*minZoom={0.5}*/}
-          {/*zoomStep={0.1}*/}
-          {/*initialZoom={1}*/}
-          {/*bindToBorders={true}*/}
-          {/*onZoomAfter={() => {}}*/}
-          {/*pinchToZoomInSensitivity={1}*/}
-          {/*pinchToZoomOutSensitivity={1}*/}
-        {/*>*/}
-          {/*<Text>This is the content</Text>*/}
-          {/*/!*<Image style={{width: 150, height: 150, resizeMode: 'contain'}} source={{uri: `http://biciapp.sepisolutions.com${get(props, 'data.immagine', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg')}`}}/>*!/*/}
-        {/*</ReactNativeZoomableView>*/}
-      {/*</View>*/}
-      {/*</Modal>*/}
+      <Modal
+      animationType="slide"
+      visible={isVisible}
+      presentationStyle="fullScreen"
+      onRequestClose={() => {
+      Alert.alert("Modal has been closed.");
+      }}
+      >
+        <ZoomableImage onClose={() => setIsVisible(false)} scale={scale} imageUrl={get(props, 'data.immagine_zoom', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg')}/>
+      </Modal>
 
       <MainInfo>
         <TouchableOpacity onPress={() => !props.productIf ? goToBike(props.data.url) : {}}
