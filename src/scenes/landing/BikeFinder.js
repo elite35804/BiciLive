@@ -81,8 +81,8 @@ const BikeFinder = props => {
           </View>)
         })}
       </Container>
-      <Bottom onPress={() => navigation.navigate('Home')}>
-        <Image width={50} height={50} source={Images.icons.ic_close} />
+      <Bottom>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}><Image width={50} height={50} source={Images.icons.ic_close} /></TouchableOpacity>
       </Bottom>
     </View>
   );
@@ -94,7 +94,7 @@ const Container = styled(ScrollView)`
     paddingTop: ${isIOS ? (ratio < 1.5 ? verticalScale(40) : (ratio < 1.8 ? verticalScale(65) : verticalScale(55))) : verticalScale(10)}
 `;
 
-const Bottom = styled(TouchableOpacity)`
+const Bottom = styled(View)`
   background-color:${themeProp('colorSecondary')};
   justify-content: flex-end;
   align-items: flex-end;

@@ -387,7 +387,9 @@ const RelatedElements = (item, index) => {
             fontSize: 15,
             fontFamily: isIOS ? 'Oswald-Bold' : 'oswald_bold',
             marginTop: -5,
-          }}>{item0.modello}</Text>
+          }}
+                numberOfLines={2}
+          >{item0.modello}</Text>
         </View>,
       )}
     </View>

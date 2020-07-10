@@ -158,7 +158,7 @@ const Expandible_Wrapper = props => {
         <Image width={'100%'} height={'100%'} source={isCollapse ? Images.icons.arrow_up : Images.icons.arrow_down_sm} style={{marginRight: 10}}/>
         <Title size={'0'} color={'#'+get(props, 'data.color', 'D75A2B')} width={'35px'}>{get(props, 'data.title', 'eCity')}</Title>
       </View>
-      <Badge><BadgeCount>{get(props, 'data.count', '34')}</BadgeCount></Badge>
+      <Badge><BadgeCount size={get(props, 'data.count', '34') > 99 ? '13px' : '15px'}>{get(props, 'data.count', '34')}</BadgeCount></Badge>
     </TouchableOpacity>
     {isCollapse &&<View style={{marginTop: 25, marginBottom: 10}}>
       {props.data.content.map((item, index) => {
@@ -523,11 +523,6 @@ const BrandPagePremium = props => {
     }
 
   });
-  //
-  // useEffect(() => {
-  //   if (!isIOS) RNInstallReferrer.getReferrer().then(referrer=>console.log('brand page referer', referrer));
-  // }, [])
-
 
   const goToBike = url => {
     bikeData.clearData();
@@ -617,9 +612,9 @@ const Badge = styled(View)`
 
 const BadgeCount = styled(Text)`
   color: ${themeProp('colorSecondary')};
-  font-size: 15px;
+  font-size: ${props => props.size}
   font-family: ${themeProp('fontUniHeavy')}
-  margin-top: ${isIOS ? 5 : 0}
+  margin-top: ${isIOS ? '5px' : 0}
 `;
 
 const Desc = styled(Text)`
