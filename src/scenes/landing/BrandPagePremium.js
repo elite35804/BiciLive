@@ -9,6 +9,7 @@ import {
   Linking,
   Image as DefaultImage,
   Alert, Dimensions,
+  FlatList
 } from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
@@ -150,6 +151,7 @@ const RelatedGroup = props => {
 
 };
 const Expandible_Wrapper = props => {
+
   const [isCollapse, setCollapse] = useState(false);
   const {brandData} = useStores();
   return <View>
@@ -161,38 +163,43 @@ const Expandible_Wrapper = props => {
       <Badge><BadgeCount size={get(props, 'data.count', '34') > 99 ? '13px' : '15px'}>{get(props, 'data.count', '34')}</BadgeCount></Badge>
     </TouchableOpacity>
     {isCollapse &&<View style={{marginTop: 25, marginBottom: 10}}>
-      {props.data.content.map((item, index) => {
-        if (item.id === "BIKE_RESUME_SMALL")
-          return <View>
-            <SwipeListView
-              data={[""]}
-              renderItem={(data, rowMap) => (<View><ListBikeInfo key={index} data={item} referer={brandData.url}/></View>)}
-              renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
-                <LikeBlock data={item}/>
-              </View>)}
-              leftOpenValue={0}
-              rightOpenValue={-80}
-            />
-            <DivideLine/></View>
-        if (item.id === "BIKE_RESUME_BIG")
-          return <View>
-            <SwipeListView
-              data={[""]}
-              renderItem={(data, rowMap) => (<View><MainBikeInfo data={item} referer={brandData.url}/></View>)}
-              renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
-                <LikeBlock data={item}/>
-                {/*<TouchableOpacity style={{backgroundColor: '#53DCD0', alignItems: 'center', width: 70,height: '30%', justifyContent: 'center'}}>*/}
+      {<FlatList
+        data={props.data.content}
+        keyExtractor={(item,index) => index}
+        initialNumToRender = {10}
+        renderItem={({item, index}) => {
+          if (item.id === "BIKE_RESUME_SMALL")
+            return <View>
+              <SwipeListView
+                data={[""]}
+                renderItem={(data, rowMap) => (<View><ListBikeInfo key={index} data={item} referer={brandData.url}/></View>)}
+                renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
+                  <LikeBlock data={item}/>
+                </View>)}
+                leftOpenValue={0}
+                rightOpenValue={-80}
+              />
+              <DivideLine/></View>
+          if (item.id === "BIKE_RESUME_BIG")
+            return <View>
+              <SwipeListView
+                data={[""]}
+                renderItem={(data, rowMap) => (<View><MainBikeInfo data={item} referer={brandData.url}/></View>)}
+                renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
+                  <LikeBlock data={item}/>
+                  {/*<TouchableOpacity style={{backgroundColor: '#53DCD0', alignItems: 'center', width: 70,height: '30%', justifyContent: 'center'}}>*/}
                   {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare_white} />*/}
-                {/*</TouchableOpacity>*/}
-              </View>)}
-              leftOpenValue={0}
-              rightOpenValue={-80}
-            />
-            <DivideLine/></View>
-        if (item.id === 'RELATED_GROUP') {
-          return <View><RelatedGroup key={`key${index}`} data={item}/><Divider size={10}/><DivideLine/></View>
+                  {/*</TouchableOpacity>*/}
+                </View>)}
+                leftOpenValue={0}
+                rightOpenValue={-80}
+              />
+              <DivideLine/></View>
+          if (item.id === 'RELATED_GROUP') {
+            return <View><RelatedGroup key={`key${index}`} data={item}/><Divider size={10}/><DivideLine/></View>
+          }
         }
-      })}
+        }/>}
     </View>
     }
   </View>
@@ -543,7 +550,7 @@ const BrandPagePremium = props => {
         titleData = uiData.shift();
       }
       return (
-        <View style={{backgroundColor: themeProp('colorSecondary')}}>
+        <View style={{backgroundColor: themeProp('colorSecondary'), flex: 1}}>
           <Header>
             <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => navigation.goBack()}>
               <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
@@ -597,7 +604,6 @@ const BrandPagePremium = props => {
 
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
-    margin-bottom: 10px;
     marginTop: ${isIOS ? (ratio < 1.5 ? verticalScale(50) : (ratio < 1.8 ? verticalScale(75) : verticalScale(65))) : verticalScale(50)}
 `;
 

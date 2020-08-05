@@ -3,10 +3,19 @@ import Tooltip from 'rn-tooltip';
 import React from 'react';
 import Images from 'res/Images';
 import styled from 'styled-components/native/dist/styled-components.native.esm';
+import analytics from '@react-native-firebase/analytics';
 
 const {height, width} = Dimensions.get('window');
 const ratio = height/width;
-
+const setAnalytics = (social) => {
+  analytics().logEvent('social_share', {social: social})
+    .then(res=>{
+      console.log('result============', res);
+    })
+    .catch(error => {
+      console.log("---------------------------------------Error occured-------------------", error);
+    });
+};
 const ShareTooltip = (props) => (
   <Tooltip
     width={Dimensions.get('window').width-20}
@@ -15,10 +24,10 @@ const ShareTooltip = (props) => (
     popover={
       <View style={{flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', width: '100%'}}>
         {/*<TouchableOpacity onPress={() => props.onLinkedin()}><Image width={'100%'} height={'100%'} source={Images.icons.ic_linkedin} /></TouchableOpacity>*/}
-        <TouchableOpacity onPress={() => props.onEmail()}><Image width={'100%'} height={'100%'} source={Images.icons.ic_alpha} /></TouchableOpacity>
-        <TouchableOpacity onPress={() => props.onTwitter()}><Image width={'100%'} height={'100%'} source={Images.icons.ic_twitter} /></TouchableOpacity>
-        <TouchableOpacity onPress={() => props.onWhatsapp()}><Image width={'100%'} height={'100%'} source={Images.icons.ic_whatsapp} /></TouchableOpacity>
-        <TouchableOpacity onPress={() => props.onFB()}><Image width={'100%'} height={'100%'} source={Images.icons.ic_facebook} /></TouchableOpacity>
+        <TouchableOpacity onPress={() => {setAnalytics('Email');props.onEmail()}}><Image width={'100%'} height={'100%'} source={Images.icons.ic_alpha} /></TouchableOpacity>
+        <TouchableOpacity onPress={() => {setAnalytics('Twitter');props.onTwitter()}}><Image width={'100%'} height={'100%'} source={Images.icons.ic_twitter} /></TouchableOpacity>
+        <TouchableOpacity onPress={() => {setAnalytics('Whatsapp');props.onWhatsapp()}}><Image width={'100%'} height={'100%'} source={Images.icons.ic_whatsapp} /></TouchableOpacity>
+        <TouchableOpacity onPress={() => {setAnalytics('Facebook');props.onFB()}}><Image width={'100%'} height={'100%'} source={Images.icons.ic_facebook} /></TouchableOpacity>
       </View>
     }
     backgroundColor={'#333333'}

@@ -56,10 +56,10 @@ const Dashboard = props => {
           <Image width={'100%'} height={'100%'} style={{marginTop: isIOS ? -4 : 10}} source={Images.icons.ic_heart_sm}/>
           <Title size={'10px'} color={themeProp('colorThird')} width={'35px'}>EBIKE</Title>
         </ItemView>
-        <ItemView onPress={() => {account.getData(auth.token); navigation.navigate('Account')}}>
-          <Image width={'100%'} height={'100%'} style={{marginTop: isIOS ? -4 : 10}} source={Images.icons.ic_user_sm}/>
-          <Title size={'10px'} color={themeProp('colorDescription')} width={'35px'}>ACCOUNT</Title>
-        </ItemView>
+        {/*<ItemView onPress={() => {account.getData(auth.token); navigation.navigate('Account')}}>*/}
+          {/*<Image width={'100%'} height={'100%'} style={{marginTop: isIOS ? -4 : 10}} source={Images.icons.ic_user_sm}/>*/}
+          {/*<Title size={'10px'} color={themeProp('colorDescription')} width={'35px'}>ACCOUNT</Title>*/}
+        {/*</ItemView>*/}
         <ItemView onPress={() => logout()}>
           <Image width={'100%'} height={'100%'} style={{marginTop: isIOS ? -4 : 10}} source={Images.icons.ic_user_sm}/>
           <Title size={'10px'} color={themeProp('colorDescription')} width={'35px'}>LOGOUT</Title>

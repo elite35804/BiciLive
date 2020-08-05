@@ -360,7 +360,15 @@ const IconDescriptionGroup = props => {
     </SwipeView>
   );
 };
-
+const setAnalytics = (url) => {
+  analytics().logEvent('related_product', {url: url})
+    .then(res=>{
+      console.log('result============', res);
+    })
+    .catch(error => {
+      console.log("---------------------------------------Error occured-------------------", error);
+    });
+};
 const RelatedElements = (item, index) => {
   const navigation = useNavigation();
   const {bikeData, auth} = useStores();
@@ -373,7 +381,7 @@ const RelatedElements = (item, index) => {
     <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10}}>
       {item.map((item0, index) =>
         <View key={index} style={{width: '33%', borderLeftColor: '#c9c3c5', borderLeftWidth: 7, paddingHorizontal: 5}}>
-          <TouchableOpacity onPress={() => goToBike(item0.url)}><Image
+          <TouchableOpacity onPress={() => {setAnalytics(item0.url);goToBike(item0.url)}}><Image
             style={{width: '100%', height: ratio < 1.5 ? 100 : 60, resizeMode: 'contain'}}
             source={{uri: item0.img_url}}/></TouchableOpacity>
           <Text style={{
@@ -753,7 +761,7 @@ const BikePagePremium = props => {
       hud.hide();
       const uiData = toJS(bikeData.data);
       return (
-        <View>
+        <View style={{flex: 1}}>
           <Header>
             <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'center'}} onPress={() => navigation.goBack()}>
               <Image resizeMode="contain" source={Images.btn.btn_back_arrow}
@@ -782,7 +790,7 @@ const BikePagePremium = props => {
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
     padding-bottom: 10px;
-    paddingHorizontal: ${scale(8)} 
+    paddingHorizontal: ${scale(8)}
     marginTop: ${isIOS ? (ratio < 1.5 ? verticalScale(50) : (ratio < 1.8 ? verticalScale(75) : verticalScale(65))) : verticalScale(50)}
     paddingTop: ${verticalScale(10)}
 `;

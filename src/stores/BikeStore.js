@@ -69,7 +69,7 @@ class BikeStore {
     this.data = []
   };
 
-  track = (url) => {
+  track = async (url) => {
     console.log('url========', url);
     const title = url.split('?')[0].slice(7);
     const params = url.split('?')[1].split('&');
@@ -79,6 +79,10 @@ class BikeStore {
     });
     requestParams['page_title'] = title;
     console.log('request======', requestParams);
+    // await analytics().setUserProperties({
+    //   Gender: 'Maschio',
+    //   Age: '25',
+    // });
     analytics().logEvent('product', requestParams)
       .then(res=>{
       console.log('result============', res);

@@ -87,8 +87,6 @@ const Register = props => {
     console.log('======', event, selectedDate);
   };
 
-
-
   const onRegister = async () => {
     for (let [key, value] of Object.entries(auth.registerData)) {
       if (key === 'email' && !validationEmail(value)) {
@@ -99,11 +97,14 @@ const Register = props => {
         alert.showWarn("Questo campo è obbligatorio", key.toUpperCase())
         return;
       }
-      if (value === '') {
+      if (key !== 'sesso' && key !== 'provincia' && key !== 'eta' && value === '') {
         alert.showWarn("Questo campo è obbligatorio", key.toUpperCase())
         return;
       }
-
+    }
+    if (auth.registerData.password !== auth.registerData.password_confirm) {
+      alert.showWarn("Le password non corrispondono")
+      return;
     }
     hud.show();
     await auth.register();
@@ -111,7 +112,7 @@ const Register = props => {
     auth.errorIf && alert.showError(auth.err_string, "Registrazione")
     if (!auth.errorIf) {
       alert.showSuccess("Grazie per esserti registrato! A breve riceverai un link di conferma per attivare il tuo account.", "Registrazione", false)
-      navigation.navigate('Login');
+      navigation.replace('Login');
     }
   };
 
@@ -146,6 +147,7 @@ const Register = props => {
       <View style={{alignItems: 'center'}}>
         <BaseTextInput required={true} placeholder="EMAIL" onChange = {(value) => auth.setParam('email', value)}/>
         <PasswordInput required={true} placeholder="PASSWORD" onChange = {(value) => auth.setParam('password', value)}/>
+        <PasswordInput required={true} placeholder="CONFERMA PASSWORD" onChange = {(value) => auth.setParam('password_confirm', value)}/>
         <BaseTextInput required={true} placeholder="NOME" onChange = {(value) => auth.setParam('nome', value)}/>
         <BaseTextInput required={true} placeholder="COGNOME" onChange = {(value) => auth.setParam('cognome', value)}/>
         {/*<BaseTextInput placeholder="CITTÀ" onChange = {(value) => auth.setParam('citta', value)}/>*/}

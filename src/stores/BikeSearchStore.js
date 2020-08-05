@@ -5,7 +5,8 @@ import config from '../config/Config';
 class BikeSearchStore {
   requestData = {};
   data = [];
-  extraData = [];
+  extraData1 = [];
+  extraData2 = [];
   listData = [];
   errorIf = false;
   referer = '/api/v1/get_statics';
@@ -46,24 +47,31 @@ class BikeSearchStore {
         .then(response => {
           if (response.data.err_code === 'ERR_OK') {
             this.data = response.data.content;
-            const temp1 = [], temp2 = [];
+            const temp1 = [], temp2 = []; temp3 = [];
             let id = 0;
+            let i = 0;
             this.data.map(item => {
               if (item.id === "BIKE_RESUME_BIG" || item.id === "BIKE_RESUME_SMALL") {
                 id++;
                 item.keyId = id;
                 temp1.push(item);
               } else {
-                temp2.push(item);
+                if (item.id === 'TITLED_TEXT') i++;
+                if (i === 2) {
+                  temp3.push(item)
+                } else {
+                  temp2.push(item);
+                }
               }
             });
             temp1.sort((a,b) => {
-              if (a.prezzo === "€ n.d.") return 1;
-              if (b.prezzo === "€ n.d.") return -1;
-              return (a.prezzo > b.prezzo) ? -1 : 1
+              const a_temp = a.prezzo.replace(/\./g, '');
+              const b_temp = b.prezzo.replace(/\./g, '');
+              return (parseInt(a_temp.split(' ')[1]) > parseInt(b_temp.split(' ')[1])) ? -1 : 1
             })
             this.listData = temp1;
-            this.extraData = temp2;
+            this.extraData1 = temp2;
+            this.extraData2 = temp3;
             this.errorIf = false;
           } else {
             this.errorIf = true;

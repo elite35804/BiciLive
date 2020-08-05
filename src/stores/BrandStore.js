@@ -4,7 +4,8 @@ import analytics from '@react-native-firebase/analytics';
 import config from '../config/Config';
 
 class BrandStore {
-  data = {};
+  data = [];
+  listData = [];
   errorIf = false;
   url = '';
   @observable position = 0;
@@ -12,7 +13,7 @@ class BrandStore {
   @observable isLike = false;
   @action
   getData = async (url, referer = '', token = '') => {
-    console.log('brand refererererer========', referer);
+    console.log('brand referer========', referer);
     this.url = url;
     this.isLoading = true;
     if (token === '' || token === undefined) {
@@ -72,7 +73,8 @@ class BrandStore {
     this.data = []
   };
 
-  track = (url) => {
+  track = async (url) => {
+    console.log('track=======', url);
     const title = url.split('?')[0].slice(7);
     const params = url.split('?')[1].split('&');
     const requestParams = {};
@@ -81,6 +83,10 @@ class BrandStore {
     });
     requestParams['page_title'] = title;
     console.log('request======', requestParams);
+    // await analytics().setUserProperties({
+    //   Gender: 'Female',
+    //   Age: '25',
+    // });
     analytics().logEvent('brand', requestParams)
       .then(res=>{
         console.log('result============', res);

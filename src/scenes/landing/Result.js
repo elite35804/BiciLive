@@ -105,9 +105,9 @@ const Result = props => {
       hud.hide()
       const uiData = toJS(bikeSearch.data);
       // console.log('listData=========', toJS(bikeSearch.listData));
-      const extraData = toJS(bikeSearch.extraData);
+      const extraData1 = toJS(bikeSearch.extraData1);
+      const extraData2 = toJS(bikeSearch.extraData2);
       const listData = toJS(bikeSearch.listData);
-      console.log('data=================', extraData.length, listData.length)
 
 
       return (
@@ -135,7 +135,7 @@ const Result = props => {
             </TouchableOpacity>
           </Header>
           <Container>
-            {extraData.map((item, index) => {
+            {extraData1.map((item, index) => {
               if (item.id === 'TITLE') {
                 return <View><Title size={18} width={'35px'}
                                     color={themeProp('colorBorder')}>{item.titolo}</Title></View>;
@@ -200,6 +200,17 @@ const Result = props => {
                 </View>;
               }
             }}/>}
+            {extraData2.map((item, index) => {
+              if (item.id === "TITLED_TEXT") {
+                return <View>
+                  <Divider size={5}/>
+                  <Text style={{fontSize: 20, color: item.title_color}}>{item.title}</Text>
+                  <Divider size={10}/>
+                  <Text style={{fontSize: 18, color: item.text_color}}>{item.text}</Text>
+                  <Divider size={35}/>
+                </View>
+              }
+            })}
 
           </Container>
         </View>

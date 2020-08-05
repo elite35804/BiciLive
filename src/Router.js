@@ -35,6 +35,15 @@ const ratio = height/width;
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const setAnalytics = (tabName) => {
+  analytics().logEvent('tab_bar', {tabName : tabName})
+    .then(res=>{
+      console.log('result============', res);
+    })
+    .catch(error => {
+      console.log("---------------------------------------Error occured-------------------", error);
+    });
+};
 const TabBar = (props) => {
   const navigation = useNavigation();
   const {homeData, auth} = useStores();
@@ -56,6 +65,7 @@ const TabBar = (props) => {
       paddingTop : ratio < 1.5 ? 20 : 0
     }}>
       <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => {
+        setAnalytics('Home');
         homeData.clearData();
         homeData.getData();
         navigation.navigate('Home');
@@ -71,11 +81,11 @@ const TabBar = (props) => {
           marginTop: 10,
         }}>HOME</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => navigation.navigate('BikeFinder')}>
+      <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => {setAnalytics('Ebike finder');navigation.navigate('BikeFinder')}}>
         <View style={{height: 35, justifyContent: 'flex-end'}}>
           <Image style={{
-            width: ratio < 1.5 ? moderateScale(35) : moderateScale(40),
-            height: moderateScale(40),
+            width: ratio < 1.5 ? moderateScale(40) : moderateScale(45),
+            height: moderateScale(45),
             resizeMode: 'contain',
             marginBottom: moderateScale(-5),
           }} source={Images.icons.ic_ebike}/>
@@ -88,7 +98,7 @@ const TabBar = (props) => {
           textAlign: 'center',
         }}>EBIKE FINDER</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => onDashboard()}>
+      <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => {setAnalytics('Dashboard');onDashboard()}}>
         {/*<View style={{backgroundColor: 'red', width: 10, height: 10, borderRadius: 5, position: 'absolute', top: 0, right: 10}}/>*/}
         <View style={{height: 35, justifyContent: 'flex-end'}}>
           <Image style={{width: ratio < 1.5 ? moderateScale(25) : moderateScale(30), height: moderateScale(30), resizeMode: 'contain'}}
@@ -99,7 +109,7 @@ const TabBar = (props) => {
           color: '#c9c3c5',
           fontFamily: isIOS ? 'UniSansRegular' : 'uni_sans_regular',
           marginTop: 10,
-        }}>PROFILO</Text>
+        }}>DASHBOARD</Text>
       </TouchableOpacity>
     </View>
   );
@@ -136,16 +146,22 @@ const Root = props => {
   };
 
 
-  React.useEffect(() => {
+  React.useEffect(async () => {
     const state = navigationRef.current.getRootState();
 
     // Save the initial route name
     routeNameRef.current = getActiveRouteName(state);
+    // await analytics().setUserProperties({
+    //   Gender: 'Maschio',
+    //   Age: '25',
+    // });
+    console.log('initial screen', getActiveRouteName(state));
+    analytics().setCurrentScreen(getActiveRouteName(state));
   }, []);
   return (
     <NavigationContainer
       ref={navigationRef}
-      onStateChange={state => {
+      onStateChange={async state => {
         const previousRouteName = routeNameRef.current;
         const currentRouteName = getActiveRouteName(state);
 
@@ -153,6 +169,10 @@ const Root = props => {
           // The line below uses the expo-firebase-analytics tracker
           // https://docs.expo.io/versions/latest/sdk/firebase-analytics/
           // Change this line to use another Mobile analytics SDK
+          // await analytics().setUserProperties({
+          //   Gender: 'Maschio',
+          //   Age: '25 Badge',
+          // });
           analytics().setCurrentScreen(currentRouteName);
         }
 

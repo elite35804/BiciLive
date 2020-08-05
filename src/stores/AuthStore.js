@@ -12,6 +12,7 @@ class AuthStore{
   registerData = {
     email:'',
     password: '',
+    password_confirm: '',
     nome: '',
     cognome : '',
     provincia: '',
@@ -90,6 +91,7 @@ class AuthStore{
     this.registerData = {
       email:'',
       password: '',
+      password_confirm: '',
       nome: '',
       cognome : '',
       provincia: '',
@@ -117,7 +119,7 @@ class AuthStore{
         headers: {'Content-Type': 'multipart/form-data', 'Referer': this.referer},
       })
         .then(response => {
-          // console.log('=======response=======================', response.data.err_code);
+          console.log('=======response=======================', response.data);
           if (response.data.err_code === "ERR_OK") {
             // console.log('after passworkd=====', response.data);
             this.errorIf =  false;

@@ -16,6 +16,7 @@ import StepIndicator from 'react-native-step-indicator';
 import CustomTooltip from 'components/controls/CustomTooltip';
 import {scale, verticalScale} from 'react-native-size-matters';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import analytics from '@react-native-firebase/analytics';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -327,7 +328,7 @@ const BikeFinderCategory = props => {
 
           {uiData.map((item,index) => {
             if (item.id === "FORM_INPUT_BUTTON" && item.action === "CERCA"){
-              return  <View style={{marginHorizontal : 10, marginBottom: 10}}><GreenButton bg_color={item.bg_color} txt_color= {item.txt_color} onPress={() => goToResult(item.url)}>CERCA</GreenButton></View>
+              return  <View style={{marginHorizontal : 10, marginBottom: 10}}><GreenButton bg_color={item.bg_color} txt_color= {item.txt_color} onPress={() => {analytics().logEvent('search_launch');goToResult(item.url)}}>CERCA</GreenButton></View>
             }
           })}
         </Container>

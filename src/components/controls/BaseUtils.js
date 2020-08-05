@@ -9,11 +9,7 @@ import {
   TouchableOpacity,
   View,
   Platform,
-  Button,
   Modal,
-  TouchableHighlight,
-  Alert,
-  StyleSheet,
   Image as DefaultImage, ImageBackground,
 } from 'react-native';
 import Images from 'res/Images';
@@ -283,7 +279,7 @@ const AdvResumeBig = (props) => {
       visible={isVisible}
       presentationStyle="fullScreen"
       onRequestClose={() => {
-      Alert.alert("Modal has been closed.");
+        setIsVisible(false);
       }}
       >
         <ZoomableImage onClose={() => setIsVisible(false)} scale={scale} imageUrl={get(props, 'data.immagine_zoom', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg')}/>

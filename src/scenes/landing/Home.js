@@ -65,9 +65,13 @@ const PageElement = props => {
     bikeData.getData(url, homeData.url, auth.token);
     navigation.navigate('Product', {url: url});
   };
+  const openWebViewer = (url) => {
+    web.url = url;
+    navigation.navigate('WebViewer')
+  };
   return (
     <View>
-      <LogoView onPress={() => goToBike(get(props, 'data.url', ''))}>
+      <LogoView onPress={() => props.data.url_type === 'API' ? goToBike(get(props, 'data.url', '')) : openWebViewer(get(props, 'data.url', ''))}>
         <DefaultImage source={{uri: config.server + get(props, 'data.immagine', '')}}
               style={{width: Dimensions.get('window').width * 0.95, height: isIOS ? (ratio < 1.5 ? 500 : 260) : 230, resizeMode: 'contain'}}/>
       </LogoView>
@@ -242,7 +246,7 @@ const Home = (props) => {
       homeData.setPosition(0);
 
       return (
-        <Container>
+        <Container showsVerticalScrollIndicator={false}>
           <HomeElements data={uiData}/>
         </Container>
       );
@@ -252,6 +256,7 @@ const Home = (props) => {
 };
 
 const Container = styled(ScrollView)`
+    flex: 1;
     background-color:${themeProp('colorSecondary')};
     padding-horizontal: ${scale(10)};
     padding-vertical: ${isIOS ? verticalScale(20) : 0}
