@@ -107,7 +107,7 @@ const SelectElement = (props) => {
   const [brand, setBrand] = useState();
   const _onOpenActionSheet = (id, cb) => {
     const {title, texts, values} = processSelectData(preData);
-    const options = ['Cancel', ...texts];
+    const options = ['QUALSIASI', ...texts];
     const cancelButtonIndex = 0;
     showActionSheetWithOptions(
       {
@@ -115,7 +115,7 @@ const SelectElement = (props) => {
         cancelButtonIndex
       },
       buttonIndex => {
-        if (buttonIndex !== 0) {
+        if  (buttonIndex !== 0) {
           bikeSearch.setRequest(get(preData, 'name', ''), values[buttonIndex - 1]);
           cb(texts[buttonIndex - 1]);
           // Do something here depending on the button index selected

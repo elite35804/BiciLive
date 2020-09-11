@@ -6,10 +6,14 @@ import ImageZoom from 'react-native-image-pan-zoom';
 import {get} from 'lodash';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import config from '../../config/Config';
+import analytics from '@react-native-firebase/analytics';
 
 const ZoomableImage = props => {
   const {width, height} = Dimensions.get('window');
   const {scale} = props
+  useEffect(() => {
+    analytics().setCurrentScreen('ImageView');
+  }, []);
   if (scale !== 0) {
     return (
       <>

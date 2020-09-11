@@ -40,7 +40,7 @@ const SelectElement = (props) => {
   const {showActionSheetWithOptions} = useActionSheet();
   const data =  get(props, 'data', []);
   const _onOpenActionSheet = () => {
-    const options = ['Cancel', ...data];
+    const options = ['QUALSIASI', ...data];
     const cancelButtonIndex = 0;
     showActionSheetWithOptions(
       {

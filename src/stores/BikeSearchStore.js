@@ -1,6 +1,7 @@
 import {observable, action} from 'mobx';
 import axios from 'axios';
 import config from '../config/Config';
+import {AsyncStorage} from 'react-native';
 
 class BikeSearchStore {
   requestData = {};
@@ -26,7 +27,7 @@ class BikeSearchStore {
     this.requestData = {};
   };
   @action
-  getData =  (url) => {
+  getData =  async url => {
     const data = Object.entries(this.requestData).length ? this.requestData : {filter :null};
     console.log('requestdata=====', data);
     this.isLoading = true;
@@ -34,20 +35,24 @@ class BikeSearchStore {
     for (let [key, value] of Object.entries(data)) {
       bodyFormData.append(key, value);
     }
+    const userData = await AsyncStorage.getItem('biciliveUser');
+    const headers = {
+      'Content-Type': 'multipart/form-data',
+      'Referer': this.referer,
+    };
+    if (userData !== null) headers.Authorization = `Bearer ${userData}`;
     try {
       axios({
         method: 'post',
         url: url,
         data: bodyFormData,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'Referer': this.referer
-        },
+        headers: headers,
       })
         .then(response => {
+          console.log('response------', response);
           if (response.data.err_code === 'ERR_OK') {
             this.data = response.data.content;
-            const temp1 = [], temp2 = []; temp3 = [];
+            const temp1 = [], temp2 = [], temp3 = [];
             let id = 0;
             let i = 0;
             this.data.map(item => {

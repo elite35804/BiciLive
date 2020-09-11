@@ -197,7 +197,7 @@ const Result = props => {
                     rightOpenValue={-80}
                   />
                   <DivideLine/>
-                </View>;
+                </View>
               }
             }}/>}
             {extraData2.map((item, index) => {
@@ -223,7 +223,6 @@ const Result = props => {
 
 const Container = styled(ScrollView)`
     background-color:${themeProp('colorSecondary')};
-    margin-bottom: 10px;
     padding-horizontal: 10px;
     marginTop: ${isIOS ? (ratio < 1.5 ? verticalScale(50) : (ratio < 1.8 ? verticalScale(75) : verticalScale(65))) : verticalScale(50)}
     paddingTop: ${verticalScale(10)}

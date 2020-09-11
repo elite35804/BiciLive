@@ -2,6 +2,7 @@ import {observable, action} from 'mobx';
 import axios from 'axios';
 import analytics from '@react-native-firebase/analytics';
 import config from '../config/Config';
+import {AsyncStorage} from 'react-native';
 
 class HomeStore {
   data = {};
@@ -12,8 +13,10 @@ class HomeStore {
   @action.bound
   getData = async () => {
     this.isLoading = true;
+    const userData = await AsyncStorage.getItem('biciliveUser');
+    const headers = userData !== null ? {Authorization : `Bearer ${userData}`} : {};
     try {
-      const response = await axios.get(`${config.server}/api/v1/home`);
+      const response = await axios.get(`${config.server}/api/v1/home`, headers);
       console.log('homeData =====================');
       if (response.data.err_code === "ERR_OK") {
         this.data = response.data.content;

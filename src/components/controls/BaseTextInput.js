@@ -17,7 +17,7 @@ const BaseTextInput= (props) => (
   <View style={{flex: 1, flexDirection: 'row'}}>
     <LineView {...props}/>
   <InputView>
-    <Input placeholder={props.placeholder} placeholderTextColor={'#c9c3c5'} onEndEditing={f => props.onChange(f.nativeEvent.text)}/>
+    <Input placeholder={props.placeholder} autoCapitalize = 'none' placeholderTextColor={'#c9c3c5'} onEndEditing={f => props.onChange(f.nativeEvent.text)}/>
     <Image width={20} height={20} source={Images.icons.keyboard} />
   </InputView>
   </View>

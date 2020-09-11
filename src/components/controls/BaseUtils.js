@@ -23,6 +23,7 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import CustomTooltip from './CustomTooltip';
 import config from '../../config/Config';
 import ZoomableImage from './ZoomableImage';
+import analytics from '@react-native-firebase/analytics';
 // import ImageZoom from 'react-native-image-pan-zoom';
 // import ZoomableImage from 'components/controls/ZoomableImage';
 // import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
@@ -257,23 +258,6 @@ const AdvResumeBig = (props) => {
   }, []);
   return (
     <View>
-      {/*<ImageView*/}
-        {/*images={images}*/}
-        {/*imageIndex={0}*/}
-        {/*visible={isVisible}*/}
-        {/*onRequestClose={() => setIsVisible(false)}*/}
-        {/*style={{height: 800}}*/}
-      {/*/>*/}
-
-      {/*{isVisible &&*/}
-      {/*<ImageZoom cropWidth={1000}*/}
-      {/*cropHeight={Dimensions.get('window').height}*/}
-      {/*imageWidth={Dimensions.get('window').width}*/}
-      {/*imageHeight={Dimensions.get('window').height}>*/}
-      {/*<Image style={{height: Dimensions.get('window').height, width: Dimensions.get('window').width, resizeMode: 'cover'}}*/}
-      {/*source={{uri: 'http://biciapp.sepisolutions.com' + get(props, 'data.immagine_zoom', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg')}}/>*/}
-      {/*</ImageZoom>*/}
-      {/*}*/}
       <Modal
       animationType="slide"
       visible={isVisible}
@@ -341,6 +325,7 @@ const LoginModal = props => {
   const {bikeData, auth} = useStores();
   let timer = undefined
   useEffect(() => {
+    analytics().setCurrentScreen('Login Modal');
     timer = setTimeout(() => {
       setVisible(true);
     }, 5000);

@@ -57,12 +57,13 @@ const TabBar = (props) => {
   return (
     <View style={{
       width: '100%',
-      height: ratio < 1.5 ? 130 : 90,
+      height: ratio < 1.5 ? 120 : 80,
       flexDirection: 'row',
       justifyContent: 'space-evenly',
       alignItems: 'center',
       backgroundColor: '#333333',
-      paddingTop : ratio < 1.5 ? 20 : 0
+      paddingTop : ratio < 1.5 ? 30 : 10,
+      paddingBottom: 12
     }}>
       <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => {
         setAnalytics('Home');
@@ -101,7 +102,7 @@ const TabBar = (props) => {
       <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => {setAnalytics('Dashboard');onDashboard()}}>
         {/*<View style={{backgroundColor: 'red', width: 10, height: 10, borderRadius: 5, position: 'absolute', top: 0, right: 10}}/>*/}
         <View style={{height: 35, justifyContent: 'flex-end'}}>
-          <Image style={{width: ratio < 1.5 ? moderateScale(25) : moderateScale(30), height: moderateScale(30), resizeMode: 'contain'}}
+          <Image style={{width: ratio < 1.5 ? moderateScale(25) : moderateScale(30), height: moderateScale(28), resizeMode: 'contain'}}
                  source={Images.icons.ic_profile}/>
         </View>
         <Text style={{

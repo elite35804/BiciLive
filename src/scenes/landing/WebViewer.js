@@ -28,7 +28,7 @@ const isIOS = Platform.OS === 'ios';
 const WebViewer = (props) => {
   const {web} = useStores();
   const navigation = useNavigation();
-  const [spinnerVisible, setSpinnerVisible] = useState(true);
+  const [spinnerVisible, setSpinnerVisible] = useState(false);
   console.log('url=======', web.url);
   return (
     <View style={{flex: 1}}>
@@ -52,6 +52,9 @@ const WebViewer = (props) => {
         onLoad={() => setSpinnerVisible(false)}
         source={{
           uri: web.url,
+        }}
+        onNavigationStateChange = {event => {
+          if (web.url !== event.url) web.url = event.url;
         }}
       />
       {spinnerVisible &&

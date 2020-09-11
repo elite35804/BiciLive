@@ -64,13 +64,15 @@ const Dashboard = props => {
           <Image width={'100%'} height={'100%'} style={{marginTop: isIOS ? -4 : 10}} source={Images.icons.ic_user_sm}/>
           <Title size={'10px'} color={themeProp('colorDescription')} width={'35px'}>LOGOUT</Title>
         </ItemView>
+        <VersionView>v.1.0.7</VersionView>
       </Container>
   );
 };
 
-const Container = styled(ScrollView)`
+const Container = styled(View)`
     background-color:${themeProp('colorSecondary')};
     padding-top: ${isIOS ? '20px' : '0px'}
+    flex: 1;
 `;
 
 const ItemView = styled(TouchableOpacity)`
@@ -86,6 +88,11 @@ const Title = styled(Text)`
   margin-top: ${props => props.size}   
   padding-horizontal: 10px; 
 `;
-
+const VersionView = styled(Text)`
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: grey
+`;
 
 export default Dashboard;
