@@ -2,6 +2,7 @@ import StepIndicator from 'react-native-step-indicator';
 import React, {useEffect, useState, useRef} from 'react';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native/dist/styled-components.native.esm';
+import HTML from 'react-native-render-html';
 import {
   Dimensions,
   Image,
@@ -10,7 +11,7 @@ import {
   View,
   Platform,
   Modal,
-  Image as DefaultImage, ImageBackground,
+  Image as DefaultImage, ImageBackground, TextProps as ellipsizeMode,
 } from 'react-native';
 import Images from 'res/Images';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
@@ -24,6 +25,8 @@ import CustomTooltip from './CustomTooltip';
 import config from '../../config/Config';
 import ZoomableImage from './ZoomableImage';
 import analytics from '@react-native-firebase/analytics';
+import Colors from '../../res/Colors';
+import {openLink} from '../../utils/NumberUtil';
 // import ImageZoom from 'react-native-image-pan-zoom';
 // import ZoomableImage from 'components/controls/ZoomableImage';
 // import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
@@ -63,7 +66,9 @@ const CheckBox = (props) => (
     {props.checked ? <SelectBoxUnchecked borderColor={get(props, 'borderColor', '#c9c3c5')}><SelectDot
         color={get(props, 'color', '#53DCD0')}/></SelectBoxUnchecked> :
       <SelectBoxUnchecked borderColor={get(props, 'borderColor', '#c9c3c5')}/>}
-    <SelectText color={get(props, 'textColor', '#909090')}>{props.text}</SelectText>
+    {/*<SelectText color={get(props, 'textColor', '#909090')}>{props.text}</SelectText>*/}
+    <HTML onLinkPress={openLink} html={props.text} containerStyle={{marginLeft: 10, marginTop: isIOS ? 8 : 1}}
+          baseFontStyle={{color: get(props, 'textColor', '#909090'), fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book', fontSize:18}}/>
   </SelectView>
 );
 
@@ -102,8 +107,12 @@ const MainBikeInfo = (props) => {
           <Sort size={'23px'}>{get(props, 'data.brand', 'ASKOLL')}</Sort>
           <Divider size={ratio < 1.5 ? moderateScale(-20) : moderateScale(-10)}/>
           <NameView>
-            <Name numberOfLines={1} color={'#' + get(props, 'data.color', 'D75A2B')}
-                  size={'38px'}>{get(props, 'data.modello', 'EB4')}</Name>
+            {/*<Name numberOfLines={1} color={'#' + get(props, 'data.color', 'D75A2B')}*/}
+                  {/*size={'38px'}>{get(props, 'data.modello', 'EB4')}</Name>*/}
+            <HTML onLinkPress={openLink} html={`<p>${get(props, 'data.modello', 'EB4')}</p>`}
+                  renderers={{p: (_, children)=><Text numberOfLines={1}>{children}</Text>}}
+                  containerStyle={{marginTop: isIOS ? -2 : -5, marginRight: 5,}}
+                  baseFontStyle={{fontFamily: oswald_bold, color: '#' + get(props, 'data.color', 'D75A2B'), fontSize: 38, lineHeight: ratio < 1.5 ? 80 : 42}}/>
             {/*<Image width={20} height={20} source={Images.icons.arrow_right}/>*/}
           </NameView>
           <Sort style={{marginTop: isIOS ? moderateScale(-12) : moderateScale(-15)}}
@@ -288,19 +297,26 @@ const AdvResumeBig = (props) => {
             source={Images.icons.ic_zoom_in}/></TouchableOpacity> : <View/>}
         <View style={{marginLeft: 5}}>
           <View style={{justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row'}}>
-            <TypeView bg_color={'#' + get(props, 'data.color', 'D75A2B')}><Type
-              size={moderateScale(13)}>{get(props, 'data.categoria', 'eCity')}</Type></TypeView>
+            <TypeView bg_color={'#' + get(props, 'data.color', 'D75A2B')}>
+              {/*<Type size={moderateScale(13)}>{get(props, 'data.categoria', 'eCity')}</Type>*/}
+              <HTML onLinkPress={openLink} html={get(props, 'data.categoria', 'eCity')} baseFontStyle={{fontSize: moderateScale(13), color: '#FFFFFF', fontFamily: oswald_bold}}/>
+            </TypeView>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Image width={40} height={40} source={Images.icons.ic_calendar} style={{marginRight: 5}}/>
-              <Sort size={moderateScale(22)}>{get(props, 'data.anno', '2020')}</Sort>
+              {/*<Sort size={moderateScale(22)}>{get(props, 'data.anno', '2020')}</Sort>*/}
+              <HTML onLinkPress={openLink} html={get(props, 'data.anno', '2020')} baseFontStyle={{fontSize: moderateScale(22), color: '#909090', fontFamily: oswald_bold}}/>
             </View>
           </View>
           <Divider size={moderateScale(-11)}/>
-          <Sort size={moderateScale(22)}>{get(props, 'data.brand', 'ASKOLL')}</Sort>
+          {/*<Sort size={moderateScale(22)}>{get(props, 'data.brand', 'ASKOLL')}</Sort>*/}
+          <HTML onLinkPress={openLink} html={get(props, 'data.brand', 'ASKOLL')} baseFontStyle={{fontSize: moderateScale(22), color: '#909090', fontFamily: oswald_bold}}/>
           <Divider size={moderateScale(-10)}/>
           <NameView>
-            <Name numberOfLines={1} color={'#' + get(props, 'data.color', 'D75A2B')}
-                  size={moderateScale(35)}>{get(props, 'data.modello', 'EB4')}</Name>
+            {/*<Name numberOfLines={1} color={'#' + get(props, 'data.color', 'D75A2B')}*/}
+                  {/*size={moderateScale(35)}>{get(props, 'data.modello', 'EB4')}</Name>*/}
+            <HTML onLinkPress={openLink} html={`<p>${get(props, 'data.modello', 'EB4')}</p>`}
+                  renderers={{p: (_, children)=><Text numberOfLines={1}>{children}</Text>}}
+                  baseFontStyle={{fontFamily: oswald_bold, color: '#' + get(props, 'data.color', 'D75A2B'), fontSize: moderateScale(35)}}/>
             {/*<Image width={20} height={20} source={Images.icons.arrow_right}/>*/}
           </NameView>
           <Sort style={{marginTop: isIOS ? moderateScale(-12) :moderateScale(-15)}}
@@ -621,19 +637,23 @@ const Detail = (props) => (
 const DetailMore = (props) => (
   <View style={{marginTop: -15, marginBottom: 4}}>
     <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-    <Text style={{
-      fontSize: 16,
-      color: props.data.title_color,
-      fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',
-      marginTop: 3,
-    }}>{props.data.title}</Text>
+    {/*<Text style={{*/}
+      {/*fontSize: 16,*/}
+      {/*color: props.data.title_color,*/}
+      {/*fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',*/}
+      {/*marginTop: 3,*/}
+    {/*}}>{props.data.title}</Text>*/}
+    <HTML onLinkPress={openLink} html={props.data.title} baseFontStyle={{fontSize: 16, color: props.data.title_color, fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold', marginTop: 3,}}/>
+
+
       {props.data.infobox && <CustomTooltip from="category" tooltipText={get(props, 'data.infobox', 'No Info')}/>}
   </View>
-    <Text style={{
-      fontSize: 24,
-      color: props.data.text_color,
-      fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',
-    }}>{props.data.text}</Text>
+    {/*<Text style={{*/}
+      {/*fontSize: 24,*/}
+      {/*color: props.data.text_color,*/}
+      {/*fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',*/}
+    {/*}}>{props.data.text}</Text>*/}
+    <HTML onLinkPress={openLink} html={props.data.text} baseFontStyle={{fontSize: 24, color: props.data.text_color, fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book'}}/>
   </View>
 );
 

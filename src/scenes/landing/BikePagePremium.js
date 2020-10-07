@@ -40,17 +40,17 @@ import {get} from 'lodash';
 import Swiper from 'react-native-swiper';
 import {observer} from 'mobx-react';
 import {toJS} from 'mobx';
-import Tooltip from 'rn-tooltip';
 import CustomTooltip from 'components/controls/CustomTooltip';
 import {moderateScale, verticalScale, scale} from 'react-native-size-matters';
-import {LoginButton, ShareDialog} from 'react-native-fbsdk';
 import analytics from '@react-native-firebase/analytics';
 import axios from 'axios';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-import RNInstallReferrer from 'react-native-install-referrer';
 import config from '../../config/Config';
 import Share from "react-native-share";
-
+import HTML from 'react-native-render-html';
+import Colors from '../../res/Colors';
+import Themes from '../../res/Themes';
+import {openLink} from '../../utils/NumberUtil';
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
@@ -205,11 +205,12 @@ const BrandLogo = props => {
                   fontSize: moderateScale(14, 0.2),
                   fontFamily: UniSansBook,
                 }}>DI</Text>
-                <Text style={{
-                  color: themeProp('colorDescription'),
-                  fontSize: moderateScale(14, 0.2),
-                  fontFamily: UniSansBold,
-                }}> {get(props, 'data.brand', '')}</Text>
+                {/*<Text style={{*/}
+                  {/*color: themeProp('colorDescription'),*/}
+                  {/*fontSize: moderateScale(14, 0.2),*/}
+                  {/*fontFamily: UniSansBold,*/}
+                {/*}}> {get(props, 'data.brand', '')}</Text>*/}
+                <HTML onLinkPress={openLink} html={get(props, 'data.brand', '')} baseFontStyle={{color: themeProp('colorDescription'), fontSize: moderateScale(14, 0.2), fontFamily: UniSansBold}}/>
               </SubTitleView>
             </View>
             <Image width={'100%'} height={'100%'} source={Images.icons.arrow_right} style={{marginRight: 10}}/>
@@ -384,20 +385,24 @@ const RelatedElements = (item, index) => {
           <TouchableOpacity onPress={() => {setAnalytics(item0.url);goToBike(item0.url)}}><Image
             style={{width: '100%', height: ratio < 1.5 ? 100 : 60, resizeMode: 'contain'}}
             source={{uri: item0.img_url}}/></TouchableOpacity>
-          <Text style={{
-            color: '#909090',
-            fontSize: 15,
-            fontFamily: isIOS ? 'Oswald-Bold' : 'oswald_bold',
-            marginTop: 10,
-          }}>{item0.brand}</Text>
-          <Text style={{
-            color: item0.color,
-            fontSize: 15,
-            fontFamily: isIOS ? 'Oswald-Bold' : 'oswald_bold',
-            marginTop: -5,
-          }}
-                numberOfLines={2}
-          >{item0.modello}</Text>
+          {/*<Text style={{*/}
+          {/*color: '#909090',*/}
+          {/*fontSize: 15,*/}
+          {/*fontFamily: isIOS ? 'Oswald-Bold' : 'oswald_bold',*/}
+          {/*marginTop: 10,*/}
+        {/*}}>{item0.brand}</Text>*/}
+          <HTML onLinkPress={openLink} html={item0.brand} containerStyle={{marginTop: 10}} baseFontStyle={{color: '#909090', fontSize: 15, fontFamily: isIOS ? 'Oswald-Bold' : 'oswald_bold'}}/>
+          {/*<Text style={{*/}
+            {/*color: item0.color,*/}
+            {/*fontSize: 15,*/}
+            {/*fontFamily: isIOS ? 'Oswald-Bold' : 'oswald_bold',*/}
+            {/*marginTop: -5,*/}
+          {/*}}*/}
+                {/*numberOfLines={2}*/}
+          {/*>{item0.modello}</Text>*/}
+          <HTML onLinkPress={openLink} html={`<p>${item0.modello}</p>`} containerStyle={{marginTop: -5}}
+            renderers={{p: (_, children)=><Text numberOfLines={2}>{children}</Text>}}
+            baseFontStyle={{color: item0.color, fontSize: 15, fontFamily: isIOS ? 'Oswald-Bold' : 'oswald_bold'}}/>
         </View>,
       )}
     </View>
@@ -474,12 +479,14 @@ const RelatedGroup = props => {
         marginTop: 8,
         paddingHorizontal: 8,
       }}>
-        <Text style={{
-          fontSize: 16,
-          color: '#53dcd0',
-          fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',
-          marginTop: 4,
-        }}>{get(props, 'data.titolo', '')}</Text>
+        {/*<Text style={{*/}
+          {/*fontSize: 16,*/}
+          {/*color: '#53dcd0',*/}
+          {/*fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',*/}
+          {/*marginTop: 4,*/}
+        {/*}}>{get(props, 'data.titolo', '')}</Text>*/}
+
+        <HTML onLinkPress={openLink} html={get(props, 'data.titolo', '')} containerStyle={{marginTop: 4}} baseFontStyle={{fontSize: 16, color: '#53dcd0', fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold'}}/>
         {/*<TouchableOpacity><Image width={'100%'} height={'100%'} source={Images.icons.ic_close_sm}/></TouchableOpacity>*/}
       </View>
       <View style={{height: ratio < 1.5 ? 210 : 180}}>
@@ -521,10 +528,12 @@ const AdBlock = props => {
 const TitleContainer = props => {
   return <View>
     <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-      <Title color={get(props, 'data.colore')}>{props.data.titolo}</Title>
+      {/*<Title color={get(props, 'data.colore')}>{props.data.titolo}</Title>*/}
+      <HTML onLinkPress={openLink} containerStyle={{marginTop: isIOS ? ratio < 1.5 ? 15 : 10 : 0}} html={props.data.titolo} baseFontStyle={{color: get(props, 'data.colore'), fontSize: moderateScale(30), fontFamily: Themes.base.fontUniHeavy}}/>
       {props.data.infobox && <CustomTooltip from="category" tooltipText={get(props, 'data.infobox', 'No Info')}/>}
     </View>
-    <SubTitle1 color={get(props, 'data.sub_color', '#ffffff')}>{props.data.sub}</SubTitle1><Divider size={-25}/>
+    {/*<SubTitle1 color={get(props, 'data.sub_color', '#ffffff')}>{props.data.sub}</SubTitle1><Divider size={-25}/>*/}
+    <HTML onLinkPress={openLink} html={props.data.sub} baseFontStyle={{fontSize: 20, fontFamily: Themes.base.fontUniRegular, color: get(props, 'data.sub_color', '#ffffff')}}/>
   </View>
 };
 
@@ -572,13 +581,14 @@ const RenderElements = props => {
             flex: 0,
             paddingVertical: 5,
           }}>
-            <Text
-              style={{
-                fontSize: 60,
-                color: 'white',
-                fontFamily: isIOS ? 'UniSansBold' : 'uni_sans_bold',
-              }}>{item.ant_diametro}
-            </Text>
+            {/*<Text*/}
+              {/*style={{*/}
+                {/*fontSize: 60,*/}
+                {/*color: 'white',*/}
+                {/*fontFamily: isIOS ? 'UniSansBold' : 'uni_sans_bold',*/}
+              {/*}}>{item.ant_diametro}*/}
+            {/*</Text>*/}
+            <HTML onLinkPress={openLink} html={item.ant_diametro} baseFontStyle={{fontSize: 60, color: 'white', fontFamily: isIOS ? 'UniSansBold' : 'uni_sans_bold'}}/>
             <Text style={{
               fontSize: 17,
               color: 'white',
@@ -600,28 +610,33 @@ const RenderElements = props => {
               fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',
               marginTop: 3,
             }}>RUOTA</Text>
-            <Text
-              style={{
-                fontSize: 20,
-                color: 'black',
-                fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',
-                marginTop: 7,
-                textAlign: 'center',
-              }} numberOfLines={2}>{item.ant_ruota}</Text>
+            {/*<Text*/}
+              {/*style={{*/}
+                {/*fontSize: 20,*/}
+                {/*color: 'black',*/}
+                {/*fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',*/}
+                {/*marginTop: 7,*/}
+                {/*textAlign: 'center',*/}
+              {/*}} numberOfLines={2}>{item.ant_ruota}</Text>*/}
+            <HTML onLinkPress={openLink} html={`<p>${item.ant_ruota}</p>`} containerStyle={{marginTop: 7}}
+              baseFontStyle={{fontSize: 20, color: 'black', fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book', textAlign: 'center'}}
+              renderers={{p: (_, children)=><Text numberOfLines={2}>{children}</Text>}}
+            />
             <Text style={{
               fontSize: 16,
               color: item.bg_color,
               fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',
               marginTop: 10,
             }}>GOMMA</Text>
-            <Text
-              style={{
-                fontSize: 20,
-                color: 'black',
-                fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',
-                marginTop: 7,
-                textAlign: 'center',
-              }}>{item.ant_gomma}</Text>
+            {/*<Text*/}
+              {/*style={{*/}
+                {/*fontSize: 20,*/}
+                {/*color: 'black',*/}
+                {/*fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',*/}
+                {/*marginTop: 7,*/}
+                {/*textAlign: 'center',*/}
+              {/*}}>{item.ant_gomma}</Text>*/}
+            <HTML onLinkPress={openLink} html={item.ant_gomma} containerStyle={{marginTop: 7}} baseFontStyle={{fontSize: 20, color: 'black', fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book', textAlign: 'center'}}/>
           </View>
         </View>
         <View style={{width: '48%'}}>
@@ -646,12 +661,13 @@ const RenderElements = props => {
             flex: 0,
             paddingVertical: 5,
           }}>
-            <Text
-              style={{
-                fontSize: 60,
-                color: 'white',
-                fontFamily: isIOS ? 'UniSansBold' : 'uni_sans_bold',
-              }}>{item.post_diametro}</Text>
+            {/*<Text*/}
+              {/*style={{*/}
+                {/*fontSize: 60,*/}
+                {/*color: 'white',*/}
+                {/*fontFamily: isIOS ? 'UniSansBold' : 'uni_sans_bold',*/}
+              {/*}}>{item.post_diametro}</Text>*/}
+            <HTML onLinkPress={openLink} html={item.post_diametro} baseFontStyle={{fontSize: 60, color: 'white', fontFamily: isIOS ? 'UniSansBold' : 'uni_sans_bold'}}/>
             <Text style={{
               fontSize: 17,
               color: 'white',
@@ -673,27 +689,32 @@ const RenderElements = props => {
               fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',
               marginTop: 3,
             }}>RUOTA</Text>
-            <Text style={{
-              fontSize: 20,
-              color: 'black',
-              fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',
-              marginTop: 7,
-              textAlign: 'center',
-            }} numberOfLines={2}>{item.post_ruota}</Text>
+            {/*<Text style={{*/}
+              {/*fontSize: 20,*/}
+              {/*color: 'black',*/}
+              {/*fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',*/}
+              {/*marginTop: 7,*/}
+              {/*textAlign: 'center',*/}
+            {/*}} numberOfLines={2}>{item.post_ruota}</Text>*/}
+            <HTML onLinkPress={openLink} html={`<p>${item.post_ruota}</p>`}
+              containerStyle={{marginTop: 7,}} baseFontStyle={{fontSize: 20, color: 'black', fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book', textAlign: 'center'}}
+              renderers={{p: (_, children)=><Text numberOfLines={2}>{children}</Text>}}
+            />
             <Text style={{
               fontSize: 16,
               color: item.bg_color,
               fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',
               marginTop: 10,
             }}>GOMMA</Text>
-            <Text
-              style={{
-                fontSize: 20,
-                color: 'black',
-                fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',
-                marginTop: 7,
-                textAlign: 'center',
-              }}>{item.post_gomma}</Text>
+            {/*<Text*/}
+              {/*style={{*/}
+                {/*fontSize: 20,*/}
+                {/*color: 'black',*/}
+                {/*fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',*/}
+                {/*marginTop: 7,*/}
+                {/*textAlign: 'center',*/}
+              {/*}}>{item.post_gomma}</Text>*/}
+            <HTML onLinkPress={openLink} html={item.ant_gomma} containerStyle={{marginTop: 7}} baseFontStyle={{fontSize: 20, color: 'black', fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book', textAlign: 'center'}}/>
           </View>
         </View>
       </SwipeView><Divider size={-30}/></View>);

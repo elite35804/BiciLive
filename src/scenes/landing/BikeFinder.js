@@ -11,7 +11,9 @@ import {toJS} from 'mobx';
 import { get } from 'lodash';
 import {scale, verticalScale} from 'react-native-size-matters';
 import { useNavigation } from '@react-navigation/native';
-
+import HTML from 'react-native-render-html';
+import Themes from '../../res/Themes';
+import {openLink} from '../../utils/NumberUtil';
 const {height, width} = Dimensions.get('window');
 const ratio = height/width;
 
@@ -46,7 +48,10 @@ const BikeFinder = props => {
         {get(staticData, 'data.search_landing', []).map((item, i) => {
           if (i === 1 || i === 3) return <View><Divider size={15}/><Title size={'0'} color={item.colore}>{item.titolo}</Title></View>
           return (<View>
-            <TouchableOpacity key={i} onPress={() => goToCategory(i, item.titolo, item.colore)}><Title size={'0'} color={item.colore}>{item.titolo}</Title></TouchableOpacity>
+            <TouchableOpacity key={i} onPress={() => goToCategory(i, item.titolo, item.colore)}>
+              <HTML onLinkPress={openLink} html={item.titolo} baseFontStyle={{color: item.colore, fontSize: 35, fontFamily: Themes.base.fontUniHeavy}} containerStyle={{marginTop: 0}}/>
+              {/*<Title size={'0'} color={item.colore}>{item.titolo}</Title>*/}
+            </TouchableOpacity>
           </View>)
         })}
         <Divider size={60}/>

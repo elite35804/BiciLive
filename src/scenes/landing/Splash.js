@@ -68,12 +68,12 @@ const Splash = props => {
       // accountName: '', // [Android] specifies an account name on the device that should be used
       iosClientId: '808976326604-62ut9ho77m6dm5lbp9irk5v9s9rs94h4.apps.googleusercontent.com', // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
     });
-      Linking.getInitialURL().then(url => {
-        console.log('initial url=----------', url);
-        if (url !== null) {
-          navigate(url)
-        }
-      })
+    Linking.getInitialURL().then(url => {
+      console.log('initial url=----------', url);
+      if (url !== null) {
+        navigate(url)
+      }
+    })
     try {
       const userData = await AsyncStorage.getItem('biciliveUser');
       if (userData !== null) {
@@ -190,39 +190,39 @@ const Splash = props => {
       </BtnView>}
 
       {/*<SocialBtnView>*/}
-                    {/*/!*<GoogleSigninButton*!/*/}
-                      {/*/!*style={{ width: 192, height: 48 }}*!/*/}
-                      {/*/!*size={GoogleSigninButton.Size.Wide}*!/*/}
-                      {/*/!*color={GoogleSigninButton.Color.Dark}*!/*/}
-                      {/*/!*onPress={_signIn}/>*!/*/}
-        {/*<GoogleBtn onPress={_gAuth}>*/}
-          {/*<Image width={20} height={20} source={Images.icons.google}/>*/}
-          {/*<IconTitle color="#FF0000">Continue with Google</IconTitle>*/}
-          {/*<View width={20}/>*/}
-        {/*</GoogleBtn>*/}
-        {/*/!*<Divider size="15px"/>*!/*/}
-                      {/*/!*<LoginButton*!/*/}
-                        {/*/!*onLoginFinished={*!/*/}
-                          {/*/!*(error, result) => {*!/*/}
-                            {/*/!*if (error) {*!/*/}
-                              {/*/!*console.log("login has error: " + result.error);*!/*/}
-                            {/*/!*} else if (result.isCancelled) {*!/*/}
-                              {/*/!*console.log("login is cancelled.");*!/*/}
-                            {/*/!*} else {*!/*/}
-                              {/*/!*AccessToken.getCurrentAccessToken().then(*!/*/}
-                                {/*/!*(data) => {*!/*/}
-                                  {/*/!*console.log('facebook login data=====',data.accessToken.toString())*!/*/}
-                                {/*/!*}*!/*/}
-                              {/*/!*)*!/*/}
-                            {/*/!*}*!/*/}
-                          {/*/!*}*!/*/}
-                        {/*/!*}*!/*/}
-                        {/*/!*onLogoutFinished={() => console.log("logout.")}/>*!/*/}
-        {/*<GoogleBtn onPress={_fbAuth}>*/}
-          {/*<Image width={20} height={20} source={Images.icons.facebook}/>*/}
-          {/*<IconTitle color="#3B5998">Continue with facebook</IconTitle>*/}
-          {/*<View width={20}/>*/}
-        {/*</GoogleBtn>*/}
+      {/*/!*<GoogleSigninButton*!/*/}
+      {/*/!*style={{ width: 192, height: 48 }}*!/*/}
+      {/*/!*size={GoogleSigninButton.Size.Wide}*!/*/}
+      {/*/!*color={GoogleSigninButton.Color.Dark}*!/*/}
+      {/*/!*onPress={_signIn}/>*!/*/}
+      {/*<GoogleBtn onPress={_gAuth}>*/}
+      {/*<Image width={20} height={20} source={Images.icons.google}/>*/}
+      {/*<IconTitle color="#FF0000">Continue with Google</IconTitle>*/}
+      {/*<View width={20}/>*/}
+      {/*</GoogleBtn>*/}
+      {/*/!*<Divider size="15px"/>*!/*/}
+      {/*/!*<LoginButton*!/*/}
+      {/*/!*onLoginFinished={*!/*/}
+      {/*/!*(error, result) => {*!/*/}
+      {/*/!*if (error) {*!/*/}
+      {/*/!*console.log("login has error: " + result.error);*!/*/}
+      {/*/!*} else if (result.isCancelled) {*!/*/}
+      {/*/!*console.log("login is cancelled.");*!/*/}
+      {/*/!*} else {*!/*/}
+      {/*/!*AccessToken.getCurrentAccessToken().then(*!/*/}
+      {/*/!*(data) => {*!/*/}
+      {/*/!*console.log('facebook login data=====',data.accessToken.toString())*!/*/}
+      {/*/!*}*!/*/}
+      {/*/!*)*!/*/}
+      {/*/!*}*!/*/}
+      {/*/!*}*!/*/}
+      {/*/!*}*!/*/}
+      {/*/!*onLogoutFinished={() => console.log("logout.")}/>*!/*/}
+      {/*<GoogleBtn onPress={_fbAuth}>*/}
+      {/*<Image width={20} height={20} source={Images.icons.facebook}/>*/}
+      {/*<IconTitle color="#3B5998">Continue with facebook</IconTitle>*/}
+      {/*<View width={20}/>*/}
+      {/*</GoogleBtn>*/}
       {/*</SocialBtnView>*/}
 
     </Container>

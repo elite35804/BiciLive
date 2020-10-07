@@ -24,7 +24,7 @@
 		4D19D9BA32A34D20AAEC2D3D /* uni_sans_book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F9BB2E92D364F67B1A632B3 /* uni_sans_book.ttf */; };
 		59337FD19D5847C987A49D69 /* uni_sans_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB81F48624AA4B1399E12F21 /* uni_sans_bold.ttf */; };
 		7137C2B9FD354060A2CB5F35 /* oswald_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C27468EFB5DC4996BE4E674E /* oswald_medium.ttf */; };
-		83A2F6E424AB2827008DFA77 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83A2F6E324AB2827008DFA77 /* GoogleService-Info.plist */; };
+		7BE7EAF22511FBB000556E7B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7BE7EAF12511FBB000556E7B /* GoogleService-Info.plist */; };
 		83A7BD5F248ADD980055F60B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A7BD5E248ADD980055F60B /* File.swift */; };
 		90482119825E4D8A8B85C20D /* oswald_semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11FCED3C7B5940DFB2778354 /* oswald_semibold.ttf */; };
 		973BBE354EC5487D8E4C74E5 /* oswald_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAFEF56B61C14FF496E07596 /* oswald_light.ttf */; };
@@ -96,9 +96,9 @@
 		712240BBD80327FFCBA36352 /* Pods-BiciLive-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BiciLive-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-BiciLive-tvOSTests/Pods-BiciLive-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		785F4389FC25EF4C262C4B2D /* Pods-BiciLiveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BiciLiveTests.debug.xcconfig"; path = "Target Support Files/Pods-BiciLiveTests/Pods-BiciLiveTests.debug.xcconfig"; sourceTree = "<group>"; };
 		796DEDE03333307308AAD97F /* Pods-BiciLive-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BiciLive-tvOS.release.xcconfig"; path = "Target Support Files/Pods-BiciLive-tvOS/Pods-BiciLive-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		7BE7EAF12511FBB000556E7B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		825339C7175A4FF599B08C99 /* Oswald-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Oswald-Light.ttf"; path = "../src/assets/font/Oswald-Light.ttf"; sourceTree = "<group>"; };
 		839560CA24A4D4B500026851 /* BiciLive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = BiciLive.entitlements; path = BiciLive/BiciLive.entitlements; sourceTree = "<group>"; };
-		83A2F6E324AB2827008DFA77 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../configurations/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		83A7BD59248AD5900055F60B /* BiciLive-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BiciLive-Bridging-Header.h"; sourceTree = "<group>"; };
 		83A7BD5E248ADD980055F60B /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		843953F837922635D5DC297C /* Pods-BiciLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BiciLive.release.xcconfig"; path = "Target Support Files/Pods-BiciLive/Pods-BiciLive.release.xcconfig"; sourceTree = "<group>"; };
@@ -188,7 +188,7 @@
 		13B07FAE1A68108700A75B9A /* BiciLive */ = {
 			isa = PBXGroup;
 			children = (
-				83A2F6E324AB2827008DFA77 /* GoogleService-Info.plist */,
+				7BE7EAF12511FBB000556E7B /* GoogleService-Info.plist */,
 				839560CA24A4D4B500026851 /* BiciLive.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -458,7 +458,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				83A2F6E424AB2827008DFA77 /* GoogleService-Info.plist in Resources */,
+				7BE7EAF22511FBB000556E7B /* GoogleService-Info.plist in Resources */,
 				140E77C7B7B649A2A7F8C2D4 /* oswald_bold.ttf in Resources */,
 				201D645B42D24F05971B6649 /* oswald_extralight.ttf in Resources */,
 				C0D416862D4242DAA6899607 /* oswald_heavy_regular.ttf in Resources */,

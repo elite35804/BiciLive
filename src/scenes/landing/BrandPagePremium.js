@@ -12,6 +12,7 @@ import {
   FlatList
 } from 'react-native';
 import {themeProp} from 'utils/CssUtil';
+import {openLink} from '../../utils/NumberUtil';
 import styled from 'styled-components/native';
 import {useStores} from 'hooks/Utils';
 import Images from 'res/Images';
@@ -48,6 +49,9 @@ import RNInstallReferrer from 'react-native-install-referrer';
 import {ShareDialog} from 'react-native-fbsdk';
 import config from '../../config/Config';
 import Share from 'react-native-share';
+import HTML from 'react-native-render-html';
+import Themes from '../../res/Themes';
+import Colors from '../../res/Colors';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
@@ -517,11 +521,18 @@ const AdBlock = props => {
   };
   return <View><Divider size={30}/><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image style={{width: Dimensions.get('window').width - scale(20), height: (Dimensions.get('window').width - scale(20))/3, resizeMode: 'contain'}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>
 };
+
 const BrandPagePremium = props => {
   const navigation = useNavigation();
   const {brandData, bikeData, hud, auth} = useStores();
-
-
+  const {web} = useStores();
+  const openWebViewer = (url) => {
+    web.url = url;
+    navigation.navigate('WebViewer');
+  };
+  // function openLink(event, url) {
+  //   Linking.openURL(url);
+  // }
   useEffect(() => {
     if (props.route.params){
       const {url} = props.route.params;
@@ -549,6 +560,7 @@ const BrandPagePremium = props => {
       if (uiData[0].id === "TITLE") {
         titleData = uiData.shift();
       }
+      console.log('brand data----', uiData);
       return (
         <View style={{backgroundColor: themeProp('colorSecondary'), flex: 1}}>
           <Header>
@@ -581,9 +593,12 @@ const BrandPagePremium = props => {
                     style={{width: 200, height: 200, resizeMode: 'contain', marginTop: -30}}
                     source={{uri: get(item, 'img', 'http://')}}/>
                   {/*<Image width={'100%'} height={'100%'} source={Images.background.haibike_lg} />*/}
-                  <Text style={{color: themeProp('colorDescription'), fontSize: 15, marginTop: -30, fontFamily: UniSansBook,lineHeight: 20}}>
-                    {item.text}
-                  </Text>
+                  {/*<Text style={{color: themeProp('colorDescription'), fontSize: 15, marginTop: -30, fontFamily: UniSansBook,lineHeight: 20}}>*/}
+                    {/*{item.text}*/}
+                  {/*</Text>*/}
+                  <HTML html={item.text} onLinkPress={openLink} containerStyle={{marginTop: -30,}} baseFontStyle={{color: '#909090', fontSize: 15, lineHeight: 20}}/>
+
+
                 </View>
               if (item.id === 'AD_BANNER_ENGAGE') {
                 return <AdBlock data={item}/>

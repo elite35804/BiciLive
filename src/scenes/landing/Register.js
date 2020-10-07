@@ -25,7 +25,6 @@ import config from '../../config/Config';
 import {Header} from '../../components/controls/BaseUtils';
 import {scale, verticalScale} from 'react-native-size-matters';
 import Images from 'res/Images';
-
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
@@ -144,6 +143,11 @@ const Register = props => {
       </Header>}
     <Container>
       <Title>REGISTRAZIONE</Title>
+      <HeaderText>Stiamo ricevendo segnalazioni da parte di utenti che alcuni indirizzi di posta, in particolare Alice e Tin, non ricevono l'email di verifica. Se riscontri lo stesso problema scrivici a </HeaderText>
+      <TouchableOpacity onPress={()=>Linking.openURL('mailto:feedback@bicilive.it')}>
+        <HeaderEmailText style={{textDecorationLine: 'underline'}}>feedback@bicilive.it</HeaderEmailText>
+      </TouchableOpacity>
+
       <View style={{alignItems: 'center'}}>
         <BaseTextInput required={true} placeholder="EMAIL" onChange = {(value) => auth.setParam('email', value)}/>
         <PasswordInput required={true} placeholder="PASSWORD" onChange = {(value) => auth.setParam('password', value)}/>
@@ -218,7 +222,20 @@ const Container = styled(ScrollView)`
 const Divider = styled(View)`
   margin-top: ${props => props.size}
 `;
-
+const HeaderText = styled(Text)`
+  font-size: 15px;
+  color: #909090
+  font-family: ${themeProp('fontUniRegular')};
+  margin-top: 10px;
+  padding-left: ${ratio < 1.5 ? '20px' : '8px'};
+`;
+const HeaderEmailText = styled(Text)`
+  font-size: 15px;
+  color: #909090
+  font-family: ${themeProp('fontUniRegular')};
+  padding-left: ${ratio < 1.5 ? '20px' : '8px'};
+  margin-bottom: 10px
+`;
 const Title = styled(Text)`
   font-size: 35px;
   color: #7cd9d0

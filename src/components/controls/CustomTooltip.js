@@ -7,7 +7,8 @@ import {
 } from 'react-native';
 import { Tooltip as RNETooltip } from 'react-native-elements';
 import Images from 'res/Images';
-
+import HTML from 'react-native-render-html';
+import {openLink} from '../../utils/NumberUtil';
 const TOOLTIP_WIDTH = 250;
 const TOOLTIP_PADDING = 10;
 
@@ -38,9 +39,10 @@ class CustomTooltip extends Component {
           });
         }}
       >
-        <Text style={styles.tooltipHiddenText}>
-          {tooltipText}
-        </Text>
+        {/*<Text style={styles.tooltipHiddenText}>*/}
+          {/*{tooltipText}*/}
+        {/*</Text>*/}
+        <HTML onLinkPress={openLink} html={tooltipText}/>
       </View>
     );
   };

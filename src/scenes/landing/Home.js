@@ -3,7 +3,6 @@ import {Image as DefaultImage, View, TouchableOpacity, Text, ScrollView, Platfor
 import StepIndicator from 'react-native-step-indicator';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
-import {Actions} from 'react-native-router-flux';
 import {useStores} from 'hooks/Utils';
 import Images from 'res/Images';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
@@ -16,9 +15,10 @@ import {Divider, ErrorView} from '../../components/controls/BaseUtils';
 import Image from 'react-native-image-progress';
 import { useNavigation } from '@react-navigation/native';
 import config from '../../config/Config';
-import RNInstallReferrer from 'react-native-install-referrer';
-
-
+import HTML from 'react-native-render-html';
+import Colors from '../../res/Colors';
+import Themes from '../../res/Themes';
+import {openLink} from '../../utils/NumberUtil';
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
@@ -77,10 +77,27 @@ const PageElement = props => {
       </LogoView>
       <Content>
         <TypeView
-          bg_color={'#' + get(props, 'data.color', themeProp('colorType'))}><Type>{get(props, 'data.categoria', '')}</Type></TypeView>
-        <Sort>{get(props, 'data.brand', '')}</Sort>
+          bg_color={'#' + get(props, 'data.color', themeProp('colorType'))}>
+          {/*<Type>{get(props, 'data.categoria', '')}</Type>*/}
+          <HTML
+            onLinkPress={openLink}
+            html={get(props, 'data.categoria', '')}
+            baseFontStyle={{fontSize: moderateScale(13), color: Colors.secondary, fontFamily: Themes.base.fontPrimaryBold}}
+          />
+        </TypeView>
+        {/*<Sort>{get(props, 'data.brand', '')}</Sort>*/}
+        <HTML html={get(props, 'data.brand', '')} onLinkPress={openLink}
+          baseFontStyle={{color: Colors.description, fontFamily: Themes.base.fontPrimaryBold, fontSize: moderateScale(22)}}
+          containerStyle={{marginTop: moderateScale(20), marginBottom: -10}}
+        />
+
         <NameView>
-          <Name numberOfLines={1} color={'#' + get(props, 'data.color', themeProp('colorType'))}>{get(props, 'data.modello', '')}</Name>
+          {/*<Name numberOfLines={1} color={'#' + get(props, 'data.color', themeProp('colorType'))}>{get(props, 'data.modello', '')}</Name>*/}
+          <HTML onLinkPress={openLink} html={`<p>${get(props, 'data.modello', '')}</p>`}
+            containerStyle={{marginTop: isIOS ? 0 : moderateScale(-5), marginRight: 5}}
+                renderers={{p: (_, children)=><Text numberOfLines={1}>{children}</Text>}}
+            baseFontStyle={{color: '#' + get(props, 'data.color', Themes.base.colorType), fontSize: moderateScale(34), fontFamily: Themes.base.fontPrimaryBold}}
+          />
           {/*<Image width={ratio < 1.5 ? moderateScale(40) : moderateScale(20)} height={ratio < 1.5 ? moderateScale(40) : moderateScale(20)} style={{marginTop: moderateScale(-17)}}  source={Images.icons.arrow_right}/>*/}
         </NameView>
       </Content>
@@ -185,13 +202,14 @@ const AdBlock = props => {
 
 const HomeElements = (props) => {
   const uiData = props.data;
+  console.log('HOME UI DATA:::', uiData);
   const items = [];
   uiData.forEach((item, index) => {
     if (item.id === 'PAGED_SLIDER' && Object.keys(item.content).length) {
       items.push(<View><PageSlider key={`key${index}`} data={item}/><Divider size={20}/></View>);
     }
     if (item.id === 'TITLE') {
-      items.push(<View><Divider size={ratio < 1.5 ? 50 : 0}/><Title key={`key${index}`} color={item.colore}>{item.titolo}</Title></View>);
+      items.push(<View><Divider size={ratio < 1.5 ? 50 : 0}/><HTML onLinkPress={openLink} html={item.titolo} baseFontStyle={{fontSize: scale(30), color: item.colore, fontFamily: Themes.base.fontUniHeavy}}/></View>);
     }
     if (item.id === 'IMAGE_REEL') {
       items.push(<View><Divider size={-20}/><ImageReel key={`key${index}`} data={item}/></View>);

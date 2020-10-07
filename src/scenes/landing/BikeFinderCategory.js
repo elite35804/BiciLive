@@ -17,7 +17,9 @@ import CustomTooltip from 'components/controls/CustomTooltip';
 import {scale, verticalScale} from 'react-native-size-matters';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import analytics from '@react-native-firebase/analytics';
-
+import HTML from 'react-native-render-html';
+import Themes from '../../res/Themes';
+import {openLink} from '../../utils/NumberUtil';
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 const {height, width} = Dimensions.get('window');
@@ -287,7 +289,8 @@ const BikeFinderCategory = props => {
         <Container ref={_container}>
           <View style={{paddingHorizontal: 10, paddingTop: isIOS ? 10 : 0}}>
             {/*<Title size={'30px'} color={themeProp('colorThird')} width={'35px'}>EBIKE FINDER</Title>*/}
-            <Title size={5} color={toJS(category.color)} width={'50px'}>{toJS(category.title)}</Title>
+            {/*<Title size={5} color={toJS(category.color)} width={'50px'}>{toJS(category.title)}</Title>*/}
+            <HTML onLinkPress={openLink} containerStyle={{marginTop: 5}} html={toJS(category.title)} baseFontStyle={{color: toJS(category.color), fontSize: 50, fontFamily: Themes.base.fontUniHeavy}}/>
             {uiData.map((item,index) => {
               if (item.id === 'PAGED_SLIDER' && Object.keys(item.content).length) {
                 return <View><PageSlider key={`key${index}`} data={item}/><Divider size={20}/></View>

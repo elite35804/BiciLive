@@ -10,7 +10,10 @@ import Images from 'res/Images';
 import {toJS} from 'mobx';
 import {isIOS} from 'rn-tooltip/src/helpers';
 import { useNavigation } from '@react-navigation/native';
-
+import HTML from 'react-native-render-html';
+import Themes from '../../res/Themes';
+import Colors from '../../res/Colors';
+import {openLink} from '../../utils/NumberUtil';
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
@@ -89,7 +92,8 @@ const BikeFinderAZ = props => {
                     <TouchableOpacity onPress={() => goToBrand(item.url)}>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
                       paddingHorizontal: 13, paddingVertical: 3, paddingTop: -10, paddingBottom:10, backgroundColor: index % 2 ? item.bg_color_even : item.bg_color_odd}}>
-                      <ListText>{item.titolo}</ListText>
+                      {/*<ListText>{item.titolo}</ListText>*/}
+                      <HTML onLinkPress={openLink} html={item.titolo} containerStyle={{paddingTop: 10}} baseFontStyle={{fontFamily: Themes.base.fontUniHeavy, fontSize: 25, color: Colors.description}}/>
                       <Badge>
                         <BadgeCount>{item.count}</BadgeCount>
                       </Badge>
