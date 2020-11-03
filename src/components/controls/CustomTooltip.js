@@ -39,9 +39,6 @@ class CustomTooltip extends Component {
           });
         }}
       >
-        {/*<Text style={styles.tooltipHiddenText}>*/}
-          {/*{tooltipText}*/}
-        {/*</Text>*/}
         <HTML onLinkPress={openLink} html={tooltipText}/>
       </View>
     );
@@ -65,9 +62,9 @@ class CustomTooltip extends Component {
         backgroundColor={'black'}
         containerStyle={{color: 'white'}}
         skipAndroidStatusBar
+        onOpen={() => this.props.setAnalytics ? this.props.setAnalytics() : {}}
       >
         <View>
-          {/*<Text>Press Me!</Text>*/}
           {this.props.from === "category" ? <Image style={{width: 27, height: 27, resizeMode: 'contain'}} source={Images.icons.ic_info_green}/> : <Image style={{width: 20, height: 20, resizeMode: 'contain'}} source={Images.icons.ic_info_black}/>}
         </View>
         {this.renderHiddenBoxToGetHeight()}

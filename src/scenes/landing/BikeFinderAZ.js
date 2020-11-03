@@ -14,8 +14,19 @@ import HTML from 'react-native-render-html';
 import Themes from '../../res/Themes';
 import Colors from '../../res/Colors';
 import {openLink} from '../../utils/NumberUtil';
+import analytics from "@react-native-firebase/analytics";
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
+
+const setAnalytics = eventName => {
+  analytics().logEvent(eventName)
+    .then(res=>{
+      console.log('analytics result============', eventName);
+    })
+    .catch(error => {
+      console.log("---------------------------------------Error occured-------------------", error);
+    });
+};
 
 const preProcess = (rawData, filter = '') => {
   const title = rawData.shift();
@@ -44,25 +55,8 @@ const BikeFinderAZ = props => {
   const rawData = toJS(staticData.data.brand_search_page);
   const {title, filterPlaceholder, filterData, color} = preProcess(rawData, filter);
 
-  const navigate = url => {
-    console.log('deeplinkurl==========', url);
-    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
-    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
-    if (type === 'Product') {
-      bikeData.clearData();
-      bikeData.getData(data);
-    } else {
-      brandData.clearData();
-      brandData.getData(data);
-    }
-    navigation.navigate(type, {url: type});
-  };
-  // useEffect(() => {
-  //   Linking.addEventListener('url', event => navigate(event.url))
-  //   return () => Linking.removeEventListener('url', event => navigate(event.url));
-  // }, []);
-
   const goToBrand = (url) => {
+    setAnalytics('ebike_finder_az_brand');
     brandData.clearData();
     brandData.getData(url, '', auth.token);
     navigation.navigate('Brand', {url: url});
@@ -79,7 +73,6 @@ const BikeFinderAZ = props => {
         <Divider size={'10px'} />
 
         {Object.entries(filterData).map(([key, value]) => {
-          // console.log('data=======', key,value);
           return (
             <View key={key}>
               <Divider size={'10px'} />
@@ -104,21 +97,6 @@ const BikeFinderAZ = props => {
             </View>
           )
         })}
-        {/*<TouchableOpacity><Title size={'0'} color={themeProp('colorThird')} width={'50px'}>A</Title></TouchableOpacity>*/}
-        {/*<FlatList*/}
-          {/*data={data}*/}
-          {/*keyExtractor={(item, index) => `company_${index}`}*/}
-          {/*renderItem={({ item, index }) => {*/}
-            {/*return (*/}
-            {/*<View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',*/}
-               {/*paddingHorizontal: 13, paddingVertical: 3, backgroundColor: (index % 2 === 0) && '#F7F7F7' }}>*/}
-              {/*<ListText>{item.name}</ListText>*/}
-              {/*<Badge>*/}
-                {/*<BadgeCount>{item.count}</BadgeCount>*/}
-              {/*</Badge>*/}
-            {/*</View>*/}
-          {/*)}}*/}
-        {/*/>*/}
         <Divider size={'10px'} />
       </Container>
       <Bottom>
@@ -141,13 +119,6 @@ const Bottom = styled(View)`
   margin-horizontal: 16px;
   margin-bottom: 10px;
   margin-top: 10px;
-`;
-
-const ListText = styled(Text)`
-  color: ${themeProp('colorDescription')};
-  font-family: ${themeProp('fontUniHeavy')}
-  font-size: 25px;
-  padding-top: 10px;
 `;
 
 const Badge = styled(View)`

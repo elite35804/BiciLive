@@ -19,6 +19,7 @@ import HTML from 'react-native-render-html';
 import Colors from '../../res/Colors';
 import Themes from '../../res/Themes';
 import {openLink} from '../../utils/NumberUtil';
+import analytics from '@react-native-firebase/analytics';
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
@@ -26,6 +27,19 @@ const {height, width} = Dimensions.get('window');
 const ratio = height/width;
 
 const isIOS = Platform.OS === 'ios';
+
+const setAnalytics = eventName => {
+  analytics().logEvent(eventName)
+    .then(res=>{
+      console.log('analytics result============', eventName);
+    })
+    .catch(error => {
+      console.log("---------------------------------------Error occured-------------------", error);
+    });
+};
+const getRandomInt = max => {
+  return Math.floor(Math.random() * Math.floor(max));
+};
 const Stepper = observer(props => {
   const {homeData} = useStores();
   const label = ['', '', '', '', ''];
@@ -48,7 +62,6 @@ const Stepper = observer(props => {
     labelColor: '#c9c3c5',
   };
   return <StepIndicator
-
     customStyles={customStyles}
     stepCount={props.total}
     currentPosition={homeData.position}
@@ -61,6 +74,7 @@ const PageElement = props => {
   const {bikeData, homeData, auth} = useStores();
   const navigation = useNavigation();
   const goToBike = url => {
+    setAnalytics('home_slider_tap');
     bikeData.clearData();
     bikeData.getData(url, homeData.url, auth.token);
     navigation.navigate('Product', {url: url});
@@ -78,27 +92,23 @@ const PageElement = props => {
       <Content>
         <TypeView
           bg_color={'#' + get(props, 'data.color', themeProp('colorType'))}>
-          {/*<Type>{get(props, 'data.categoria', '')}</Type>*/}
           <HTML
             onLinkPress={openLink}
             html={get(props, 'data.categoria', '')}
             baseFontStyle={{fontSize: moderateScale(13), color: Colors.secondary, fontFamily: Themes.base.fontPrimaryBold}}
           />
         </TypeView>
-        {/*<Sort>{get(props, 'data.brand', '')}</Sort>*/}
         <HTML html={get(props, 'data.brand', '')} onLinkPress={openLink}
           baseFontStyle={{color: Colors.description, fontFamily: Themes.base.fontPrimaryBold, fontSize: moderateScale(22)}}
           containerStyle={{marginTop: moderateScale(20), marginBottom: -10}}
         />
 
         <NameView>
-          {/*<Name numberOfLines={1} color={'#' + get(props, 'data.color', themeProp('colorType'))}>{get(props, 'data.modello', '')}</Name>*/}
           <HTML onLinkPress={openLink} html={`<p>${get(props, 'data.modello', '')}</p>`}
             containerStyle={{marginTop: isIOS ? 0 : moderateScale(-5), marginRight: 5}}
                 renderers={{p: (_, children)=><Text numberOfLines={1}>{children}</Text>}}
             baseFontStyle={{color: '#' + get(props, 'data.color', Themes.base.colorType), fontSize: moderateScale(34), fontFamily: Themes.base.fontPrimaryBold}}
           />
-          {/*<Image width={ratio < 1.5 ? moderateScale(40) : moderateScale(20)} height={ratio < 1.5 ? moderateScale(40) : moderateScale(20)} style={{marginTop: moderateScale(-17)}}  source={Images.icons.arrow_right}/>*/}
         </NameView>
       </Content>
     </View>
@@ -137,6 +147,7 @@ const ImageReel = (props) => {
   const {brandData, homeData, auth} = useStores();
   const navigation = useNavigation();
   const goToBrand = (url) => {
+    setAnalytics(`home_${getRandomInt(2) ? 'ebike' : 'motori'}_evindenza`);
     brandData.clearData();
     brandData.getData(url, homeData.url, auth.token);
     navigation.navigate('Brand', {url: url})
@@ -172,6 +183,7 @@ const Finder = () => {
       <Title color={themeProp('colorThird')}>EBIKE FINDER</Title>
       <SubTitle>Cerca la tua bici ideale</SubTitle>
       <TouchableOpacity onPress={() => {
+        setAnalytics('home_ebike_finder');
         navigation.navigate('BikeFinder');
       }}>
         <DefaultImage style={{width: ratio < 1.5 ? 220 : 170, height: ratio < 1.5 ? 220 : 170, resizeMode: 'contain',marginTop: 14}} source={Images.btn.btn_finder_animated}/></TouchableOpacity>
@@ -179,21 +191,11 @@ const Finder = () => {
     </FinderView>
   );
 };
-
-// const openUrl = (url) => {
-//   Linking.canOpenURL(url).then(supported => {
-//     if (supported) {
-//       Linking.openURL(url);
-//     } else {
-//       console.log("Don't know how to open URI: " + this.props.url);
-//     }
-//   });
-// };
-
 const AdBlock = props => {
   const navigation = useNavigation();
   const {web} = useStores();
   const openWebViewer = (url) => {
+    setAnalytics('home_ad_banner');
     web.url = url;
     navigation.navigate('WebViewer')
   };
@@ -202,7 +204,7 @@ const AdBlock = props => {
 
 const HomeElements = (props) => {
   const uiData = props.data;
-  console.log('HOME UI DATA:::', uiData);
+  // console.log('HOME UI DATA:::', uiData);
   const items = [];
   uiData.forEach((item, index) => {
     if (item.id === 'PAGED_SLIDER' && Object.keys(item.content).length) {
@@ -228,29 +230,7 @@ const HomeElements = (props) => {
 
 
 const Home = (props) => {
-  const navigation = useNavigation();
-  const {hud, bikeData, brandData} = useStores();
-  const navigate = url => {
-    console.log('deeplinkurl==========', url);
-    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
-    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
-    if (type === 'Product') {
-      bikeData.clearData();
-      bikeData.getData(data);
-    } else {
-      brandData.clearData();
-      brandData.getData(data);
-    }
-    navigation.navigate(type, {url: type});
-  };
-  // useEffect(() => {
-  //   Linking.addEventListener('url', event => navigate(event.url))
-  //   return () => Linking.removeEventListener('url', event => navigate(event.url));
-  // }, [])
-  useEffect(() => {
-    console.log('ratioratio=======', ratio);
-
-  }, []);
+  const {hud} = useStores();
   const {homeData} = useStores();
   if (homeData.isLoading) {
     hud.show()
@@ -258,9 +238,8 @@ const Home = (props) => {
     if (homeData.errorIf) {
       return <ErrorView/>
     } else {
-      hud.hide()
+      hud.hide();
       const uiData = toJS(get(homeData, 'data', []));
-      // console.log('homeData====', uiData);
       homeData.setPosition(0);
 
       return (
@@ -280,33 +259,10 @@ const Container = styled(ScrollView)`
     padding-vertical: ${isIOS ? verticalScale(20) : 0}
 `;
 
-const Date = styled(Text)`
-  color: ${themeProp('colorBorder')};
-  font-family: ${themeProp('fontPrimaryBold')}
-  font-size: 12px;
-`;
-
-const Description = styled(Text)`
-  color: #5C5C5C;
-  font-family: ${themeProp('fontPrimaryBold')}
-  font-size: 18px;
-`;
-
-const Desc = styled(Text)`
-  color: #5C5C5C;
-  font-family: ${themeProp('fontPrimaryBold')}
-  font-size: 15px;
-`;
-
 const LogoView = styled(TouchableOpacity)`
   width: 100%;
   text-align: center
 `;
-
-const Logo = styled(Image)`
-  resize-mode: contain;
-`;
-
 const Content = styled(View)`
   padding-horizontal: 14px;
   margin-left: -15px;
@@ -319,43 +275,12 @@ const TypeView = styled(View)`
   left: 15;
 `;
 
-const Type = styled(Text)`
-  color: ${themeProp('colorSecondary')};
-  font-family: ${themeProp('fontPrimaryBold')}
-  font-size: ${moderateScale(13)};
-`;
-
-const Sort = styled(Text)`
-  color: ${themeProp('colorDescription')};
-  font-family: ${themeProp('fontPrimaryBold')}
-  font-size: ${moderateScale(22)};
-  margin-bottom: -10px;
-  margin-top: ${moderateScale(20)};
-`;
-
 const NameView = styled(View)`
   flex-direction: row;
   align-items: center
   margin-top: ${verticalScale(-3)}
 `;
 
-const Name = styled(Text)`
-  color: ${props => props.color ? props.color: themeProp('colorType')};
-  font-family: ${themeProp('fontPrimaryBold')}
-  font-size: ${moderateScale(34)};
-  margin-top: ${isIOS ? 0 : moderateScale(-5)};
-  margin-right: 5px;
-`;
-
-// const Divider = styled(View)`
-//   margin-top: ${props => props.size}
-// `;
-
-const CategoryText = styled(Text)`
-  color: ${themeProp('colorBorder')};
-  font-family: ${themeProp('fontUniHeavy')}
-  font-size: 32px;
-`;
 
 const CategoryView = styled(View)`
   flex-direction: row;
@@ -369,12 +294,6 @@ const FinderView = styled(View)`
   margin-top: ${ratio < 1.5 ? '80px' : '48px'};
 `;
 
-const NewsFinderView = styled(View)`
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-`;
-
 const Title = styled(Text)`
   color: ${props => props.color};
   font-family: ${themeProp('fontUniHeavy')}
@@ -385,29 +304,6 @@ const SubTitle = styled(Text)`
   color: ${themeProp('colorDescription')};
   font-family: ${themeProp('fontUniBook')}
   font-size: ${ratio < 1.5 ? '25px' : '14px'};
-`;
-
-const NewsView = styled(View)`
-  margin-top: 32px;
-  margin-bottom: 2px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const DescView = styled(View)`
- background-color: #333333;
- padding-horizontal: 5px;
- flex-direction: row;
- justify-content: space-between;
- align-items: center;
- height: 25px;
-`;
-
-const DescTitle = styled(Text)`
-  color: ${themeProp('colorSecondary')};
-  font-family: ${themeProp('fontPrimaryBold')}
-  font-size: 13px;
 `;
 
 const SwiperContainer = styled(View)`

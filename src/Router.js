@@ -36,9 +36,8 @@ const ratio = height/width;
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const setAnalytics = (tabName) => {
-  analytics().logEvent('tab_bar', {tabName : tabName})
+  analytics().logEvent(`tab_bar${tabName}`, )
     .then(res=>{
-      console.log('result============', res);
     })
     .catch(error => {
       console.log("---------------------------------------Error occured-------------------", error);
@@ -69,6 +68,7 @@ const TabBar = (props) => {
         setAnalytics('Home');
         homeData.clearData();
         homeData.getData();
+        setAnalytics('home');
         navigation.navigate('Home');
       }}>
         <View style={{height: 35, justifyContent: 'flex-end'}}>
@@ -82,7 +82,7 @@ const TabBar = (props) => {
           marginTop: 10,
         }}>HOME</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => {setAnalytics('Ebike finder');navigation.navigate('BikeFinder')}}>
+      <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => {setAnalytics('ebike_finder');navigation.navigate('BikeFinder')}}>
         <View style={{height: 35, justifyContent: 'flex-end'}}>
           <Image style={{
             width: ratio < 1.5 ? moderateScale(40) : moderateScale(45),
@@ -99,7 +99,7 @@ const TabBar = (props) => {
           textAlign: 'center',
         }}>EBIKE FINDER</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => {setAnalytics('Dashboard');onDashboard()}}>
+      <TouchableOpacity style={{alignItems: 'center', width: '19%'}} onPress={() => {setAnalytics('dashboard');onDashboard()}}>
         {/*<View style={{backgroundColor: 'red', width: 10, height: 10, borderRadius: 5, position: 'absolute', top: 0, right: 10}}/>*/}
         <View style={{height: 35, justifyContent: 'flex-end'}}>
           <Image style={{width: ratio < 1.5 ? moderateScale(25) : moderateScale(30), height: moderateScale(28), resizeMode: 'contain'}}

@@ -15,7 +15,7 @@ import Swiper from 'react-native-swiper';
 import StepIndicator from 'react-native-step-indicator';
 import CustomTooltip from 'components/controls/CustomTooltip';
 import {scale, verticalScale} from 'react-native-size-matters';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import analytics from '@react-native-firebase/analytics';
 import HTML from 'react-native-render-html';
 import Themes from '../../res/Themes';
@@ -26,7 +26,15 @@ const {height, width} = Dimensions.get('window');
 const ratio = height/width;
 const isIOS = Platform.OS === 'ios';
 
-
+const setAnalytics = eventName => {
+  analytics().logEvent(eventName)
+    .then(res=>{
+      console.log('analytics result============', eventName);
+    })
+    .catch(error => {
+      console.log("---------------------------------------Error occured-------------------", error);
+    });
+};
 
 const Stepper = observer(props => {
   const {category} = useStores();
@@ -50,7 +58,6 @@ const Stepper = observer(props => {
     labelColor: '#c9c3c5',
   };
   return <StepIndicator
-
     customStyles={customStyles}
     stepCount={props.total}
     currentPosition={category.position}
@@ -75,7 +82,7 @@ const PageSlider = (props) => {
         onIndexChanged={(index) => category.setPosition(index)}
       >
         {props.data.content.map((item, index) => {
-          return <AdvResumeBig key={index} data={item} productIf={false}/>;
+          return <AdvResumeBig key={index} data={item} productIf={false} setAnalytics={() => setAnalytics(`ebike_finder_${category.title}_slider`)}/>;
         })}
       </Swiper>
       <Divider size={20}/>
@@ -134,7 +141,7 @@ const SelectElement = (props) => {
 };
 
 const FinderItem = props => {
-  const {bikeSearch} = useStores();
+  const {bikeSearch, category} = useStores();
   const [checked, setChecked] = useState(false);
   const min = props.data.min_val < props.data.max_val ? props.data.min_val : props.data.max_val;
   const max = props.data.min_val > props.data.max_val ? props.data.min_val : props.data.max_val;
@@ -148,7 +155,7 @@ const FinderItem = props => {
     <View>
       <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginRight: 20}}>
         <CheckBox checked={checked} onPress={() => setChecked(!checked)} text={get(props, 'data.title','').toUpperCase()}/>
-        <CustomTooltip from="category" tooltipText={get(props, 'data.infotext', 'No Info')}/>
+        <CustomTooltip from="category" tooltipText={get(props, 'data.infotext', 'No Info')} setAnalytics={() => setAnalytics(`ebike_finder_${category.title}_info`)}/>
       </View>
       {
         checked &&
@@ -219,15 +226,6 @@ const ExtraSearch = props => {
         }
       })}
     </View>
-    {/*<Divider size={-25}/>*/}
-    {/*{uiData.map((item,index) => {*/}
-    {/*if (item.id === "FORM_INPUT_SELECT" && item.name === "ruota_anteriore"){*/}
-    {/*return <SelectElement data={item} key={index}/>*/}
-    {/*}*/}
-    {/*if (item.id === "FORM_INPUT_SELECT" && item.name === "ruota_posteriore"){*/}
-    {/*return <View><Divider size={-10}/><SelectElement data={item} key={index}/></View>*/}
-    {/*}*/}
-    {/*})}*/}
   </View>
 };
 const BikeFinderCategory = props => {
@@ -255,19 +253,6 @@ const BikeFinderCategory = props => {
     }
 
   },[collapse]);
-
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     category.setPosition(category.position + 1);
-  //     console.log('category counter increment');
-  //     setCounter(counter + 1);
-  //     setCounter(false);
-  //     return () => {
-  //
-  //     }
-  //
-  //   }, [])
-  // )
 
   if (Object.keys(uiData).length !== 0) {
     return (
@@ -331,18 +316,10 @@ const BikeFinderCategory = props => {
 
           {uiData.map((item,index) => {
             if (item.id === "FORM_INPUT_BUTTON" && item.action === "CERCA"){
-              return  <View style={{marginHorizontal : 10, marginBottom: 10}}><GreenButton bg_color={item.bg_color} txt_color= {item.txt_color} onPress={() => {analytics().logEvent('search_launch');goToResult(item.url)}}>CERCA</GreenButton></View>
+              return  <View style={{marginHorizontal : 10, marginBottom: 10}}><GreenButton bg_color={item.bg_color} txt_color= {item.txt_color} onPress={() => {setAnalytics(`ebike_finder_${category.title}_search`);goToResult(item.url)}}>CERCA</GreenButton></View>
             }
           })}
         </Container>
-        {/*<Bottom>*/}
-          {/*{uiData.map((item,index) => {*/}
-            {/*if (item.id === "FORM_INPUT_BUTTON" && item.action === "CERCA"){*/}
-              {/*return  <GreenButton bg_color={item.bg_color} txt_color= {item.txt_color} onPress={() => goToResult(item.url)}>CERCA</GreenButton>*/}
-            {/*}*/}
-          {/*})}*/}
-          {/*/!*<GreenButton bg_color='green' onPress={() => Actions.Result()}>CERCA</GreenButton>*!/*/}
-        {/*</Bottom>*/}
       </View>
     );
   } else {

@@ -35,10 +35,21 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import config from '../../config/Config';
+import analytics from "@react-native-firebase/analytics";
 const isIOS = Platform.OS === 'ios';
 
 const {height, width} = Dimensions.get('window');
 const ratio = height/width;
+
+const setAnalytics = eventName => {
+  analytics().logEvent(eventName)
+    .then(res=>{
+      console.log('analytics result============', eventName);
+    })
+    .catch(error => {
+      console.log("---------------------------------------Error occured-------------------", error);
+    });
+};
 
 const AdBlock = props => {
   const navigation = useNavigation();
@@ -47,7 +58,7 @@ const AdBlock = props => {
     web.url = url;
     navigation.navigate('WebViewer');
   };
-  return <View><TouchableOpacity onPress={() => openWebViewer(props.data.url)}><Image
+  return <View><TouchableOpacity onPress={() => {setAnalytics('search_results_ad_banner');openWebViewer(props.data.url)}}><Image
     style={{width: Dimensions.get('window').width - scale(20), height: (Dimensions.get('window').width - scale(20))/3, resizeMode: 'contain'}} source={{uri: props.data.img}}/></TouchableOpacity><Divider size={20}/></View>;
 };
 
@@ -166,7 +177,7 @@ const Result = props => {
                 return <View>
                   <SwipeListView
                     data={['']}
-                    renderItem={(data, rowMap) => (<View><MainBikeInfo data={item}/></View>)}
+                    renderItem={(data, rowMap) => (<View><MainBikeInfo data={item} setAnalytics={() => setAnalytics('search_results_bigbike')}/></View>)}
                     renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
                       <LikeBlock data={item}/>
                       {/*<TouchableOpacity style={{*/}
@@ -189,7 +200,7 @@ const Result = props => {
                 return <View>
                   <SwipeListView
                     data={['']}
-                    renderItem={(data, rowMap) => (<View><ListBikeInfo data={item}/></View>)}
+                    renderItem={(data, rowMap) => (<View><ListBikeInfo data={item} setAnalytics={() => setAnalytics('search_results_listbike')}/></View>)}
                     renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
                       <LikeBlock data={item}/>
                     </View>)}

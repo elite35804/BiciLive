@@ -7,8 +7,6 @@ import {
   ScrollView,
   Platform,
   Linking,
-  Image as DefaultImage,
-  Modal,
   Alert, Dimensions,
 } from 'react-native';
 import {themeProp} from 'utils/CssUtil';
@@ -48,7 +46,6 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import config from '../../config/Config';
 import Share from "react-native-share";
 import HTML from 'react-native-render-html';
-import Colors from '../../res/Colors';
 import Themes from '../../res/Themes';
 import {openLink} from '../../utils/NumberUtil';
 Text.defaultProps = Text.defaultProps || {};
@@ -58,6 +55,19 @@ const {height, width} = Dimensions.get('window');
 const ratio = height/width;
 
 const isIOS = Platform.OS === 'ios';
+
+const setAnalytics = eventName => {
+  analytics().logEvent(eventName)
+    .then(res=>{
+      console.log('analytics result============', eventName);
+    })
+    .catch(error => {
+      console.log("---------------------------------------Error occured-------------------", error);
+    });
+};
+const getRandomInt = max => {
+  return Math.floor(Math.random() * Math.floor(max));
+};
 
 const shareFacebook = (url, share_url) => {
   console.log('share url========', url, share_url);
@@ -124,32 +134,10 @@ const shareWhatsapp = (shareurl, share_url) => {
       }
     }).catch(err => console.error('An error occurred', err));
   }
-  // const content = `${share_url}?data=${shareurl}`;
-  // const options = {
-  //   title: 'Bicklive',
-  //   message: 'Bicilive',
-  //   social: Share.Social.WHATSAPP,
-  //   url: content,
-  // }
-  // Share.shareSingle(options).then(res => {
-  //   console.log('res=====', res);
-  // }).catch(e => {
-  //   console.log('e========'.e);
-  // });
 
 };
 
 const shareEmail = (url, share_url) => {
-  // const shareURL = `${share_url}?data=${url}`
-  // const emailURL = `mailto:support@example.com?subject=Bicilive&body=${shareURL}`;
-  // Linking.canOpenURL(emailURL).then(supported => {
-  //   console.log('supported======', supported);
-  //   if (!supported) {
-  //     console.log('Can\'t handle url: ' + emailURL);
-  //   } else {
-  //     return Linking.openURL(emailURL);
-  //   }
-  // }).catch(err => console.error('An error occurred', err));
   const content = `${share_url}?data=${url}`;
   const options = {
     title: 'Bicklive',
@@ -233,6 +221,7 @@ const ShareBlock = observer(props => {
   const {auth, bikeData} = useStores();
   const fetchData = async () => {
     auth.loginState || navigation.navigate('Login');
+    setAnalytics(`${getRandomInt(2) ? 'bike' : 'bike_premium'}_add_wishlist`);
     try {
       axios.get(
         `${config.server}${props.data.like_url}`,
@@ -274,7 +263,7 @@ const ShareBlock = observer(props => {
 
   return <View><ShareView>
     <TouchableOpacity onPress={() => fetchData()}><Image style={{width: ratio < 1.5 ? 70 : 40, height: ratio < 1.5 ? 70 : 40, resizeMode: 'contain'}} source={bikeData.isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart} /></TouchableOpacity>
-    <ShareTooltip onWhatsapp={() => shareWhatsapp(bikeData.url, props.data.share_url)} onFB={() => shareFacebook(bikeData.url, props.data.share_url)} onEmail={() => shareEmail(bikeData.url, props.data.share_url)} onTwitter={() => shareTwitter(bikeData.url, props.data.share_url)} onLinkedin={() => shareLinkedin(bikeData.url, props.data.share_url)}/>
+    <ShareTooltip setAnalytics={() => setAnalytics(`${getRandomInt(2) ? 'bike' : 'bike'}_social_share`)} onWhatsapp={() => shareWhatsapp(bikeData.url, props.data.share_url)} onFB={() => shareFacebook(bikeData.url, props.data.share_url)} onEmail={() => shareEmail(bikeData.url, props.data.share_url)} onTwitter={() => shareTwitter(bikeData.url, props.data.share_url)} onLinkedin={() => shareLinkedin(bikeData.url, props.data.share_url)}/>
   </ShareView>
     <Divider size={15}/>
   </View>
@@ -361,15 +350,6 @@ const IconDescriptionGroup = props => {
     </SwipeView>
   );
 };
-const setAnalytics = (url) => {
-  analytics().logEvent('related_product', {url: url})
-    .then(res=>{
-      console.log('result============', res);
-    })
-    .catch(error => {
-      console.log("---------------------------------------Error occured-------------------", error);
-    });
-};
 const RelatedElements = (item, index) => {
   const navigation = useNavigation();
   const {bikeData, auth} = useStores();
@@ -382,24 +362,10 @@ const RelatedElements = (item, index) => {
     <View key={index} style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10}}>
       {item.map((item0, index) =>
         <View key={index} style={{width: '33%', borderLeftColor: '#c9c3c5', borderLeftWidth: 7, paddingHorizontal: 5}}>
-          <TouchableOpacity onPress={() => {setAnalytics(item0.url);goToBike(item0.url)}}><Image
+          <TouchableOpacity onPress={() => {setAnalytics(`${getRandomInt(2) ? 'bike' : 'bike_premium'}_related_products`);goToBike(item0.url)}}><Image
             style={{width: '100%', height: ratio < 1.5 ? 100 : 60, resizeMode: 'contain'}}
             source={{uri: item0.img_url}}/></TouchableOpacity>
-          {/*<Text style={{*/}
-          {/*color: '#909090',*/}
-          {/*fontSize: 15,*/}
-          {/*fontFamily: isIOS ? 'Oswald-Bold' : 'oswald_bold',*/}
-          {/*marginTop: 10,*/}
-        {/*}}>{item0.brand}</Text>*/}
           <HTML onLinkPress={openLink} html={item0.brand} containerStyle={{marginTop: 10}} baseFontStyle={{color: '#909090', fontSize: 15, fontFamily: isIOS ? 'Oswald-Bold' : 'oswald_bold'}}/>
-          {/*<Text style={{*/}
-            {/*color: item0.color,*/}
-            {/*fontSize: 15,*/}
-            {/*fontFamily: isIOS ? 'Oswald-Bold' : 'oswald_bold',*/}
-            {/*marginTop: -5,*/}
-          {/*}}*/}
-                {/*numberOfLines={2}*/}
-          {/*>{item0.modello}</Text>*/}
           <HTML onLinkPress={openLink} html={`<p>${item0.modello}</p>`} containerStyle={{marginTop: -5}}
             renderers={{p: (_, children)=><Text numberOfLines={2}>{children}</Text>}}
             baseFontStyle={{color: item0.color, fontSize: 15, fontFamily: isIOS ? 'Oswald-Bold' : 'oswald_bold'}}/>
@@ -479,12 +445,6 @@ const RelatedGroup = props => {
         marginTop: 8,
         paddingHorizontal: 8,
       }}>
-        {/*<Text style={{*/}
-          {/*fontSize: 16,*/}
-          {/*color: '#53dcd0',*/}
-          {/*fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',*/}
-          {/*marginTop: 4,*/}
-        {/*}}>{get(props, 'data.titolo', '')}</Text>*/}
 
         <HTML onLinkPress={openLink} html={get(props, 'data.titolo', '')} containerStyle={{marginTop: 4}} baseFontStyle={{fontSize: 16, color: '#53dcd0', fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold'}}/>
         {/*<TouchableOpacity><Image width={'100%'} height={'100%'} source={Images.icons.ic_close_sm}/></TouchableOpacity>*/}
@@ -518,6 +478,7 @@ const AdBlock = props => {
   const navigation = useNavigation();
   const {web} = useStores();
   const openWebViewer = (url) => {
+    setAnalytics(`${getRandomInt(2) ? 'bike' : 'bike_premium'}_ad_banner`);
     web.url = url;
     navigation.navigate('WebViewer');
   };
@@ -539,7 +500,7 @@ const TitleContainer = props => {
 
 const RenderElements = props => {
   // console.log(props);
-  const {auth, bikeData} = useStores();
+  const {bikeData} = useStores();
   const uiData = props.uiData;
   const items = [];
   let i = 0;
@@ -555,7 +516,7 @@ const RenderElements = props => {
       items.push(<TitleContainer key={`key${index}`} data={item}/>)
     }
     if (item.id === 'TITLED_TEXT') {
-      items.push(<DetailMore key={index} data={item}/>);
+      items.push(<DetailMore setAnalytics={() => setAnalytics(`${getRandomInt(2) ? 'bike' : 'bike_premium'}_info`)} key={index} data={item}/>);
     }
     if (item.id === 'WHEEL_DETAIL_GROUP') {
       items.push(<View><Divider size={-18}/><SwipeView>
@@ -581,13 +542,6 @@ const RenderElements = props => {
             flex: 0,
             paddingVertical: 5,
           }}>
-            {/*<Text*/}
-              {/*style={{*/}
-                {/*fontSize: 60,*/}
-                {/*color: 'white',*/}
-                {/*fontFamily: isIOS ? 'UniSansBold' : 'uni_sans_bold',*/}
-              {/*}}>{item.ant_diametro}*/}
-            {/*</Text>*/}
             <HTML onLinkPress={openLink} html={item.ant_diametro} baseFontStyle={{fontSize: 60, color: 'white', fontFamily: isIOS ? 'UniSansBold' : 'uni_sans_bold'}}/>
             <Text style={{
               fontSize: 17,
@@ -610,14 +564,6 @@ const RenderElements = props => {
               fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',
               marginTop: 3,
             }}>RUOTA</Text>
-            {/*<Text*/}
-              {/*style={{*/}
-                {/*fontSize: 20,*/}
-                {/*color: 'black',*/}
-                {/*fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',*/}
-                {/*marginTop: 7,*/}
-                {/*textAlign: 'center',*/}
-              {/*}} numberOfLines={2}>{item.ant_ruota}</Text>*/}
             <HTML onLinkPress={openLink} html={`<p>${item.ant_ruota}</p>`} containerStyle={{marginTop: 7}}
               baseFontStyle={{fontSize: 20, color: 'black', fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book', textAlign: 'center'}}
               renderers={{p: (_, children)=><Text numberOfLines={2}>{children}</Text>}}
@@ -628,14 +574,6 @@ const RenderElements = props => {
               fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',
               marginTop: 10,
             }}>GOMMA</Text>
-            {/*<Text*/}
-              {/*style={{*/}
-                {/*fontSize: 20,*/}
-                {/*color: 'black',*/}
-                {/*fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',*/}
-                {/*marginTop: 7,*/}
-                {/*textAlign: 'center',*/}
-              {/*}}>{item.ant_gomma}</Text>*/}
             <HTML onLinkPress={openLink} html={item.ant_gomma} containerStyle={{marginTop: 7}} baseFontStyle={{fontSize: 20, color: 'black', fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book', textAlign: 'center'}}/>
           </View>
         </View>
@@ -661,12 +599,6 @@ const RenderElements = props => {
             flex: 0,
             paddingVertical: 5,
           }}>
-            {/*<Text*/}
-              {/*style={{*/}
-                {/*fontSize: 60,*/}
-                {/*color: 'white',*/}
-                {/*fontFamily: isIOS ? 'UniSansBold' : 'uni_sans_bold',*/}
-              {/*}}>{item.post_diametro}</Text>*/}
             <HTML onLinkPress={openLink} html={item.post_diametro} baseFontStyle={{fontSize: 60, color: 'white', fontFamily: isIOS ? 'UniSansBold' : 'uni_sans_bold'}}/>
             <Text style={{
               fontSize: 17,
@@ -689,13 +621,6 @@ const RenderElements = props => {
               fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',
               marginTop: 3,
             }}>RUOTA</Text>
-            {/*<Text style={{*/}
-              {/*fontSize: 20,*/}
-              {/*color: 'black',*/}
-              {/*fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',*/}
-              {/*marginTop: 7,*/}
-              {/*textAlign: 'center',*/}
-            {/*}} numberOfLines={2}>{item.post_ruota}</Text>*/}
             <HTML onLinkPress={openLink} html={`<p>${item.post_ruota}</p>`}
               containerStyle={{marginTop: 7,}} baseFontStyle={{fontSize: 20, color: 'black', fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book', textAlign: 'center'}}
               renderers={{p: (_, children)=><Text numberOfLines={2}>{children}</Text>}}
@@ -706,14 +631,6 @@ const RenderElements = props => {
               fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',
               marginTop: 10,
             }}>GOMMA</Text>
-            {/*<Text*/}
-              {/*style={{*/}
-                {/*fontSize: 20,*/}
-                {/*color: 'black',*/}
-                {/*fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',*/}
-                {/*marginTop: 7,*/}
-                {/*textAlign: 'center',*/}
-              {/*}}>{item.post_gomma}</Text>*/}
             <HTML onLinkPress={openLink} html={item.ant_gomma} containerStyle={{marginTop: 7}} baseFontStyle={{fontSize: 20, color: 'black', fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book', textAlign: 'center'}}/>
           </View>
         </View>
@@ -745,30 +662,11 @@ const RenderElements = props => {
 
 const BikePagePremium = props => {
   const navigation = useNavigation();
-  const {bikeData, brandData, hud} = useStores();
-
-  const navigate = url => {
-    console.log('bike deep link==========', url);
-    const type = url.includes('/ebike/') ? 'Product' : 'Brand';
-    const data = url.split('data=')[1].replace(/%2F/g, '/').replace(/%3F/g, '?').replace(/%3D/g, '=');
-    if (type === 'Product') {
-      bikeData.clearData();
-      bikeData.getData(data);
-    } else {
-      brandData.clearData();
-      brandData.getData(data);
-    }
-    navigation.navigate(type, {url: type});
-  };
-  // useEffect(() => {
-  //   Linking.addEventListener('url', event => navigate(event.url))
-  //   return () => Linking.removeEventListener('url', event => navigate(event.url));
-  // }, [])
+  const {bikeData, hud} = useStores();
 
   useEffect(() => {
     if (props.route.params){
       const {url} = props.route.params;
-      // console.log('url-[-----', url.split('?')[0].substring(7));
       analytics().setCurrentScreen(url.split('?')[0].substring(7));
     }
   });

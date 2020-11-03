@@ -14,6 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import HTML from 'react-native-render-html';
 import Themes from '../../res/Themes';
 import {openLink} from '../../utils/NumberUtil';
+import analytics from "@react-native-firebase/analytics";
 const {height, width} = Dimensions.get('window');
 const ratio = height/width;
 
@@ -22,7 +23,15 @@ const isIOS = Platform.OS === 'ios';
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
-
+const setAnalytics = eventName => {
+  analytics().logEvent(eventName)
+    .then(res=>{
+      console.log('analytics result============', eventName);
+    })
+    .catch(error => {
+      console.log("---------------------------------------Error occured-------------------", error);
+    });
+};
 const BikeFinder = props => {
   const navigation = useNavigation();
   const {staticData, category, bikeSearch, bikeData, brandData} = useStores();
@@ -32,13 +41,14 @@ const BikeFinder = props => {
     console.log('id====', id);
     switch (true) {
       case (id === 2):
+        setAnalytics('ebike_finder_az');
         navigation.navigate('BikeFinderAZ');
         break;
       case (id>=4 && id<=10):
+        setAnalytics(`ebike_finder_${title}`);
         category.setId(id, title, color);
         navigation.navigate('BikeFinderCategory');
         break;
-      default:
     }
   };
   return (

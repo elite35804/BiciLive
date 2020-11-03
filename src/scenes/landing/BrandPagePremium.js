@@ -7,7 +7,6 @@ import {
   ScrollView,
   Platform,
   Linking,
-  Image as DefaultImage,
   Alert, Dimensions,
   FlatList
 } from 'react-native';
@@ -33,7 +32,6 @@ import {
   ErrorView
 } from 'components/controls/BaseUtils';
 import {BaseTextInput, BaseSelect, BaseTextFilter} from 'components/controls/BaseTextInput';
-import {Oswald, UniSansBold, UniSansBook} from '../../utils/fontFamily';
 import {observer} from 'mobx-react';
 import {toJS} from 'mobx';
 import {get} from 'lodash';
@@ -45,19 +43,28 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 const isIOS = Platform.OS === "ios";
 import analytics from '@react-native-firebase/analytics';
-import RNInstallReferrer from 'react-native-install-referrer';
-import {ShareDialog} from 'react-native-fbsdk';
 import config from '../../config/Config';
 import Share from 'react-native-share';
 import HTML from 'react-native-render-html';
-import Themes from '../../res/Themes';
-import Colors from '../../res/Colors';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
 const {height, width} = Dimensions.get('window');
 const ratio = height/width;
+
+const setAnalytics = eventName => {
+  analytics().logEvent(eventName)
+    .then(res=>{
+      console.log('analytics result============', eventName);
+    })
+    .catch(error => {
+      console.log("---------------------------------------Error occured-------------------", error);
+    });
+};
+const getRandomInt = max => {
+  return Math.floor(Math.random() * Math.floor(max));
+};
 
 const RelatedElements = (item, index) => {
   const navigation = useNavigation();
@@ -159,7 +166,7 @@ const Expandible_Wrapper = props => {
   const [isCollapse, setCollapse] = useState(false);
   const {brandData} = useStores();
   return <View>
-    <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}} onPress={() => setCollapse(!isCollapse)}>
+    <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}} onPress={() => {setAnalytics(`${getRandomInt(2) ? 'brand' : 'brand_premium'}_categoria`);setCollapse(!isCollapse)}}>
       <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
         <Image width={'100%'} height={'100%'} source={isCollapse ? Images.icons.arrow_up : Images.icons.arrow_down_sm} style={{marginRight: 10}}/>
         <Title size={'0'} color={'#'+get(props, 'data.color', 'D75A2B')} width={'35px'}>{get(props, 'data.title', 'eCity')}</Title>
@@ -173,10 +180,10 @@ const Expandible_Wrapper = props => {
         initialNumToRender = {10}
         renderItem={({item, index}) => {
           if (item.id === "BIKE_RESUME_SMALL")
-            return <View>
+            return <View key={index}>
               <SwipeListView
                 data={[""]}
-                renderItem={(data, rowMap) => (<View><ListBikeInfo key={index} data={item} referer={brandData.url}/></View>)}
+                renderItem={(data, rowMap) => (<View><ListBikeInfo setAnalytics={() => setAnalytics(`${getRandomInt(2) ? 'brand' : 'brand_premium'}_bike`)} key={index} data={item} referer={brandData.url}/></View>)}
                 renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
                   <LikeBlock data={item}/>
                 </View>)}
@@ -185,10 +192,10 @@ const Expandible_Wrapper = props => {
               />
               <DivideLine/></View>
           if (item.id === "BIKE_RESUME_BIG")
-            return <View>
+            return <View key={index}>
               <SwipeListView
                 data={[""]}
-                renderItem={(data, rowMap) => (<View><MainBikeInfo data={item} referer={brandData.url}/></View>)}
+                renderItem={(data, rowMap) => (<View><MainBikeInfo setAnalytics={() => setAnalytics(`${getRandomInt(2) ? 'brand' : 'brand_premium'}_bike`)} data={item} referer={brandData.url}/></View>)}
                 renderHiddenItem={(data, rowMap) => (<View style={{alignItems: 'flex-end'}}>
                   <LikeBlock data={item}/>
                   {/*<TouchableOpacity style={{backgroundColor: '#53DCD0', alignItems: 'center', width: 70,height: '30%', justifyContent: 'center'}}>*/}
@@ -290,7 +297,7 @@ const PageSlider = (props) => {
         onIndexChanged={(index) => brandData.setPosition(index)}
       >
         {props.data.content.map((item, index) => {
-          return <MainBikeInfo key={index} data={item} referer={brandData.url}/>;
+          return <MainBikeInfo setAnalytics={() => setAnalytics('brand_premium_slider')} key={index} data={item} referer={brandData.url}/>;
         })}
       </Swiper>
       <Divider size={20}/>
@@ -336,6 +343,8 @@ const LikeBlock = props => {
   const {auth} = useStores();
   const [isLike, setIsLike] = useState(false);
   const setStatus = async () => {
+    console.log('set status func');
+    setAnalytics('brand_add_wishlist');
     try {
       if (auth.loginState) {
         console.log('set============', auth.token);
@@ -379,10 +388,11 @@ const ShareBlock = props => {
   const navigation = useNavigation();
   const {auth, brandData} = useStores();
   const [isLike, setLike] = useState(false);
+
   const fetchData = async () => {
     auth.loginState || navigation.navigate('Login');
+    setAnalytics(`${getRandomInt(2) ? 'brand' : 'brand_premium'}_add_wishlist`);
     try {
-      console.log('getshardata=========');
       axios.get(
         `${config.server}${props.data.like_url}`,
         {
@@ -412,7 +422,7 @@ const ShareBlock = props => {
                                                                source={isLike ? Images.icons.ic_heart_red : Images.icons.ic_heart}/></TouchableOpacity>
           {/*<Image width={'100%'} height={'100%'} source={Images.icons.ic_compare} style={{marginLeft: 25}}/>*/}
         </ShareIcon>
-        <ShareTooltip onWhatsapp={() => shareWhatsapp(brandData.url, props.data.share_url)} onFB={() => shareFacebook(brandData.url, props.data.share_url)} onEmail={() => shareEmail(brandData.url, props.data.share_url)} onTwitter={() => shareTwitter(brandData.url, props.data.share_url)} onLinkedin={() => shareLinkedin(brandData.url, props.data.share_url)}/>
+        <ShareTooltip setAnalytics={() => setAnalytics(`${getRandomInt(2) ? 'brand' : 'brand_premium'}_social_share`)} onWhatsapp={() => shareWhatsapp(brandData.url, props.data.share_url)} onFB={() => shareFacebook(brandData.url, props.data.share_url)} onEmail={() => shareEmail(brandData.url, props.data.share_url)} onTwitter={() => shareTwitter(brandData.url, props.data.share_url)} onLinkedin={() => shareLinkedin(brandData.url, props.data.share_url)}/>
       </ShareView>
     </View>
   );
@@ -560,7 +570,7 @@ const BrandPagePremium = props => {
       if (uiData[0].id === "TITLE") {
         titleData = uiData.shift();
       }
-      console.log('brand data----', uiData);
+      // console.log('brand data----', uiData);
       return (
         <View style={{backgroundColor: themeProp('colorSecondary'), flex: 1}}>
           <Header>

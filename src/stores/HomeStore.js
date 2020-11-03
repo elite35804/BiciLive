@@ -21,15 +21,11 @@ class HomeStore {
       if (response.data.err_code === "ERR_OK") {
         this.data = response.data.content;
         this.errorIf = false;
-        // analytics().logEvent('openApp',{
-        //   url: 'http://biciapp.sepisolutions.com/api/v1/home',
-        //   page_title: '/home'
-        // }).then(res=>{
-        //   console.log('result============', res);
-        // })
-        //   .catch(error => {
-        //     console.log("---------------------------------------Error occured-------------------", error);
-        //   });
+        analytics().logEvent('home_start').then(res=>{
+          console.log('result============', res);
+        }).catch(error => {
+            console.log("---------------------------------------Error occured-------------------", error);
+          });
       } else {
         this.errorIf = true;
       }

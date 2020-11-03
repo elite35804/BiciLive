@@ -76,6 +76,7 @@ const MainBikeInfo = (props) => {
   const navigation = useNavigation();
   const {bikeData, auth} = useStores();
   const goToBike = url => {
+    props.setAnalytics && props.setAnalytics();
     bikeData.clearData();
     bikeData.getData(url, get(props, 'referer', ''), auth.token);
     navigation.navigate('Product', {url: url});
@@ -161,6 +162,7 @@ const ListBikeInfo = (props) => {
   const navigation = useNavigation();
   const {bikeData, auth} = useStores();
   const goToBike = url => {
+    props.setAnalytics && props.setAnalytics();
     bikeData.clearData();
     bikeData.getData(url, get(props, 'referer', ''), auth.token);
     navigation.navigate('Product', {url: url});
@@ -251,15 +253,12 @@ const AdvResumeBig = (props) => {
   const {bikeData, auth} = useStores();
   const [isVisible, setIsVisible] = React.useState(false);
   const [scale, setScale] = useState(1);
-  const _image = useRef(null);
   const goToBike = url => {
+    props.setAnalytics && props.setAnalytics();
     bikeData.clearData();
     bikeData.getData(url, get(props, 'referer', ''), auth.token);
     navigation.navigate('Product', {url: url});
   };
-  const images = [{
-    uri: config.server + get(props, 'data.immagine_zoom', '/z-content/images/ebike/askoll/RZO7ZxEegAPHou369k2kKL1wHAv0SX3W.jpg'),
-  }];
   useEffect(() => {
     Image.getSize(config.server + get(props, 'data.immagine_zoom', ''), (w, h) => {
       setScale((height * w / (width * h)).toFixed(1))
@@ -298,26 +297,20 @@ const AdvResumeBig = (props) => {
         <View style={{marginLeft: 5}}>
           <View style={{justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row'}}>
             <TypeView bg_color={'#' + get(props, 'data.color', 'D75A2B')}>
-              {/*<Type size={moderateScale(13)}>{get(props, 'data.categoria', 'eCity')}</Type>*/}
               <HTML onLinkPress={openLink} html={get(props, 'data.categoria', 'eCity')} baseFontStyle={{fontSize: moderateScale(13), color: '#FFFFFF', fontFamily: oswald_bold}}/>
             </TypeView>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Image width={40} height={40} source={Images.icons.ic_calendar} style={{marginRight: 5}}/>
-              {/*<Sort size={moderateScale(22)}>{get(props, 'data.anno', '2020')}</Sort>*/}
               <HTML onLinkPress={openLink} html={get(props, 'data.anno', '2020')} baseFontStyle={{fontSize: moderateScale(22), color: '#909090', fontFamily: oswald_bold}}/>
             </View>
           </View>
           <Divider size={moderateScale(-11)}/>
-          {/*<Sort size={moderateScale(22)}>{get(props, 'data.brand', 'ASKOLL')}</Sort>*/}
           <HTML onLinkPress={openLink} html={get(props, 'data.brand', 'ASKOLL')} baseFontStyle={{fontSize: moderateScale(22), color: '#909090', fontFamily: oswald_bold}}/>
-          <Divider size={moderateScale(-10)}/>
+          <Divider size={moderateScale(-24)}/>
           <NameView>
-            {/*<Name numberOfLines={1} color={'#' + get(props, 'data.color', 'D75A2B')}*/}
-                  {/*size={moderateScale(35)}>{get(props, 'data.modello', 'EB4')}</Name>*/}
             <HTML onLinkPress={openLink} html={`<p>${get(props, 'data.modello', 'EB4')}</p>`}
                   renderers={{p: (_, children)=><Text numberOfLines={1}>{children}</Text>}}
                   baseFontStyle={{fontFamily: oswald_bold, color: '#' + get(props, 'data.color', 'D75A2B'), fontSize: moderateScale(35)}}/>
-            {/*<Image width={20} height={20} source={Images.icons.arrow_right}/>*/}
           </NameView>
           <Sort style={{marginTop: isIOS ? moderateScale(-12) :moderateScale(-15)}}
                 size={moderateScale(22)}>{get(props, 'data.prezzo', '1390')}</Sort>
@@ -637,26 +630,12 @@ const Detail = (props) => (
 const DetailMore = (props) => (
   <View style={{marginTop: -15, marginBottom: 4}}>
     <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-    {/*<Text style={{*/}
-      {/*fontSize: 16,*/}
-      {/*color: props.data.title_color,*/}
-      {/*fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold',*/}
-      {/*marginTop: 3,*/}
-    {/*}}>{props.data.title}</Text>*/}
     <HTML onLinkPress={openLink} html={props.data.title} baseFontStyle={{fontSize: 16, color: props.data.title_color, fontFamily: isIOS ? 'UniSansSemiBold' : 'uni_sans_semibold', marginTop: 3,}}/>
-
-
-      {props.data.infobox && <CustomTooltip from="category" tooltipText={get(props, 'data.infobox', 'No Info')}/>}
+      {props.data.infobox && <CustomTooltip setAnalytics={() => props.setAnalytics ? props.setAnalytics() : {}} from="category" tooltipText={get(props, 'data.infobox', 'No Info')}/>}
   </View>
-    {/*<Text style={{*/}
-      {/*fontSize: 24,*/}
-      {/*color: props.data.text_color,*/}
-      {/*fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book',*/}
-    {/*}}>{props.data.text}</Text>*/}
     <HTML onLinkPress={openLink} html={props.data.text} baseFontStyle={{fontSize: 24, color: props.data.text_color, fontFamily: isIOS ? 'UniSansBook' : 'uni_sans_book'}}/>
   </View>
 );
-
 
 export {
   Header,

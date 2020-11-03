@@ -6,20 +6,15 @@ import {
   Text,
   ScrollView,
   Platform,
-  BackHandler,
-  Linking,
   Dimensions,
 } from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
 import {useStores} from 'hooks/Utils';
 import {BaseTextInput, BaseSelect, CustomSelect } from 'components/controls/BaseTextInput';
-import BaseSelectBox, {CustomSelectBox} from 'components/controls/BaseSelectBox';
+import {CustomSelectBox} from 'components/controls/BaseSelectBox';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
-import {cities, sesso} from '../../res/data';
 import {get} from 'lodash';
-import {useActionSheet} from '@expo/react-native-action-sheet';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation } from '@react-navigation/native';
 import config from '../../config/Config';
 import {Divider, Header} from '../../components/controls/BaseUtils';
@@ -36,7 +31,7 @@ const ratio = height/width;
 
 const Continue = props => {
   const navigation = useNavigation();
-  const { auth, alert, hud, bikeData, brandData, web } = useStores();
+  const {alert, web } = useStores();
   const [checked, setChecked] = useState(true);
 
   const onRegister = async () => {

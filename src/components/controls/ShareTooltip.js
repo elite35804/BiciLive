@@ -21,6 +21,7 @@ const ShareTooltip = (props) => (
     width={Dimensions.get('window').width-20}
     height={90}
     overlayColor={'rgba(0,0,0,0'}
+    onOpen={() => props.setAnalytics()}
     popover={
       <View style={{flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', width: '100%'}}>
         {/*<TouchableOpacity onPress={() => props.onLinkedin()}><Image width={'100%'} height={'100%'} source={Images.icons.ic_linkedin} /></TouchableOpacity>*/}

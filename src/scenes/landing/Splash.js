@@ -11,10 +11,10 @@ import {
 } from 'react-native';
 import {themeProp} from 'utils/CssUtil';
 import styled from 'styled-components/native';
-import { Actions } from 'react-native-router-flux';
 import {useStores} from 'hooks/Utils';
 import Images from 'res/Images';
 import {BlueButton, WhiteButton} from 'components/controls/Button';
+import CustomSwitcher from 'components/controls/CustomSwitcher';
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -174,6 +174,7 @@ const Splash = props => {
         <Text style={{textAlign: 'center', fontSize: ratio < 1.5 ? 40 : 27, fontWeight: 'bold'}}>PEDALA...CON LA</Text>
         <Text style={{textAlign: 'center', fontSize: ratio < 1.5 ? 40 : 27, fontWeight: 'bold'}}>TUA NUOVA EBIKE</Text>
       </View>
+      <CustomSwitcher style={{height: 100, width: width * 0.8}}/>
       {loginState || <BtnView>
         <BlueButton width={'85%'} height={ratio < 1.5 ? '80px' : '55px'} fontSize={ratio < 1.5 ? '40px' : '30px'} onPress={() => navigation.navigate('Login')}>LOGIN</BlueButton>
         <Divider size="12px"/>
